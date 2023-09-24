@@ -10,5 +10,6 @@
     <color name="blue">#218BFF</color>
     <color name="bg_login">#AFB8C1</color>
     <color name="yellow">#FFEB3B</color>
+    <color name="fab">#218BFF</color>
 
 </resources>
