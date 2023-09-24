@@ -2,7 +2,9 @@
     <string name="app_name">AppsATIPadang</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="title_history">History</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
     <string name="validasi_login">“Pemeliharaan sarana dan prasarana merupakan kewajiban seluruh civitas akademika Politeknik ATI Padang. Dengan ini pelopor menyatakan telah melakukan usaha perbaikan semaksimal mungkin dan belum berhasil sehingga membutuhkan tindak lanjut.”</string>
     <string name="name">Aditya ahmad nugraha</string>
     <string name="selamat_datang">Selamat Datang!</string>
