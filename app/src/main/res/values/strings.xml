@@ -17,4 +17,12 @@
     <string name="lcd_proyektor">LCD Proyektor</string>
     <string name="rp">Rp</string>
     <string name="jumlah_pelapor">3</string>
+    <string name="email">EMAIL</string>
+    <string name="alamat_email">adity@gmail.com</string>
+    <string name="no_hp">NO TELEPHONE</string>
+    <string name="no_tlp">+0812993293293</string>
+    <string name="alamat">Alamat</string>
+    <string name="alamat_lengkap">Jl.Dr.Sutomo</string>
+    <string name="keluar">Keluar</string>
+    <string name="jabatan">Manager</string>
 </resources>
