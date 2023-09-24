@@ -35,10 +35,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/opensansbold"
                 android:text="Aditya ahmad nugraha"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_profil"
                 app:layout_constraintTop_toTopOf="@+id/img_profil" />
@@ -48,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/opensanssemibold"
                 android:text="Selamat Datang!"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -77,10 +78,10 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_sarana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -105,6 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/opensanscondensedextrabold"
                         android:text="Prasarana"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_sarana"
@@ -120,9 +122,10 @@
                 android:id="@+id/card_prasarana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_sarana"
+                app:layout_constraintStart_toEndOf="@+id/card_sarana"
+                app:layout_constraintTop_toTopOf="@+id/card_sarana">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -145,6 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/opensanscondensedextrabold"
                         android:text="Prasarana"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_prasarana"
@@ -157,62 +161,119 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
+                android:id="@+id/card_kamtibmas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_prasarana"
+                app:layout_constraintStart_toEndOf="@+id/card_prasarana"
+                app:layout_constraintTop_toTopOf="@+id/card_prasarana">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/img_kamtibmas"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/vector"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_kamtibmas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/opensanscondensedextrabold"
+                        android:text="kamtibmas"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/img_kamtibmas"
+                        app:layout_constraintStart_toStartOf="@+id/img_kamtibmas"
+                        app:layout_constraintTop_toBottomOf="@+id/img_kamtibmas" />
 
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
-<!--            <ImageView-->
-<!--                android:id="@+id/img_kamtibmas"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginStart="32dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:src="@drawable/vector_prasarana"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/img_prasarana"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_kamtibmas"
+                app:layout_constraintStart_toEndOf="@+id/card_kamtibmas"
+                app:layout_constraintTop_toTopOf="@+id/card_kamtibmas">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="4dp"-->
-<!--                android:text="Kamtibmas"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/img_kamtibmas"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/img_kamtibmas"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/img_kamtibmas" />-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/img_status"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginStart="32dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:src="@drawable/status"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/img_kamtibmas"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+                    <ImageView
+                        android:id="@+id/img_status"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/vector"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="4dp"-->
-<!--                android:text="Kamtibmas"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/img_status"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/img_status"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/img_status" />-->
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/opensanscondensedextrabold"
+                        android:text="Status"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/img_status"
+                        app:layout_constraintStart_toStartOf="@+id/img_status"
+                        app:layout_constraintTop_toBottomOf="@+id/img_status" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tv_title_pelaporan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/opensansbold"
+        android:text="History Pelaporan"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/card_profil_home"
+        app:layout_constraintTop_toBottomOf="@+id/card_menu" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_pelaporan"
+        tools:listitem="@layout/list_pelaporan" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
