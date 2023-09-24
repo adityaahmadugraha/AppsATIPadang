@@ -13,6 +13,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Laporan Sarana"
+                android:fontFamily="@font/opensanscondensedextrabold"
+                android:text="@string/laporan_sarana"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/img_pelaporan"
                 app:layout_constraintTop_toTopOf="@+id/img_pelaporan" />
 
@@ -49,7 +54,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="LCD Proyektor"
+                android:fontFamily="@font/opensanssemibold"
+                android:text="@string/lcd_proyektor"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/tv_title_laporan"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan" />
 
@@ -59,8 +66,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
-                android:text="Rp"
-                android:textStyle="bold"
+                android:fontFamily="@font/opensansbold"
+                android:text="@string/rp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_title_laporan"
                 app:layout_constraintStart_toEndOf="@+id/tv_title_laporan" />
 
@@ -69,18 +78,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/opensansbold"
                 android:text="3.000"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_rp"
                 app:layout_constraintStart_toEndOf="@+id/tv_rp"
                 app:layout_constraintTop_toTopOf="@+id/tv_rp" />
 
             <ImageView
                 android:id="@+id/img_jumlah_pelapor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_person"
-                app:layout_constraintStart_toStartOf="@+id/tv_harga"
+                app:layout_constraintStart_toStartOf="@+id/tv_rp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_harga" />
 
 
@@ -89,7 +101,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="3"
+                android:fontFamily="@font/opensanscondensedextrabold"
+                android:text="@string/jumlah_pelapor"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_jumlah_pelapor"
                 app:layout_constraintStart_toEndOf="@+id/img_jumlah_pelapor"
                 app:layout_constraintTop_toTopOf="@+id/img_jumlah_pelapor" />

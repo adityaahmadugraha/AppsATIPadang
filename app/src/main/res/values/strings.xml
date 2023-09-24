@@ -4,4 +4,15 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="validasi_login">“Pemeliharaan sarana dan prasarana merupakan kewajiban seluruh civitas akademika Politeknik ATI Padang. Dengan ini pelopor menyatakan telah melakukan usaha perbaikan semaksimal mungkin dan belum berhasil sehingga membutuhkan tindak lanjut.”</string>
+    <string name="name">Aditya ahmad nugraha</string>
+    <string name="selamat_datang">Selamat Datang!</string>
+    <string name="prasarana">Prasarana</string>
+    <string name="sarana">Sarana</string>
+    <string name="kamtibmas">kamtibmas</string>
+    <string name="status">Status</string>
+    <string name="history_pelaporan">History Pelaporan</string>
+    <string name="laporan_sarana">Laporan Sarana</string>
+    <string name="lcd_proyektor">LCD Proyektor</string>
+    <string name="rp">Rp</string>
+    <string name="jumlah_pelapor">3</string>
 </resources>
