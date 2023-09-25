@@ -17,33 +17,49 @@
             android:orientation="horizontal">
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/c_instalasi_listrik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensanscondensedextrabold"
                 android:layout_marginEnd="4dp"
-                android:text="Instalasi Listrik" />
+                android:text="@string/instalasi_listrik" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/c_ac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensanscondensedextrabold"
                 android:layout_marginEnd="4dp"
-                android:text="AC" />
+                android:text="@string/ac" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/c_LCD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensanscondensedextrabold"
                 android:layout_marginEnd="4dp"
-                android:text="LCD Proyektor" />
+                android:text="@string/lcd_proyektor_chip" />
 
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/c_peralatan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensanscondensedextrabold"
                 android:layout_marginEnd="4dp"
-                android:text="Peralatan Praktikum" />
+                android:text="@string/peralatan_praktikum" />
 
         </LinearLayout>
 

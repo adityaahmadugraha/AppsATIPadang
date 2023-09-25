@@ -22,7 +22,7 @@
         android:id="@+id/img_profil"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="8dp"
         android:src="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         android:fontFamily="@font/opensanssemibold"
         android:text="@string/selamat_datang"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_profil"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -244,7 +244,7 @@
         android:fontFamily="@font/opensansbold"
         android:text="@string/history_pelaporan"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/img_profil"
         app:layout_constraintTop_toBottomOf="@+id/card_sarana" />
 

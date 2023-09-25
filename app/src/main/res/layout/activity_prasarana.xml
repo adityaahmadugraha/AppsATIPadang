@@ -25,10 +25,10 @@
         android:text="@string/laporan_prasarana"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_back_status_laporan"
+        app:layout_constraintBottom_toBottomOf="@+id/img_back_laporan_prasarana"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_back_status_laporan" />
+        app:layout_constraintTop_toTopOf="@+id/img_back_laporan_prasarana" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

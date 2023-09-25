@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -29,8 +31,21 @@ class HistoryFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupButtonBackClicked()
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupButtonBackClicked() {
+
+        binding?.imgBackHistory?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_history_to_navigation_home)
+        }
     }
 }

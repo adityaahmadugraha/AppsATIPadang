@@ -31,8 +31,13 @@
     <string name="merk">Merk :</string>
     <string name="masukan_merk_produk">Masukan Merk Produk</string>
     <string name="masukan_lokasi_anda">Masukan Lokasi Anda</string>
-    <string name="deskripsi_kerusakan">Deskripsi Kerusakan</string>
+    <string name="deskripsi_kerusakan">Deskripsi Kerusakan :</string>
     <string name="status_laporan">Status Laporan</string>
     <string name="laporan_prasarana">Laporan Prasarana</string>
     <string name="laporan_kamtibmas">Laporan Kamtibmas</string>
+    <string name="lcd_proyektor_chip">LCD Proyektor</string>
+    <string name="ac">AC</string>
+    <string name="instalasi_listrik">Instalasi Listrik</string>
+    <string name="peralatan_praktikum">Peralatan Praktikum</string>
+    <string name="lokasi">Lokasi :</string>
 </resources>

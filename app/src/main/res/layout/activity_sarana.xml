@@ -62,6 +62,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/hari_tanggal"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/chip_item"
         app:layout_constraintTop_toBottomOf="@+id/chip_item" />
 
@@ -95,7 +98,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Lokasi"
+        android:text="@string/lokasi"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/il_tanggal"
         app:layout_constraintTop_toBottomOf="@+id/il_tanggal" />
 
@@ -131,6 +137,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/merk"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/il_tanggal"
         app:layout_constraintTop_toBottomOf="@+id/il_lokasi" />
 
@@ -164,6 +173,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/deskripsi_kerusakan"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/il_tanggal"
         app:layout_constraintTop_toBottomOf="@+id/il_merk" />
 
