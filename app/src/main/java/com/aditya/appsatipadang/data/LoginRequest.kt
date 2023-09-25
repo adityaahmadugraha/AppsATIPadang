@@ -1,6 +1,6 @@
 package com.aditya.appsatipadang.data
 
-data class Login(
+data class LoginRequest(
     val username: String,
     val password: String
 )

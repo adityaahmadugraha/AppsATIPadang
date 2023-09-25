@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.WindowManager
 import com.aditya.appsatipadang.MainActivity
 import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         Handler(Looper.getMainLooper()).postDelayed({
-            intent = Intent(this, MainActivity::class.java)
+            intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, 1500)
