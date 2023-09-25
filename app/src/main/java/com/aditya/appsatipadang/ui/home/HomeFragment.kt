@@ -1,13 +1,17 @@
 package com.aditya.appsatipadang.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
+import com.aditya.laporan.kamtibmas.ActivityKamtibmas
+import com.aditya.laporan.prasarana.ActivityPrasarana
+import com.aditya.laporan.sarana.SaranaActivity
+import com.aditya.laporan.status.ActivityStatus
 
 class HomeFragment : Fragment() {
 
@@ -26,10 +30,37 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
 
 
-        return root
+//        binding.cardStatus.setOnClickListener {
+//            val intent = Intent(activity, SaranaActivity::class.java)
+//            startActivity(intent)
+//        }
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        binding?.cardSarana?.setOnClickListener {
+            val intent = Intent(activity, SaranaActivity::class.java)
+            startActivity(intent)
+        }
+        binding?.cardPrasarana?.setOnClickListener {
+            val intent = Intent(activity, ActivityPrasarana::class.java)
+            startActivity(intent)
+        }
+        binding?.cardKamtibmas?.setOnClickListener {
+            val intent = Intent(activity, ActivityKamtibmas::class.java)
+            startActivity(intent)
+        }
+        binding?.cardStatus?.setOnClickListener {
+            val intent = Intent(activity, ActivityStatus::class.java)
+            startActivity(intent)
+        }
 
     }
 
