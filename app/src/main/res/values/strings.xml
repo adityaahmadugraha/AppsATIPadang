@@ -27,11 +27,13 @@
     <string name="jabatan">Manager</string>
     <string name="hari_tanggal">Hari/Tanggal :</string>
     <string name="laporan_sarana_title">Laporan Sarana</string>
-    <string name="senin_25_september_2023">Senin, 25 September 2023</string>
+    <string name="senin_25_september_2023">Hari/Tanggal/Bulan/Tahun</string>
     <string name="merk">Merk :</string>
     <string name="masukan_merk_produk">Masukan Merk Produk</string>
     <string name="masukan_lokasi_anda">Masukan Lokasi Anda</string>
     <string name="deskripsi_kerusakan">Deskripsi Kerusakan :</string>
+    <string name="pilih_foto">Pilih Foto</string>
+    <string name="upload_foto">Upload Foto :</string>
     <string name="status_laporan">Status Laporan</string>
     <string name="laporan_prasarana">Laporan Prasarana</string>
     <string name="laporan_kamtibmas">Laporan Kamtibmas</string>
@@ -47,4 +49,5 @@
     <string name="useraname">useraname</string>
     <string name="masuk_ke_akun_anda">Masuk Ke Akun Anda</string>
     <string name="format_tgl">21 Setember 2023</string>
+    <string name="kirim">Kirim</string>
 </resources>

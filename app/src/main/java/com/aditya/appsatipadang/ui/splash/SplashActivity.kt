@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         Handler(Looper.getMainLooper()).postDelayed({
-            intent = Intent(this, LoginActivity::class.java)
+            intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, 1500)
