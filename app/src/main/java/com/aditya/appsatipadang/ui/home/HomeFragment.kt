@@ -32,13 +32,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
 
-
-//        binding.cardStatus.setOnClickListener {
-//            val intent = Intent(activity, SaranaActivity::class.java)
-//            startActivity(intent)
-//        }
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

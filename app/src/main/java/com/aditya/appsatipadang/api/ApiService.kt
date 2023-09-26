@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface ApiService {
 
-    @POST("tb_user_android/login")
+    @POST("login.php")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
 }

@@ -1,5 +1,6 @@
 package com.aditya.appsatipadang.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentProfileBinding
+import com.aditya.appsatipadang.ui.login.LoginActivity
+import com.aditya.laporan.kamtibmas.ActivityKamtibmas
+import com.aditya.laporan.prasarana.ActivityPrasarana
+import com.aditya.laporan.sarana.SaranaActivity
+import com.aditya.laporan.status.ActivityStatus
 
 class ProfileFragment : Fragment() {
 
@@ -30,10 +36,6 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textNotifications
-//        profileViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
 
@@ -42,7 +44,12 @@ class ProfileFragment : Fragment() {
 
         setupButtonBackClicked()
 
+        binding?.btnLogout?.setOnClickListener {
+            val intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
     private fun setupButtonBackClicked() {
 
