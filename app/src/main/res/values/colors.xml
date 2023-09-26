@@ -11,5 +11,6 @@
     <color name="bg_login">#AFB8C1</color>
     <color name="yellow">#FFEB3B</color>
     <color name="fab">#218BFF</color>
+    <color name="status_bar">#54AEFF</color>
 
 </resources>

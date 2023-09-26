@@ -18,13 +18,23 @@
     <!--            android:layout_width="wrap_content"-->
     <!--            android:layout_height="wrap_content">-->
 
+    <ImageView
+        android:id="@+id/back_img"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_profil"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="8dp"
-        android:src="@color/blue"
+        android:src="@color/yellow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +45,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="@font/opensansbold"
         android:text="@string/name"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/img_profil"
         app:layout_constraintTop_toTopOf="@+id/img_profil" />
@@ -47,7 +57,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/opensanssemibold"
         android:text="@string/selamat_datang"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_profil"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
