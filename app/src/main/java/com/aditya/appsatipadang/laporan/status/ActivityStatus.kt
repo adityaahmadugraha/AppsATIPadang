@@ -1,4 +1,4 @@
-package com.aditya.laporan.status
+package com.aditya.appsatipadang.laporan.status
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

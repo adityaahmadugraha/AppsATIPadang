@@ -12,10 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentProfileBinding
 import com.aditya.appsatipadang.ui.login.LoginActivity
-import com.aditya.laporan.kamtibmas.ActivityKamtibmas
-import com.aditya.laporan.prasarana.ActivityPrasarana
-import com.aditya.laporan.sarana.SaranaActivity
-import com.aditya.laporan.status.ActivityStatus
+import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
+import com.aditya.appsatipadang.laporan.prasarana.ActivityPrasarana
+import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
+import com.aditya.appsatipadang.laporan.status.ActivityStatus
 
 class ProfileFragment : Fragment() {
 

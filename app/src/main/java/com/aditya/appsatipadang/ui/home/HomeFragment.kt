@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
-import com.aditya.laporan.kamtibmas.ActivityKamtibmas
-import com.aditya.laporan.prasarana.ActivityPrasarana
-import com.aditya.laporan.sarana.SaranaActivity
-import com.aditya.laporan.status.ActivityStatus
+import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
+import com.aditya.appsatipadang.laporan.prasarana.ActivityPrasarana
+import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
+import com.aditya.appsatipadang.laporan.status.ActivityStatus
 
 class HomeFragment : Fragment() {
 

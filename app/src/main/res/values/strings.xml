@@ -40,4 +40,10 @@
     <string name="instalasi_listrik">Instalasi Listrik</string>
     <string name="peralatan_praktikum">Peralatan Praktikum</string>
     <string name="lokasi">Lokasi :</string>
+    <string name="login">Login</string>
+    <string name="password">password</string>
+    <string name="masukan_username">masukan username</string>
+    <string name="masukan_password">masukan password</string>
+    <string name="useraname">useraname</string>
+    <string name="masuk_ke_akun_anda">Masuk Ke Akun Anda</string>
 </resources>

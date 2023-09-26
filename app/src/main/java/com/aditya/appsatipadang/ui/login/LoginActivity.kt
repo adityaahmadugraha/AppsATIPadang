@@ -33,14 +33,12 @@ class LoginActivity : AppCompatActivity() {
             when (result) {
                 is LoginResult.Success -> {
 
-                    val user = result.user
                     showToast("Login berhasil")
                     navigateToMainActivity()
                 }
 
                 is LoginResult.Error -> {
-                    val errorMessage = result.message
-                    showToast("Login gagal: $errorMessage")
+                    showToast("Login Gagal")
                 }
             }
         })

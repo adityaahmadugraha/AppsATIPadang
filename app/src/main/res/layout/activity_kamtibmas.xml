@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aditya.laporan.kamtibmas.ActivityKamtibmas">
+    tools:context=".laporan.kamtibmas.ActivityKamtibmas">
 
     <ImageView
         android:id="@+id/img_back_kamtibmas"

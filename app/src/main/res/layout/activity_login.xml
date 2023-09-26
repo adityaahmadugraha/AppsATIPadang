@@ -6,15 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:id="@+id/tv_title_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/gambar_login"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/opensansbold"
+        android:text="@string/masuk_ke_akun_anda"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo_atip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_login" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -36,7 +49,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="useranme"
+                android:fontFamily="@font/opensanscondensedextrabold"
+                android:textColor="@color/black"
+                android:text="@string/useraname"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +69,7 @@
                     android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="masukan username"
+                    android:hint="@string/masukan_username"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +78,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="password"
+                android:text="@string/password"
+                android:fontFamily="@font/opensanscondensedextrabold"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/ti_username"
                 app:layout_constraintTop_toBottomOf="@+id/ti_username" />
 
@@ -72,7 +89,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="335dp"
                 android:layout_height="62dp"
-                android:layout_marginTop="8dp"
                 app:hintEnabled="false"
                 app:layout_constraintStart_toStartOf="@+id/tv_password"
                 app:layout_constraintTop_toBottomOf="@+id/tv_password"
@@ -83,8 +99,7 @@
                     android:id="@+id/txt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="masukan password"
-
+                    android:hint="@string/masukan_password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Lupa Password?"
+                android:fontFamily="@font/opensanscondensedextrabold"
                 android:textColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="@+id/ti_password"
                 app:layout_constraintTop_toBottomOf="@+id/ti_password" />
@@ -119,8 +135,8 @@
 
     <CheckBox
         android:id="@+id/cb_confim_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -130,11 +146,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/opensanssemibold"
         android:justificationMode="inter_word"
         android:text="@string/validasi_login"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/cb_confim_login"
         app:layout_constraintTop_toTopOf="@+id/cb_confim_login" />
 
@@ -145,7 +161,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:backgroundTint="@color/bg_login"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
