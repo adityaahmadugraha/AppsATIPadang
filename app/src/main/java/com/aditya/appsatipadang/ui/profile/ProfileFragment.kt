@@ -5,61 +5,69 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentProfileBinding
 import com.aditya.appsatipadang.ui.login.LoginActivity
-import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
-import com.aditya.appsatipadang.laporan.prasarana.ActivityPrasarana
-import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
-import com.aditya.appsatipadang.laporan.status.ActivityStatus
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var binding: FragmentProfileBinding? = null
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
-
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        return root
+    ): View? {
+        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupButtonBackClicked()
 
-        binding?.btnLogout?.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
+
+        if (activity != null) {
+            checkUserLogin()
+            binding?.apply {
+                btnLogout.setOnClickListener {
+                    showAlertLogout()
+                }
+            }
+        }
+    }
+
+    private fun showAlertLogout() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(getString(R.string.logoutMessage))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+                viewModel.deleteUser()
+                checkUserLogin()
+            }
+            .setNegativeButton(getString(R.string.no)){ dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+
+    }
+
+    private fun checkUserLogin() {
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            if (it.username.isEmpty()) {
+                Intent(requireActivity(), LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(this)
+                }
+            }
         }
     }
 
 
-    private fun setupButtonBackClicked() {
 
-        binding?.imgBackProfil?.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_navigation_home)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

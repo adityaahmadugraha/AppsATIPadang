@@ -1,13 +1,20 @@
 package com.aditya.appsatipadang.ui.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.aditya.appsatipadang.repository.DataRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val repository: DataRepository
+): ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+    fun getUser() = repository.getUser().asLiveData()
+    fun deleteUser() = viewModelScope.launch {
+        repository.deleteUser()
     }
-    val text: LiveData<String> = _text
 }

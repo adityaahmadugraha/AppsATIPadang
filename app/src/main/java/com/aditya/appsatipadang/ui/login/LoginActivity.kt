@@ -61,23 +61,17 @@ class LoginActivity : AppCompatActivity() {
                                 UserLocal(
                                     // ?: 1 pengiriman data jika null maka akan mengambil 1
                                     userData.user?.id,
-                                    userData?.user?.name.toString(),
-                                    userData?.user?.username.toString(),
-                                    userData?.user?.password.toString(),
-                                    userData?.user?.roles.toString(),
-                                    userData?.user?.created_at.toString(),
-                                    userData?.user?.update_at.toString(),
+                                    userData.user?.name.toString(),
+                                    userData.user?.username.toString(),
+                                    userData.user?.password.toString(),
+                                    userData.user?.roles.toString(),
+                                    userData.user?.created_at.toString(),
+                                    userData.user?.update_at.toString(),
 
                                     )
                             )
-//                                    userData.user?.name?.toString()
 
-
-//                                    userData.email.toString(),
-//                                    userData.username.toString(),
-//                                    userData.password.toString(),
-//                                    userData.role?.name.toString() ?: ""
-
+                            checkUserLogin()
 
                         } else {
                             Toast.makeText(
@@ -89,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this@LoginActivity,
-                            result.data.message(),
+                            "Password atau username salah!",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -103,6 +97,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
     private fun setInputLoading(condition: Boolean) {

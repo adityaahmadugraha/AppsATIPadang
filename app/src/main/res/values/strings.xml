@@ -51,4 +51,8 @@
     <string name="format_tgl">21 Setember 2023</string>
     <string name="kirim">Kirim</string>
     <string name="must_not_empty">Form Tidak Boleh Kosong</string>
+    <string name="logoutMessage">Are you sure want to logout?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="hello_user">%1$s</string>
 </resources>
