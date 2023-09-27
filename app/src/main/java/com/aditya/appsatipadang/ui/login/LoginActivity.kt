@@ -1,18 +1,23 @@
 package com.aditya.appsatipadang.ui.login
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.aditya.appsatipadang.MainActivity
-import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityLoginBinding
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,84 +29,114 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
 
-        viewModel.getUser().observe(this@LoginActivity) {
+        checkUserLogin()
 
+        binding.btnLogin.setOnClickListener {
+            loginUser()
         }
+    }
 
-        binding.apply {
-            btnLogin.setOnClickListener {
-                val username = txtUsername.text.toString()
-                val password = txtPassword.text.toString()
+    private fun loginUser() {
+        val email = binding.txtUsername.text.toString()
+        val password = binding.txtPassword.text.toString()
 
-                val loginRequest = LoginRequest(username, password)
-                if (validateInput(loginRequest)) {
-                    loginUser(loginRequest)
+        viewModel.loginUser(LoginRequest(email, password)).observe(this@LoginActivity) { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    setInputLoading(true)
                 }
-            }
-        }
-    }
 
-    private fun toMainActivity() {
-        Intent(this@LoginActivity, MainActivity::class.java).also {
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(it)
-        }
-    }
+                is Resource.Success -> {
+                    setInputLoading(false)
 
-    private fun loginUser(loginRequest: LoginRequest) {
-        binding.apply {
-            viewModel.loginUser(loginRequest).observe(this@LoginActivity) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        setLoadingInput(true)
-                    }
-                    is Resource.Success -> {
-                        setLoadingInput(false)
-                        Log.d(ContentValues.TAG, "login Success")
+                    Log.d(TAG, "loginUser: ${result.data.body()}")
 
-                        toMainActivity()
-                    }
-                    is Resource.Error -> {
-                        setLoadingInput(false)
-                        Log.d(ContentValues.TAG, "login Error")
+                    if (result.data.code() == 200) {
+
+                        val userData = result.data.body()
+                        if (userData != null) {
+                            viewModel.saveUser(
+                                UserLocal(
+                                    // ?: 1 pengiriman data jika null maka akan mengambil 1
+                                    userData.user?.id,
+                                    userData?.user?.name.toString(),
+                                    userData?.user?.username.toString(),
+                                    userData?.user?.password.toString(),
+                                    userData?.user?.roles.toString(),
+                                    userData?.user?.created_at.toString(),
+                                    userData?.user?.update_at.toString(),
+
+                                    )
+                            )
+//                                    userData.user?.name?.toString()
+
+
+//                                    userData.email.toString(),
+//                                    userData.username.toString(),
+//                                    userData.password.toString(),
+//                                    userData.role?.name.toString() ?: ""
+
+
+                        } else {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Data pengguna tidak valid",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
                         Toast.makeText(
-                            applicationContext,
-                            "Login Error",
+                            this@LoginActivity,
+                            result.data.message(),
                             Toast.LENGTH_SHORT
                         ).show()
-
-
                     }
+                }
+
+                is Resource.Error -> {
+                    setInputLoading(false)
+                    Toast.makeText(this@LoginActivity, result.error, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
     }
 
 
-
-    private fun setLoadingInput(condition: Boolean) {
+    private fun setInputLoading(condition: Boolean) {
         binding.apply {
-            progressBar.isVisible = condition
             btnLogin.isEnabled = !condition
+            progressBar.isVisible = condition
         }
     }
 
-    private fun validateInput(loginRequest: LoginRequest): Boolean {
-        binding.apply {
-            if (loginRequest.username.isEmpty()) {
-                tiUsername.isErrorEnabled = true
-                tiUsername.error = getString(R.string.must_not_empty)
-                return false
+    private fun checkUserLogin() {
+        viewModel.getUser().observe(this@LoginActivity) {
+            if (it.username.isNotEmpty() || it.password.isNotEmpty()) {
+                Intent(this@LoginActivity, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(this)
+                }
             }
-            if (loginRequest.password.isEmpty()) {
-                tiPassword.isErrorEnabled = true
-                tiPassword.error = getString(R.string.must_not_empty)
-                return false
-            }
-            return true
         }
     }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is TextInputEditText || v is AutoCompleteTextView) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
 }
