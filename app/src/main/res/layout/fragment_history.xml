@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="History Pelaporan"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/opensanscondensedextrabold"
+        android:fontFamily="@font/poppinsextrabold"
         app:layout_constraintBottom_toBottomOf="@+id/img_back_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -35,10 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:fontFamily="@font/opensanscondensedextrabold"
+        android:fontFamily="@font/poppinssembiold"
         android:text="Hari Ini :"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_back_history" />
 
@@ -60,10 +60,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/opensanscondensedextrabold"
+        android:fontFamily="@font/poppinssembiold"
         android:text="Kemarin :"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/txt_history_hari_ini"
         app:layout_constraintTop_toBottomOf="@+id/rv_history_hari_ini" />
 

@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang
+package com.aditya.appsatipadang.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

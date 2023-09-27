@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/opensansbold"
+        android:fontFamily="@font/poppinsextrabold"
         android:text="@string/masuk_ke_akun_anda"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -21,10 +21,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
+        android:layout_width="210dp"
         android:layout_height="190dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/logo_atip"
+        android:src="@drawable/unnamed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_login" />
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/opensanscondensedextrabold"
+                android:fontFamily="@font/poppinssembiold"
                 android:textColor="@color/black"
                 android:text="@string/useraname"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,8 @@
                     android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:textSize="12sp"
                     android:hint="@string/masukan_username"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/password"
-                android:fontFamily="@font/opensanscondensedextrabold"
+                android:textSize="10sp"
+                android:fontFamily="@font/poppinssembiold"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/ti_username"
                 app:layout_constraintTop_toBottomOf="@+id/ti_username" />
@@ -100,6 +103,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/masukan_password"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:textSize="12sp"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,7 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Lupa Password?"
-                android:fontFamily="@font/opensanscondensedextrabold"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppinsblack"
                 android:textColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="@+id/ti_password"
                 app:layout_constraintTop_toBottomOf="@+id/ti_password" />
@@ -146,10 +152,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="@font/opensanssemibold"
+        android:fontFamily="@font/poppinssembiold"
         android:justificationMode="inter_word"
         android:text="@string/validasi_login"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/cb_confim_login"
         app:layout_constraintTop_toTopOf="@+id/cb_confim_login" />
@@ -166,6 +172,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

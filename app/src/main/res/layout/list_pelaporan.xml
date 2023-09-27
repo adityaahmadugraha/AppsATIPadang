@@ -41,9 +41,9 @@
                 android:id="@+id/tv_title_laporan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/opensanscondensedextrabold"
+                android:fontFamily="@font/poppinssembiold"
                 android:text="@string/laporan_sarana"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -56,9 +56,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/opensanssemibold"
+                android:fontFamily="@font/poppinssembiold"
                 android:text="@string/format_tgl"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toTopOf="@+id/tv_name_alat"
                 app:layout_constraintStart_toStartOf="@+id/tv_title_laporan"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan" />
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/opensanssemibold"
+                android:fontFamily="@font/poppinssembiold"
                 android:text="@string/lcd_proyektor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -128,14 +128,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/opensanssemicondensedextrabold"
+                android:fontFamily="@font/poppinssembiold"
                 android:text="Diproses"
                 android:textColor="@color/blue"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.507" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

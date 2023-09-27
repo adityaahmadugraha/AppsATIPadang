@@ -50,4 +50,5 @@
     <string name="masuk_ke_akun_anda">Masuk Ke Akun Anda</string>
     <string name="format_tgl">21 Setember 2023</string>
     <string name="kirim">Kirim</string>
+    <string name="must_not_empty">Form Tidak Boleh Kosong</string>
 </resources>

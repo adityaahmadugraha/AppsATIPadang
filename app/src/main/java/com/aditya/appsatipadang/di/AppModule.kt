@@ -1,10 +1,13 @@
 package com.aditya.appsatipadang.di
 
+import android.content.Context
 import com.aditya.appsatipadang.BuildConfig
-import com.aditya.appsatipadang.api.ApiService
+import com.aditya.appsatipadang.data.local.UserPreference
+import com.aditya.appsatipadang.data.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,5 +52,10 @@ object AppModule {
     fun provideApi(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
+    @Provides
+    @Singleton
+    fun provideUserPreference(
+        @ApplicationContext context: Context
+    ): UserPreference = UserPreference(context)
 
 }

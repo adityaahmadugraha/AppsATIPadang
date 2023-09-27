@@ -33,10 +33,10 @@
                 android:id="@+id/txt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/opensanscondensedextrabold"
+                android:fontFamily="@font/poppinsextrabold"
                 android:text="@string/laporan_sarana_title"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                 android:id="@+id/sc_chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-            android:scrollbars="none"
+                android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_title">
@@ -107,6 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -122,11 +123,11 @@
                     android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensanssemibold"
+                    android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/senin_25_september_2023"
                     android:maxLength="30"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,6 +151,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -165,11 +167,11 @@
                     android:id="@+id/et_lokasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensanssemibold"
+                    android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/masukan_lokasi_anda"
                     android:maxLength="100"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,6 +194,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -207,11 +210,11 @@
                     android:id="@+id/et_merk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensanssemibold"
+                    android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/masukan_merk_produk"
                     android:maxLength="25"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -233,6 +236,7 @@
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:boxCornerRadiusBottomEnd="15dp"
                 app:boxCornerRadiusBottomStart="15dp"
@@ -248,12 +252,12 @@
                     android:id="@+id/et_deskripsi_kerusakan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/opensanssemibold"
+                    android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
                     android:hint="@string/deskripsi_kerusakan"
                     android:maxLength="500"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -262,9 +266,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppinssembiold"
                 android:text="@string/upload_foto"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/il_tanggal"
                 app:layout_constraintTop_toBottomOf="@+id/il_deskripsi_kerusakan" />
@@ -279,14 +284,14 @@
                 app:layout_constraintStart_toStartOf="@+id/txt_upload_foto"
                 app:layout_constraintTop_toBottomOf="@+id/txt_upload_foto" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/galery"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="24dp"-->
-<!--                android:src="@drawable/galery"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/camera"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/camera" />-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/galery"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="24dp"-->
+            <!--                android:src="@drawable/galery"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/camera"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/camera" />-->
 
 
             <ImageView
