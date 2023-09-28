@@ -31,16 +31,24 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        checkUserLogin()
+
 
         binding.btnLogin.setOnClickListener {
             loginUser()
         }
+
+        checkUserLogin()
     }
 
     private fun loginUser() {
         val email = binding.txtUsername.text.toString()
         val password = binding.txtPassword.text.toString()
+
+        // Validasi input
+        if (email.isBlank() || password.isBlank()) {
+            Toast.makeText(this@LoginActivity, "Username dan password harus diisi", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         viewModel.loginUser(LoginRequest(email, password)).observe(this@LoginActivity) { result ->
             when (result) {
@@ -66,9 +74,8 @@ class LoginActivity : AppCompatActivity() {
                                     userData.user?.password.toString(),
                                     userData.user?.roles.toString(),
                                     userData.user?.created_at.toString(),
-                                    userData.user?.update_at.toString(),
-
-                                    )
+                                    userData.user?.update_at.toString()
+                                )
                             )
 
                             checkUserLogin()
@@ -97,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 
