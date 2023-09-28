@@ -14,6 +14,7 @@ class ProfileViewModel @Inject constructor(
 ): ViewModel() {
 
     fun getUser() = repository.getUser().asLiveData()
+
     fun deleteUser() = viewModelScope.launch {
         repository.deleteUser()
     }

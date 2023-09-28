@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        getDataUser()
 
         if (activity != null) {
             checkUserLogin()
@@ -40,6 +40,15 @@ class ProfileFragment : Fragment() {
                     showAlertLogout()
                 }
             }
+        }
+    }
+
+
+    //menampilkan data profil
+    private fun getDataUser() {
+        viewModel.getUser().observe(viewLifecycleOwner) {  data ->
+            binding?.tvNameProfil?.text = data.name
+            binding?.tvJabatanProfil?.text = data.roles
         }
     }
 
