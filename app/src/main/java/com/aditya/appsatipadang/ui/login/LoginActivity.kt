@@ -62,12 +62,10 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "loginUser: ${result.data.body()}")
 
                     if (result.data.code() == 200) {
-
                         val userData = result.data.body()
                         if (userData != null) {
                             viewModel.saveUser(
                                 UserLocal(
-                                    // ?: 1 pengiriman data jika null maka akan mengambil 1
                                     userData.user?.id,
                                     userData.user?.name.toString(),
                                     userData.user?.username.toString(),
@@ -79,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
                             )
 
                             checkUserLogin()
-
                         } else {
                             Toast.makeText(
                                 this@LoginActivity,
@@ -88,6 +85,7 @@ class LoginActivity : AppCompatActivity() {
                             ).show()
                         }
                     } else {
+                        // Tampilkan pesan jika username atau password salah
                         Toast.makeText(
                             this@LoginActivity,
                             "Password atau username salah!",
@@ -95,6 +93,7 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
+
 
                 is Resource.Error -> {
                     setInputLoading(false)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentProfileBinding
 import com.aditya.appsatipadang.ui.login.LoginActivity
@@ -31,6 +32,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupButtonBackClicked()
         getDataUser()
 
         if (activity != null) {
@@ -74,6 +76,13 @@ class ProfileFragment : Fragment() {
                     startActivity(this)
                 }
             }
+        }
+    }
+
+    private fun setupButtonBackClicked() {
+
+        binding?.imgBackProfil?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_navigation_home)
         }
     }
 
