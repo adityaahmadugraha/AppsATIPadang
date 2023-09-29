@@ -23,5 +23,10 @@ class ActivityStatus : AppCompatActivity() {
             intent = Intent(this@ActivityStatus, MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnBack.setOnClickListener {
+            intent = Intent(this@ActivityStatus, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

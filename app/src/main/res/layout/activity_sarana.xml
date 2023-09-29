@@ -114,10 +114,10 @@
                     android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/senin_25_september_2023"
-                    android:focusable="false"
-                    android:clickable="true"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -276,14 +276,14 @@
                 app:layout_constraintStart_toStartOf="@+id/txt_upload_foto"
                 app:layout_constraintTop_toBottomOf="@+id/txt_upload_foto" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/galery"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="24dp"-->
-            <!--                android:src="@drawable/galery"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/camera"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/camera" />-->
+            <ImageView
+                android:id="@+id/galery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/galery"
+                app:layout_constraintStart_toEndOf="@+id/camera"
+                app:layout_constraintTop_toTopOf="@+id/camera" />
 
 
             <ImageView

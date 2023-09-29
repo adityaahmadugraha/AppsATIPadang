@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider
 import com.aditya.appsatipadang.MainActivity
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
+import com.aditya.appsatipadang.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.createCustomTempFile
 import com.aditya.appsatipadang.ui.camera.rotateFile
@@ -95,10 +96,16 @@ class SaranaActivity : AppCompatActivity() {
 
 
         supportActionBar?.hide()
-        binding.imgBack.setOnClickListener() {
+
+
+        binding.imgBack.setOnClickListener{
             val intent = Intent(this@SaranaActivity, MainActivity::class.java)
             startActivity(intent)
         }
+
+
+
+
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -107,13 +114,22 @@ class SaranaActivity : AppCompatActivity() {
             )
         }
         binding.camera.setOnClickListener { startCameraX() }
-
+        binding.galery.setOnClickListener { startGallery() }
+        binding.imgFoto.setOnClickListener { uploadImage() }
 
     }
 
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
+    }
+
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
     }
 
     private fun uploadImage() {
@@ -123,7 +139,7 @@ class SaranaActivity : AppCompatActivity() {
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        if (it.resultCode == CAMERA_X_RESULT) {
+        if (it.resultCode == SaranaActivity.CAMERA_X_RESULT) {
             val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 it.data?.getSerializableExtra("picture", File::class.java)
             } else {
@@ -140,19 +156,6 @@ class SaranaActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var currentPhotoPath: String
-    private val launcherIntentCamera = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == RESULT_OK) {
-            val myFile = File(currentPhotoPath)
-
-            myFile.let { file ->
-                binding.imgFoto.setImageBitmap(BitmapFactory.decodeFile(file.path))
-            }
-        }
-    }
-
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -164,5 +167,7 @@ class SaranaActivity : AppCompatActivity() {
             }
         }
     }
-
 }
+
+
+

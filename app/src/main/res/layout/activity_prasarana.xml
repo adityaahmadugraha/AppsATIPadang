@@ -93,35 +93,35 @@
                 app:layout_constraintStart_toStartOf="@+id/sc_chip"
                 app:layout_constraintTop_toBottomOf="@+id/sc_chip" />
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/il_tanggal"-->
-<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                app:boxCornerRadiusBottomEnd="10dp"-->
-<!--                app:boxCornerRadiusBottomStart="10dp"-->
-<!--                app:boxCornerRadiusTopEnd="10dp"-->
-<!--                app:boxCornerRadiusTopStart="10dp"-->
-<!--                app:hintAnimationEnabled="true"-->
-<!--                app:hintEnabled="false"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/txt_hari">-->
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/il_tanggal"-->
+            <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                app:boxCornerRadiusBottomEnd="10dp"-->
+            <!--                app:boxCornerRadiusBottomStart="10dp"-->
+            <!--                app:boxCornerRadiusTopEnd="10dp"-->
+            <!--                app:boxCornerRadiusTopStart="10dp"-->
+            <!--                app:hintAnimationEnabled="true"-->
+            <!--                app:hintEnabled="false"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/txt_hari">-->
 
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/et_tanggal"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/poppinssembiold"-->
-<!--                    android:hint="@string/senin_25_september_2023"-->
-<!--                    android:maxLength="30"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="12sp" />-->
+            <!--                <com.google.android.material.textfield.TextInputEditText-->
+            <!--                    android:id="@+id/et_tanggal"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:fontFamily="@font/poppinssembiold"-->
+            <!--                    android:hint="@string/senin_25_september_2023"-->
+            <!--                    android:maxLength="30"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="12sp" />-->
 
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -146,9 +146,9 @@
                     android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinssembiold"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/senin_25_september_2023"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -308,14 +308,14 @@
                 app:layout_constraintStart_toStartOf="@+id/txt_upload_foto"
                 app:layout_constraintTop_toBottomOf="@+id/txt_upload_foto" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/galery"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="24dp"-->
-            <!--                android:src="@drawable/galery"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/camera"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/camera" />-->
+            <ImageView
+                android:id="@+id/galery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/galery"
+                app:layout_constraintStart_toEndOf="@+id/camera"
+                app:layout_constraintTop_toTopOf="@+id/camera" />
 
 
             <ImageView
@@ -347,8 +347,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
