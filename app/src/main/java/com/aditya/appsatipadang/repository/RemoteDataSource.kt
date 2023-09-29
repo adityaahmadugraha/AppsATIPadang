@@ -3,6 +3,7 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.remote.network.ApiService
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -43,4 +44,17 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
+    fun getListLaporan() = flow<Resource<LaporanResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.getListLaporan()
+        emit(Resource.Success(response))
+        response.let {
+            if (it.data!!.isNotEmpty()) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemukan"))
+        }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
 }

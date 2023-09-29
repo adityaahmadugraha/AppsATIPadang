@@ -18,13 +18,16 @@ class DataRepository @Inject constructor(
 
     suspend fun deleteUser() = localData.deleteUser()
 
-    fun getUserProfile(token: String) = remoteData.getUserProfile(token)
+//    fun getUserProfile(token: String) = remoteData.getUserProfile(token)
+//
+//    fun updateUserProfile(
+//        token: String,
+//        image: MultipartBody.Part? = null,
+//        email: RequestBody,
+//        fullname: RequestBody,
+//    ) = remoteData.updateUserProfile(token, image, email, fullname)
 
-    fun updateUserProfile(
-        token: String,
-        image: MultipartBody.Part? = null,
-        email: RequestBody,
-        fullname: RequestBody,
-    ) = remoteData.updateUserProfile(token, image, email, fullname)
+    fun getListLaporan() = remoteData.getListLaporan()
+
 
 }

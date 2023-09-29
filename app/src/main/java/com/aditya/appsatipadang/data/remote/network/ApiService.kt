@@ -1,6 +1,8 @@
 package com.aditya.appsatipadang.data.remote.network
 
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.LoginResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import okhttp3.MultipartBody
@@ -31,5 +33,11 @@ interface ApiService {
         @Part("email") email: RequestBody,
         @Part("fullname") fullname: RequestBody,
     ): ProfileUserResponse
+
+
+    @GET("get_laporan.php")
+    suspend fun getListLaporan() : LaporanResponse
+
+
 
 }

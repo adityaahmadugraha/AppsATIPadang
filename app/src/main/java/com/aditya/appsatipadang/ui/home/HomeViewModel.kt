@@ -15,4 +15,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getUser() = repository.getUser().asLiveData()
+
+    fun getListLaporan() = repository.getListLaporan().asLiveData()
+
 }

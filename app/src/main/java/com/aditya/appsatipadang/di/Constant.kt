@@ -32,6 +32,8 @@ object Constant {
         return fields.all { it.isNotEmpty() }
     }
 
+//    val .getToken get() = "Bearer ${this.token}"
+
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
     fun uriToFile(selectedImg: Uri, context: Context): File {
