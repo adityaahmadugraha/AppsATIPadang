@@ -68,4 +68,8 @@
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="hello_user">%1$s</string>
+    <string name="laporan_anda_sudah_selesai_dikerjakan">Laporan anda sudah selesai dikerjakan</string>
+    <string name="sedang_di_kerjakan_oleh_eleanor">Sedang di kerjakan oleh eleanor</string>
+    <string name="sudah_di_terima_admin">Sudah di terima admin</string>
+    <string name="kembali">Kembali</string>
 </resources>

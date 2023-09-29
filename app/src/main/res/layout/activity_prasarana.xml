@@ -297,11 +297,11 @@
 
             <Button
                 android:id="@+id/btn_kirim"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:backgroundTint="@color/blue"
                 android:text="@string/kirim"
