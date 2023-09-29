@@ -10,6 +10,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,6 +25,8 @@ import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.createCustomTempFile
 import com.aditya.appsatipadang.ui.camera.rotateFile
 import com.aditya.appsatipadang.ui.camera.uriToFile
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -102,6 +105,19 @@ class SaranaActivity : AppCompatActivity() {
             val intent = Intent(this@SaranaActivity, MainActivity::class.java)
             startActivity(intent)
         }
+
+       binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            for (i in 0 until group.childCount) {
+                val chip = group.getChildAt(i) as Chip
+                chip.setChipBackgroundColorResource(android.R.color.transparent)
+            }
+
+            if (checkedId != View.NO_ID) {
+                val selectedChip = findViewById<Chip>(checkedId)
+                selectedChip.setChipBackgroundColorResource(android.R.color.holo_blue_bright)
+            }
+        }
+
 
 
 

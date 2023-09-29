@@ -53,28 +53,66 @@
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-
                 app:layout_constraintTop_toBottomOf="@+id/txt_title">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
 
-                    <include
-                        android:id="@+id/chip_item"
-                        layout="@layout/item_chip"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:singleSelection="true">
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/c_printer"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppinssembiold"
+                            android:text="@string/printer"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/c_ac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:fontFamily="@font/poppinssembiold"
+                            android:text="@string/ac"
+                            android:textSize="12sp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/c_LCD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:fontFamily="@font/poppinssembiold"
+                            android:text="@string/lcd_proyektor_chip"
+                            android:textSize="12sp" />
+
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/c_peralatan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:fontFamily="@font/poppinssembiold"
+                            android:text="@string/peralatan_praktikum"
+                            android:textSize="12sp" />
+
+
+                    </com.google.android.material.chip.ChipGroup>
+
+
+
+
+
+                </RelativeLayout>
 
 
             </HorizontalScrollView>

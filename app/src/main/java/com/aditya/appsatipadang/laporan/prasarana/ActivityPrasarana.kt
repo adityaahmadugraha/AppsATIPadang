@@ -25,6 +25,7 @@ import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.rotateFile
 import com.aditya.appsatipadang.ui.camera.uriToFile
+import com.google.android.material.chip.Chip
 import java.io.File
 
 class ActivityPrasarana : AppCompatActivity() {
@@ -98,11 +99,24 @@ class ActivityPrasarana : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            for (i in 0 until group.childCount) {
+                val chip = group.getChildAt(i) as Chip
+                chip.setChipBackgroundColorResource(android.R.color.transparent)
+            }
+
+            if (checkedId != View.NO_ID) {
+                val selectedChip = findViewById<Chip>(checkedId)
+                selectedChip.setChipBackgroundColorResource(android.R.color.holo_blue_bright)
+            }
+        }
+
+
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
-                ActivityPrasarana.REQUIRED_PERMISSIONS,
-                ActivityPrasarana.REQUEST_CODE_PERMISSIONS
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
             )
         }
         binding.camera.setOnClickListener { startCameraX() }
