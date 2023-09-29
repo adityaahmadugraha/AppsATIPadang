@@ -72,7 +72,7 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinssembiold"
+                            android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/printer"
                             android:textColor="@color/black"
                             android:textSize="12sp"
@@ -83,7 +83,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:fontFamily="@font/poppinssembiold"
+                            android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/ac"
                             android:textSize="12sp"
                             app:chipBackgroundColor="#FFFFFFFF"/>
@@ -93,7 +93,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:fontFamily="@font/poppinssembiold"
+                            android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/lcd_proyektor_chip"
                             android:textSize="12sp"
                             app:chipBackgroundColor="#FFFFFFFF"/>
@@ -104,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:fontFamily="@font/poppinssembiold"
+                            android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/peralatan_praktikum"
                             android:textSize="12sp"
                             app:chipBackgroundColor="#FFFFFFFF"/>

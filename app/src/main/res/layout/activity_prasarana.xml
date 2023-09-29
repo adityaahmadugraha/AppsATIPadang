@@ -75,7 +75,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:fontFamily="@font/poppinssembiold"
+                                android:fontFamily="@font/poppinsextrabold"
                                 android:textColor="@color/black"
                                 app:chipBackgroundColor="#FFFFFFFF"
                                 android:text="@string/instalasi_listrik" />
@@ -86,7 +86,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:textSize="12sp"
-                                android:fontFamily="@font/poppinssembiold"
+                                android:fontFamily="@font/poppinsextrabold"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
                                 android:text="@string/air"
                                 app:chipBackgroundColor="#FFFFFFFF"/>
@@ -97,7 +97,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:textSize="12sp"
-                                android:fontFamily="@font/poppinssembiold"
+                                android:fontFamily="@font/poppinsextrabold"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
                                 android:text="@string/lcd_proyektor_chip"
                                 app:chipBackgroundColor="#FFFFFFFF"/>
@@ -109,7 +109,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:textSize="12sp"
-                                android:fontFamily="@font/poppinssembiold"
+                                android:fontFamily="@font/poppinsextrabold"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
                                 android:text="@string/ruang_terbuka"
                                 app:chipBackgroundColor="#FFFFFFFF"/>
