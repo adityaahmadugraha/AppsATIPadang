@@ -112,10 +112,6 @@
 
                     </com.google.android.material.chip.ChipGroup>
 
-
-
-
-
                 </RelativeLayout>
 
 
@@ -318,6 +314,20 @@
                 app:layout_constraintStart_toStartOf="@+id/txt_upload_foto"
                 app:layout_constraintTop_toBottomOf="@+id/txt_upload_foto" />
 
+            <TextView
+                android:id="@+id/txt_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppinsblack"
+                android:text="@string/camera"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/camera"
+                app:layout_constraintStart_toStartOf="@+id/camera"
+                app:layout_constraintTop_toBottomOf="@+id/camera" />
+
+
             <ImageView
                 android:id="@+id/galery"
                 android:layout_width="wrap_content"
@@ -326,6 +336,19 @@
                 android:src="@drawable/galery"
                 app:layout_constraintStart_toEndOf="@+id/camera"
                 app:layout_constraintTop_toTopOf="@+id/camera" />
+
+            <TextView
+                android:id="@+id/txt_galery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppinsblack"
+                android:text="@string/galery"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/galery"
+                app:layout_constraintStart_toStartOf="@+id/galery"
+                app:layout_constraintTop_toBottomOf="@+id/galery" />
 
 
             <ImageView

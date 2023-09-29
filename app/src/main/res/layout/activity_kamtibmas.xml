@@ -22,7 +22,6 @@
             android:layout_height="wrap_content">
 
 
-
             <ImageView
                 android:id="@+id/img_back_kamtibmas"
                 android:layout_width="wrap_content"
@@ -172,10 +171,10 @@
                     android:id="@+id/et_tanggal_kamtibmas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/senin_25_september_2023"
-                    android:focusable="false"
-                    android:clickable="true"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -217,15 +216,14 @@
                     android:id="@+id/et_waktu_kamtibmas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinssembiold"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/ddhh"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <TextView
@@ -251,6 +249,20 @@
                 app:layout_constraintStart_toStartOf="@+id/txt_upload_foto_kamtibmas"
                 app:layout_constraintTop_toBottomOf="@+id/txt_upload_foto_kamtibmas" />
 
+            <TextView
+                android:id="@+id/txt_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppinsblack"
+                android:text="@string/camera"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/camera_kamtibmas"
+                app:layout_constraintStart_toStartOf="@+id/camera_kamtibmas"
+                app:layout_constraintTop_toBottomOf="@+id/camera_kamtibmas" />
+
+
             <ImageView
                 android:id="@+id/galery_kamtibmas"
                 android:layout_width="wrap_content"
@@ -259,6 +271,19 @@
                 android:src="@drawable/galery"
                 app:layout_constraintStart_toEndOf="@+id/camera_kamtibmas"
                 app:layout_constraintTop_toTopOf="@+id/camera_kamtibmas" />
+
+            <TextView
+                android:id="@+id/txt_galery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppinsblack"
+                android:text="@string/galery"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/galery_kamtibmas"
+                app:layout_constraintStart_toStartOf="@+id/galery_kamtibmas"
+                app:layout_constraintTop_toBottomOf="@+id/galery_kamtibmas" />
 
 
             <ImageView
