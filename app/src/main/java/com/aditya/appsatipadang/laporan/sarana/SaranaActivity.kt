@@ -1,6 +1,7 @@
 package com.aditya.appsatipadang.laporan.sarana
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -9,6 +10,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -22,6 +24,8 @@ import com.aditya.appsatipadang.ui.camera.createCustomTempFile
 import com.aditya.appsatipadang.ui.camera.rotateFile
 import com.aditya.appsatipadang.ui.camera.uriToFile
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class SaranaActivity : AppCompatActivity() {
 
@@ -63,6 +67,33 @@ class SaranaActivity : AppCompatActivity() {
         binding = ActivitySaranaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.etTanggal.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+                    val formattedDate = dateFormat.format(selectedDate.time)
+
+                    binding.etTanggal.setText(formattedDate)
+                },
+                year,
+                month,
+                dayOfMonth
+            )
+
+            datePickerDialog.show()
+        }
+
+
+
         supportActionBar?.hide()
         binding.imgBack.setOnClickListener() {
             val intent = Intent(this@SaranaActivity, MainActivity::class.java)
@@ -84,30 +115,6 @@ class SaranaActivity : AppCompatActivity() {
         val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
-
-//    private fun startTakePhoto() {
-//        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        intent.resolveActivity(packageManager)
-//
-//        createCustomTempFile(application).also {
-//            val photoURI: Uri = FileProvider.getUriForFile(
-//                this@SaranaActivity,
-//                "com.aditya.appsatipadang",
-//                it
-//            )
-//            currentPhotoPath = it.absolutePath
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-//            launcherIntentCamera.launch(intent)
-//        }
-//    }
-
-//    private fun startGallery() {
-//        val intent = Intent()
-//        intent.action = Intent.ACTION_GET_CONTENT
-//        intent.type = "image/*"
-//        val chooser = Intent.createChooser(intent, "Choose a Picture")
-//        launcherIntentGallery.launch(chooser)
-//    }
 
     private fun uploadImage() {
         Toast.makeText(this, "Fitur ini belum tersedia", Toast.LENGTH_SHORT).show()
@@ -141,8 +148,6 @@ class SaranaActivity : AppCompatActivity() {
             val myFile = File(currentPhotoPath)
 
             myFile.let { file ->
-//              Silakan gunakan kode ini jika mengalami perubahan rotasi
-//              rotateFile(file)
                 binding.imgFoto.setImageBitmap(BitmapFactory.decodeFile(file.path))
             }
         }

@@ -22,50 +22,6 @@
             android:layout_height="wrap_content">
 
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/txt_hari"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:text="@string/hari_tanggal"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="14sp"-->
-            <!--                android:textStyle="bold"-->
-
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                android:id="@+id/il_tanggal"-->
-            <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:layout_marginEnd="16dp"-->
-            <!--                app:boxCornerRadiusBottomEnd="10dp"-->
-            <!--                app:boxCornerRadiusBottomStart="10dp"-->
-            <!--                app:boxCornerRadiusTopEnd="10dp"-->
-            <!--                app:boxCornerRadiusTopStart="10dp"-->
-            <!--                app:hintAnimationEnabled="true"-->
-            <!--                app:hintEnabled="false"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/txt_hari">-->
-
-            <!--                <com.google.android.material.textfield.TextInputEditText-->
-            <!--                    android:id="@+id/et_tanggal"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:fontFamily="@font/poppinssembiold"-->
-            <!--                    android:hint="@string/senin_25_september_2023"-->
-            <!--                    android:maxLength="30"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textSize="12sp" />-->
-
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
-
 
             <ImageView
                 android:id="@+id/img_back_kamtibmas"
@@ -218,7 +174,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
                     android:hint="@string/senin_25_september_2023"
-                    android:maxLength="30"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -231,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="@string/hari_tanggal"
+                android:text="Waktu :"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -256,17 +213,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_waktu_kamtimas">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/et_waktu_kamtibmas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:hint="@string/ddhh"
-                    android:maxLength="30"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
 
 
             <TextView

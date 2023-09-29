@@ -4,8 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aditya.appsatipadang.MainActivity
-import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.databinding.ActivityKamtibmasBinding
+import android.app.DatePickerDialog
+import android.view.View
+import android.widget.EditText
+import java.text.SimpleDateFormat
+import java.util.Calendar
+
 import com.aditya.appsatipadang.databinding.ActivityPrasaranaBinding
 
 class ActivityPrasarana : AppCompatActivity() {
@@ -16,6 +20,33 @@ class ActivityPrasarana : AppCompatActivity() {
 
         binding = ActivityPrasaranaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.etTanggal.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+                    val formattedDate = dateFormat.format(selectedDate.time)
+
+                    binding.etTanggal.setText(formattedDate)
+                },
+                year,
+                month,
+                dayOfMonth
+            )
+
+            datePickerDialog.show()
+        }
+
+
 
         supportActionBar?.hide()
 

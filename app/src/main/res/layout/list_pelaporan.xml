@@ -16,18 +16,6 @@
             android:layout_height="match_parent">
 
 
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                android:id="@+id/img_profil"-->
-<!--                android:layout_width="130dp"-->
-<!--                android:layout_height="130dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:src="@color/purple_200"-->
-<!--                app:civ_border_color="@color/yellow"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/txt_profil"-->
-<!--                app:layout_constraintVertical_chainStyle="packed" />-->
-<!--            -->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_pelaporan"
                 android:layout_width="50dp"
