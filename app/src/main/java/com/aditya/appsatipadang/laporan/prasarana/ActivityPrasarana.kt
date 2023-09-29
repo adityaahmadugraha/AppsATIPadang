@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.aditya.appsatipadang.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -102,12 +103,14 @@ class ActivityPrasarana : AppCompatActivity() {
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until group.childCount) {
                 val chip = group.getChildAt(i) as Chip
-                chip.setChipBackgroundColorResource(android.R.color.transparent)
+                chip.setChipBackgroundColorResource(android.R.color.white)
+                chip.textSize = 12f
             }
 
             if (checkedId != View.NO_ID) {
                 val selectedChip = findViewById<Chip>(checkedId)
-                selectedChip.setChipBackgroundColorResource(android.R.color.holo_blue_bright)
+                selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+                selectedChip.textSize = 14f
             }
         }
 

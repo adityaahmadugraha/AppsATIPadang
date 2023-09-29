@@ -77,6 +77,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
                                 android:fontFamily="@font/poppinssembiold"
                                 android:textColor="@color/black"
+                                app:chipBackgroundColor="#FFFFFFFF"
                                 android:text="@string/instalasi_listrik" />
 
                             <com.google.android.material.chip.Chip
@@ -87,7 +88,8 @@
                                 android:textSize="12sp"
                                 android:fontFamily="@font/poppinssembiold"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:text="@string/air" />
+                                android:text="@string/air"
+                                app:chipBackgroundColor="#FFFFFFFF"/>
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/c_LCD"
@@ -97,7 +99,8 @@
                                 android:textSize="12sp"
                                 android:fontFamily="@font/poppinssembiold"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:text="@string/lcd_proyektor_chip" />
+                                android:text="@string/lcd_proyektor_chip"
+                                app:chipBackgroundColor="#FFFFFFFF"/>
 
 
                             <com.google.android.material.chip.Chip
@@ -108,7 +111,8 @@
                                 android:textSize="12sp"
                                 android:fontFamily="@font/poppinssembiold"
                                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:text="@string/ruang_terbuka" />
+                                android:text="@string/ruang_terbuka"
+                                app:chipBackgroundColor="#FFFFFFFF"/>
 
 
                     </com.google.android.material.chip.ChipGroup>

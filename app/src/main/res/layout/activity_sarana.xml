@@ -75,7 +75,8 @@
                             android:fontFamily="@font/poppinssembiold"
                             android:text="@string/printer"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#FFFFFFFF"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/c_ac"
@@ -84,7 +85,8 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinssembiold"
                             android:text="@string/ac"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#FFFFFFFF"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/c_LCD"
@@ -93,7 +95,8 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinssembiold"
                             android:text="@string/lcd_proyektor_chip"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#FFFFFFFF"/>
 
 
                         <com.google.android.material.chip.Chip
@@ -103,7 +106,8 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinssembiold"
                             android:text="@string/peralatan_praktikum"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#FFFFFFFF"/>
 
 
                     </com.google.android.material.chip.ChipGroup>

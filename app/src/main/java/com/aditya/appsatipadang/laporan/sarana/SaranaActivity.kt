@@ -101,20 +101,22 @@ class SaranaActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 
-        binding.imgBack.setOnClickListener{
+        binding.imgBack.setOnClickListener {
             val intent = Intent(this@SaranaActivity, MainActivity::class.java)
             startActivity(intent)
         }
 
-       binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until group.childCount) {
                 val chip = group.getChildAt(i) as Chip
-                chip.setChipBackgroundColorResource(android.R.color.transparent)
+                chip.setChipBackgroundColorResource(android.R.color.white)
+                chip.textSize = 12f
             }
 
             if (checkedId != View.NO_ID) {
                 val selectedChip = findViewById<Chip>(checkedId)
-                selectedChip.setChipBackgroundColorResource(android.R.color.holo_blue_bright)
+                selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+                selectedChip.textSize = 14f
             }
         }
 
