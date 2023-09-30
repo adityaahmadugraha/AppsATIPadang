@@ -104,13 +104,13 @@ class ActivityPrasarana : AppCompatActivity() {
             for (i in 0 until group.childCount) {
                 val chip = group.getChildAt(i) as Chip
                 chip.setChipBackgroundColorResource(android.R.color.white)
-                chip.textSize = 12f
+//                chip.textSize = 12f
             }
 
             if (checkedId != View.NO_ID) {
                 val selectedChip = findViewById<Chip>(checkedId)
                 selectedChip.setChipBackgroundColorResource(R.color.status_bar)
-                selectedChip.textSize = 14f
+//                selectedChip.textSize = 14f
             }
         }
 
