@@ -7,7 +7,6 @@ import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -24,35 +23,37 @@ interface ApiService {
     @POST("login")
     suspend fun login(@Body request: LoginRequest): AuthResponse
 
-    @GET("getLogin")
-    suspend fun getLogin(
+    @GET("getUser")
+    suspend fun getProfile(
         @Header("Authorization") token: String
     ): ProfileUserResponse
 
-//    @Multipart
-//    @POST("profile/update")
-//    suspend fun updateProfile(
-//        @Header("Authorization") token: String,
-//        @Part image: MultipartBody.Part? = null,
-//        @Part("email") email: RequestBody,
-//        @Part("fullname") fullname: RequestBody,
-//    ): ProfileUserResponse
+    @Multipart
+    @POST("profile/update")
+    suspend fun updateProfile(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part? = null,
+        @Part("email") email: RequestBody,
+        @Part("fullname") fullname: RequestBody,
+    ): ProfileUserResponse
 
 
 //    @GET("get_laporan.php")
 //    suspend fun getListLaporan() : LaporanResponse
 
+
 //    @GET("laporan")
 //    suspend fun getListLaporan() : LaporanResponse
 
-//    @GET("laporan")
-//    suspend fun getListLaporan(
-//        @Header("Authorization") token: String
-//    ): LaporanResponse
-//
-//    @PUT("laporan")
-//    suspend fun inputLaporan(
-//        @Header("Authorization") token: String
-//    ): LaporanResponse
+    @GET("laporan")
+    suspend fun getListLaporan(
+        @Header("Authorization") token: String,
+    ): LaporanResponse
+
+    @PUT("laporan")
+    suspend fun inputLaporan(
+        @Header("Authorization") token: String,
+        @Body resquest: ItemLaporaneResponse
+    ): LaporanResponse
 
 }

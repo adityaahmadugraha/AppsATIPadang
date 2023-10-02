@@ -61,10 +61,10 @@ class LoginActivity : AppCompatActivity() {
                             viewModel.saveUserLocal(
                                 UserLocal(
                                     userData?.name.toString(),
-                                    userData?.email.toString(),
                                     userData?.username.toString(),
-                                    userData?.token.toString(),
-                                    userData?.password.toString()
+                                    userData?.password.toString(),
+                                    userData?.password.toString(),
+                                    userData?.token.toString()
                                 )
                             )
                             checkUserLogin()
@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getUser().observe(this@LoginActivity) { userData ->
 
 
-            if (userData.username.isNotEmpty() || userData.password.isNotEmpty()) {
+            if (userData.username.isNotEmpty() || userData.token.isNotEmpty()) {
                 Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
                 Intent(this@LoginActivity, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

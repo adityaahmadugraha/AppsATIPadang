@@ -14,6 +14,10 @@ data class ItemLaporaneResponse(
     @field:SerializedName("tanggal")
     val tanggal: String? = null,
 
+
+    @field:SerializedName("token")
+    val token: String? = null,
+
     @field:SerializedName("waktu")
     val waktu: String? = null,
 

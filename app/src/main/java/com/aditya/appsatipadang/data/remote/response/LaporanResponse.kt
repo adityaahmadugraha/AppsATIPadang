@@ -4,14 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class LaporanResponse(
     @field:SerializedName("status")
-    val status: Boolean? = null,
-
-//    @field:SerializedName("message")
-//    val laporan: String? = null,
+    val status: Int? = null,
 
     @field:SerializedName("laporan")
     val laporan: List<ItemLaporaneResponse?>? = null,
-//
-//    @field:SerializedName("success")
-//    val success: Boolean? = null,
+
 )

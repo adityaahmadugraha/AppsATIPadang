@@ -15,6 +15,9 @@ data class UserResponse (
     @field:SerializedName("token")
     val token: String? = null,
 
+    @field:SerializedName("roles")
+    val roles: String? = null,
+
     @field:SerializedName("password")
     val password: String? = null,
 

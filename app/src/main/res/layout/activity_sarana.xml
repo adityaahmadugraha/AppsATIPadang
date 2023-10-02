@@ -219,7 +219,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/il_lokasi" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_merk"
+                android:id="@+id/il_jenis_kerusakan"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/il_tanggal"
-                app:layout_constraintTop_toBottomOf="@+id/il_merk" />
+                app:layout_constraintTop_toBottomOf="@+id/il_jenis_kerusakan" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/il_deskripsi_kerusakan"

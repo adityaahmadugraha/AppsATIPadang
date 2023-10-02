@@ -32,8 +32,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setupButtonBackClicked()
-//        getDataUser()
+        setupButtonBackClicked()
+        getDataUser()
 
         if (activity != null) {
             checkUserLogin()
@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) {  data ->
             binding?.tvNameProfil?.text = data.name
-            binding?.tvJabatanProfil?.text = data.roles
+            binding?.tvJabatanProfil?.text = data.username
         }
     }
 

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
 import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
@@ -66,56 +67,57 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-//        getDataUser()
-//        setupList()
+        getDataUser()
+        setupList()
     }
 
-//    private fun getDataUser() {
-//        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-//            binding.tvName.text = userLocal.name
-//
-//
-//            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-//                when (result) {
-//                    is Resource.Loading -> {
-//                        binding.progressBar.isVisible = true
-//                    }
-//
-//                    is Resource.Success -> {
-//                        binding.progressBar.isVisible = false
-//
-//
-//                        Log.d(TAG, "listadapter::::::: ${result.data}")
-//
-//                        mAdapter.submitList(result.data.laporan)
-//                        setupRecyclerView()
-//                    }
-//
-//                    is Resource.Error -> {
-//                        binding.progressBar.isVisible = false
-//                        Toast.makeText(
-//                            requireActivity(),
-//                            result.error,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//
-//                }
-//            }
-//
-//        }
-//    }
+    private fun getDataUser() {
+        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+            binding.tvName.text = userLocal.name
 
 
-//    private fun setupList() {
-//        mAdapter = AdapterLaporan { }
-//    }
+            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                Log.d(TAG, "getDataUser: ${userLocal.getToken}")
+                when (result) {
+                    is Resource.Loading -> {
+                        binding.progressBar.isVisible = true
+                    }
 
-//    private fun setupRecyclerView() {
-//        binding.rvLaporanHome.apply {
-//            adapter = mAdapter
-//            layoutManager = LinearLayoutManager(requireActivity())
-//            setHasFixedSize(true)
-//        }
-//    }
+                    is Resource.Success -> {
+                        binding.progressBar.isVisible = false
+
+
+                        Log.d(TAG, "listadapter::::::: ${result.data}")
+
+                        mAdapter.submitList(result.data.laporan)
+                        setupRecyclerView()
+                    }
+
+                    is Resource.Error -> {
+                        binding.progressBar.isVisible = false
+                        Toast.makeText(
+                            requireActivity(),
+                            result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }
+            }
+
+        }
+    }
+
+
+    private fun setupList() {
+        mAdapter = AdapterLaporan { }
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvLaporanHome.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
+            setHasFixedSize(true)
+        }
+    }
 }

@@ -1,12 +1,9 @@
 package com.aditya.appsatipadang.repository
 
-import android.content.ContentValues
-import android.util.Log
 import com.aditya.appsatipadang.data.remote.network.ApiService
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.response.InputLaporanRequest
-import com.aditya.appsatipadang.data.remote.response.LaporanResponse
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -26,42 +23,49 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-//    fun getUserProfile(token: String) = flow {
+    fun getUserProfile(token: String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getProfile(token)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun updateUserProfile(
+        token: String,
+        image: MultipartBody.Part? = null,
+        email: RequestBody,
+        fullname: RequestBody,
+    ) = flow {
+        emit(Resource.Loading())
+        val response = apiService.updateProfile(token, image, email, fullname)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun getListLaporan(token: String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getListLaporan(token)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun inputLaporan(token: String, request: ItemLaporaneResponse) = flow {
+        emit(Resource.Loading())
+        val response = apiService.inputLaporan(token,request)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+//    fun inputLaporan(token: String, saranaData: SaranaData) = flow {
 //        emit(Resource.Loading())
-//        val response = apiService.getProfile(token)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-
-//    fun updateUserProfile(
-//        token: String,
-//        image: MultipartBody.Part? = null,
-//        email: RequestBody,
-//        fullname: RequestBody,
-//    ) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.updateProfile(token, image, email, fullname)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-
-
-//    fun getListLaporan(token: String) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.getListLaporan(token)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-
-//    fun inputLaporan(token: String) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.inputLaporan(token)
+//        val response = apiService.inputLaporan(token, saranaData)
 //        emit(Resource.Success(response))
 //    }.catch {
 //        emit(Resource.Error(it.message ?: ""))

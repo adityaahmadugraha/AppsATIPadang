@@ -5,7 +5,7 @@ data class UserLocal(
     val username: String,
     val password: String,
     val roles: String,
-    val token: String,
+    val token: String
 //    val created_at: String,
 //    val update_at: String
 )
