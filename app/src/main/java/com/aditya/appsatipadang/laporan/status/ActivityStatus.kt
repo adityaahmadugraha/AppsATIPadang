@@ -24,9 +24,9 @@ class ActivityStatus : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnBack.setOnClickListener {
-            intent = Intent(this@ActivityStatus, MainActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.btn.setOnClickListener {
+//            intent = Intent(this@ActivityStatus, MainActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }

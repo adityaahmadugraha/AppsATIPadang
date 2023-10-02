@@ -1,9 +1,9 @@
 package com.aditya.appsatipadang.data.remote.network
 
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
-import com.aditya.appsatipadang.data.remote.response.LoginResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -13,31 +13,46 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 
 interface ApiService {
 
-    @POST("login.php")
-    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+    //    @POST("login.php")
+//    @POST("auth/login")
+//    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+    @POST("login")
+    suspend fun login(@Body request: LoginRequest): AuthResponse
 
-    @GET("profile/me")
-    suspend fun getProfile(
+    @GET("getLogin")
+    suspend fun getLogin(
         @Header("Authorization") token: String
     ): ProfileUserResponse
 
-    @Multipart
-    @POST("profile/update")
-    suspend fun updateProfile(
-        @Header("Authorization") token: String,
-        @Part image: MultipartBody.Part? = null,
-        @Part("email") email: RequestBody,
-        @Part("fullname") fullname: RequestBody,
-    ): ProfileUserResponse
+//    @Multipart
+//    @POST("profile/update")
+//    suspend fun updateProfile(
+//        @Header("Authorization") token: String,
+//        @Part image: MultipartBody.Part? = null,
+//        @Part("email") email: RequestBody,
+//        @Part("fullname") fullname: RequestBody,
+//    ): ProfileUserResponse
 
 
-    @GET("get_laporan.php")
-    suspend fun getListLaporan() : LaporanResponse
+//    @GET("get_laporan.php")
+//    suspend fun getListLaporan() : LaporanResponse
 
+//    @GET("laporan")
+//    suspend fun getListLaporan() : LaporanResponse
 
+//    @GET("laporan")
+//    suspend fun getListLaporan(
+//        @Header("Authorization") token: String
+//    ): LaporanResponse
+//
+//    @PUT("laporan")
+//    suspend fun inputLaporan(
+//        @Header("Authorization") token: String
+//    ): LaporanResponse
 
 }

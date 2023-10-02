@@ -19,6 +19,7 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
+import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
@@ -47,7 +48,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        mAdapter = AdapterLaporan()
 
         binding.cardSarana.setOnClickListener {
             val intent = Intent(activity, SaranaActivity::class.java)
@@ -66,55 +66,56 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        getDataUser()
-        setupList()
+//        getDataUser()
+//        setupList()
     }
 
-    private fun getDataUser() {
-        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            binding.tvName.text = userLocal.name
+//    private fun getDataUser() {
+//        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+//            binding.tvName.text = userLocal.name
+//
+//
+//            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+//                when (result) {
+//                    is Resource.Loading -> {
+//                        binding.progressBar.isVisible = true
+//                    }
+//
+//                    is Resource.Success -> {
+//                        binding.progressBar.isVisible = false
+//
+//
+//                        Log.d(TAG, "listadapter::::::: ${result.data}")
+//
+//                        mAdapter.submitList(result.data.laporan)
+//                        setupRecyclerView()
+//                    }
+//
+//                    is Resource.Error -> {
+//                        binding.progressBar.isVisible = false
+//                        Toast.makeText(
+//                            requireActivity(),
+//                            result.error,
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//
+//                }
+//            }
+//
+//        }
+//    }
 
 
-            viewModel.getListLaporan().observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
+//    private fun setupList() {
+//        mAdapter = AdapterLaporan { }
+//    }
 
-                    is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-
-
-                        Log.d(TAG, "listadapter::::::: ${result.data}")
-
-                        mAdapter.submitList(result.data.data)
-                        setupRecyclerView()
-                    }
-
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(
-                            requireActivity(),
-                            result.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-
-                }
-            }
-
-        }
-    }
-
-
-    private fun setupList(){
-        mAdapter = AdapterLaporan {  }
-    }
-    private fun setupRecyclerView() {
-        binding.rvLaporanHome.apply {
-            adapter = mAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
-            setHasFixedSize(true)
-        }
-    }
+//    private fun setupRecyclerView() {
+//        binding.rvLaporanHome.apply {
+//            adapter = mAdapter
+//            layoutManager = LinearLayoutManager(requireActivity())
+//            setHasFixedSize(true)
+//        }
+//    }
 }

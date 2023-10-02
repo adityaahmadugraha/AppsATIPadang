@@ -1,9 +1,10 @@
 package com.aditya.appsatipadang.ui.login
 
+
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -11,11 +12,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.aditya.appsatipadang.MainActivity
-import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,81 +33,53 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-
+        checkUserLogin()
 
         binding.btnLogin.setOnClickListener {
             loginUser()
         }
 
-        checkUserLogin()
     }
 
     private fun loginUser() {
-        val email = binding.txtUsername.text.toString()
+        val username = binding.txtUsername.text.toString()
         val password = binding.txtPassword.text.toString()
 
-        // Validasi input
-        if (email.isBlank() || password.isBlank()) {
-            Toast.makeText(this@LoginActivity, "Username dan password harus diisi", Toast.LENGTH_SHORT).show()
-            return
-        }
+        viewModel.loginUser(LoginRequest(username, password))
+            .observe(this@LoginActivity) { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        setInputLoading(true)
+                    }
 
-        viewModel.loginUser(LoginRequest(email, password)).observe(this@LoginActivity) { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    setInputLoading(true)
-                }
+                    is Resource.Success -> {
+                        setInputLoading(false)
 
-                is Resource.Success -> {
-                    setInputLoading(false)
+                        if (result.data.status == 200) {
 
-                    Log.d(TAG, "loginUser: ${result.data.body()}")
-
-                    if (result.data.code() == 200) {
-                        val userData = result.data.body()
-                        if (userData != null) {
-                            viewModel.saveUser(
+                            val userData = result.data.user
+                            viewModel.saveUserLocal(
                                 UserLocal(
-                                    userData.user?.id,
-                                    userData.user?.name.toString(),
-                                    userData.user?.username.toString(),
-                                    userData.user?.password.toString(),
-                                    userData.user?.roles.toString(),
-                                    userData.user?.created_at.toString(),
-                                    userData.user?.update_at.toString()
+                                    userData?.name.toString(),
+                                    userData?.email.toString(),
+                                    userData?.username.toString(),
+                                    userData?.token.toString(),
+                                    userData?.password.toString()
                                 )
                             )
-
                             checkUserLogin()
-                        } else {
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Data pengguna tidak valid",
-                                Toast.LENGTH_SHORT
-                            ).show()
                         }
-                    } else {
-                        // Tampilkan pesan jika username atau password salah
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Password atau username salah!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+                    }
+
+                    is Resource.Error -> {
+                        setInputLoading(false)
+                        Toast.makeText(this@LoginActivity, result.error, Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
-
-
-                is Resource.Error -> {
-                    setInputLoading(false)
-                    Toast.makeText(this@LoginActivity, result.error, Toast.LENGTH_SHORT)
-                        .show()
-                }
             }
-        }
     }
-
-
-
 
     private fun setInputLoading(condition: Boolean) {
         binding.apply {
@@ -115,8 +89,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkUserLogin() {
-        viewModel.getUser().observe(this@LoginActivity) {
-            if (it.username.isNotEmpty() || it.password.isNotEmpty()) {
+        viewModel.getUser().observe(this@LoginActivity) { userData ->
+
+
+            if (userData.username.isNotEmpty() || userData.password.isNotEmpty()) {
+                Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
                 Intent(this@LoginActivity, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(this)

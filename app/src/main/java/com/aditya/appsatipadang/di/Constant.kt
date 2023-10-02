@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Environment
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.aditya.appsatipadang.data.local.UserLocal
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -19,22 +20,20 @@ import java.util.Locale
 object Constant {
     const val PREF_NAME = "userInfo" //nama preference datastore
 
-
-    val KEY_ID = intPreferencesKey("id")
     val KEY_NAME = stringPreferencesKey("name")
     val KEY_USERNAME = stringPreferencesKey("username")
     val KEY_PASSWORD = stringPreferencesKey("password")
     val KEY_ROLES = stringPreferencesKey("roles")
-    val KEY_CREATED_AT = stringPreferencesKey("created_at")
-    val KEY_UPDATE_AT = stringPreferencesKey("update_at")
+    val KEY_TOKEN = stringPreferencesKey("token")
+
+    private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+
+    val UserLocal.getToken get() = "Bearer ${this.token}"
+
 
     fun isAllFieldsFilled(vararg fields: String): Boolean {
         return fields.all { it.isNotEmpty() }
     }
-
-//    val .getToken get() = "Bearer ${this.token}"
-
-    private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
     fun uriToFile(selectedImg: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver

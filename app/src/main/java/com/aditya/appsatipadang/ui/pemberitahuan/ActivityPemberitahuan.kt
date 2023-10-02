@@ -1,9 +1,10 @@
 package com.aditya.appsatipadang.ui.pemberitahuan
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.ActivityPemberitahuanBinding
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 
 class ActivityPemberitahuan : AppCompatActivity() {
 
@@ -15,6 +16,13 @@ class ActivityPemberitahuan : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+
+        binding.btnCekLaporan.setOnClickListener {
+            intent = Intent(this@ActivityPemberitahuan, DetailStatusLaporanActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }

@@ -1,6 +1,8 @@
 package com.aditya.appsatipadang.data.remote.response
 
 import com.google.gson.annotations.SerializedName
+import java.sql.Time
+import java.util.Date
 
 data class ItemLaporaneResponse(
     @field:SerializedName("id")
@@ -25,5 +27,12 @@ data class ItemLaporaneResponse(
     val deskripsi: String? = null,
 
     @field:SerializedName("foto")
-    val foto: String? = null
+    val gambar: String? = null,
+
+    @field:SerializedName("create_at")
+    val create_at: String? = null,
+
+    @field:SerializedName("updated_at")
+    val updated_at: String? = null
+
 )

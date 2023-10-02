@@ -13,12 +13,12 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val dataRepository: DataRepository
- ) :ViewModel(){
+) : ViewModel() {
     fun loginUser(loginRequest: LoginRequest) = dataRepository.loginUser(loginRequest).asLiveData()
 
     fun getUser() = dataRepository.getUser().asLiveData()
 
-    fun saveUser(userLocal: UserLocal) = viewModelScope.launch {
+    fun saveUserLocal(userLocal: UserLocal) = viewModelScope.launch {
         dataRepository.saveUser(userLocal)
     }
 }

@@ -3,15 +3,15 @@ package com.aditya.appsatipadang.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class LaporanResponse(
-    @field:SerializedName("code")
-    val code: Int? = null,
+    @field:SerializedName("status")
+    val status: Boolean? = null,
 
-    @field:SerializedName("data")
-    val data: List<ItemLaporaneResponse?>? = null,
+//    @field:SerializedName("message")
+//    val laporan: String? = null,
 
-    @field:SerializedName("success")
-    val success: Boolean? = null,
-
-    @field:SerializedName("message")
-    val message: String? = null
+    @field:SerializedName("laporan")
+    val laporan: List<ItemLaporaneResponse?>? = null,
+//
+//    @field:SerializedName("success")
+//    val success: Boolean? = null,
 )

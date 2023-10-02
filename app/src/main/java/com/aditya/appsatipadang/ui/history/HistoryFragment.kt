@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private val viewModel: HistoryViewModel by viewModels()
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -23,8 +23,8 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val historyViewModel =
-            ViewModelProvider(this)[HistoryViewModel::class.java]
+//        val historyViewModel =
+//            ViewModelProvider(this)[HistoryViewModel::class.java]
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
 
@@ -37,10 +37,10 @@ class HistoryFragment : Fragment() {
         setupButtonBackClicked()
 
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
     private fun setupButtonBackClicked() {
 

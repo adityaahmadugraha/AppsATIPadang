@@ -1,13 +1,16 @@
 package com.aditya.appsatipadang.ui.history
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.aditya.appsatipadang.repository.DataRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HistoryViewModel : ViewModel() {
+@HiltViewModel
+class HistoryViewModel @Inject constructor(
+    private val repository: DataRepository
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is history Fragment"
-    }
-    val text: LiveData<String> = _text
+//    fun getListLaporan(token: String) = repository.getListLaporan(token).asLiveData()
+
 }

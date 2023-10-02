@@ -6,19 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".laporan.status.ActivityStatus">
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <ScrollView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:scrollbars="none"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
 
             <ImageView
@@ -46,278 +46,420 @@
                 app:layout_constraintTop_toTopOf="@+id/img_back_status_laporan" />
 
 
-            <TextView
-                android:id="@+id/txt_nama_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/nama"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/img_back_status_laporan"
-                app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+<!--            <TextView-->
+<!--                android:id="@+id/txt_nama_status"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/nama"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/img_back_status_laporan"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txt_title" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_name_status"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:enabled="false"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_nama_status">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/il_name_status"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:enabled="false"-->
+<!--                app:boxCornerRadiusBottomEnd="10dp"-->
+<!--                app:boxCornerRadiusBottomStart="10dp"-->
+<!--                app:boxCornerRadiusTopEnd="10dp"-->
+<!--                app:boxCornerRadiusTopStart="10dp"-->
+<!--                app:hintAnimationEnabled="true"-->
+<!--                app:hintEnabled="false"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txt_nama_status">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_name_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinssembiold"
-                    android:hint="@string/name"
-                    android:maxLength="25"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_name_status"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/poppinssembiold"-->
+<!--                    android:maxLength="25"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="12sp" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <TextView
-                android:id="@+id/txt_jenis_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/jenis"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/img_back_status_laporan"
-                app:layout_constraintTop_toBottomOf="@+id/il_name_status" />
+<!--            <TextView-->
+<!--                android:id="@+id/txt_jenis_status"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/jenis"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/img_back_status_laporan"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/il_name_status" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_jenis_status"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:enabled="false"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_jenis_status">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/il_jenis_status"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:enabled="false"-->
+<!--                app:boxCornerRadiusBottomEnd="10dp"-->
+<!--                app:boxCornerRadiusBottomStart="10dp"-->
+<!--                app:boxCornerRadiusTopEnd="10dp"-->
+<!--                app:boxCornerRadiusTopStart="10dp"-->
+<!--                app:hintAnimationEnabled="true"-->
+<!--                app:hintEnabled="false"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txt_jenis_status">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_jenis_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinssembiold"
-                    android:hint="@string/jenis_status"
-                    android:maxLength="25"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_jenis_status"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/poppinssembiold"-->
+<!--                    android:maxLength="25"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="12sp" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <TextView
-                android:id="@+id/txt_deskripsi_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/deskripsi_kejadian"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/img_back_status_laporan"
-                app:layout_constraintTop_toBottomOf="@+id/il_jenis_status" />
+<!--            <TextView-->
+<!--                android:id="@+id/txt_deskripsi_status"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/deskripsi_kejadian"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/img_back_status_laporan"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/il_jenis_status" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_deskripsi_status"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="230dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:enabled="false"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                app:hintAnimationEnabled="true"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_deskripsi_status">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/il_deskripsi_status"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="220dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:enabled="false"-->
+<!--                app:boxCornerRadiusBottomEnd="15dp"-->
+<!--                app:boxCornerRadiusBottomStart="15dp"-->
+<!--                app:boxCornerRadiusTopEnd="15dp"-->
+<!--                app:boxCornerRadiusTopStart="15dp"-->
+<!--                app:hintAnimationEnabled="true"-->
+<!--                app:hintEnabled="false"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txt_deskripsi_status">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_deskripsi_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/poppinssembiold"
-                    android:gravity="top"
-                    android:hint="@string/deskripsi_status"
-                    android:maxLength="500"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_deskripsi_status"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="@font/poppinssembiold"-->
+<!--                    android:gravity="top"-->
+<!--                    android:maxLength="500"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="12sp" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_diterima_admin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/il_deskripsi_status">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/card_diterima_admin"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                app:cardCornerRadius="8dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/il_deskripsi_status">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
 
-                    <ImageView
-                        android:id="@+id/img_verifikasi_admin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/baseline_verified_user_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img_verifikasi_admin"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:src="@drawable/baseline_verified_user_24"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/poppinsextrabold"
-                        android:text="@string/sudah_di_terima_admin"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_verifikasi_admin"
-                        app:layout_constraintStart_toEndOf="@+id/img_verifikasi_admin"
-                        app:layout_constraintTop_toTopOf="@+id/img_verifikasi_admin" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:fontFamily="@font/poppinsextrabold"-->
+<!--                        android:text="@string/sudah_di_terima_admin"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/img_verifikasi_admin"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/img_verifikasi_admin"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/img_verifikasi_admin" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_sedang_dikerjakan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_diterima_admin">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/card_sedang_dikerjakan"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                app:cardCornerRadius="8dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/card_diterima_admin">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
 
-                    <ImageView
-                        android:id="@+id/img_verifikasi_dikerjakan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/baseline_verified_user_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img_verifikasi_dikerjakan"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:src="@drawable/baseline_verified_user_24"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:id="@+id/tv_proses_sedang_dikerjakan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/poppinsextrabold"
-                        android:text="@string/sedang_di_kerjakan_oleh_eleanor"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_verifikasi_dikerjakan"
-                        app:layout_constraintStart_toEndOf="@+id/img_verifikasi_dikerjakan"
-                        app:layout_constraintTop_toTopOf="@+id/img_verifikasi_dikerjakan" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_proses_sedang_dikerjakan"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:fontFamily="@font/poppinsextrabold"-->
+<!--                        android:text="@string/sedang_di_kerjakan_oleh_eleanor"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/img_verifikasi_dikerjakan"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/img_verifikasi_dikerjakan"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/img_verifikasi_dikerjakan" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_selesai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_sedang_dikerjakan">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/card_selesai"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/card_sedang_dikerjakan">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
 
-                    <ImageView
-                        android:id="@+id/img_verifikasi_selesai"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/baseline_verified_user_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img_verifikasi_selesai"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        android:src="@drawable/baseline_verified_user_24"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:id="@+id/tv_proses_selesai"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/poppinsextrabold"
-                        android:text="@string/laporan_anda_sudah_selesai_dikerjakan"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_verifikasi_selesai"
-                        app:layout_constraintStart_toEndOf="@+id/img_verifikasi_selesai"
-                        app:layout_constraintTop_toTopOf="@+id/img_verifikasi_selesai" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_proses_selesai"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:fontFamily="@font/poppinsextrabold"-->
+<!--                        android:text="@string/laporan_anda_sudah_selesai_dikerjakan"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/img_verifikasi_selesai"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/img_verifikasi_selesai"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/img_verifikasi_selesai" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/blue"
-                android:text="@string/kembali"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_selesai" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_back"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:backgroundTint="@color/blue"-->
+<!--                android:text="@string/kembali"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/card_selesai" />-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
+
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardView2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardCornerRadius="12dp"-->
+<!--        app:cardElevation="12dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txt_title">-->
+
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="0dp">-->
+
+
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/img_pelaporan"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:src="@color/blue"-->
+<!--            app:civ_border_color="@color/yellow"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_title_laporan"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:fontFamily="@font/poppinssembiold"-->
+<!--            android:text="@string/laporan_sarana"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/img_pelaporan"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_tgl_laporan_sarana"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:fontFamily="@font/poppinssembiold"-->
+<!--            android:text="@string/format_tgl"-->
+<!--            android:textSize="10sp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/tv_name_alat"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_title_laporan"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_name_alat"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:fontFamily="@font/poppinssembiold"-->
+<!--            android:text="@string/lcd_proyektor"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_tgl_laporan_sarana" />-->
+
+
+<!--        &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:id="@+id/tv_rp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_marginStart="100dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:fontFamily="@font/opensansbold"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:text="@string/rp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:textSize="12sp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@+id/tv_title_laporan"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintStart_toEndOf="@+id/tv_title_laporan" />&ndash;&gt;-->
+
+<!--        &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:id="@+id/tv_harga"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_marginStart="8dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:fontFamily="@font/opensansbold"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:text="3.000"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:textSize="12sp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@+id/tv_rp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintStart_toEndOf="@+id/tv_rp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintTop_toTopOf="@+id/tv_rp" />&ndash;&gt;-->
+
+<!--        &lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:id="@+id/img_jumlah_pelapor"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_width="18dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_height="18dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_marginTop="16dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:src="@drawable/ic_person"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintStart_toStartOf="@+id/tv_rp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/tv_harga" />&ndash;&gt;-->
+
+
+<!--        &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:id="@+id/tv_jumlah_pelapor"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:layout_marginStart="8dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:fontFamily="@font/opensanscondensedextrabold"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:text="@string/jumlah_pelapor"&ndash;&gt;-->
+<!--        &lt;!&ndash;                android:textSize="16sp"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@+id/img_jumlah_pelapor"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintStart_toEndOf="@+id/img_jumlah_pelapor"&ndash;&gt;-->
+<!--        &lt;!&ndash;                app:layout_constraintTop_toTopOf="@+id/img_jumlah_pelapor" />&ndash;&gt;-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_status_laporan"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:fontFamily="@font/poppinssembiold"-->
+<!--            android:text="Diproses"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_status_laporan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        tools:listitem="@layout/list_pelaporan" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,8 +32,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupButtonBackClicked()
-        getDataUser()
+//        setupButtonBackClicked()
+//        getDataUser()
 
         if (activity != null) {
             checkUserLogin()

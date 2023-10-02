@@ -14,13 +14,12 @@ class UserPreference(context: Context) {
     fun getUser(): Flow<UserLocal> {
         return userDataStore.data.map { preferences ->
             UserLocal(
-                preferences[Constant.KEY_ID] ?:hashCode(),
                 preferences[Constant.KEY_NAME] ?: "",
                 preferences[Constant.KEY_USERNAME] ?: "",
                 preferences[Constant.KEY_PASSWORD] ?: "",
                 preferences[Constant.KEY_ROLES] ?: "",
-                preferences[Constant.KEY_CREATED_AT] ?: "",
-                preferences[Constant.KEY_UPDATE_AT] ?: ""
+                preferences[Constant.KEY_TOKEN] ?: "",
+
 
             )
 
@@ -29,13 +28,11 @@ class UserPreference(context: Context) {
 
     suspend fun saveUser(user: UserLocal) {
         userDataStore.edit { preferences ->
-            preferences[Constant.KEY_ID] = user.id as Int
             preferences[Constant.KEY_NAME] = user.name
             preferences[Constant.KEY_USERNAME] = user.username
             preferences[Constant.KEY_PASSWORD] = user.password
             preferences[Constant.KEY_ROLES] = user.roles
-            preferences[Constant.KEY_CREATED_AT] = user.created_at
-            preferences[Constant.KEY_UPDATE_AT] = user.update_at
+            preferences[Constant.KEY_TOKEN] = user.token
         }
     }
 
