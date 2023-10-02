@@ -4,7 +4,7 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -30,10 +30,9 @@ class DataRepository @Inject constructor(
         fullname: RequestBody,
     ) = remoteData.updateUserProfile(token, image, email, fullname)
 
-    fun getListLaporan(token : String) = remoteData.getListLaporan(token)
+    fun getListLaporan(token: String) = remoteData.getListLaporan(token)
 
-    fun inputLaporan(token: String, request: ItemLaporaneResponse)
-    = remoteData.inputLaporan(token,request)
+    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) = remoteData.inputLaporan(token,inputLaporanRequest)
 
 
 }

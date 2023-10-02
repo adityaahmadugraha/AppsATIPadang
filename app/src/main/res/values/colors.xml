@@ -12,6 +12,7 @@
     <color name="yellow">#FFEB3B</color>
     <color name="fab">#218BFF</color>
     <color name="status_bar">#54AEFF</color>
+    <color name="background_chip">#BEC2C6</color>
     <color name="selected_chip_color">#54AEFF</color>
 
 

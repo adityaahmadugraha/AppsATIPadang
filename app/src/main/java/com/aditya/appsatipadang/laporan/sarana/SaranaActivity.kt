@@ -19,15 +19,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aditya.appsatipadang.MainActivity
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
-import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.rotateFile
 import com.aditya.appsatipadang.ui.camera.uriToFile
-import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.text.SimpleDateFormat
@@ -39,6 +38,8 @@ class SaranaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
+
+    private var user: UserLocal? = null
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -63,6 +64,14 @@ class SaranaActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+//         var chip : String = ""
+
+//        binding.apply {
+//            cAc.setOnClickListener{
+//                chip = "AC".toString()
+//            }
+//        }
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -76,9 +85,24 @@ class SaranaActivity : AppCompatActivity() {
         binding = ActivitySaranaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.btnKirim.setOnClickListener {
-            checkInput()
+
+            getUserInput()
+            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+            val selectedChipId = chipGroup.checkedChipId
+
+            if (selectedChipId != View.NO_ID) {
+                val selectedChip = findViewById<Chip>(selectedChipId)
+                val selectedChipText = selectedChip.text.toString()
+
+                Log.d(TAG, "Chip yang dipilih: $selectedChipText")
+
+            } else {
+                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
+            }
         }
+
 
         binding.etTanggal.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -110,10 +134,13 @@ class SaranaActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 
+        getUserData()
         binding.imgBack.setOnClickListener {
             val intent = Intent(this@SaranaActivity, MainActivity::class.java)
             startActivity(intent)
         }
+
+
 
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until group.childCount) {
@@ -135,6 +162,7 @@ class SaranaActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+
         binding.camera.setOnClickListener { startCameraX() }
         binding.galery.setOnClickListener { startGallery() }
         binding.imgFoto.setOnClickListener { uploadImage() }
@@ -142,81 +170,148 @@ class SaranaActivity : AppCompatActivity() {
 
     }
 
-    private fun checkInput() {
-        binding.apply {
-            val id = taskId
-            val chip = chipGroup.toString()
-            val tanggal = etTanggal.toString()
-            val lokasi = etLokasi.toString()
-            val jenisKerusakan = etJenisKerusakan.toString()
-            val desakripsiKerusakan = etDeskripsiKerusakan.toString()
-            val camera = imgFoto.toString()
-
-            val itemLaporanResponse = ItemLaporaneResponse(id, chip, tanggal,  lokasi, jenisKerusakan, desakripsiKerusakan, camera)
-            if (validateInput(itemLaporanResponse)) {
-
-            }
-                viewModel.getUser().observe(this@SaranaActivity) {
-                viewModel.inputLaporan(it.getToken,itemLaporanResponse).observe(this@SaranaActivity) { item ->
-                        when (item) {
-                            is Resource.Loading -> {
-
-                            }
-
-                            is Resource.Success -> {
-                                Log.d(TAG, "simpanData: ${item.data}")
-                                if (item.data.status == 200) {
-                                    Intent(
-                                        this@SaranaActivity,
-                                        ActivityPemberitahuan::class.java
-                                    ).also { mov ->
-                                        mov.flags =
-                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        startActivity(mov)
-                                    }
-                                }
-                            }
-
-                            is Resource.Error -> {
-
-                            }
-                        }
-                    }
-
-            }
+    private fun getUserData() {
+        viewModel.getUser().observe(this) {
+            user = it
         }
     }
 
-    private fun validateInput(inputLaporanRequest: ItemLaporaneResponse): Boolean {
+    private fun getUserInput() {
+
+//        Log.d("IKOCHIP:::::::::", chip.toString())
+
+            val type = "Sarana"
+            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+            val selectedChipId = chipGroup.checkedChipId
+            val chip: String
+
+            if (selectedChipId != View.NO_ID) {
+                val selectedChip = findViewById<Chip>(selectedChipId)
+                chip = selectedChip.text.toString()
+            } else {
+                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
         binding.apply {
-            if (inputLaporanRequest.tanggal!!.isEmpty()) {
-                ilTanggal.isErrorEnabled = true
-                ilTanggal.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (inputLaporanRequest.lokasi!!.isEmpty()) {
-                ilLokasi.isErrorEnabled = true
-                ilLokasi.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (inputLaporanRequest.merk!!.isEmpty()) {
-                ilJenisKerusakan.isErrorEnabled = true
-                ilJenisKerusakan.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (inputLaporanRequest.deskripsi!!.isEmpty()) {
-                ilDeskripsiKerusakan.isErrorEnabled = true
-                ilDeskripsiKerusakan.error = getString(R.string.must_not_empty)
-                return false
-            }
-//            if (inputLaporanRequest.gambar.toString().isEmpty()) {
+            val type = "Sarana"
+            val tanggal = etTanggal.text.toString()
+            val lokasi = etLokasi.text.toString()
+            val jenisKerusakan = etJenisKerusakan.text.toString()
+            val deskripsiKerusakan = etDeskripsiKerusakan.text.toString()
+            val camera = imgFoto.toString()
+
+            val inputLaporanRequest = InputLaporanRequest(
+                type,
+                tanggal,
+                lokasi,
+                chip,
+                deskripsiKerusakan,
+                jenisKerusakan,
+//                camera.
+            )
+
+
+//            val tanggal = etTanggal.toString()
+//            val lokasi = etLokasi.toString()
+//            val jenisKerusakan = etJenisKerusakan.toString()
+//            val desakripsiKerusakan = etDeskripsiKerusakan.toString()
+//            val camera = imgFoto.toString()
+//            val tanggal = binding.etTanggal.text.toString()
+//            val lokasi = binding.etLokasi.text.toString()
+//            val jenisKerusakan = binding.etJenisKerusakan.text.toString()
+//            val desakripsiKerusakan = binding.etDeskripsiKerusakan.text.toString()
+//            val camera = binding.imgFoto.toString()
+
+
+//            Log.d("IKOCIP::", chip.toString())
+//            val inputLaporanRequest = InputLaporanRequest(
+//                type,
+//                chipGroup.toString(),
+//                tanggal,
+//                lokasi,
+//                jenisKerusakan,
+//                desakripsiKerusakan,
+//                camera
+//            )
+
+            Log.d(TAG, "LAPORAN::: $inputLaporanRequest")
+
+//            if (validateInput(inputLaporanRequest)) {
+//                viewModel.inputLaporan(
+//                    user?.getToken.toString(),
+//                    inputLaporanRequest
+//                ).observe(this@SaranaActivity) { item ->
+//                    when (item) {
+//                        is Resource.Loading -> {
+//
+//                        }
+//
+//                        is Resource.Success -> {
+//                            Log.d(TAG, "simpanData: ${item.data}")
+//                            if (item.data.status == 200) {
+//                                Intent(
+//                                    this@SaranaActivity,
+//                                    ActivityPemberitahuan::class.java
+//                                ).also { mov ->
+//                                    mov.flags =
+//                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                    startActivity(mov)
+//                                }
+//                            }
+//                        }
+//
+//                        is Resource.Error -> {
+//
+//                        }
+//                    }
+//                }
+//
+//            }
+        }
+    }
+
+//    private fun validateInput(inputLaporanRequest: InputLaporanRequest): Boolean {
+//        binding.apply {
+//            if (inputLaporanRequest.tanggal?.isEmpty() == true) {
+//                ilTanggal.isErrorEnabled = true
+//                ilTanggal.error = getString(R.string.must_not_empty)
+//                return false
+//            }
+//            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
+//                ilLokasi.isErrorEnabled = true
+//                ilLokasi.error = getString(R.string.must_not_empty)
+//                return false
+//            }
+//            if (inputLaporanRequest.merk?.isEmpty() == true) {
+//                ilJenisKerusakan.isErrorEnabled = true
+//                ilJenisKerusakan.error = getString(R.string.must_not_empty)
+//                return false
+//            }
+//            if (binding.etTanggal.text?.isEmpty() == true) {
+//                binding.ilTanggal.isErrorEnabled = true
+//                binding.ilTanggal.error = getString(R.string.must_not_empty)
+//                return false
+//            }
+
+
+//            if (inputLaporanRequest.deskripsi?.isEmpty() == true) {
+//                ilDeskripsiKerusakan.isErrorEnabled = true
+//                ilDeskripsiKerusakan.error = getString(R.string.must_not_empty)
+//                return false
+//            }
+
+//            if (inputLaporanRequest.gambar?.isNotEmpty() == true) {
+//            } else {
 //                imgFoto.isErrorEnabled = true
 //                imgFoto.error = getString(R.string.must_not_empty)
 //                return false
 //            }
-            return true
-        }
-    }
+
+
+//            return true
+//        }
+//    }
 
 
     private fun startCameraX() {

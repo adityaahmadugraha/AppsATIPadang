@@ -3,6 +3,7 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.remote.network.ApiService
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -55,7 +56,7 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun inputLaporan(token: String, request: ItemLaporaneResponse) = flow {
+    fun inputLaporan(token: String, request: InputLaporanRequest) = flow {
         emit(Resource.Loading())
         val response = apiService.inputLaporan(token,request)
         emit(Resource.Success(response))

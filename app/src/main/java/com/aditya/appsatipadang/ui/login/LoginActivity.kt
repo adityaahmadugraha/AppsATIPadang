@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                                     userData?.name.toString(),
                                     userData?.username.toString(),
                                     userData?.password.toString(),
-                                    userData?.password.toString(),
+                                    userData?.roles.toString(),
                                     userData?.token.toString()
                                 )
                             )

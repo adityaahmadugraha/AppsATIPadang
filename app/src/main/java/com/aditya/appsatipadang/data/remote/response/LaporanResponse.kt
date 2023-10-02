@@ -8,5 +8,4 @@ data class LaporanResponse(
 
     @field:SerializedName("laporan")
     val laporan: List<ItemLaporaneResponse?>? = null,
-
 )

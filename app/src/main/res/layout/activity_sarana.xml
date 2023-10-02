@@ -68,7 +68,6 @@
 
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/c_printer"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -76,38 +75,35 @@
                             android:text="@string/printer"
                             android:textColor="@color/black"
                             android:textSize="12sp"
-                            app:chipBackgroundColor="#FFFFFFFF"/>
+                            app:chipBackgroundColor="#BEC2C6"/>
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/c_ac"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/ac"
                             android:textSize="12sp"
-                            app:chipBackgroundColor="#FFFFFFFF"/>
+                            app:chipBackgroundColor="#BEC2C6"/>
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/c_LCD"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/lcd_proyektor_chip"
                             android:textSize="12sp"
-                            app:chipBackgroundColor="#FFFFFFFF"/>
+                            app:chipBackgroundColor="#BEC2C6"/>
 
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/c_peralatan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/peralatan_praktikum"
                             android:textSize="12sp"
-                            app:chipBackgroundColor="#FFFFFFFF"/>
+                            app:chipBackgroundColor="#56CACCCD"/>
 
 
                     </com.google.android.material.chip.ChipGroup>

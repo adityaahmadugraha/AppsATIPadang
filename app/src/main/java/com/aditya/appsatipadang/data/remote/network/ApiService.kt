@@ -1,5 +1,6 @@
 package com.aditya.appsatipadang.data.remote.network
 
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
@@ -17,9 +18,6 @@ import retrofit2.http.Part
 
 interface ApiService {
 
-    //    @POST("login.php")
-//    @POST("auth/login")
-//    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
     @POST("login")
     suspend fun login(@Body request: LoginRequest): AuthResponse
 
@@ -38,22 +36,16 @@ interface ApiService {
     ): ProfileUserResponse
 
 
-//    @GET("get_laporan.php")
-//    suspend fun getListLaporan() : LaporanResponse
-
-
-//    @GET("laporan")
-//    suspend fun getListLaporan() : LaporanResponse
-
     @GET("laporan")
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
     ): LaporanResponse
 
-    @PUT("laporan")
+    @POST("laporan")
     suspend fun inputLaporan(
         @Header("Authorization") token: String,
-        @Body resquest: ItemLaporaneResponse
+        @Body inputLaporanRequest: InputLaporanRequest
     ): LaporanResponse
+
 
 }
