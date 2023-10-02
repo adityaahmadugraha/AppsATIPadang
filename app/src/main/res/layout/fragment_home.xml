@@ -68,8 +68,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_sarana"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
@@ -85,8 +85,8 @@
 
                     <ImageView
                         android:id="@+id/img_sarana"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
@@ -115,8 +115,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_prasarana"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="12dp"
@@ -131,8 +131,8 @@
 
                     <ImageView
                         android:id="@+id/img_prasarana"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
@@ -161,8 +161,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_kamtibmas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_prasarana"
@@ -176,8 +176,8 @@
 
                     <ImageView
                         android:id="@+id/img_kamtibmas"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
@@ -207,8 +207,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginEnd="24dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_kamtibmas"
@@ -222,8 +222,8 @@
 
                     <ImageView
                         android:id="@+id/img_status"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
@@ -256,12 +256,11 @@
     </androidx.cardview.widget.CardView>
 
 
-
     <TextView
         android:id="@+id/tv_title_pelaporan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/poppinssembiold"
         android:text="@string/history_pelaporan"
         android:textColor="@color/black"
@@ -292,6 +291,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/list_pelaporan" />

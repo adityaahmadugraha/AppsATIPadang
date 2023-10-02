@@ -26,7 +26,7 @@
                 android:id="@+id/img_back_laporan_prasarana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,14 +53,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/il_tanggal"
+                app:layout_constraintStart_toStartOf="@+id/il_tanggal"
                 app:layout_constraintTop_toBottomOf="@+id/txt_title">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp">
+                    android:padding="4dp">
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chipGroup"
@@ -69,50 +69,58 @@
                         app:singleSelection="true">
 
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/c_instalasi_listrik"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:fontFamily="@font/poppinsextrabold"
-                                android:textColor="@color/black"
-                                app:chipBackgroundColor="#BEC2C6"
-                                android:text="@string/instalasi_listrik" />
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppinsextrabold"
+                            android:text="@string/instalasi_listrik"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#ffffff"
+                            app:chipCornerRadius="6dp"
+                            app:chipStrokeColor="@color/background_chip"
+                            app:chipStrokeWidth="2dp" />
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/c_air"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/poppinsextrabold"
-                                style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:text="@string/air"
-                                app:chipBackgroundColor="#BEC2C6"/>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/poppinsextrabold"
+                            android:text="@string/air"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#ffffff"
+                            app:chipCornerRadius="6dp"
+                            app:chipStrokeColor="@color/background_chip"
+                            app:chipStrokeWidth="2dp" />
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/c_LCD"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/poppinsextrabold"
-                                style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:text="@string/lcd_proyektor_chip"
-                                app:chipBackgroundColor="#BEC2C6"/>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/poppinsextrabold"
+                            android:text="@string/lcd_proyektor_chip"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#ffffff"
+                            app:chipCornerRadius="6dp"
+                            app:chipStrokeColor="@color/background_chip"
+                            app:chipStrokeWidth="2dp" />
 
 
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/c_ruang_terbuka"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/poppinsextrabold"
-                                style="@style/Widget.MaterialComponents.Chip.Choice"
-                                android:text="@string/ruang_terbuka"
-                                app:chipBackgroundColor="#BEC2C6"/>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/poppinsextrabold"
+                            android:text="@string/ruang_terbuka"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#ffffff"
+                            app:chipCornerRadius="6dp"
+                            app:chipStrokeColor="@color/background_chip"
+                            app:chipStrokeWidth="2dp" />
 
 
                     </com.google.android.material.chip.ChipGroup>
@@ -127,12 +135,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
                 android:text="@string/hari_tanggal"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/sc_chip"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sc_chip" />
 
 

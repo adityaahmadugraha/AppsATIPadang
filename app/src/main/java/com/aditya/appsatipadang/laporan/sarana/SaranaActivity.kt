@@ -145,7 +145,7 @@ class SaranaActivity : AppCompatActivity() {
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until group.childCount) {
                 val chip = group.getChildAt(i) as Chip
-                chip.setChipBackgroundColorResource(android.R.color.white)
+                chip.setChipBackgroundColorResource(android.R.color.background_light)
             }
 
             if (checkedId != View.NO_ID) {
