@@ -56,6 +56,15 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
+    fun getListLaporanHarian(token: String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getListLaporanHarian(token)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
     fun inputLaporan(token: String, request: InputLaporanRequest) = flow {
         emit(Resource.Loading())
         val response = apiService.inputLaporan(token,request)

@@ -19,12 +19,18 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
 import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.laporan.status.ActivityStatus
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_BUNDLE
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_NAMA
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_STATUS
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_TIPE
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -110,11 +116,29 @@ class HomeFragment : Fragment() {
 
 
     private fun setupList() {
-        mAdapter = AdapterLaporan { }
+        mAdapter = AdapterLaporan {
+            goToDetailScreen(it)
+        }
+    }
+
+    private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
+
+        val bundle = Bundle().apply {
+//            putString(TAG_KODE, pesanan.kdPesanan)
+            putString(TAG_NAMA, itemLaporaneResponse.type)
+            putString(TAG_STATUS, itemLaporaneResponse.merk)
+            putString(TAG_TIPE, itemLaporaneResponse.lokasi)
+
+
+        }
+        Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
+            putExtra(TAG_BUNDLE, bundle)
+            startActivity(this)
+        }
     }
 
     private fun setupRecyclerView() {
-        binding.rvLaporanHome.apply {
+        binding?.rvLaporanHome?.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)

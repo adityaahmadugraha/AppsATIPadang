@@ -6,7 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.history.HistoryFragment">
 
-    <ImageView
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
         android:id="@+id/img_back_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,23 +44,23 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/txt_history_hari_ini"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/poppinssembiold"
-        android:text="Hari Ini :"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_back_history" />
+            <TextView
+                android:id="@+id/txt_history_hari_ini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppinssembiold"
+                android:text="Hari Ini :"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_back_history" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history_hari_ini"
         android:layout_width="0dp"
-        android:layout_height="290dp"
+        android:layout_height="200dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -56,12 +71,12 @@
 
 
     <TextView
-        android:id="@+id/txt_history_kemarin"
+        android:id="@+id/txt_history_bulan_ini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppinssembiold"
-        android:text="Kemarin :"
+        android:text="Bulan Ini :"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/txt_history_hari_ini"
@@ -70,13 +85,56 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history_kemarin"
         android:layout_width="0dp"
-        android:layout_height="290dp"
+        android:layout_height="200dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         tools:listitem="@layout/list_pelaporan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_history_kemarin" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_history_bulan_ini" />
+
+    <TextView
+        android:id="@+id/txt_history_bulan_kemarin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppinssembiold"
+        android:text="Bulan Ini :"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/txt_history_hari_ini"
+        app:layout_constraintTop_toBottomOf="@+id/rv_history_kemarin" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history_bulan_kemarin"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        tools:listitem="@layout/list_pelaporan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_history_bulan_kemarin" />
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
