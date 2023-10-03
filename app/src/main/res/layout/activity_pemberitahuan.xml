@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/tv_nomor_pemberitahuan"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        android:text="Laporan Telah Disimpan dengan Nomor 0192912912"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Laporan Telah Disimpan"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,6 +19,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26" />
+
+    <TextView
+        android:id="@+id/tv_pemberitahuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Dengan Nomor :"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_nomor_pemberitahuan"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nomor_pemberitahuan" />
+
+    <TextView
+        android:id="@+id/tv_id_laporan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tv_pemberitahuan"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nomor_pemberitahuan" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cek_laporan"

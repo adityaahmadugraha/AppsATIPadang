@@ -1,6 +1,7 @@
 package com.aditya.appsatipadang.laporan.status
 
 import android.content.ContentValues
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +11,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityStatusBinding
 import com.aditya.appsatipadang.di.Constant.getToken
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,7 +34,11 @@ class ActivityStatus : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.imgBackStatusLaporan.setOnClickListener {
-            finish() // Menutup ActivityStatus dan kembali ke MainActivity
+            finish()
+        }
+
+        binding.imgBackStatusLaporan.setOnClickListener {
+
         }
 
         setupList()
@@ -40,9 +47,24 @@ class ActivityStatus : AppCompatActivity() {
 
     private fun setupList() {
         mAdapter = AdapterStatusLaporan {
+            goToDetailScreen(it)
 
         }
         setupRecyclerView()
+    }
+
+    private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
+
+        val bundle = Bundle().apply {
+            putString(DetailStatusLaporanActivity.TAG_NAMA, itemLaporaneResponse.type)
+            putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.merk)
+            putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.lokasi)
+
+        }
+        Intent(this@ActivityStatus, DetailStatusLaporanActivity::class.java).apply {
+            putExtra(DetailStatusLaporanActivity.TAG_BUNDLE, bundle)
+            startActivity(this)
+        }
     }
 
     private fun getDataUser() {
@@ -55,11 +77,13 @@ class ActivityStatus : AppCompatActivity() {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
                     }
+
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
                         mAdapter.submitList(result.data.laporan)
                     }
+
                     is Resource.Error -> {
                         binding.progressBar.isVisible = false
                         Toast.makeText(

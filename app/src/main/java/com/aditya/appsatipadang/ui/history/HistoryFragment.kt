@@ -1,6 +1,7 @@
 package com.aditya.appsatipadang.ui.history
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
 import com.aditya.appsatipadang.di.Constant.getToken
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,7 +82,8 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        mAdapter = AdapterHistoryLaporan { item ->
+        mAdapter = AdapterHistoryLaporan {
+            goToDetailScreen(it)
         }
         binding.rvHistoryKemarin.apply {
             adapter = mAdapter
@@ -92,6 +96,22 @@ class HistoryFragment : Fragment() {
             setHasFixedSize(true)
         }
     }
+
+    private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
+
+        val bundle = Bundle().apply {
+            putString(DetailStatusLaporanActivity.TAG_NAMA, itemLaporaneResponse.type)
+            putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.merk)
+            putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.lokasi)
+
+
+        }
+        Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
+            putExtra(DetailStatusLaporanActivity.TAG_BUNDLE, bundle)
+            startActivity(this)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

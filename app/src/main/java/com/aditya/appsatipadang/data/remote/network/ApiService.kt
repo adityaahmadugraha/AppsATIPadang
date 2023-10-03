@@ -4,6 +4,7 @@ import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import okhttp3.MultipartBody
@@ -15,6 +16,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -57,7 +59,11 @@ interface ApiService {
         @Body inputLaporanRequest: InputLaporanRequest
     ): LaporanResponse
 
-
+@GET("getLlaporan/{id}")
+suspend fun getDataLaporan(
+    @Header("Authorization") token : String,
+    @Path("id") id: String
+):LaporanInfoResponse
 
 
 }
