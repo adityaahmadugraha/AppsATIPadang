@@ -37,10 +37,6 @@ class ActivityStatus : AppCompatActivity() {
             finish()
         }
 
-//        binding.imgBackStatusLaporan.setOnClickListener {
-//
-//        }
-
         setupList()
         getDataUser()
     }

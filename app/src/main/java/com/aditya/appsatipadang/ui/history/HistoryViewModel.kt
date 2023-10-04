@@ -15,5 +15,5 @@ class HistoryViewModel @Inject constructor(
 
     fun getListLaporan(token : String) = repository.getListLaporan(token).asLiveData()
 
-    fun getListLaporanHarian(token : String) = repository.getListLaporan(token).asLiveData()
+    fun getListLaporanHarian(token : String) = repository.getListLaporanHarian(token).asLiveData()
 }

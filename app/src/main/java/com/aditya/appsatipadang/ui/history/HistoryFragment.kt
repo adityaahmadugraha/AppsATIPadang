@@ -78,6 +78,30 @@ class HistoryFragment : Fragment() {
                     }
                 }
             }
+
+            viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        binding.progressBar.isVisible = true
+                    }
+                    is Resource.Success -> {
+                        binding.progressBar.isVisible = false
+
+                        Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
+
+                        mAdapter.submitList(result.data.laporan)
+                    }
+                    is Resource.Error -> {
+                        binding.progressBar.isVisible = false
+                        Toast.makeText(
+                            requireActivity(),
+                            result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+
         }
     }
 

@@ -13,7 +13,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -22,7 +21,7 @@ import androidx.core.content.ContextCompat
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
+import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -33,8 +32,6 @@ import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.rotateFile
 import com.aditya.appsatipadang.ui.camera.uriToFile
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -167,13 +164,14 @@ class ActivityKamtibmas : AppCompatActivity() {
 
 
         binding.apply {
+            val type = "Kamtibmas"
             val lokasi = etLokasiKamtibmas.text.toString()
             val deskripsi = etDeskripsiKerusakanKamtibmas.text.toString()
             val tanggal = etTanggalKamtibmas.text.toString()
             val waktu = etWaktuKamtibmas.text.toString()
             val camera = imgFotoKamtibmas.toString()
 
-            val inputLaporanRequest = InputLaporanRequest(
+            val inputKamtibmasRequest = InputKamtibmasRequest(
                 type,
                 lokasi,
                 deskripsi,
@@ -182,12 +180,12 @@ class ActivityKamtibmas : AppCompatActivity() {
 //                camera
             )
 
-            Log.d(ContentValues.TAG, "LAPORAN::: $inputLaporanRequest")
+            Log.d(ContentValues.TAG, "LAPORAN::: $inputKamtibmasRequest")
 
-            if (validateInput(inputLaporanRequest)) {
-                viewModel.inputLaporan(
+            if (validateInput(inputKamtibmasRequest)) {
+                viewModel.inputLaporanKamtibmas(
                     user?.getToken.toString(),
-                    inputLaporanRequest
+                    inputKamtibmasRequest
                 ).observe(this@ActivityKamtibmas) { item ->
                     when (item) {
                         is Resource.Loading -> {
@@ -218,7 +216,7 @@ class ActivityKamtibmas : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(inputLaporanRequest: InputLaporanRequest): Boolean {
+    private fun validateInput(inputLaporanRequest: InputKamtibmasRequest): Boolean {
         binding.apply {
             if (inputLaporanRequest.tanggal?.isEmpty() == true) {
                 ilLokasiKamtibmas.isErrorEnabled = true
@@ -230,11 +228,11 @@ class ActivityKamtibmas : AppCompatActivity() {
                 ilDeskripsiKerusakanKambtimas.error = getString(R.string.must_not_empty)
                 return false
             }
-            if (inputLaporanRequest.merk?.isEmpty() == true) {
-                ilTanggalKamtibmas.isErrorEnabled = true
-                ilTanggalKamtibmas.error = getString(R.string.must_not_empty)
-                return false
-            }
+//            if (inputLaporanRequest.merk?.isEmpty() == true) {
+//                ilTanggalKamtibmas.isErrorEnabled = true
+//                ilTanggalKamtibmas.error = getString(R.string.must_not_empty)
+//                return false
+//            }
             if (binding.etWaktuKamtibmas.text?.isEmpty() == true) {
                 binding.ilWaktuKamtibmas.isErrorEnabled = true
                 binding.ilWaktuKamtibmas.error = getString(R.string.must_not_empty)

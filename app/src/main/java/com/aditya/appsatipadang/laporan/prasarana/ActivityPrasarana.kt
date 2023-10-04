@@ -13,7 +13,6 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -22,13 +21,12 @@ import androidx.core.content.ContextCompat
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
+import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import com.aditya.appsatipadang.databinding.ActivityPrasaranaBinding
 import com.aditya.appsatipadang.di.Constant.getToken
-import com.aditya.appsatipadang.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.rotateFile
@@ -183,24 +181,24 @@ class ActivityPrasarana : AppCompatActivity() {
             val type = "Prasarana"
             val tanggal = etTanggal.text.toString()
             val lokasi = etLokasi.text.toString()
-            val jenisKerusakan = etJenisKerusakan.text.toString()
+//            val jenisKerusakan = etJenisKerusakan.text.toString()
             val camera = imgFoto.toString()
 
-            val inputLaporanRequest = InputLaporanRequest(
+            val inputPrasaranaRequest = InputPrasaranaRequest(
                 type,
                 tanggal,
                 lokasi,
-                chip,
-                jenisKerusakan,
-//                camera
+//                chip,
+//                jenisKerusakan,
+                camera
             )
 
-            Log.d(ContentValues.TAG, "LAPORAN::: $inputLaporanRequest")
+            Log.d(ContentValues.TAG, "LAPORAN::: $inputPrasaranaRequest")
 
-            if (validateInput(inputLaporanRequest)) {
-                viewModel.inputLaporan(
+            if (validateInput(inputPrasaranaRequest)) {
+                viewModel.inputLaporanPrasana(
                     user?.getToken.toString(),
-                    inputLaporanRequest
+                    inputPrasaranaRequest
                 ).observe(this@ActivityPrasarana) { item ->
                     when (item) {
                         is Resource.Loading -> {
@@ -226,7 +224,7 @@ class ActivityPrasarana : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(inputLaporanRequest: InputLaporanRequest): Boolean {
+    private fun validateInput(inputLaporanRequest: InputPrasaranaRequest): Boolean {
         binding.apply {
             if (inputLaporanRequest.tanggal?.isEmpty() == true) {
                 ilTanggal.isErrorEnabled = true
@@ -238,11 +236,11 @@ class ActivityPrasarana : AppCompatActivity() {
                 ilLokasi.error = getString(R.string.must_not_empty)
                 return false
             }
-            if (inputLaporanRequest.merk?.isEmpty() == true) {
-                ilJenisKerusakan.isErrorEnabled = true
-                ilJenisKerusakan.error = getString(R.string.must_not_empty)
-                return false
-            }
+//            if (inputLaporanRequest.merk?.isEmpty() == true) {
+//                ilJenisKerusakan.isErrorEnabled = true
+//                ilJenisKerusakan.error = getString(R.string.must_not_empty)
+//                return false
+//            }
             if (binding.etTanggal.text?.isEmpty() == true) {
                 binding.ilTanggal.isErrorEnabled = true
                 binding.ilTanggal.error = getString(R.string.must_not_empty)

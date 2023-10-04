@@ -32,6 +32,7 @@ import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan.Companion
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -82,7 +83,24 @@ class SaranaActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        supportActionBar?.hide()
+        binding.btnKirim.setOnClickListener {
+
+            getUserInput()
+            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+            val selectedChipId = chipGroup.checkedChipId
+
+            if (selectedChipId != View.NO_ID) {
+                val selectedChip = findViewById<Chip>(selectedChipId)
+                val selectedChipText = selectedChip.text.toString()
+
+                Log.d(TAG, "Chip yang dipilih: $selectedChipText")
+
+            } else {
+                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
 
         binding.etTanggal.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -111,24 +129,8 @@ class SaranaActivity : AppCompatActivity() {
 
 
 
+        supportActionBar?.hide()
 
-
-        binding.btnKirim.setOnClickListener {
-
-            getUserInput()
-            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-            val selectedChipId = chipGroup.checkedChipId
-
-            if (selectedChipId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(selectedChipId)
-                val selectedChipText = selectedChip.text.toString()
-
-                Log.d(TAG, "Chip yang dipilih: $selectedChipText")
-
-            } else {
-                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         getUserData()
         binding.imgBack.setOnClickListener {
@@ -174,24 +176,23 @@ class SaranaActivity : AppCompatActivity() {
 
     private fun getUserInput() {
 
-            val type = "Sarana"
-            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-            val selectedChipId = chipGroup.checkedChipId
-            val chip: String
+        val type = "Sarana"
+        val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+        val selectedChipId = chipGroup.checkedChipId
+        val chip: String
 
-            if (selectedChipId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(selectedChipId)
-                chip = selectedChip.text.toString()
-            } else {
-                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
-                return
-            }
+        if (selectedChipId != View.NO_ID) {
+            val selectedChip = findViewById<Chip>(selectedChipId)
+            chip = selectedChip.text.toString()
+        } else {
+            Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         binding.apply {
             val type = "Sarana"
             val tanggal = etTanggal.text.toString()
             val lokasi = etLokasi.text.toString()
-            val jenisKerusakan = etJenisKerusakan.text.toString()
             val deskripsiKerusakan = etDeskripsiKerusakan.text.toString()
             val camera = imgFoto.toString()
 
@@ -201,8 +202,7 @@ class SaranaActivity : AppCompatActivity() {
                 lokasi,
                 chip,
                 deskripsiKerusakan,
-                jenisKerusakan,
-//                camera
+                camera
             )
 
             Log.d(TAG, "LAPORAN::: $inputLaporanRequest")
@@ -220,9 +220,11 @@ class SaranaActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             Log.d(TAG, "simpanData: ${item.data.id}")
                             if (item.data.status == 200) {
-                                val intent = Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
+                                val intent =
+                                    Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
                                 intent.putExtra(TAG_ID_LAPORAN, item.data.id)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                             }
                         }
