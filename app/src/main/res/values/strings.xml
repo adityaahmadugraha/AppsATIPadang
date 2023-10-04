@@ -28,7 +28,7 @@
     <string name="alamat_lengkap">Jl.Dr.Sutomo</string>
     <string name="keluar">Keluar</string>
     <string name="jabatan">Manager</string>
-    <string name="hari_tanggal">Hari/Tanggal :</string>
+    <string name="hari_tanggal">Tanggal :</string>
     <string name="waktu_kejadian">Waktu Kejadian:</string>
     <string name="laporan_sarana_title">Laporan Sarana</string>
     <string name="senin_25_september_2023">Tanggal/Bulan/Tahun</string>

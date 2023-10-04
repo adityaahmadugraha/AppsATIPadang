@@ -38,13 +38,18 @@ interface ApiService {
     ): ProfileUserResponse
 
 
-    @GET("laporan_bulanan")
+    @GET("laporan_harian")
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
     ): LaporanResponse
 
     @GET("laporan_harian")
     suspend fun getListLaporanHarian(
+        @Header("Authorization") token: String,
+    ): LaporanResponse
+
+    @GET("laporan_bulanan")
+    suspend fun getListLaporanBulanan(
         @Header("Authorization") token: String,
     ): LaporanResponse
 

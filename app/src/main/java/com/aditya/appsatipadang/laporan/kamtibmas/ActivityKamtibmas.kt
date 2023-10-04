@@ -47,7 +47,6 @@ class ActivityKamtibmas : AppCompatActivity() {
 
     companion object {
         const val CAMERA_X_RESULT = 200
-
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -143,11 +142,6 @@ class ActivityKamtibmas : AppCompatActivity() {
             getUserInput()
         }
 
-
-
-
-
-
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -158,8 +152,8 @@ class ActivityKamtibmas : AppCompatActivity() {
         binding.cameraKamtibmas.setOnClickListener { startCameraX() }
         binding.galeryKamtibmas.setOnClickListener { startGallery() }
         binding.imgFotoKamtibmas.setOnClickListener { uploadImage() }
-
     }
+
 
     private fun getUserData() {
         viewModel.getUser().observe(this) {

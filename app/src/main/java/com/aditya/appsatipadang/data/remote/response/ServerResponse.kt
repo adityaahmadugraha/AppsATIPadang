@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.data
+package com.aditya.appsatipadang.data.remote.response
 
 data class ServerResponse (
     val status: Boolean,
