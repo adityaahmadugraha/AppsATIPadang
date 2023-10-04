@@ -10,6 +10,9 @@ data class InputPrasaranaRequest(
     @field:SerializedName("tanggal")
     val tanggal: String? = null,
 
+    @field:SerializedName("merk")
+    val merk: String? = null,
+
     @field:SerializedName("lokasi")
     val lokasi: String? = null,
 

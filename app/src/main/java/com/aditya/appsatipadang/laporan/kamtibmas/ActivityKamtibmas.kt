@@ -218,24 +218,14 @@ class ActivityKamtibmas : AppCompatActivity() {
 
     private fun validateInput(inputLaporanRequest: InputKamtibmasRequest): Boolean {
         binding.apply {
-            if (inputLaporanRequest.tanggal?.isEmpty() == true) {
+            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
                 ilLokasiKamtibmas.isErrorEnabled = true
                 ilLokasiKamtibmas.error = getString(R.string.must_not_empty)
                 return false
             }
-            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
+            if (inputLaporanRequest.deskripsi?.isEmpty() == true) {
                 ilDeskripsiKerusakanKambtimas.isErrorEnabled = true
                 ilDeskripsiKerusakanKambtimas.error = getString(R.string.must_not_empty)
-                return false
-            }
-//            if (inputLaporanRequest.merk?.isEmpty() == true) {
-//                ilTanggalKamtibmas.isErrorEnabled = true
-//                ilTanggalKamtibmas.error = getString(R.string.must_not_empty)
-//                return false
-//            }
-            if (binding.etWaktuKamtibmas.text?.isEmpty() == true) {
-                binding.ilWaktuKamtibmas.isErrorEnabled = true
-                binding.ilWaktuKamtibmas.error = getString(R.string.must_not_empty)
                 return false
             }
             if (binding.etTanggalKamtibmas.text?.isEmpty() == true) {
@@ -243,6 +233,12 @@ class ActivityKamtibmas : AppCompatActivity() {
                 binding.ilTanggalKamtibmas.error = getString(R.string.must_not_empty)
                 return false
             }
+            if (binding.etWaktuKamtibmas.text?.isEmpty() == true) {
+                binding.ilWaktuKamtibmas.isErrorEnabled = true
+                binding.ilWaktuKamtibmas.error = getString(R.string.must_not_empty)
+                return false
+            }
+
 
             return true
         }

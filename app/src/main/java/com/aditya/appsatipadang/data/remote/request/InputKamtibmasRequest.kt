@@ -19,7 +19,6 @@ data class InputKamtibmasRequest(
     @field:SerializedName("waktu")
     val waktu: String? = null,
 
-
     @field:SerializedName("gambar")
     val gambar: String? = null
 

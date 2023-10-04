@@ -179,6 +179,7 @@ class ActivityPrasarana : AppCompatActivity() {
 
         binding.apply {
             val type = "Prasarana"
+
             val tanggal = etTanggal.text.toString()
             val lokasi = etLokasi.text.toString()
 //            val jenisKerusakan = etJenisKerusakan.text.toString()
@@ -187,7 +188,9 @@ class ActivityPrasarana : AppCompatActivity() {
             val inputPrasaranaRequest = InputPrasaranaRequest(
                 type,
                 tanggal,
+                chip,
                 lokasi,
+
 //                chip,
 //                jenisKerusakan,
                 camera
@@ -231,16 +234,16 @@ class ActivityPrasarana : AppCompatActivity() {
                 ilTanggal.error = getString(R.string.must_not_empty)
                 return false
             }
-            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
-                ilLokasi.isErrorEnabled = true
-                ilLokasi.error = getString(R.string.must_not_empty)
-                return false
-            }
-//            if (inputLaporanRequest.merk?.isEmpty() == true) {
-//                ilJenisKerusakan.isErrorEnabled = true
-//                ilJenisKerusakan.error = getString(R.string.must_not_empty)
+//            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
+//                ilLokasi.isErrorEnabled = true
+//                ilLokasi.error = getString(R.string.must_not_empty)
 //                return false
 //            }
+            if (inputLaporanRequest.merk?.isEmpty() == true) {
+                ilJenisKerusakan.isErrorEnabled = true
+                ilJenisKerusakan.error = getString(R.string.must_not_empty)
+                return false
+            }
             if (binding.etTanggal.text?.isEmpty() == true) {
                 binding.ilTanggal.isErrorEnabled = true
                 binding.ilTanggal.error = getString(R.string.must_not_empty)
