@@ -7,28 +7,43 @@ import android.os.Bundle
 import com.aditya.appsatipadang.MainActivity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import com.aditya.appsatipadang.databinding.ActivityKamtibmasBinding
+import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.camera.rotateFile
 import com.aditya.appsatipadang.ui.camera.uriToFile
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class ActivityKamtibmas : AppCompatActivity() {
 
     private lateinit var binding: ActivityKamtibmasBinding
+    private val viewModel: KamtibmasViewModel by viewModels()
+    private var user: UserLocal? = null
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -121,6 +136,17 @@ class ActivityKamtibmas : AppCompatActivity() {
             startActivity(intent)
         }
 
+        getUserData()
+
+        binding.btnKirimKamtibmas.setOnClickListener {
+
+            getUserInput()
+        }
+
+
+
+
+
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -134,6 +160,102 @@ class ActivityKamtibmas : AppCompatActivity() {
         binding.imgFotoKamtibmas.setOnClickListener { uploadImage() }
 
     }
+
+    private fun getUserData() {
+        viewModel.getUser().observe(this) {
+            user = it
+        }
+    }
+
+    private fun getUserInput() {
+
+        val type = "Kamtibmas"
+
+
+        binding.apply {
+            val lokasi = etLokasiKamtibmas.text.toString()
+            val deskripsi = etDeskripsiKerusakanKamtibmas.text.toString()
+            val tanggal = etTanggalKamtibmas.text.toString()
+            val waktu = etWaktuKamtibmas.text.toString()
+            val camera = imgFotoKamtibmas.toString()
+
+            val inputLaporanRequest = InputLaporanRequest(
+                type,
+                lokasi,
+                deskripsi,
+                tanggal,
+                waktu,
+//                camera
+            )
+
+            Log.d(ContentValues.TAG, "LAPORAN::: $inputLaporanRequest")
+
+            if (validateInput(inputLaporanRequest)) {
+                viewModel.inputLaporan(
+                    user?.getToken.toString(),
+                    inputLaporanRequest
+                ).observe(this@ActivityKamtibmas) { item ->
+                    when (item) {
+                        is Resource.Loading -> {
+
+                        }
+
+                        is Resource.Success -> {
+                            Log.d(ContentValues.TAG, "simpanData: ${item.data.id}")
+                            if (item.data.status == 200) {
+                                val intent = Intent(
+                                    this@ActivityKamtibmas,
+                                    ActivityPemberitahuan::class.java
+                                )
+                                intent.putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, item.data.id)
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                            }
+                        }
+
+                        is Resource.Error -> {
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    private fun validateInput(inputLaporanRequest: InputLaporanRequest): Boolean {
+        binding.apply {
+            if (inputLaporanRequest.tanggal?.isEmpty() == true) {
+                ilLokasiKamtibmas.isErrorEnabled = true
+                ilLokasiKamtibmas.error = getString(R.string.must_not_empty)
+                return false
+            }
+            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
+                ilDeskripsiKerusakanKambtimas.isErrorEnabled = true
+                ilDeskripsiKerusakanKambtimas.error = getString(R.string.must_not_empty)
+                return false
+            }
+            if (inputLaporanRequest.merk?.isEmpty() == true) {
+                ilTanggalKamtibmas.isErrorEnabled = true
+                ilTanggalKamtibmas.error = getString(R.string.must_not_empty)
+                return false
+            }
+            if (binding.etWaktuKamtibmas.text?.isEmpty() == true) {
+                binding.ilWaktuKamtibmas.isErrorEnabled = true
+                binding.ilWaktuKamtibmas.error = getString(R.string.must_not_empty)
+                return false
+            }
+            if (binding.etTanggalKamtibmas.text?.isEmpty() == true) {
+                binding.ilTanggalKamtibmas.isErrorEnabled = true
+                binding.ilTanggalKamtibmas.error = getString(R.string.must_not_empty)
+                return false
+            }
+
+            return true
+        }
+    }
+
 
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)

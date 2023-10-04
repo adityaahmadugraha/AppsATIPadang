@@ -37,9 +37,9 @@ class ActivityStatus : AppCompatActivity() {
             finish()
         }
 
-        binding.imgBackStatusLaporan.setOnClickListener {
-
-        }
+//        binding.imgBackStatusLaporan.setOnClickListener {
+//
+//        }
 
         setupList()
         getDataUser()
@@ -68,7 +68,6 @@ class ActivityStatus : AppCompatActivity() {
     }
 
     private fun getDataUser() {
-//        val userToken = getToken()
 
         viewModel.getUser().observe(this) {
             viewModel.getListLaporan(it.getToken).observe(this) { result ->

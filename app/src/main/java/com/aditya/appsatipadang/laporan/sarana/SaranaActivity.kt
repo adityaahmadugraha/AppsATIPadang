@@ -47,7 +47,6 @@ class SaranaActivity : AppCompatActivity() {
 
     companion object {
         const val CAMERA_X_RESULT = 200
-
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -69,13 +68,6 @@ class SaranaActivity : AppCompatActivity() {
             }
         }
 
-//         var chip : String = ""
-
-//        binding.apply {
-//            cAc.setOnClickListener{
-//                chip = "AC".toString()
-//            }
-//        }
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -90,23 +82,7 @@ class SaranaActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.btnKirim.setOnClickListener {
-
-            getUserInput()
-            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-            val selectedChipId = chipGroup.checkedChipId
-
-            if (selectedChipId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(selectedChipId)
-                val selectedChipText = selectedChip.text.toString()
-
-                Log.d(TAG, "Chip yang dipilih: $selectedChipText")
-
-            } else {
-                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+        supportActionBar?.hide()
 
         binding.etTanggal.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -135,8 +111,24 @@ class SaranaActivity : AppCompatActivity() {
 
 
 
-        supportActionBar?.hide()
 
+
+        binding.btnKirim.setOnClickListener {
+
+            getUserInput()
+            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+            val selectedChipId = chipGroup.checkedChipId
+
+            if (selectedChipId != View.NO_ID) {
+                val selectedChip = findViewById<Chip>(selectedChipId)
+                val selectedChipText = selectedChip.text.toString()
+
+                Log.d(TAG, "Chip yang dipilih: $selectedChipText")
+
+            } else {
+                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         getUserData()
         binding.imgBack.setOnClickListener {
@@ -210,7 +202,7 @@ class SaranaActivity : AppCompatActivity() {
                 chip,
                 deskripsiKerusakan,
                 jenisKerusakan,
-//                camera.
+//                camera
             )
 
             Log.d(TAG, "LAPORAN::: $inputLaporanRequest")
@@ -225,21 +217,6 @@ class SaranaActivity : AppCompatActivity() {
 
                         }
 
-//                        is Resource.Success -> {
-//                            Log.d(TAG, "simpanData: ${item.data.id}")
-//                            if (item.data.status == 200) {
-//                                Intent(
-//                                    this@SaranaActivity,
-//                                    ActivityPemberitahuan::class.java
-//                                ).also { mov ->
-//                                    mov.putExtra(TAG_ID_LAPORAN,item.data.id)
-//                                    mov.flags =
-//                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                    startActivity(mov)
-//                                }
-//                            }
-//                        }
-
                         is Resource.Success -> {
                             Log.d(TAG, "simpanData: ${item.data.id}")
                             if (item.data.status == 200) {
@@ -250,9 +227,7 @@ class SaranaActivity : AppCompatActivity() {
                             }
                         }
 
-
                         is Resource.Error -> {
-
                         }
                     }
                 }
@@ -284,27 +259,15 @@ class SaranaActivity : AppCompatActivity() {
                 return false
             }
 
-
             if (inputLaporanRequest.deskripsi?.isEmpty() == true) {
                 ilDeskripsiKerusakan.isErrorEnabled = true
                 ilDeskripsiKerusakan.error = getString(R.string.must_not_empty)
                 return false
             }
 
-
-
-
-//            if (inputLaporanRequest.gambar?.isNotEmpty() == true) {
-//            } else {
-//                imgFoto.isErrorEnabled = true
-//                imgFoto.error = getString(R.string.must_not_empty)
-//                return false
-//            }
-
             return true
         }
     }
-
 
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)
