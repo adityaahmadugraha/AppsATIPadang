@@ -60,6 +60,9 @@ class LoginActivity : AppCompatActivity() {
                                     userData?.name.toString(),
                                     userData?.username.toString(),
                                     userData?.password.toString(),
+                                    userData?.email.toString(),
+                                    userData?.no_tlp.toString(),
+                                    userData?.alamat.toString(),
                                     userData?.roles.toString(),
                                     userData?.token.toString()
                                 )

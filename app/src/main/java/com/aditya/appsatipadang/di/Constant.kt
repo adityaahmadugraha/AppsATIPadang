@@ -23,8 +23,13 @@ object Constant {
     val KEY_NAME = stringPreferencesKey("name")
     val KEY_USERNAME = stringPreferencesKey("username")
     val KEY_PASSWORD = stringPreferencesKey("password")
+    val KEY_EMAIL = stringPreferencesKey("email")
+    val KEY_NOTLP = stringPreferencesKey("no_tlp")
     val KEY_ROLES = stringPreferencesKey("roles")
+    val KEY_ALAMAT = stringPreferencesKey("alamat")
     val KEY_TOKEN = stringPreferencesKey("token")
+
+
 
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 

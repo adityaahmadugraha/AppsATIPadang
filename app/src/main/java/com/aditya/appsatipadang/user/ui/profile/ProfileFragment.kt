@@ -48,9 +48,13 @@ class ProfileFragment : Fragment() {
 
     //menampilkan data profil
     private fun getDataUser() {
-        viewModel.getUser().observe(viewLifecycleOwner) {  data ->
+        viewModel.getUser().observe(viewLifecycleOwner) { data ->
             binding?.tvNameProfil?.text = data.name
-            binding?.tvJabatanProfil?.text = data.username
+            binding?.tvJabatanProfil?.text = data.alamat
+            binding?.etEmail?.setText(data.email)
+            binding?.etNotlpProfil?.setText(data.no_tlp)
+            binding?.etAlamatProfil?.setText(data.roles)
+
         }
     }
 
@@ -61,7 +65,7 @@ class ProfileFragment : Fragment() {
                 viewModel.deleteUser()
                 checkUserLogin()
             }
-            .setNegativeButton(getString(R.string.no)){ dialog, _ ->
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
@@ -85,7 +89,6 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_navigation_home)
         }
     }
-
 
 
 }
