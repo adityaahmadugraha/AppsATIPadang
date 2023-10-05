@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_admin"
+    app:startDestination="@+id/navigation_home_admin">
+
+    <fragment
+        android:id="@+id/navigation_home_admin"
+        android:name="com.aditya.appsatipadang.admin.fragment.HomeFragmentAdmin"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home_admin" />
+
+    <fragment
+        android:id="@+id/navigation_history_admin"
+        android:name="com.aditya.appsatipadang.admin.fragment.HistoryFragmentAdmin"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history_admin" >
+        <action
+            android:id="@+id/action_navigation_history_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_history_admin_to_navigation_home_admin"
+            app:destination="@id/navigation_home_admin" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile_admin"
+        android:name="com.aditya.appsatipadang.admin.fragment.ProfilFragmentAdmin"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profil_admin" >
+
+        <action
+            android:id="@+id/action_navigation_profile_admin_to_loginActivity"
+            app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_navigation_profile_admin_to_navigation_home_admin"
+            app:destination="@id/navigation_home_admin" />
+    </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.aditya.appsatipadang.user.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+</navigation>

@@ -31,6 +31,7 @@
     <string name="hari_tanggal">Tanggal :</string>
     <string name="waktu_kejadian">Waktu Kejadian:</string>
     <string name="laporan_sarana_title">Laporan Sarana</string>
+    <string name="title_pengaduan">Pengaduan</string>
     <string name="senin_25_september_2023">Tanggal/Bulan/Tahun</string>
     <string name="ddhh">DD/HH</string>
     <string name="merk">Merk :</string>
@@ -74,4 +75,9 @@
     <string name="kembali">Kembali</string>
     <string name="galery">Galery</string>
     <string name="camera">Camera</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type">Type :</string>
+    <string name="deskripsi_kerusakan_admin">Deskripsi Kerusakan :</string>
+    <string name="diposisikan_kepada">Diposisikan Kepada :</string>
 </resources>
