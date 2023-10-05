@@ -1,9 +1,6 @@
 package com.aditya.appsatipadang.user.data.remote.response
 
 import com.google.gson.annotations.SerializedName
-import java.sql.Time
-import java.util.Date
-
 data class ItemLaporaneResponse(
     @field:SerializedName("id")
     val id: Int? = null,

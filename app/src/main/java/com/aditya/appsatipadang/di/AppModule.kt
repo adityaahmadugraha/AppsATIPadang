@@ -3,7 +3,7 @@ package com.aditya.appsatipadang.di
 import android.content.Context
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.user.data.local.UserPreference
-import com.aditya.appsatipadang.user.data.remote.network.ApiService
+import com.aditya.appsatipadang.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

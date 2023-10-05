@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/navigation_home_admin"
-        android:name="com.aditya.appsatipadang.admin.fragment.HomeFragmentAdmin"
+        android:name="com.aditya.appsatipadang.admin.fragment.home_admin.HomeFragmentAdmin"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home_admin" />
 
     <fragment
         android:id="@+id/navigation_history_admin"
-        android:name="com.aditya.appsatipadang.admin.fragment.HistoryFragmentAdmin"
+        android:name="com.aditya.appsatipadang.admin.fragment.history_admin.HistoryFragmentAdmin"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_history_admin" >
         <action
             android:id="@+id/action_navigation_history_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home_admin" />
         <action
             android:id="@+id/action_navigation_history_admin_to_navigation_home_admin"
             app:destination="@id/navigation_home_admin" />
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_profile_admin"
-        android:name="com.aditya.appsatipadang.admin.fragment.ProfilFragmentAdmin"
+        android:name="com.aditya.appsatipadang.admin.fragment.profil_admin.ProfilFragmentAdmin"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profil_admin" >
 

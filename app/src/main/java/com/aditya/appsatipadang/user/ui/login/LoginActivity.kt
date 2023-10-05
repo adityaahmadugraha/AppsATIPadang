@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.user.data.Resource
 import com.aditya.appsatipadang.user.data.local.UserLocal
@@ -31,6 +32,11 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         checkUserLogin()
+
+        binding.imgNext.setOnClickListener {
+            intent = Intent(this@LoginActivity, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnLogin.setOnClickListener {
             loginUser()

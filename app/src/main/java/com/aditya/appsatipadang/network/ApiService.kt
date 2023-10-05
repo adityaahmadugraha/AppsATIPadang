@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.user.data.remote.network
+package com.aditya.appsatipadang.network
 
 import com.aditya.appsatipadang.user.data.remote.request.InputKamtibmasRequest
 import com.aditya.appsatipadang.user.data.remote.request.InputLaporanRequest
@@ -54,6 +54,11 @@ interface ApiService {
     suspend fun getListLaporanBulanan(
         @Header("Authorization") token: String,
     ): LaporanResponse
+
+//    @GET("laporan_tahun")
+//    suspend fun getListLaporanTahun(
+//        @Header("Authorization") token: String,
+//    ): LaporanResponse
 
 //    @GET("laporan_bulanan")
 //    suspend fun getListLaporan(

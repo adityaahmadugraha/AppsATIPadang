@@ -11,5 +11,7 @@ class SaranaActivityAdmin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sarana_admin)
+
+        supportActionBar?.hide()
     }
 }

@@ -1,6 +1,6 @@
 package com.aditya.appsatipadang.user.repository
 
-import com.aditya.appsatipadang.user.data.remote.network.ApiService
+import com.aditya.appsatipadang.network.ApiService
 import com.aditya.appsatipadang.user.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.user.data.Resource
 import com.aditya.appsatipadang.user.data.remote.request.InputKamtibmasRequest

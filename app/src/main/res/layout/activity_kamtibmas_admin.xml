@@ -9,7 +9,6 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,8 +86,6 @@
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
             <TextView
@@ -269,7 +266,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <TextView
                 android:id="@+id/txt_jenis_kerusakan"
                 android:layout_width="wrap_content"
@@ -333,8 +329,9 @@
                 android:id="@+id/img_bukti_sarana"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/galery"
                 app:layout_constraintEnd_toEndOf="parent"
