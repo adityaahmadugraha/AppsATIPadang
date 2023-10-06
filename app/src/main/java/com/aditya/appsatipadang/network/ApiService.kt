@@ -1,14 +1,14 @@
 package com.aditya.appsatipadang.network
 
-import com.aditya.appsatipadang.user.data.remote.request.InputKamtibmasRequest
-import com.aditya.appsatipadang.user.data.remote.request.InputLaporanRequest
-import com.aditya.appsatipadang.user.data.remote.request.InputPrasaranaRequest
-import com.aditya.appsatipadang.user.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.user.data.remote.response.AuthResponse
-import com.aditya.appsatipadang.user.data.remote.response.ItemLaporaneResponse
-import com.aditya.appsatipadang.user.data.remote.response.LaporanInfoResponse
-import com.aditya.appsatipadang.user.data.remote.response.LaporanResponse
-import com.aditya.appsatipadang.user.data.remote.response.ProfileUserResponse
+import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
+import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
+import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.AuthResponse
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
+import com.aditya.appsatipadang.data.remote.response.LaporanResponse
+import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -84,7 +84,7 @@ interface ApiService {
     ): LaporanResponse
 
 
-    @GET("getLlaporan/{id}")
+    @GET("getlaporan/{id}")
 suspend fun getDataLaporan(
     @Header("Authorization") token : String,
     @Path("id") id: String

@@ -8,7 +8,7 @@ import android.net.Uri
 import android.os.Environment
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.aditya.appsatipadang.user.data.local.UserLocal
+import com.aditya.appsatipadang.data.local.UserLocal
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream

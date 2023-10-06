@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aditya.appsatipadang.user.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 
 

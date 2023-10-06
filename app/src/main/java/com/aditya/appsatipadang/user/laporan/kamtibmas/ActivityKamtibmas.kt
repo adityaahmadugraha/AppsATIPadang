@@ -19,19 +19,19 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.user.data.Resource
-import com.aditya.appsatipadang.user.data.local.UserLocal
-import com.aditya.appsatipadang.user.data.remote.request.InputKamtibmasRequest
+import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import com.aditya.appsatipadang.databinding.ActivityKamtibmasBinding
 import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
-import com.aditya.appsatipadang.user.ui.camera.CameraActivity
-import com.aditya.appsatipadang.user.ui.camera.rotateFile
-import com.aditya.appsatipadang.user.ui.camera.uriToFile
-import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
+import com.aditya.appsatipadang.ui.camera.CameraActivity
+import com.aditya.appsatipadang.ui.camera.rotateFile
+import com.aditya.appsatipadang.ui.camera.uriToFile
+import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 

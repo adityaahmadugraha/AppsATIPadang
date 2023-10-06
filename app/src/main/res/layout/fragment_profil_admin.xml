@@ -120,7 +120,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_email_profil">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_full_name"
+                    android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
@@ -209,7 +209,6 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/blue"
-
         android:fontFamily="@font/poppinssembiold"
         android:text="@string/keluar"
         app:layout_constraintEnd_toEndOf="parent"

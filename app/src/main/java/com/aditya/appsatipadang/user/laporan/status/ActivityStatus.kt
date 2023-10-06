@@ -10,11 +10,11 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.user.adapter.AdapterStatusLaporan
-import com.aditya.appsatipadang.user.data.Resource
-import com.aditya.appsatipadang.user.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityStatusBinding
 import com.aditya.appsatipadang.di.Constant.getToken
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 

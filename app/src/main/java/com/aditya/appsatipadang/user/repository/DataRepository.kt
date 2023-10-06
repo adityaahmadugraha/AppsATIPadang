@@ -1,12 +1,12 @@
 package com.aditya.appsatipadang.user.repository
 
 
-import com.aditya.appsatipadang.user.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.user.data.local.UserPreference
-import com.aditya.appsatipadang.user.data.local.UserLocal
-import com.aditya.appsatipadang.user.data.remote.request.InputKamtibmasRequest
-import com.aditya.appsatipadang.user.data.remote.request.InputLaporanRequest
-import com.aditya.appsatipadang.user.data.remote.request.InputPrasaranaRequest
+import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.local.UserPreference
+import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
+import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject

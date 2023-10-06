@@ -30,18 +30,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/txt_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsextrabold"
-                android:text="@string/status_laporan"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/img_back_status_laporan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/img_back_status_laporan" />
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsextrabold"
+        android:text="@string/status_laporan"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_back_status_laporan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_back_status_laporan" />
 
 
     <androidx.recyclerview.widget.RecyclerView
