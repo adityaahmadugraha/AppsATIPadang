@@ -33,10 +33,10 @@ class LoginActivity : AppCompatActivity() {
 
         checkUserLogin()
 
-        binding.imgNext.setOnClickListener {
-            intent = Intent(this@LoginActivity, HomeActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.imgNext.setOnClickListener {
+//            intent = Intent(this@LoginActivity, HomeActivity::class.java)
+//            startActivity(intent)
+//        }
 
         binding.btnLogin.setOnClickListener {
             loginUser()
@@ -96,15 +96,23 @@ class LoginActivity : AppCompatActivity() {
 
     private fun checkUserLogin() {
         viewModel.getUser().observe(this@LoginActivity) { userData ->
-
-
             if (userData.username.isNotEmpty() || userData.token.isNotEmpty()) {
-                Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
-                Intent(this@LoginActivity, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(this)
+                if (userData.roles == "Admin"){
+                    Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(this)
+                    }
+                }else if (userData.roles == "Pelapor"){
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                    Intent(this@LoginActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(this)
+                    }
                 }
+
             }
+
+
         }
     }
 
