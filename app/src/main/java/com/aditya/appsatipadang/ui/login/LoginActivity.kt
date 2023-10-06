@@ -4,6 +4,7 @@ package com.aditya.appsatipadang.ui.login
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
@@ -32,11 +33,6 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         checkUserLogin()
-
-//        binding.imgNext.setOnClickListener {
-//            intent = Intent(this@LoginActivity, HomeActivity::class.java)
-//            startActivity(intent)
-//        }
 
         binding.btnLogin.setOnClickListener {
             loginUser()
@@ -68,8 +64,8 @@ class LoginActivity : AppCompatActivity() {
                                     userData?.password.toString(),
                                     userData?.email.toString(),
                                     userData?.no_tlp.toString(),
-                                    userData?.alamat.toString(),
                                     userData?.roles.toString(),
+                                    userData?.alamat.toString(),
                                     userData?.token.toString()
                                 )
                             )
@@ -98,12 +94,15 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getUser().observe(this@LoginActivity) { userData ->
             if (userData.username.isNotEmpty() || userData.token.isNotEmpty()) {
                 if (userData.roles == "Admin"){
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                    Log.d("LOGINADMIN:::::", userData.token)
                     Intent(this@LoginActivity, HomeActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }
                 }else if (userData.roles == "Pelapor"){
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                    Log.d("LOGIN:::::", userData.token)
                     Intent(this@LoginActivity, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)

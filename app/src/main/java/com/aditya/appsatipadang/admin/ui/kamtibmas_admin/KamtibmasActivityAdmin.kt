@@ -1,8 +1,10 @@
 package com.aditya.appsatipadang.admin.ui.kamtibmas_admin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.databinding.ActivityKamtibmasAdminBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,5 +19,10 @@ class KamtibmasActivityAdmin : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        binding.imgBack.setOnClickListener {
+            intent = Intent(this@KamtibmasActivityAdmin, HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

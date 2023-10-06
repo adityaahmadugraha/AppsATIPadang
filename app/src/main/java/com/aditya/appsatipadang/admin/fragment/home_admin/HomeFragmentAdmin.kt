@@ -12,23 +12,22 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.KamtibmasActivityAdmin
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_DESKRIPSI
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_JENIS
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_LOKASI
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_MERK
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_NAMA
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TANGGAL
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TIPE
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
-import com.aditya.appsatipadang.databinding.FragmentHomeBinding
 import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.user.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
-import com.aditya.appsatipadang.user.laporan.kamtibmas.ActivityKamtibmas
-import com.aditya.appsatipadang.user.laporan.prasarana.ActivityPrasarana
-import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
-import com.aditya.appsatipadang.user.laporan.status.ActivityStatus
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
-import com.aditya.appsatipadang.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -70,6 +69,8 @@ class HomeFragmentAdmin : Fragment() {
             val intent = Intent(activity, StatusActivityAdmin::class.java)
             startActivity(intent)
         }
+
+
 
         getDataUser()
         setupList()
@@ -123,14 +124,21 @@ class HomeFragmentAdmin : Fragment() {
 
         val bundle = Bundle().apply {
 //            putString(TAG_KODE, pesanan.kdPesanan)
-            putString(DetailStatusLaporanActivity.TAG_NAMA, itemLaporaneResponse.type)
-            putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.merk)
-            putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.lokasi)
+
+
+            putString(TAG_JENIS, itemLaporaneResponse.type)
+//            putString(TAG_TIPE, itemLaporaneResponse.lokasi)
+            putString(TAG_NAMA, itemLaporaneResponse.type)
+//            putString(TAG_NO_PENGADUAN, itemLaporaneResponse.lokasi)
+            putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
+            putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
+            putString(TAG_MERK, itemLaporaneResponse.merk)
+            putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
 
 
         }
-        Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
-            putExtra(DetailStatusLaporanActivity.TAG_BUNDLE, bundle)
+        Intent(requireActivity(), SaranaActivityAdmin::class.java).apply {
+            putExtra(SaranaActivityAdmin.TAG_BUNDLE, bundle)
             startActivity(this)
         }
     }

@@ -36,6 +36,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Teknisi.TeknisiActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.ui.kamtibmas_admin.KamtibmasActivityAdmin"
             android:exported="false" />
         <activity

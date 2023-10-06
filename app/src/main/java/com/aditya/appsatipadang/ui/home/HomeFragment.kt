@@ -118,10 +118,11 @@ class HomeFragment : Fragment() {
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
 
         val bundle = Bundle().apply {
-//            putString(TAG_KODE, pesanan.kdPesanan)
-            putString(TAG_NAMA, itemLaporaneResponse.type)
-            putString(TAG_STATUS, itemLaporaneResponse.merk)
-            putString(TAG_TIPE, itemLaporaneResponse.lokasi)
+
+
+            putString(TAG_NAMA, itemLaporaneResponse.lokasi)
+            putString(TAG_STATUS, itemLaporaneResponse.type)
+            putString(TAG_TIPE, itemLaporaneResponse.merk)
 
 
         }

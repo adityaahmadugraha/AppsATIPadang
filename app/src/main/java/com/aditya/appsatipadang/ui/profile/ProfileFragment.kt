@@ -50,10 +50,10 @@ class ProfileFragment : Fragment() {
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
             binding?.tvNameProfil?.text = data.name
-            binding?.tvJabatanProfil?.text = data.alamat
+            binding?.tvJabatanProfil?.text = data.roles
             binding?.etEmail?.setText(data.email)
             binding?.etNotlpProfil?.setText(data.no_tlp)
-            binding?.etAlamatProfil?.setText(data.roles)
+            binding?.etAlamatProfil?.setText(data.alamat)
 
         }
     }

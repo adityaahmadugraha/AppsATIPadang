@@ -36,10 +36,10 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         val bundle = intent.getBundleExtra(TAG_BUNDLE)
         if (bundle != null) {
             binding.apply {
-                etNameStatus.text =
-                    Editable.Factory.getInstance().newEditable(bundle.getString(TAG_NAMA))
-                etJenisStatus.text =
-                    Editable.Factory.getInstance().newEditable(bundle.getString(TAG_STATUS))
+                etNameStatus.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_NAMA))
+
+                etJenisStatus.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_STATUS))
+
                 etTipe.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))
 
                 btnBack.setOnClickListener {

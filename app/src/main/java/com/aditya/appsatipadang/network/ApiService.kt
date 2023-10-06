@@ -40,7 +40,7 @@ interface ApiService {
     ): ProfileUserResponse
 
 
-    @GET("laporan_harian")
+    @GET("laporan")
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
     ): LaporanResponse
