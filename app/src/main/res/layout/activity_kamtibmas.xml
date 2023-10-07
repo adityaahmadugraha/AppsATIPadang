@@ -312,6 +312,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/img_foto_kamtibmas" />
 
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_kirim_kamtibmas"
+                app:layout_constraintEnd_toEndOf="@+id/btn_kirim_kamtibmas"
+                app:layout_constraintStart_toStartOf="@+id/btn_kirim_kamtibmas"
+                app:layout_constraintTop_toTopOf="@+id/btn_kirim_kamtibmas"
+                tools:visibility="visible" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

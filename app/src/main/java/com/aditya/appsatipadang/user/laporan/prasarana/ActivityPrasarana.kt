@@ -132,7 +132,6 @@ class ActivityPrasarana : AppCompatActivity() {
     }
 
 
-
     private fun startCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(this@ActivityPrasarana.packageManager)
@@ -222,148 +221,146 @@ class ActivityPrasarana : AppCompatActivity() {
             }
         }
 
-        }
+    }
 
-        private fun validateInput(
-            tanggal: String,
-            lokasi: String,
-            deskripsiKerusakan: String,
-            fotoKerusakan: File?
-        ): Boolean {
-            binding.apply {
-                if (tanggal.isEmpty()) {
-                    return ilTanggal.setInputError(getString(R.string.must_not_empty))
-                }
-                if (lokasi.isEmpty()) {
-                    return ilLokasi.setInputError(getString(R.string.must_not_empty))
-                }
-                if (deskripsiKerusakan.isEmpty()) {
-                    return ilDeskripsiKerusakan.setInputError(getString(R.string.must_not_empty))
-                }
-                if (fotoKerusakan == null) {
-                    Toast.makeText(
-                        this@ActivityPrasarana,
-                        getString(R.string.pick_photo_first),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return false
-                }
+    private fun validateInput(
+        tanggal: String,
+        lokasi: String,
+        deskripsiKerusakan: String,
+        fotoKerusakan: File?
+    ): Boolean {
+        binding.apply {
+            if (tanggal.isEmpty()) {
+                return ilTanggal.setInputError(getString(R.string.must_not_empty))
             }
-            return true
-        }
-
-
-        private fun getDataLaporan() {
-            binding.apply {
-
-                val lokasi = etLokasi.text.toString()
-                val deskripsi = etDeskripsiKerusakan.text.toString()
-                val tanggal = etTanggal.text.toString()
-
+            if (lokasi.isEmpty()) {
+                return ilLokasi.setInputError(getString(R.string.must_not_empty))
             }
+            if (deskripsiKerusakan.isEmpty()) {
+                return ilDeskripsiKerusakan.setInputError(getString(R.string.must_not_empty))
+            }
+            if (fotoKerusakan == null) {
+                Toast.makeText(
+                    this@ActivityPrasarana,
+                    getString(R.string.pick_photo_first),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+        }
+        return true
+    }
+
+
+    private fun getDataLaporan() {
+        binding.apply {
+
+            val lokasi = etLokasi.text.toString()
+            val deskripsi = etDeskripsiKerusakan.text.toString()
+            val tanggal = etTanggal.text.toString()
 
         }
 
+    }
 
 
+    private fun insertLaporan(
+        foto: MultipartBody.Part,
+        type: RequestBody,
+        tanggal: RequestBody,
+        lokasi: RequestBody,
+        deskripsi: RequestBody
+    ) {
+        viewModel.inputLaporanPrasana(
+            user?.getToken.toString(),
+            type,
+            tanggal,
+            lokasi,
+            deskripsi,
+            foto
+        )
+            .observe(this@ActivityPrasarana) { result ->
+                binding.apply {
+                    when (result) {
+                        is Resource.Loading -> {
+                            showLoadingInput(true)
+                        }
 
-        private fun insertLaporan(
-            foto: MultipartBody.Part,
-            type: RequestBody,
-            tanggal: RequestBody,
-            lokasi: RequestBody,
-            deskripsi: RequestBody
-        ) {
-            viewModel.inputLaporanPrasana(
-                user?.getToken.toString(),
-                type,
-                tanggal,
-                lokasi,
-                deskripsi,
-                foto
-            )
-                .observe(this@ActivityPrasarana) { result ->
-                    binding.apply {
-                        when (result) {
-                            is Resource.Loading -> {
-                                showLoadingInput(true)
+                        is Resource.Success -> {
+                            showLoadingInput(false)
+                            Intent(
+                                this@ActivityPrasarana,
+                                ActivityPemberitahuan::class.java
+                            ).apply {
+                                putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
+                                flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(this)
                             }
+                        }
 
-                            is Resource.Success -> {
-                                showLoadingInput(false)
-                                Intent(
-                                    this@ActivityPrasarana,
-                                    ActivityPemberitahuan::class.java
-                                ).apply {
-                                    putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
-                                    flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    startActivity(this)
-                                }
-                            }
-
-                            is Resource.Error -> {
-                                showLoadingInput(false)
-                                Toast.makeText(
-                                    this@ActivityPrasarana, result.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                        is Resource.Error -> {
+                            showLoadingInput(false)
+                            Toast.makeText(
+                                this@ActivityPrasarana, result.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
-        }
-
-        private fun showLoadingInput(condition: Boolean) {
-            binding.apply {
-                progressBar.isVisible = condition
-                btnKirim.isEnabled = !condition
             }
+    }
+
+    private fun showLoadingInput(condition: Boolean) {
+        binding.apply {
+            progressBar.isVisible = condition
+            btnKirim.isEnabled = !condition
         }
+    }
 
 
-        private fun startGallery() {
-            val intent = Intent()
-            intent.action = Intent.ACTION_GET_CONTENT
-            intent.type = "image/*"
-            val chooser = Intent.createChooser(intent, "Choose a Picture")
-            launcherIntentGallery.launch(chooser)
-        }
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
 
-        private val launcherIntentCamera = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (it.resultCode == RESULT_OK) {
-                val photoShooted = File(fotoKerusakanPath.toString())
-                val rotatedBitmap = Constant.getRotatedBitmap(photoShooted)
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val uri = rotatedBitmap?.let { it1 ->
-                        Constant.bitmapToFile(
-                            it1,
-                            this@ActivityPrasarana
-                        )
-                    }
-                    fotoKerusakan = File(uri?.path.toString())
-
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == RESULT_OK) {
+            val photoShooted = File(fotoKerusakanPath.toString())
+            val rotatedBitmap = Constant.getRotatedBitmap(photoShooted)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val uri = rotatedBitmap?.let { it1 ->
+                    Constant.bitmapToFile(
+                        it1,
+                        this@ActivityPrasarana
+                    )
                 }
-                Glide.with(this@ActivityPrasarana)
-                    .load(rotatedBitmap)
-                    .into(binding.imgFoto)
+                fotoKerusakan = File(uri?.path.toString())
+
             }
+            Glide.with(this@ActivityPrasarana)
+                .load(rotatedBitmap)
+                .into(binding.imgFoto)
         }
+    }
 
-        private val launcherIntentGallery = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val selectedImg = result.data?.data as Uri
-                selectedImg.let { uri ->
-                    fotoKerusakan = Constant.uriToFile(uri, this@ActivityPrasarana)
-                    binding.imgFoto.setImageURI(uri)
-                }
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg = result.data?.data as Uri
+            selectedImg.let { uri ->
+                fotoKerusakan = Constant.uriToFile(uri, this@ActivityPrasarana)
+                binding.imgFoto.setImageURI(uri)
             }
         }
     }
+}
 
 
 

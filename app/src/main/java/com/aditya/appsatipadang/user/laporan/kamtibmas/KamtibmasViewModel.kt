@@ -17,12 +17,6 @@ import javax.inject.Inject
 class KamtibmasViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
-//    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) =
-//        repository.inputLaporan(token, inputLaporanRequest).asLiveData()
-
-
-//    fun inputLaporanKamtibmas(token: String, inputKamtibmasRequest: InputKamtibmasRequest) =
-//        repository.inputLaporanKamtibmas(token, inputKamtibmasRequest).asLiveData()
 
     fun getUser() = repository.getUser().asLiveData()
 
