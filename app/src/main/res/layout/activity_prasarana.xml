@@ -220,7 +220,7 @@
 
 
             <TextView
-                android:id="@+id/txt_jenis_kerusakan"
+                android:id="@+id/txt_deskripsi_kerusakan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -231,36 +231,37 @@
                 app:layout_constraintStart_toStartOf="@+id/il_tanggal"
                 app:layout_constraintTop_toBottomOf="@+id/il_lokasi" />
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_jenis_kerusakan"
+                android:id="@+id/il_deskripsi_kerusakan"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_jenis_kerusakan">
+                app:layout_constraintTop_toBottomOf="@+id/txt_deskripsi_kerusakan">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_jenis_kerusakan"
+                    android:id="@+id/et_deskripsi_kerusakan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="@string/masukan_jenis_kerusakan"
-                    android:maxLength="25"
+                    android:gravity="top"
+                    android:hint="@string/deskripsi_kerusakan"
+                    android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <TextView
                 android:id="@+id/txt_upload_foto"
@@ -273,7 +274,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/il_tanggal"
-                app:layout_constraintTop_toBottomOf="@+id/il_jenis_kerusakan" />
+                app:layout_constraintTop_toBottomOf="@+id/il_deskripsi_kerusakan" />
 
             <ImageView
                 android:id="@+id/camera"
@@ -335,7 +336,7 @@
                 android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="600dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/blue"
@@ -345,8 +346,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/img_foto" />
 
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_kirim"
+                app:layout_constraintEnd_toEndOf="@+id/btn_kirim"
+                app:layout_constraintStart_toStartOf="@+id/btn_kirim"
+                app:layout_constraintTop_toTopOf="@+id/btn_kirim"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

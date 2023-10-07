@@ -100,8 +100,8 @@ interface ApiService {
         @Part("type") type: RequestBody,
         @Part("tanggal") tanggal: RequestBody,
         @Part("lokasi") lokasi: RequestBody,
-        @Part("merk") merk: RequestBody,
-        @Part("foto") foto: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part foto: MultipartBody.Part,
     ): LaporanResponse
 
 
@@ -129,7 +129,6 @@ interface ApiService {
         @Part("waktu") waktu: RequestBody,
         @Part foto: MultipartBody.Part,
     ): LaporanResponse
-
 
 
 }

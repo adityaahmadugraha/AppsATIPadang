@@ -5,10 +5,8 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,8 +22,6 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
-import com.aditya.appsatipadang.ui.camera.CameraActivity
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan.Companion.TAG_ID_LAPORAN
 import com.aditya.appsatipadang.user.MainActivity
@@ -34,7 +30,6 @@ import com.aditya.appsatipadang.user.utils.Constant.createCustomTempFile
 import com.aditya.appsatipadang.user.utils.Constant.getRotatedBitmap
 import com.aditya.appsatipadang.user.utils.Constant.getToken
 import com.aditya.appsatipadang.user.utils.Constant.reduceFileImage
-import com.aditya.appsatipadang.user.utils.Constant.rotateFile
 import com.aditya.appsatipadang.user.utils.Constant.setInputError
 import com.aditya.appsatipadang.user.utils.Constant.uriToFile
 import com.bumptech.glide.Glide
@@ -60,8 +55,8 @@ class SaranaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
-
     private var user: UserLocal? = null
+
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
 
@@ -159,6 +154,8 @@ class SaranaActivity : AppCompatActivity() {
             launcherIntentCamera.launch(intent)
         }
     }
+
+
 
     private fun setTanggal() {
         val calendar = Calendar.getInstance()
@@ -329,12 +326,6 @@ class SaranaActivity : AppCompatActivity() {
             btnKirim.isEnabled = !condition
         }
     }
-
-
-//    private fun startCameraX() {
-//        val intent = Intent(this, CameraActivity::class.java)
-//        launcherIntentCameraX.launch(intent)
-//    }
 
     private fun startGallery() {
         val intent = Intent()

@@ -1,51 +1,60 @@
 package com.aditya.appsatipadang.user.laporan.prasarana
 
 import android.Manifest
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.aditya.appsatipadang.user.MainActivity
 import android.app.DatePickerDialog
-import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
-import android.util.Log
+import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
-import java.text.SimpleDateFormat
-import java.util.Calendar
-
 import com.aditya.appsatipadang.databinding.ActivityPrasaranaBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
-import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
-import com.aditya.appsatipadang.ui.camera.CameraActivity
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
-import com.aditya.appsatipadang.user.utils.Constant.rotateFile
-import com.aditya.appsatipadang.user.utils.Constant.uriToFile
+import com.aditya.appsatipadang.user.MainActivity
+import com.aditya.appsatipadang.user.utils.Constant
+import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.user.utils.Constant.setInputError
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 @AndroidEntryPoint
 class ActivityPrasarana : AppCompatActivity() {
 
     private lateinit var binding: ActivityPrasaranaBinding
-
-    private val viewModel : PrasaranaViewModel by viewModels()
-
+    private val viewModel: PrasaranaViewModel by viewModels()
     private var user: UserLocal? = null
+
+    private var fotoKerusakan: File? = null
+    private var fotoKerusakanPath: String? = null
+
     companion object {
         const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -68,6 +77,7 @@ class ActivityPrasarana : AppCompatActivity() {
                 finish()
             }
         }
+
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -79,70 +89,38 @@ class ActivityPrasarana : AppCompatActivity() {
 
         binding = ActivityPrasaranaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
 
-        binding.etTanggal.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(
-                this,
-                { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                    val selectedDate = Calendar.getInstance()
-                    selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
-
-                    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-                    val formattedDate = dateFormat.format(selectedDate.time)
-
-                    binding.etTanggal.setText(formattedDate)
-                },
-                year,
-                month,
-                dayOfMonth
-            )
-
-            datePickerDialog.show()
-        }
-
-        binding.btnKirim.setOnClickListener {
-
-            getUserInput()
-            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-            val selectedChipId = chipGroup.checkedChipId
-
-            if (selectedChipId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(selectedChipId)
-                val selectedChipText = selectedChip.text.toString()
-
-                Log.d(ContentValues.TAG, "Chip yang dipilih: $selectedChipText")
-
-            } else {
-                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
+        binding.apply {
+            btnKirim.setOnClickListener {
+                getUserInput()
             }
-        }
-
-
-        getUserData()
-        binding.imgBackLaporanPrasarana.setOnClickListener() {
-            val intent = Intent(this@ActivityPrasarana, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            for (i in 0 until group.childCount) {
-                val chip = group.getChildAt(i) as Chip
-                chip.setChipBackgroundColorResource(android.R.color.background_light)
+            etTanggal.setOnClickListener {
+                setTanggal()
             }
 
-            if (checkedId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(checkedId)
-                selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+            getUserData()
+            imgBackLaporanPrasarana.setOnClickListener {
+                val intent = Intent(this@ActivityPrasarana, MainActivity::class.java)
+                startActivity(intent)
             }
-        }
 
+            chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                for (i in 0 until group.childCount) {
+                    val chip = group.getChildAt(i) as Chip
+                    chip.setChipBackgroundColorResource(android.R.color.background_light)
+                }
+
+                if (checkedId != View.NO_ID) {
+                    val selectedChip = findViewById<Chip>(checkedId)
+                    selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+                }
+            }
+
+            camera.setOnClickListener { startCamera() }
+            galery.setOnClickListener { startGallery() }
+
+        }
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -151,10 +129,49 @@ class ActivityPrasarana : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        binding.camera.setOnClickListener { startCameraX() }
-        binding.galery.setOnClickListener { startGallery() }
-        binding.imgFoto.setOnClickListener { uploadImage() }
+    }
 
+
+
+    private fun startCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.resolveActivity(this@ActivityPrasarana.packageManager)
+
+        Constant.createCustomTempFile(this@ActivityPrasarana).also {
+            val photoURI: Uri = FileProvider.getUriForFile(
+                this@ActivityPrasarana,
+                BuildConfig.APPLICATION_ID,
+                it
+            )
+            fotoKerusakanPath = it.absolutePath
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+            launcherIntentCamera.launch(intent)
+        }
+    }
+
+
+    private fun setTanggal() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale("in", "ID"))
+                val formattedDate = dateFormat.format(selectedDate.time)
+
+                binding.etTanggal.setText(formattedDate)
+            },
+            year,
+            month,
+            dayOfMonth
+        )
+        datePickerDialog.show()
     }
 
     private fun getUserData() {
@@ -162,9 +179,9 @@ class ActivityPrasarana : AppCompatActivity() {
             user = it
         }
     }
-    private fun getUserInput() {
 
-        val type = "Prasarana"
+    private fun getUserInput() {
+        val type = "Sarana"
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
         val selectedChipId = chipGroup.checkedChipId
         val chip: String
@@ -173,136 +190,180 @@ class ActivityPrasarana : AppCompatActivity() {
             val selectedChip = findViewById<Chip>(selectedChipId)
             chip = selectedChip.text.toString()
         } else {
-            Toast.makeText(this, "Isi Semua Kolom.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
             return
         }
 
         binding.apply {
-            val type = "Prasarana"
-
             val tanggal = etTanggal.text.toString()
             val lokasi = etLokasi.text.toString()
-//            val jenisKerusakan = etJenisKerusakan.text.toString()
-            val camera = imgFoto.toString()
+            val deskripsiKerusakan = etDeskripsiKerusakan.text.toString()
 
-            val inputPrasaranaRequest = InputPrasaranaRequest(
+
+            if (validateInput(tanggal, lokasi, deskripsiKerusakan, fotoKerusakan)) {
+                val fileProfilePicture: File = Constant.reduceFileImage(fotoKerusakan as File)
+
+                val rType = type.toRequestBody("text/plain".toMediaType())
+                val rLokasi = lokasi.toRequestBody("text/plain".toMediaType())
+                val rDeskripsi = deskripsiKerusakan.toRequestBody("text/plain".toMediaType())
+                val rTanggal = tanggal.toRequestBody("text/plain".toMediaType())
+
+                val fotoAlat =
+                    fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val foto: MultipartBody.Part = MultipartBody.Part.createFormData(
+                    "foto",
+                    fileProfilePicture.name,
+                    fotoAlat
+                )
+
+                insertLaporan(
+                    foto, rType, rTanggal, rLokasi, rDeskripsi,
+                )
+            }
+        }
+
+        }
+
+        private fun validateInput(
+            tanggal: String,
+            lokasi: String,
+            deskripsiKerusakan: String,
+            fotoKerusakan: File?
+        ): Boolean {
+            binding.apply {
+                if (tanggal.isEmpty()) {
+                    return ilTanggal.setInputError(getString(R.string.must_not_empty))
+                }
+                if (lokasi.isEmpty()) {
+                    return ilLokasi.setInputError(getString(R.string.must_not_empty))
+                }
+                if (deskripsiKerusakan.isEmpty()) {
+                    return ilDeskripsiKerusakan.setInputError(getString(R.string.must_not_empty))
+                }
+                if (fotoKerusakan == null) {
+                    Toast.makeText(
+                        this@ActivityPrasarana,
+                        getString(R.string.pick_photo_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return false
+                }
+            }
+            return true
+        }
+
+
+        private fun getDataLaporan() {
+            binding.apply {
+
+                val lokasi = etLokasi.text.toString()
+                val deskripsi = etDeskripsiKerusakan.text.toString()
+                val tanggal = etTanggal.text.toString()
+
+            }
+
+        }
+
+
+
+
+        private fun insertLaporan(
+            foto: MultipartBody.Part,
+            type: RequestBody,
+            tanggal: RequestBody,
+            lokasi: RequestBody,
+            deskripsi: RequestBody
+        ) {
+            viewModel.inputLaporanPrasana(
+                user?.getToken.toString(),
                 type,
                 tanggal,
-                chip,
                 lokasi,
-
-//                chip,
-//                jenisKerusakan,
-                camera
+                deskripsi,
+                foto
             )
-
-            Log.d(ContentValues.TAG, "LAPORAN::: $inputPrasaranaRequest")
-
-            if (validateInput(inputPrasaranaRequest)) {
-                viewModel.inputLaporanPrasana(
-                    user?.getToken.toString(),
-                    inputPrasaranaRequest
-                ).observe(this@ActivityPrasarana) { item ->
-                    when (item) {
-                        is Resource.Loading -> {
-
-                        }
-
-                        is Resource.Success -> {
-                            Log.d(ContentValues.TAG, "simpanData: ${item.data.id}")
-                            if (item.data.status == 200) {
-                                val intent = Intent(this@ActivityPrasarana, ActivityPemberitahuan::class.java)
-                                intent.putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, item.data.id)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
+                .observe(this@ActivityPrasarana) { result ->
+                    binding.apply {
+                        when (result) {
+                            is Resource.Loading -> {
+                                showLoadingInput(true)
                             }
-                        }
 
-                        is Resource.Error -> {
+                            is Resource.Success -> {
+                                showLoadingInput(false)
+                                Intent(
+                                    this@ActivityPrasarana,
+                                    ActivityPemberitahuan::class.java
+                                ).apply {
+                                    putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
+                                    flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(this)
+                                }
+                            }
+
+                            is Resource.Error -> {
+                                showLoadingInput(false)
+                                Toast.makeText(
+                                    this@ActivityPrasarana, result.error,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
                 }
+        }
 
+        private fun showLoadingInput(condition: Boolean) {
+            binding.apply {
+                progressBar.isVisible = condition
+                btnKirim.isEnabled = !condition
+            }
+        }
+
+
+        private fun startGallery() {
+            val intent = Intent()
+            intent.action = Intent.ACTION_GET_CONTENT
+            intent.type = "image/*"
+            val chooser = Intent.createChooser(intent, "Choose a Picture")
+            launcherIntentGallery.launch(chooser)
+        }
+
+        private val launcherIntentCamera = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == RESULT_OK) {
+                val photoShooted = File(fotoKerusakanPath.toString())
+                val rotatedBitmap = Constant.getRotatedBitmap(photoShooted)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val uri = rotatedBitmap?.let { it1 ->
+                        Constant.bitmapToFile(
+                            it1,
+                            this@ActivityPrasarana
+                        )
+                    }
+                    fotoKerusakan = File(uri?.path.toString())
+
+                }
+                Glide.with(this@ActivityPrasarana)
+                    .load(rotatedBitmap)
+                    .into(binding.imgFoto)
+            }
+        }
+
+        private val launcherIntentGallery = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val selectedImg = result.data?.data as Uri
+                selectedImg.let { uri ->
+                    fotoKerusakan = Constant.uriToFile(uri, this@ActivityPrasarana)
+                    binding.imgFoto.setImageURI(uri)
+                }
             }
         }
     }
-
-    private fun validateInput(inputLaporanRequest: InputPrasaranaRequest): Boolean {
-        binding.apply {
-            if (inputLaporanRequest.tanggal?.isEmpty() == true) {
-                ilTanggal.isErrorEnabled = true
-                ilTanggal.error = getString(R.string.must_not_empty)
-                return false
-            }
-//            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
-//                ilLokasi.isErrorEnabled = true
-//                ilLokasi.error = getString(R.string.must_not_empty)
-//                return false
-//            }
-            if (inputLaporanRequest.merk?.isEmpty() == true) {
-                ilJenisKerusakan.isErrorEnabled = true
-                ilJenisKerusakan.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (binding.etTanggal.text?.isEmpty() == true) {
-                binding.ilTanggal.isErrorEnabled = true
-                binding.ilTanggal.error = getString(R.string.must_not_empty)
-                return false
-            }
-
-            return true
-        }
-    }
-
-    private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
-        launcherIntentCameraX.launch(intent)
-    }
-
-    private fun startGallery() {
-        val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
-        intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
-        launcherIntentGallery.launch(chooser)
-    }
-
-    private fun uploadImage() {
-        Toast.makeText(this, "Fitur ini belum tersedia", Toast.LENGTH_SHORT).show()
-    }
-
-    private val launcherIntentCameraX = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == SaranaActivity.CAMERA_X_RESULT) {
-            val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                it.data?.getSerializableExtra("picture", File::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                it.data?.getSerializableExtra("picture")
-            } as? File
-
-            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-
-            myFile?.let { file ->
-                rotateFile(file, isBackCamera)
-                binding.imgFoto.setImageBitmap(BitmapFactory.decodeFile(file.path))
-            }
-        }
-    }
-
-    private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val selectedImg = result.data?.data as Uri
-            selectedImg.let { uri ->
-                val myFile = uriToFile(uri, this@ActivityPrasarana)
-                binding.imgFoto.setImageURI(uri)
-            }
-        }
-    }
-}
 
 
 

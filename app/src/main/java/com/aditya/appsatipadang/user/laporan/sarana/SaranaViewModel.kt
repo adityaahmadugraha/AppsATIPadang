@@ -16,9 +16,6 @@ class SaranaViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
 
-//    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) =
-//        repository.inputLaporan(token, inputLaporanRequest).asLiveData()
-
     fun getUser() = repository.getUser().asLiveData()
 
     fun inputLaporan(

@@ -54,8 +54,18 @@ class DataRepository @Inject constructor(
     ) = remoteData.insertLaporan(token, type, tanggal, lokasi, merk, deskripsi, foto)
 
 
-    fun inputLaporanPrasana(token: String, inputPrasanaRequest: InputPrasaranaRequest) =
-        remoteData.inputLaporanPrasana(token, inputPrasanaRequest)
+    fun inputLaporanPrasana(
+        token: String,
+        type: RequestBody,
+        tanggal: RequestBody,
+        lokasi: RequestBody,
+        deskripsi: RequestBody,
+        foto: MultipartBody.Part,
+    ) = remoteData.insertLaporanPrasana(token, type, tanggal, lokasi, deskripsi, foto)
+
+
+//    fun inputLaporanPrasana(token: String, inputPrasanaRequest: InputPrasaranaRequest) =
+//        remoteData.inputLaporanPrasana(token, inputPrasanaRequest)
 
 //    fun inputLaporanKamtibmas(token: String, inputKamtibmasRequest: InputKamtibmasRequest) = remoteData.inputLaporanKamtibmas(token,inputKamtibmasRequest)
 

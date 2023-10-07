@@ -1,10 +1,9 @@
 package com.aditya.appsatipadang.user.repository
 
-import com.aditya.appsatipadang.network.ApiService
-import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
+import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
+import com.aditya.appsatipadang.network.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -81,13 +80,13 @@ class RemoteDataSource @Inject constructor(
 //        emit(Resource.Error(it.message ?: ""))
 //    }.flowOn(Dispatchers.IO)
 
-    fun inputLaporanPrasana(token: String, request: InputPrasaranaRequest) = flow {
-        emit(Resource.Loading())
-        val response = apiService.inputLaporanPrasana(token,request)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
+//    fun inputLaporanPrasana(token: String, request: InputPrasaranaRequest) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.inputLaporanPrasana(token,request)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
 
 
 
@@ -116,6 +115,21 @@ class RemoteDataSource @Inject constructor(
     ) = flow {
         emit(Resource.Loading())
         val response = apiService.inputLaporan(token, type, tanggal, lokasi, merk,deskripsi, foto)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    fun insertLaporanPrasana(
+        token: String,
+        type: RequestBody,
+        tanggal: RequestBody,
+        lokasi: RequestBody,
+        deskripsi: RequestBody,
+        foto: MultipartBody.Part,
+    ) = flow {
+        emit(Resource.Loading())
+        val response = apiService.inputLaporanPrasana(token, type, tanggal, lokasi, deskripsi, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
