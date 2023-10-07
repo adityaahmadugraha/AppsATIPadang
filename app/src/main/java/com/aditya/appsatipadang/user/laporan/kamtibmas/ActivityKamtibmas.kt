@@ -180,38 +180,38 @@ class ActivityKamtibmas : AppCompatActivity() {
 //                camera
             )
 
-            Log.d(ContentValues.TAG, "LAPORAN::: $inputKamtibmasRequest")
-
-            if (validateInput(inputKamtibmasRequest)) {
-                viewModel.inputLaporanKamtibmas(
-                    user?.getToken.toString(),
-                    inputKamtibmasRequest
-                ).observe(this@ActivityKamtibmas) { item ->
-                    when (item) {
-                        is Resource.Loading -> {
-
-                        }
-
-                        is Resource.Success -> {
-                            Log.d(ContentValues.TAG, "simpanData: ${item.data.id}")
-                            if (item.data.status == 200) {
-                                val intent = Intent(
-                                    this@ActivityKamtibmas,
-                                    ActivityPemberitahuan::class.java
-                                )
-                                intent.putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, item.data.id)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                            }
-                        }
-
-                        is Resource.Error -> {
-                        }
-                    }
-                }
-
-            }
+//            Log.d(ContentValues.TAG, "LAPORAN::: $inputKamtibmasRequest")
+//
+//            if (validateInput(inputKamtibmasRequest)) {
+//                viewModel.inputLaporanKamtibmas(
+//                    user?.getToken.toString(),
+//                    inputKamtibmasRequest
+//                ).observe(this@ActivityKamtibmas) { item ->
+//                    when (item) {
+//                        is Resource.Loading -> {
+//
+//                        }
+//
+//                        is Resource.Success -> {
+//                            Log.d(ContentValues.TAG, "simpanData: ${item.data.id}")
+//                            if (item.data.status == 200) {
+//                                val intent = Intent(
+//                                    this@ActivityKamtibmas,
+//                                    ActivityPemberitahuan::class.java
+//                                )
+//                                intent.putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, item.data.id)
+//                                intent.flags =
+//                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                startActivity(intent)
+//                            }
+//                        }
+//
+//                        is Resource.Error -> {
+//                        }
+//                    }
+//                }
+//
+//            }
 
         }
     }

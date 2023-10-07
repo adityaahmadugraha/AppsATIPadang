@@ -32,6 +32,10 @@ import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan.Companion
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -42,7 +46,7 @@ class SaranaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
-
+    private var image: File? = null
     private var user: UserLocal? = null
 
     companion object {
@@ -165,6 +169,8 @@ class SaranaActivity : AppCompatActivity() {
         binding.imgFoto.setOnClickListener { uploadImage() }
 
 
+        getDataLaporan()
+
     }
 
     private fun getUserData() {
@@ -204,38 +210,89 @@ class SaranaActivity : AppCompatActivity() {
                 camera
             )
 
-            Log.d(TAG, "LAPORAN::: $inputLaporanRequest")
+//            Log.d(TAG, "LAPORAN::: $inputLaporanRequest")
 
-            if (validateInput(inputLaporanRequest)) {
-                viewModel.inputLaporan(
-                    user?.getToken.toString(),
-                    inputLaporanRequest
-                ).observe(this@SaranaActivity) { item ->
-                    when (item) {
-                        is Resource.Loading -> {
-
-                        }
-
-                        is Resource.Success -> {
-                            Log.d(TAG, "simpanData: ${item.data.id}")
-                            if (item.data.status == 200) {
-                                val intent =
-                                    Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
-                                intent.putExtra(TAG_ID_LAPORAN, item.data.id)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                            }
-                        }
-
-                        is Resource.Error -> {
-                        }
-                    }
-                }
-
-            }
+//            if (validateInput(inputLaporanRequest)) {
+//                viewModel.inputLaporan(
+//                    user?.getToken.toString(),
+////                    inputLaporanRequest
+//                ).observe(this@SaranaActivity) { item ->
+//                    when (item) {
+//                        is Resource.Loading -> {
+//
+//                        }
+//
+//                        is Resource.Success -> {
+//                            Log.d(TAG, "simpanData: ${item.data.id}")
+//                            if (item.data.status == 200) {
+//                                val intent =
+//                                    Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
+//                                intent.putExtra(TAG_ID_LAPORAN, item.data.id)
+//                                intent.flags =
+//                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                startActivity(intent)
+//                            }
+//                        }
+//
+//                        is Resource.Error -> {
+//                        }
+//                    }
+//                }
+//
+//            }
         }
     }
+
+    private fun getDataLaporan() {
+        binding.apply {
+            val type = etJenisKerusakan.text.toString()
+            val lokasi = etLokasi.text.toString()
+            val deskripsi = etDeskripsiKerusakan.text.toString()
+            val tanggal = etTanggal.text.toString()
+
+//            if (image != null) {
+//                if (type.isNotEmpty() && lokasi.isNotEmpty() && deskripsi.isNotEmpty()) && tanggal.isNotEmpty()) {
+//                    val fileProfilePicture: File = Constant.reduceFileImage(profilePicture as File)
+//
+//                    val rNama = nama.toRequestBody("text/plain".toMediaType())
+//                    val rTelp = telp.toRequestBody("text/plain".toMediaType())
+//                    val rAlamat = alamat.toRequestBody("text/plain".toMediaType())
+//
+//                    val profilePictureFile =
+//                        fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
+//                    val rProfilePictrue: MultipartBody.Part = MultipartBody.Part.createFormData(
+//                        "foto_profil",
+//                        fileProfilePicture.name,
+//                        profilePictureFile
+//                    )
+//
+//                    if (listPelanggan?.isEmpty() == true) {
+//                        insertDataPelanggan(
+//                            rProfilePictrue, rNama, rAlamat, rTelp
+//                        )
+//                    } else {
+//                        updateDataPelanggan(
+//                            rProfilePictrue, rNama, rAlamat, rTelp
+//                        )
+//                    }
+//                } else {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        getString(R.string.fillUpInput),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            } else {
+//                Toast.makeText(
+//                    requireContext(),
+//                    getString(R.string.choosePhotoFirst),
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+
+        }
+    }
+
 
     private fun validateInput(inputLaporanRequest: InputLaporanRequest): Boolean {
         binding.apply {

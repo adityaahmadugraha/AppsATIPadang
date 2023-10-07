@@ -18,7 +18,7 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_DESKRIPSI
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_JENIS
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_LOKASI
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_MERK
+
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_NAMA
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TANGGAL
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TIPE
@@ -123,16 +123,12 @@ class HomeFragmentAdmin : Fragment() {
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
 
         val bundle = Bundle().apply {
-//            putString(TAG_KODE, pesanan.kdPesanan)
 
-
-            putString(TAG_JENIS, itemLaporaneResponse.type)
-//            putString(TAG_TIPE, itemLaporaneResponse.lokasi)
-            putString(TAG_NAMA, itemLaporaneResponse.type)
-//            putString(TAG_NO_PENGADUAN, itemLaporaneResponse.lokasi)
+            putString(TAG_TIPE, itemLaporaneResponse.type)
+            putString(TAG_NAMA, itemLaporaneResponse.merk)
             putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
+            putString(TAG_JENIS, itemLaporaneResponse.jenis)
             putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
-            putString(TAG_MERK, itemLaporaneResponse.merk)
             putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
 
 

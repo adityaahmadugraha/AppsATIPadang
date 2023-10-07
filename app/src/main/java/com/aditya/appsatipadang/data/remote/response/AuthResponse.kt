@@ -12,5 +12,4 @@ data class AuthResponse(
 
     @field:SerializedName("status")
     val status: Int? = null,
-
     )

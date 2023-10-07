@@ -13,8 +13,8 @@ class PrasaranaViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
 
-    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) =
-        repository.inputLaporan(token, inputLaporanRequest).asLiveData()
+//    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) =
+//        repository.inputLaporan(token, inputLaporanRequest).asLiveData()
 
     fun inputLaporanPrasana(token: String, inputPrasaranaRequest: InputPrasaranaRequest) =
         repository.inputLaporanPrasana(token, inputPrasaranaRequest).asLiveData()

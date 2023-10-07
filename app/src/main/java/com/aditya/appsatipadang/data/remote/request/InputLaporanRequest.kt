@@ -5,6 +5,9 @@ import java.util.Date
 
 data class InputLaporanRequest(
 
+//    @field:SerializedName("id_pelapor")
+//    val id_pelapor: String? = null,
+
     @field:SerializedName("type")
     val type: String? = null,
 

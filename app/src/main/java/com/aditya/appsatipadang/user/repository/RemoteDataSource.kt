@@ -3,10 +3,7 @@ package com.aditya.appsatipadang.user.repository
 import com.aditya.appsatipadang.network.ApiService
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -76,13 +73,13 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun inputLaporan(token: String, request: InputLaporanRequest) = flow {
-        emit(Resource.Loading())
-        val response = apiService.inputLaporan(token,request)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
+//    fun inputLaporan(token: String, request: InputLaporanRequest) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.inputLaporan(token,request)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
 
     fun inputLaporanPrasana(token: String, request: InputPrasaranaRequest) = flow {
         emit(Resource.Loading())
@@ -93,13 +90,7 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun inputLaporanKamtibmas(token: String, request: InputKamtibmasRequest) = flow {
-        emit(Resource.Loading())
-        val response = apiService.inputLaporanKamtibmas(token,request)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
+
 
     fun getDataLaporan(token: String, id : String) = flow<Resource<LaporanInfoResponse>> {
         emit(Resource.Loading())
@@ -111,6 +102,51 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
+
+    //input gambar
+    fun insertLaporan(
+        token: String,
+        type: RequestBody,
+        tanggal: RequestBody,
+        lokasi: RequestBody,
+        merk: RequestBody,
+        foto: MultipartBody.Part,
+    ) = flow {
+        emit(Resource.Loading())
+        val response = apiService.inputLaporan(token, type, tanggal, lokasi, merk, foto)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun inputLaporanKamtibmas(
+        token: String,
+        type: RequestBody,
+        lokasi: RequestBody,
+        deskripsi: RequestBody,
+        tanggal: RequestBody,
+        waktu: RequestBody,
+        foto: MultipartBody.Part,
+    ) = flow {
+        emit(Resource.Loading())
+        val response = apiService.inputLaporanKamtibmas(token, type, lokasi, deskripsi, tanggal,waktu , foto)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+
+
+//    fun inputLaporanKamtibmas(token: String, request: InputKamtibmasRequest) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.inputLaporanKamtibmas(token,request)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
 
 
 

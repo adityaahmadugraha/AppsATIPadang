@@ -7,9 +7,11 @@ import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
 import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
+
 
 class DataRepository @Inject constructor(
     private val remoteData: RemoteDataSource,
@@ -37,11 +39,39 @@ class DataRepository @Inject constructor(
     fun getListLaporanHarian(token: String) = remoteData.getListLaporanHarian(token)
 
     fun getListLaporanBulanan(token: String) = remoteData.getListLaporanBulanan(token)
-    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) = remoteData.inputLaporan(token,inputLaporanRequest)
+
+//    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) = remoteData.inputLaporan(token,inputLaporanRequest)
+
+
+
+    fun inputLaporan(
+        token: String,
+        type: RequestBody,
+        tanggal: RequestBody,
+        lokasi: RequestBody,
+        merk: RequestBody,
+        foto: MultipartBody.Part,
+    ) = remoteData.insertLaporan(token, type, tanggal, lokasi, merk,foto )
+
 
     fun inputLaporanPrasana(token: String, inputPrasanaRequest: InputPrasaranaRequest) = remoteData.inputLaporanPrasana(token,inputPrasanaRequest)
 
-    fun inputLaporanKamtibmas(token: String, inputKamtibmasRequest: InputKamtibmasRequest) = remoteData.inputLaporanKamtibmas(token,inputKamtibmasRequest)
+//    fun inputLaporanKamtibmas(token: String, inputKamtibmasRequest: InputKamtibmasRequest) = remoteData.inputLaporanKamtibmas(token,inputKamtibmasRequest)
+
+
+    fun inputLaporanKamtibmas(
+        token: String,
+        type: RequestBody,
+        lokasi: RequestBody,
+        deskripsi: RequestBody,
+        tanggal: RequestBody,
+        waktu: RequestBody,
+        foto: MultipartBody.Part,
+    ) = remoteData.inputLaporanKamtibmas(token, type, lokasi, deskripsi, tanggal,waktu , foto)
+
+
+
+
 
     fun getDataLaporan(token : String, id : String) = remoteData.getDataLaporan(token,id)
 

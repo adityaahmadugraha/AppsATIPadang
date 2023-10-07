@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class InputKamtibmasRequest(
 
+//    @field:SerializedName("id_pelapor")
+//    val id_pelapor: String? = null,
+
     @field:SerializedName("type")
     val type: String? = null,
 

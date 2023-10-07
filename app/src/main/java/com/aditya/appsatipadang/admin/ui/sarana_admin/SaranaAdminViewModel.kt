@@ -15,4 +15,5 @@ class SaranaAdminViewModel @Inject constructor(
 
     fun getUser() = dataRepository.getUser().asLiveData()
     fun getDataLaporan(token : String,id : String) = dataRepository.getDataLaporan(token,id).asLiveData()
+
 }

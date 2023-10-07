@@ -9,6 +9,7 @@ import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -65,6 +66,14 @@ interface ApiService {
 //        @Header("Authorization") token: String,
 //    ): LaporanResponse
 
+
+    @GET("getlaporan/{id}")
+    suspend fun getDataLaporan(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): LaporanInfoResponse
+
+
     @POST("laporan")
     suspend fun inputLaporan(
         @Header("Authorization") token: String,
@@ -84,11 +93,42 @@ interface ApiService {
     ): LaporanResponse
 
 
-    @GET("getlaporan/{id}")
-suspend fun getDataLaporan(
-    @Header("Authorization") token : String,
-    @Path("id") id: String
-): LaporanInfoResponse
+    @Multipart
+    @POST("laporan")
+    suspend fun inputLaporanPrasana(
+        @Header("Authorization") token: String,
+        @Part("type") type: RequestBody,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("lokasi") lokasi: RequestBody,
+        @Part("merk") merk: RequestBody,
+        @Part("foto") foto: RequestBody,
+    ): LaporanResponse
+
+
+    @Multipart
+    @POST("laporan")
+    suspend fun inputLaporan(
+        @Header("Authorization") token: String,
+        @Part("type") type: RequestBody,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("lokasi") lokasi: RequestBody,
+        @Part("merk") merk: RequestBody,
+        @Part foto: MultipartBody.Part,
+    ): LaporanResponse
+
+
+    @Multipart
+    @POST("laporan")
+    suspend fun inputLaporanKamtibmas(
+        @Header("Authorization") token: String,
+        @Part("type") type: RequestBody,
+        @Part("lokasi") lokasi: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("waktu") waktu: RequestBody,
+        @Part foto: MultipartBody.Part,
+    ): LaporanResponse
+
 
 
 }
