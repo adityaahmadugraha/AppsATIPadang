@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.user.adapter
+package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

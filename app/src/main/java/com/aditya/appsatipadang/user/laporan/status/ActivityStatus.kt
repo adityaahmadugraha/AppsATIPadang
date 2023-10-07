@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.appsatipadang.user.adapter.AdapterStatusLaporan
+import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityStatusBinding

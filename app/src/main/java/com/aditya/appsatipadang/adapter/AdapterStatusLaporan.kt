@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.user.adapter
+package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 
-
-class AdapterLaporan
+class AdapterStatusLaporan
     (
     private val onItemClick: (ItemLaporaneResponse) -> Unit
 )
-    : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
+    : ListAdapter<ItemLaporaneResponse, AdapterStatusLaporan.ViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

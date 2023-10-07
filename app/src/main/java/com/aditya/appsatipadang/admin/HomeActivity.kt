@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_home_admin, R.id.navigation_history_admin, R.id.navigation_profile_admin
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 }

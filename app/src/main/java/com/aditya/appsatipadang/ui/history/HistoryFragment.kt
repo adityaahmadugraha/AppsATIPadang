@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.user.adapter.AdapterHistoryLaporan
+import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
