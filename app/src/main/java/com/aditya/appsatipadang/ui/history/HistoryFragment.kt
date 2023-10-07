@@ -18,7 +18,7 @@ import com.aditya.appsatipadang.user.adapter.AdapterHistoryLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
-import com.aditya.appsatipadang.di.Constant.getToken
+import com.aditya.appsatipadang.user.utils.Constant.getToken
 import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 

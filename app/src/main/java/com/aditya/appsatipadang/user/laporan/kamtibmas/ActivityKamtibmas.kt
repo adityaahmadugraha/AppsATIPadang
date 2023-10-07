@@ -7,31 +7,27 @@ import android.os.Bundle
 import com.aditya.appsatipadang.user.MainActivity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import com.aditya.appsatipadang.databinding.ActivityKamtibmasBinding
-import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.ui.camera.CameraActivity
-import com.aditya.appsatipadang.ui.camera.rotateFile
-import com.aditya.appsatipadang.ui.camera.uriToFile
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
+import com.aditya.appsatipadang.user.utils.Constant.rotateFile
+import com.aditya.appsatipadang.user.utils.Constant.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 

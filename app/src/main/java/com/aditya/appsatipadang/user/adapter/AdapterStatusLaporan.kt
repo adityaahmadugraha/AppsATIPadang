@@ -47,7 +47,7 @@ class AdapterStatusLaporan
                     oldItem: ItemLaporaneResponse,
                     newItem: ItemLaporaneResponse
                 ): Boolean {
-                    return oldItem.token == newItem.token
+                    return oldItem.id == newItem.id
                 }
 
                 @SuppressLint("DiffUtilEquals")

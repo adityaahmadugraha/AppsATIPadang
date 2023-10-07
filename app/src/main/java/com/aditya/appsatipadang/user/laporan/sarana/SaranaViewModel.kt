@@ -27,8 +27,9 @@ class SaranaViewModel @Inject constructor(
         tanggal: RequestBody,
         lokasi: RequestBody,
         merk: RequestBody,
+        deskripsi: RequestBody,
         foto: MultipartBody.Part,
-    ) = repository.inputLaporan(token, type, tanggal, lokasi, merk, foto).asLiveData ()
+    ) = repository.inputLaporan(token, type, tanggal, lokasi, merk, deskripsi, foto).asLiveData ()
 
 
 }

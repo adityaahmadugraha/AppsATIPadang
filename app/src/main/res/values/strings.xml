@@ -80,4 +80,7 @@
     <string name="type">Type :</string>
     <string name="deskripsi_kerusakan_admin">Deskripsi Kerusakan :</string>
     <string name="diposisikan_kepada">Diposisikan Kepada :</string>
+    <string name="fillUpInput">Input tidak boleh kosong</string>
+    <string name="choosePhotoFirst">Pilih foto terlebih dahulu</string>
+    <string name="pick_photo_first">Pilih foto dulu</string>
 </resources>

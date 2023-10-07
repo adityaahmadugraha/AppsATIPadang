@@ -113,6 +113,7 @@ interface ApiService {
         @Part("tanggal") tanggal: RequestBody,
         @Part("lokasi") lokasi: RequestBody,
         @Part("merk") merk: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
         @Part foto: MultipartBody.Part,
     ): LaporanResponse
 

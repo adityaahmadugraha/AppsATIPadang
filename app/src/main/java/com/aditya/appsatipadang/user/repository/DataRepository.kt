@@ -43,18 +43,19 @@ class DataRepository @Inject constructor(
 //    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) = remoteData.inputLaporan(token,inputLaporanRequest)
 
 
-
     fun inputLaporan(
         token: String,
         type: RequestBody,
         tanggal: RequestBody,
         lokasi: RequestBody,
         merk: RequestBody,
+        deskripsi: RequestBody,
         foto: MultipartBody.Part,
-    ) = remoteData.insertLaporan(token, type, tanggal, lokasi, merk,foto )
+    ) = remoteData.insertLaporan(token, type, tanggal, lokasi, merk, deskripsi, foto)
 
 
-    fun inputLaporanPrasana(token: String, inputPrasanaRequest: InputPrasaranaRequest) = remoteData.inputLaporanPrasana(token,inputPrasanaRequest)
+    fun inputLaporanPrasana(token: String, inputPrasanaRequest: InputPrasaranaRequest) =
+        remoteData.inputLaporanPrasana(token, inputPrasanaRequest)
 
 //    fun inputLaporanKamtibmas(token: String, inputKamtibmasRequest: InputKamtibmasRequest) = remoteData.inputLaporanKamtibmas(token,inputKamtibmasRequest)
 
@@ -67,14 +68,10 @@ class DataRepository @Inject constructor(
         tanggal: RequestBody,
         waktu: RequestBody,
         foto: MultipartBody.Part,
-    ) = remoteData.inputLaporanKamtibmas(token, type, lokasi, deskripsi, tanggal,waktu , foto)
+    ) = remoteData.inputLaporanKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto)
 
 
-
-
-
-    fun getDataLaporan(token : String, id : String) = remoteData.getDataLaporan(token,id)
-
+    fun getDataLaporan(token: String, id: String) = remoteData.getDataLaporan(token, id)
 
 
 }

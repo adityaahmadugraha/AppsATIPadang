@@ -15,6 +15,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.aditya.appsatipadang.databinding.ActivityCameraBinding
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
+import com.aditya.appsatipadang.user.utils.Constant.createFile
 
 class CameraActivity : AppCompatActivity() {
 

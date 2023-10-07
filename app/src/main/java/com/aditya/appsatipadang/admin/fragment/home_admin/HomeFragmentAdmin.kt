@@ -24,7 +24,7 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Compan
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TIPE
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
-import com.aditya.appsatipadang.di.Constant.getToken
+import com.aditya.appsatipadang.user.utils.Constant.getToken
 import com.aditya.appsatipadang.user.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
@@ -130,6 +130,7 @@ class HomeFragmentAdmin : Fragment() {
             putString(TAG_JENIS, itemLaporaneResponse.jenis)
             putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
             putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
+//            putString(TAG_FOTO, itemLaporaneResponse.foto)
 
 
         }

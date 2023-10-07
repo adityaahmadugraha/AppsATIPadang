@@ -111,10 +111,11 @@ class RemoteDataSource @Inject constructor(
         tanggal: RequestBody,
         lokasi: RequestBody,
         merk: RequestBody,
+        deskripsi: RequestBody,
         foto: MultipartBody.Part,
     ) = flow {
         emit(Resource.Loading())
-        val response = apiService.inputLaporan(token, type, tanggal, lokasi, merk, foto)
+        val response = apiService.inputLaporan(token, type, tanggal, lokasi, merk,deskripsi, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))

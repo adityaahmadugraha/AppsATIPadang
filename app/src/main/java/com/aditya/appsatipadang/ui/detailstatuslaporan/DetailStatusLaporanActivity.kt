@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.ActivityDetailStatusLaporanBinding
-import com.aditya.appsatipadang.di.Constant.getToken
+import com.aditya.appsatipadang.user.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +18,13 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailStatusLaporanBinding
     private val viewModel: DetailViewModel by viewModels()
     var id: String = ""
+
+    companion object {
+        const val TAG_BUNDLE = "kode"
+        const val TAG_NAMA = "nama"
+        const val TAG_STATUS = "status"
+        const val TAG_TIPE = "tipe"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,6 +33,7 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         id = intent.getStringExtra("ID_LAPORAN").toString()
+
 
         binding.imgBackStatusLaporan.setOnClickListener {
             intent = Intent(this@DetailStatusLaporanActivity, MainActivity::class.java)
@@ -77,10 +85,5 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        const val TAG_BUNDLE = "kode"
-        const val TAG_NAMA = "nama"
-        const val TAG_STATUS = "status"
-        const val TAG_TIPE = "tipe"
-    }
+
 }

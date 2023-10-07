@@ -9,13 +9,15 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:scrollbars="none"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,44 +80,44 @@
                             app:chipBackgroundColor="#ffffff"
                             app:chipCornerRadius="6dp"
                             app:chipStrokeColor="@color/background_chip"
-                            app:chipStrokeWidth="2dp"/>
+                            app:chipStrokeWidth="2dp" />
 
                         <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/ac"
                             android:textSize="12sp"
                             app:chipBackgroundColor="#ffffff"
                             app:chipCornerRadius="6dp"
                             app:chipStrokeColor="@color/background_chip"
-                            app:chipStrokeWidth="2dp"/>
+                            app:chipStrokeWidth="2dp" />
 
                         <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/lcd_proyektor_chip"
                             android:textSize="12sp"
                             app:chipBackgroundColor="#ffffff"
                             app:chipCornerRadius="6dp"
                             app:chipStrokeColor="@color/background_chip"
-                            app:chipStrokeWidth="2dp"/>
+                            app:chipStrokeWidth="2dp" />
 
 
                         <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:fontFamily="@font/poppinsextrabold"
                             android:text="@string/peralatan_praktikum"
                             android:textSize="12sp"
                             app:chipBackgroundColor="#ffffff"
                             app:chipCornerRadius="6dp"
                             app:chipStrokeColor="@color/background_chip"
-                            app:chipStrokeWidth="2dp"/>
+                            app:chipStrokeWidth="2dp" />
 
 
                     </com.google.android.material.chip.ChipGroup>
@@ -226,7 +228,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/il_lokasi" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_jenis_kerusakan"
+                android:id="@+id/il_merk"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -244,7 +246,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_jenis_kerusakan">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_jenis_kerusakan"
+                    android:id="@+id/et_merk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
@@ -265,7 +267,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/il_tanggal"
-                app:layout_constraintTop_toBottomOf="@+id/il_jenis_kerusakan" />
+                app:layout_constraintTop_toBottomOf="@+id/il_merk" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/il_deskripsi_kerusakan"
@@ -329,7 +331,7 @@
                 android:fontFamily="@font/poppinsblack"
                 android:text="@string/camera"
                 android:textColor="@color/black"
-                android:textSize="8sp"
+                android:textSize="11sp"
                 app:layout_constraintEnd_toEndOf="@+id/camera"
                 app:layout_constraintStart_toStartOf="@+id/camera"
                 app:layout_constraintTop_toBottomOf="@+id/camera" />
@@ -352,7 +354,7 @@
                 android:fontFamily="@font/poppinsblack"
                 android:text="@string/galery"
                 android:textColor="@color/black"
-                android:textSize="8sp"
+                android:textSize="11sp"
                 app:layout_constraintEnd_toEndOf="@+id/galery"
                 app:layout_constraintStart_toStartOf="@+id/galery"
                 app:layout_constraintTop_toBottomOf="@+id/galery" />
@@ -384,6 +386,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_foto" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_kirim"
+                app:layout_constraintEnd_toEndOf="@+id/btn_kirim"
+                app:layout_constraintStart_toStartOf="@+id/btn_kirim"
+                app:layout_constraintTop_toTopOf="@+id/btn_kirim"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

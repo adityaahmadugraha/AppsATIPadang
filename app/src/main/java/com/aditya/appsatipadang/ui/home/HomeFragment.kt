@@ -16,7 +16,7 @@ import com.aditya.appsatipadang.user.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
-import com.aditya.appsatipadang.di.Constant.getToken
+import com.aditya.appsatipadang.user.utils.Constant.getToken
 import com.aditya.appsatipadang.user.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.user.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity

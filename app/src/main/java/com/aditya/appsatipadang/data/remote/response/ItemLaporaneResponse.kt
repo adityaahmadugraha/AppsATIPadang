@@ -34,13 +34,11 @@ data class ItemLaporaneResponse(
     @field:SerializedName("biaya")
     val biaya: String? = null,
 
-
     @field:SerializedName("status")
     val status: String? = null,
 
     @field:SerializedName("deskripsi")
     val deskripsi: String? = null,
-
 
     @field:SerializedName("foto")
     val foto: String? = null,
@@ -53,8 +51,5 @@ data class ItemLaporaneResponse(
 
     @field:SerializedName("pihak_terlibat")
     val pihak_terlibat: String? = null,
-
-    @field:SerializedName("token")
-    val token: String? = null,
 
     )

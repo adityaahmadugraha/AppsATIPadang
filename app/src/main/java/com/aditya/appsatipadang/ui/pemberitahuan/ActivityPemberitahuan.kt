@@ -19,13 +19,10 @@ class ActivityPemberitahuan : AppCompatActivity() {
     private val viewModel: PemberitahuanViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        id = intent.getIntExtra(TAG_ID_LAPORAN, 0).toString()
-
         binding = ActivityPemberitahuanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        id = intent.getIntExtra(TAG_ID_LAPORAN, 0).toString()
         Log.d("IKO_ID_PEMBERITAHUAN:::::", id)
 
         binding.tvIdLaporan.text = id
@@ -36,7 +33,6 @@ class ActivityPemberitahuan : AppCompatActivity() {
             finish()
         }
     }
-
 
     companion object {
         const val TAG_ID_LAPORAN = "idLaporan"

@@ -2,43 +2,57 @@ package com.aditya.appsatipadang.user.laporan.sarana
 
 import android.Manifest
 import android.app.DatePickerDialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.aditya.appsatipadang.user.MainActivity
+import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
-import com.aditya.appsatipadang.di.Constant.getToken
 import com.aditya.appsatipadang.ui.camera.CameraActivity
-import com.aditya.appsatipadang.ui.camera.rotateFile
-import com.aditya.appsatipadang.ui.camera.uriToFile
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan.Companion.TAG_ID_LAPORAN
+import com.aditya.appsatipadang.user.MainActivity
+import com.aditya.appsatipadang.user.utils.Constant.bitmapToFile
+import com.aditya.appsatipadang.user.utils.Constant.createCustomTempFile
+import com.aditya.appsatipadang.user.utils.Constant.getRotatedBitmap
+import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.user.utils.Constant.reduceFileImage
+import com.aditya.appsatipadang.user.utils.Constant.rotateFile
+import com.aditya.appsatipadang.user.utils.Constant.setInputError
+import com.aditya.appsatipadang.user.utils.Constant.uriToFile
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -46,8 +60,11 @@ class SaranaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
-    private var image: File? = null
+
     private var user: UserLocal? = null
+    private var fotoKerusakan: File? = null
+    private var fotoKerusakanPath: String? = null
+
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -85,74 +102,35 @@ class SaranaActivity : AppCompatActivity() {
         binding = ActivitySaranaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        binding.btnKirim.setOnClickListener {
-
-            getUserInput()
-            val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-            val selectedChipId = chipGroup.checkedChipId
-
-            if (selectedChipId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(selectedChipId)
-                val selectedChipText = selectedChip.text.toString()
-
-                Log.d(TAG, "Chip yang dipilih: $selectedChipText")
-
-            } else {
-                Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-
-
-        binding.etTanggal.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-
-            val datePickerDialog = DatePickerDialog(
-                this,
-                { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                    val selectedDate = Calendar.getInstance()
-                    selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
-
-                    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-                    val formattedDate = dateFormat.format(selectedDate.time)
-
-                    binding.etTanggal.setText(formattedDate)
-                },
-                year,
-                month,
-                dayOfMonth
-            )
-
-            datePickerDialog.show()
-        }
-
-
-
-        supportActionBar?.hide()
-
-
-        getUserData()
-        binding.imgBack.setOnClickListener {
-            val intent = Intent(this@SaranaActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-
-
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            for (i in 0 until group.childCount) {
-                val chip = group.getChildAt(i) as Chip
-                chip.setChipBackgroundColorResource(android.R.color.background_light)
+        binding.apply {
+            btnKirim.setOnClickListener {
+                getUserInput()
             }
 
-            if (checkedId != View.NO_ID) {
-                val selectedChip = findViewById<Chip>(checkedId)
-                selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+            etTanggal.setOnClickListener {
+                setTanggal()
             }
+
+            getUserData()
+            imgBack.setOnClickListener {
+                val intent = Intent(this@SaranaActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                for (i in 0 until group.childCount) {
+                    val chip = group.getChildAt(i) as Chip
+                    chip.setChipBackgroundColorResource(android.R.color.background_light)
+                }
+
+                if (checkedId != View.NO_ID) {
+                    val selectedChip = findViewById<Chip>(checkedId)
+                    selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+                }
+            }
+
+            camera.setOnClickListener { startCamera() }
+            galery.setOnClickListener { startGallery() }
         }
 
 
@@ -164,13 +142,46 @@ class SaranaActivity : AppCompatActivity() {
             )
         }
 
-        binding.camera.setOnClickListener { startCameraX() }
-        binding.galery.setOnClickListener { startGallery() }
-        binding.imgFoto.setOnClickListener { uploadImage() }
+    }
 
+    private fun startCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.resolveActivity(this@SaranaActivity.packageManager)
 
-        getDataLaporan()
+        createCustomTempFile(this@SaranaActivity).also {
+            val photoURI: Uri = FileProvider.getUriForFile(
+                this@SaranaActivity,
+                BuildConfig.APPLICATION_ID,
+                it
+            )
+            fotoKerusakanPath = it.absolutePath
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+            launcherIntentCamera.launch(intent)
+        }
+    }
 
+    private fun setTanggal() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale("in", "ID"))
+                val formattedDate = dateFormat.format(selectedDate.time)
+
+                binding.etTanggal.setText(formattedDate)
+            },
+            year,
+            month,
+            dayOfMonth
+        )
+        datePickerDialog.show()
     }
 
     private fun getUserData() {
@@ -180,7 +191,6 @@ class SaranaActivity : AppCompatActivity() {
     }
 
     private fun getUserInput() {
-
         val type = "Sarana"
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
         val selectedChipId = chipGroup.checkedChipId
@@ -195,142 +205,136 @@ class SaranaActivity : AppCompatActivity() {
         }
 
         binding.apply {
-            val type = "Sarana"
             val tanggal = etTanggal.text.toString()
             val lokasi = etLokasi.text.toString()
             val deskripsiKerusakan = etDeskripsiKerusakan.text.toString()
-            val camera = imgFoto.toString()
+            val merk = etMerk.text.toString()
 
-            val inputLaporanRequest = InputLaporanRequest(
-                type,
-                tanggal,
-                lokasi,
-                chip,
-                deskripsiKerusakan,
-                camera
-            )
+            if (validateInput(tanggal, lokasi, deskripsiKerusakan, fotoKerusakan)) {
+                val fileProfilePicture: File = reduceFileImage(fotoKerusakan as File)
 
-//            Log.d(TAG, "LAPORAN::: $inputLaporanRequest")
+                val rType = type.toRequestBody("text/plain".toMediaType())
+                val rLokasi = lokasi.toRequestBody("text/plain".toMediaType())
+                val rDeskripsi = deskripsiKerusakan.toRequestBody("text/plain".toMediaType())
+                val rTanggal = tanggal.toRequestBody("text/plain".toMediaType())
+                val rMerk = merk.toRequestBody("text/plain".toMediaType())
 
-//            if (validateInput(inputLaporanRequest)) {
-//                viewModel.inputLaporan(
-//                    user?.getToken.toString(),
-////                    inputLaporanRequest
-//                ).observe(this@SaranaActivity) { item ->
-//                    when (item) {
-//                        is Resource.Loading -> {
-//
-//                        }
-//
-//                        is Resource.Success -> {
-//                            Log.d(TAG, "simpanData: ${item.data.id}")
-//                            if (item.data.status == 200) {
-//                                val intent =
-//                                    Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
-//                                intent.putExtra(TAG_ID_LAPORAN, item.data.id)
-//                                intent.flags =
-//                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                startActivity(intent)
-//                            }
-//                        }
-//
-//                        is Resource.Error -> {
-//                        }
-//                    }
-//                }
-//
-//            }
+                val fotoAlat =
+                    fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val foto: MultipartBody.Part = MultipartBody.Part.createFormData(
+                    "foto",
+                    fileProfilePicture.name,
+                    fotoAlat
+                )
+
+                insertLaporan(
+                    foto, rType, rLokasi, rDeskripsi, rTanggal, rMerk
+                )
+            }
+
         }
+    }
+
+    private fun validateInput(
+        tanggal: String,
+        lokasi: String,
+        deskripsiKerusakan: String,
+        fotoKerusakan: File?
+    ): Boolean {
+        binding.apply {
+            if (tanggal.isEmpty()) {
+                return ilTanggal.setInputError(getString(R.string.must_not_empty))
+            }
+            if (lokasi.isEmpty()) {
+                return ilLokasi.setInputError(getString(R.string.must_not_empty))
+            }
+            if (deskripsiKerusakan.isEmpty()) {
+                return ilDeskripsiKerusakan.setInputError(getString(R.string.must_not_empty))
+            }
+            if (fotoKerusakan == null) {
+                Toast.makeText(
+                    this@SaranaActivity,
+                    getString(R.string.pick_photo_first),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+        }
+        return true
     }
 
     private fun getDataLaporan() {
         binding.apply {
-            val type = etJenisKerusakan.text.toString()
+
             val lokasi = etLokasi.text.toString()
             val deskripsi = etDeskripsiKerusakan.text.toString()
             val tanggal = etTanggal.text.toString()
 
-//            if (image != null) {
-//                if (type.isNotEmpty() && lokasi.isNotEmpty() && deskripsi.isNotEmpty()) && tanggal.isNotEmpty()) {
-//                    val fileProfilePicture: File = Constant.reduceFileImage(profilePicture as File)
-//
-//                    val rNama = nama.toRequestBody("text/plain".toMediaType())
-//                    val rTelp = telp.toRequestBody("text/plain".toMediaType())
-//                    val rAlamat = alamat.toRequestBody("text/plain".toMediaType())
-//
-//                    val profilePictureFile =
-//                        fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
-//                    val rProfilePictrue: MultipartBody.Part = MultipartBody.Part.createFormData(
-//                        "foto_profil",
-//                        fileProfilePicture.name,
-//                        profilePictureFile
-//                    )
-//
-//                    if (listPelanggan?.isEmpty() == true) {
-//                        insertDataPelanggan(
-//                            rProfilePictrue, rNama, rAlamat, rTelp
-//                        )
-//                    } else {
-//                        updateDataPelanggan(
-//                            rProfilePictrue, rNama, rAlamat, rTelp
-//                        )
-//                    }
-//                } else {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        getString(R.string.fillUpInput),
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            } else {
-//                Toast.makeText(
-//                    requireContext(),
-//                    getString(R.string.choosePhotoFirst),
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-
         }
+
     }
 
+    private fun insertLaporan(
+        foto: MultipartBody.Part,
+        type: RequestBody,
+        lokasi: RequestBody,
+        deskripsi: RequestBody,
+        tanggal: RequestBody,
+        rMerk: RequestBody
+    ) {
+        viewModel.inputLaporan(
+            user?.getToken.toString(),
+            type,
+            tanggal,
+            lokasi,
+            rMerk,
+            deskripsi,
+            foto
+        )
+            .observe(this@SaranaActivity) { result ->
+                binding.apply {
+                    when (result) {
+                        is Resource.Loading -> {
+                            showLoadingInput(true)
+                        }
 
-    private fun validateInput(inputLaporanRequest: InputLaporanRequest): Boolean {
+                        is Resource.Success -> {
+                            showLoadingInput(false)
+                            Intent(
+                                this@SaranaActivity,
+                                ActivityPemberitahuan::class.java
+                            ).apply {
+                                putExtra(TAG_ID_LAPORAN, result.data.id)
+                                flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(this)
+                            }
+                        }
+
+                        is Resource.Error -> {
+                            showLoadingInput(false)
+                            Toast.makeText(
+                                this@SaranaActivity, result.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
+    }
+
+    private fun showLoadingInput(condition: Boolean) {
         binding.apply {
-            if (inputLaporanRequest.tanggal?.isEmpty() == true) {
-                ilTanggal.isErrorEnabled = true
-                ilTanggal.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (inputLaporanRequest.lokasi?.isEmpty() == true) {
-                ilLokasi.isErrorEnabled = true
-                ilLokasi.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (inputLaporanRequest.merk?.isEmpty() == true) {
-                ilJenisKerusakan.isErrorEnabled = true
-                ilJenisKerusakan.error = getString(R.string.must_not_empty)
-                return false
-            }
-            if (binding.etTanggal.text?.isEmpty() == true) {
-                binding.ilTanggal.isErrorEnabled = true
-                binding.ilTanggal.error = getString(R.string.must_not_empty)
-                return false
-            }
-
-            if (inputLaporanRequest.deskripsi?.isEmpty() == true) {
-                ilDeskripsiKerusakan.isErrorEnabled = true
-                ilDeskripsiKerusakan.error = getString(R.string.must_not_empty)
-                return false
-            }
-
-            return true
+            progressBar.isVisible = condition
+            btnKirim.isEnabled = !condition
         }
     }
 
-    private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
-        launcherIntentCameraX.launch(intent)
-    }
+
+//    private fun startCameraX() {
+//        val intent = Intent(this, CameraActivity::class.java)
+//        launcherIntentCameraX.launch(intent)
+//    }
 
     private fun startGallery() {
         val intent = Intent()
@@ -340,27 +344,25 @@ class SaranaActivity : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
-    private fun uploadImage() {
-        Toast.makeText(this, "Fitur ini belum tersedia", Toast.LENGTH_SHORT).show()
-    }
-
-    private val launcherIntentCameraX = registerForActivityResult(
+    private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        if (it.resultCode == CAMERA_X_RESULT) {
-            val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                it.data?.getSerializableExtra("picture", File::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                it.data?.getSerializableExtra("picture")
-            } as? File
+        if (it.resultCode == RESULT_OK) {
+            val photoShooted = File(fotoKerusakanPath.toString())
+            val rotatedBitmap = getRotatedBitmap(photoShooted)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val uri = rotatedBitmap?.let { it1 ->
+                    bitmapToFile(
+                        it1,
+                        this@SaranaActivity
+                    )
+                }
+                fotoKerusakan = File(uri?.path.toString())
 
-            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-
-            myFile?.let { file ->
-                rotateFile(file, isBackCamera)
-                binding.imgFoto.setImageBitmap(BitmapFactory.decodeFile(file.path))
             }
+            Glide.with(this@SaranaActivity)
+                .load(rotatedBitmap)
+                .into(binding.imgFoto)
         }
     }
 
@@ -370,7 +372,7 @@ class SaranaActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val selectedImg = result.data?.data as Uri
             selectedImg.let { uri ->
-                val myFile = uriToFile(uri, this@SaranaActivity)
+                fotoKerusakan = uriToFile(uri, this@SaranaActivity)
                 binding.imgFoto.setImageURI(uri)
             }
         }
