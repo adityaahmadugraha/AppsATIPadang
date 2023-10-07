@@ -33,7 +33,7 @@ object Constant {
     val KEY_USERNAME = stringPreferencesKey("username")
     val KEY_PASSWORD = stringPreferencesKey("password")
     val KEY_EMAIL = stringPreferencesKey("email")
-    val KEY_NOTLP = stringPreferencesKey("no_tlp")
+    val KEY_NOTLP = stringPreferencesKey("no_telp")
     val KEY_ROLES = stringPreferencesKey("roles")
     val KEY_ALAMAT = stringPreferencesKey("alamat")
     val KEY_TOKEN = stringPreferencesKey("token")

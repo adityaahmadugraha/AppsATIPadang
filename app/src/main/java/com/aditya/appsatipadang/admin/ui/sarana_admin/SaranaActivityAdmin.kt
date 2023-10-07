@@ -22,15 +22,15 @@ class SaranaActivityAdmin : AppCompatActivity() {
     var id: String = ""
 
     companion object {
-        const val TAG_BUNDLE = "kode"
-        const val TAG_NAMA = "nama"
-        const val TAG_LOKASI = "lokasi"
-        const val TAG_DESKRIPSI = "deskripsi"
-        const val TAG_TIPE = "tipe"
-        const val TAG_TANGGAL = "tanggal"
-        const val TAG_JENIS = "jenis"
-        const val TAG_FOTO = "foto"
-        const val TAG_ID_LAPORAN = "ID_LAPORAN"
+        const val TAG_BUNDLE = "kode" //kode
+        const val TAG_NAMA = "nama" //nama pelapor
+        const val TAG_LOKASI = "lokasi" // lokasi
+        const val TAG_DESKRIPSI = "deskripsi" //deskripsi
+        const val TAG_TIPE = "tipe" // sarana,prasarana,kamtibmas
+        const val TAG_TANGGAL = "tanggal" //tanggal
+        const val TAG_JENIS = "jenis" //chip
+        const val TAG_FOTO = "foto" //foto
+        const val TAG_ID_LAPORAN = "ID_LAPORAN" //id
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class SaranaActivityAdmin : AppCompatActivity() {
             binding.apply {
                 etMerk.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_NAMA))
 
-//                etJenis.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_STATUS))
+//                etType.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_JENIS))
 
                 etJenis.text =
                     Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))

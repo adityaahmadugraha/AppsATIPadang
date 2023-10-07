@@ -36,7 +36,7 @@ class UserPreference(context: Context) {
             preferences[Constant.KEY_USERNAME] = user.username
             preferences[Constant.KEY_PASSWORD] = user.password
             preferences[Constant.KEY_EMAIL] = user.email
-            preferences[Constant.KEY_NOTLP] = user.no_tlp
+            preferences[Constant.KEY_NOTLP] = user.no_telp
             preferences[Constant.KEY_ROLES] = user.roles
             preferences[Constant.KEY_ALAMAT] = user.alamat
             preferences[Constant.KEY_TOKEN] = user.token

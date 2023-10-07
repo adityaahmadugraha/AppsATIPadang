@@ -53,7 +53,7 @@ class ProfilFragmentAdmin : Fragment() {
             binding?.tvNameProfil?.text = data.name
             binding?.tvJabatanProfil?.text = data.alamat
             binding?.etEmail?.setText(data.email)
-            binding?.etNotlpProfil?.setText(data.no_tlp)
+            binding?.etNotlpProfil?.setText(data.no_telp)
             binding?.etAlamatProfil?.setText(data.roles)
 
         }
