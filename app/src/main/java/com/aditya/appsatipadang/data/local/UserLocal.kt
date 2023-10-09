@@ -10,5 +10,4 @@ data class UserLocal(
     val alamat: String,
     val token: String,
 
-
     )

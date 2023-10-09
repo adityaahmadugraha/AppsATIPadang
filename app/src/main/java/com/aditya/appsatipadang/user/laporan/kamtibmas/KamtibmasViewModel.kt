@@ -20,7 +20,7 @@ class KamtibmasViewModel @Inject constructor(
 
     fun getUser() = repository.getUser().asLiveData()
 
-    fun inputLaporanKamtibmas(
+    fun inputKamtibmas(
         token: String,
         type: RequestBody,
         lokasi: RequestBody,
@@ -28,7 +28,7 @@ class KamtibmasViewModel @Inject constructor(
         tanggal: RequestBody,
         waktu: RequestBody,
         foto: MultipartBody.Part,
-    ) = repository.inputLaporanKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto).asLiveData()
+    ) = repository.inputKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto).asLiveData()
 
 
 }

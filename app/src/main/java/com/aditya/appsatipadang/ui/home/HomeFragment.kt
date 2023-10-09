@@ -89,7 +89,18 @@ class HomeFragment : Fragment() {
 
                         Log.d(TAG, "listadapter::::::: ${result.data}")
 
-                        mAdapter.submitList(result.data.laporan)
+                        //membatasi 5 data terbaru
+                        val latestFiveData = if (result.data.laporan?.size!! > 5)
+                            result.data.laporan?.let {
+                                result.data.laporan.subList(
+                                    result.data.laporan.size - 5,
+                                    it.size
+                                )
+                            }
+                        else
+                            result.data.laporan
+
+                        mAdapter.submitList(latestFiveData)
                         setupRecyclerView()
                     }
 

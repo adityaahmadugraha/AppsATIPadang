@@ -51,8 +51,6 @@ interface ApiService {
     ): LaporanResponse
 
 
-
-
     @Multipart
     @POST("laporan")
     suspend fun insertLaporan(
@@ -64,7 +62,6 @@ interface ApiService {
         @Part("deskripsi") deskripsi: RequestBody,
         @Part foto: MultipartBody.Part,
     ): LaporanResponse
-
 
 
 //    @GET("laporan_tahun")
@@ -85,28 +82,9 @@ interface ApiService {
     ): LaporanInfoResponse
 
 
-//    @POST("laporan")
-//    suspend fun inputLaporan(
-//        @Header("Authorization") token: String,
-//        @Body inputLaporanRequest: InputLaporanRequest
-//    ): LaporanResponse
-//
-//    @POST("laporan")
-//    suspend fun inputLaporanPrasana(
-//        @Header("Authorization") token: String,
-//        @Body inputLaporanRequest: InputPrasaranaRequest
-//    ): LaporanResponse
-//
-//    @POST("laporan")
-//    suspend fun inputLaporanKamtibmas(
-//        @Header("Authorization") token: String,
-//        @Body inputKamtibmasRequest: InputKamtibmasRequest
-//    ): LaporanResponse
-
-
     @Multipart
     @POST("laporan")
-    suspend fun inputLaporanPrasana(
+    suspend fun inputPrasana(
         @Header("Authorization") token: String,
         @Part("type") type: RequestBody,
         @Part("tanggal") tanggal: RequestBody,
@@ -116,11 +94,9 @@ interface ApiService {
     ): LaporanResponse
 
 
-
-
     @Multipart
     @POST("laporan")
-    suspend fun inputLaporanKamtibmas(
+    suspend fun inputKamtibmas(
         @Header("Authorization") token: String,
         @Part("type") type: RequestBody,
         @Part("lokasi") lokasi: RequestBody,

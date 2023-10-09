@@ -251,19 +251,6 @@ class ActivityPrasarana : AppCompatActivity() {
         return true
     }
 
-
-    private fun getDataLaporan() {
-        binding.apply {
-
-            val lokasi = etLokasi.text.toString()
-            val deskripsi = etDeskripsiKerusakan.text.toString()
-            val tanggal = etTanggal.text.toString()
-
-        }
-
-    }
-
-
     private fun insertLaporan(
         foto: MultipartBody.Part,
         type: RequestBody,
@@ -271,7 +258,7 @@ class ActivityPrasarana : AppCompatActivity() {
         lokasi: RequestBody,
         deskripsi: RequestBody
     ) {
-        viewModel.inputLaporanPrasana(
+        viewModel.inputPrasana(
             user?.getToken.toString(),
             type,
             tanggal,

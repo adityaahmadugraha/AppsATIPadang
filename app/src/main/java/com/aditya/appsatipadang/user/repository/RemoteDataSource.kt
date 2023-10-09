@@ -72,10 +72,9 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-
-    fun getDataLaporan(token: String, id : String) = flow<Resource<LaporanInfoResponse>> {
+    fun getDataLaporan(token: String, id: String) = flow<Resource<LaporanInfoResponse>> {
         emit(Resource.Loading())
-        val response = apiService.getDataLaporan(token,id)
+        val response = apiService.getDataLaporan(token, id)
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemukan"))
@@ -96,13 +95,13 @@ class RemoteDataSource @Inject constructor(
         foto: MultipartBody.Part,
     ) = flow {
         emit(Resource.Loading())
-        val response = apiService.insertLaporan(token, type, tanggal, lokasi, merk,deskripsi, foto)
+        val response = apiService.insertLaporan(token, type, tanggal, lokasi, merk, deskripsi, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-    fun insertLaporanPrasana(
+    fun inputPrasana(
         token: String,
         type: RequestBody,
         tanggal: RequestBody,
@@ -111,14 +110,14 @@ class RemoteDataSource @Inject constructor(
         foto: MultipartBody.Part,
     ) = flow {
         emit(Resource.Loading())
-        val response = apiService.inputLaporanPrasana(token, type, tanggal, lokasi, deskripsi, foto)
+        val response = apiService.inputPrasana(token, type, tanggal, lokasi, deskripsi, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
 
-    fun inputLaporanKamtibmas(
+    fun inputKamtibmas(
         token: String,
         type: RequestBody,
         lokasi: RequestBody,
@@ -128,56 +127,12 @@ class RemoteDataSource @Inject constructor(
         foto: MultipartBody.Part,
     ) = flow {
         emit(Resource.Loading())
-        val response = apiService.inputLaporanKamtibmas(token, type, lokasi, deskripsi, tanggal,waktu , foto)
+        val response =
+            apiService.inputKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-
-
-
-//    fun inputLaporanKamtibmas(token: String, request: InputKamtibmasRequest) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.inputLaporanKamtibmas(token,request)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-
-
-
-//    fun inputLaporan(token: String, saranaData: SaranaData) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.inputLaporan(token, saranaData)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-
-//    fun getListLaporan() = flow<Resource<LaporanResponse>> {
-//        emit(Resource.Loading())
-//        val response = apiService.getListLaporan(token)
-//        emit(Resource.Success(response))
-//        response.let {
-//            if (it.data!!.isNotEmpty()) emit(Resource.Success(it))
-//            else emit(Resource.Error("Data Tidak Ditemukan"))
-//        }
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-//    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) = flow<Resouce<InputLaporanRequest>> {
-//        emit(Resouce.Loading())
-//        val response = apiService.inputLaporan(token, inputLaporan)
-//        response.let {
-//            if (it.status == 200) emit(Resouce.Success(it))
-//            else emit(Resouce.Error("Data Tidak Ditemukan"))
-//        }
-//    }.catch {
-//        Log.d(ContentValues.TAG, "dataCheck: ${it.message}")
-//    }.flowOn(Dispatchers.IO)
 
 }
