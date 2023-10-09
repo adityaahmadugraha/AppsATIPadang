@@ -136,6 +136,8 @@ object Constant {
         return Uri.parse(file.absolutePath)
     }
 
+
+
     fun getRotatedBitmap(file: File): Bitmap? {
         val imgBitmap = BitmapFactory.decodeFile(file.path)
 
@@ -170,5 +172,7 @@ object Constant {
         }
         return rotatedBitmap
     }
+
+
 
 }

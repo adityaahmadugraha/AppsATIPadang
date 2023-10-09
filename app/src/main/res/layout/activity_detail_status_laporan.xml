@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_nama_status">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_name_status"
+                    android:id="@+id/et_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/jenis"
+                android:text="@string/tanggal"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -118,7 +118,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_jenis_status">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_jenis_status"
+                    android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Tipe"
+                android:text="@string/lokasi_detail"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -160,7 +160,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_tipe">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_tipe"
+                    android:id="@+id/et_lokasi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"

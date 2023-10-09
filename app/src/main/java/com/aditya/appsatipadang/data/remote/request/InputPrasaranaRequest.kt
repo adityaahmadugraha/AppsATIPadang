@@ -19,8 +19,8 @@ data class InputPrasaranaRequest(
     @field:SerializedName("lokasi")
     val lokasi: String? = null,
 
-    @field:SerializedName("jenis_kerusakan")
-    val jenis_kerusakan: String? = null,
+//    @field:SerializedName("jenis_kerusakan")
+//    val jenis_kerusakan: String? = null,
 
     @field:SerializedName("gambar")
     val gambar: String? = null

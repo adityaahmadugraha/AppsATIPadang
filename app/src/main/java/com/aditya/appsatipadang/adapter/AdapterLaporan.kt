@@ -1,6 +1,7 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,23 +9,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
+import com.bumptech.glide.Glide
 
 
 class AdapterLaporan
     (
     private val onItemClick: (ItemLaporaneResponse) -> Unit
-)
-    : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
+    fun submitListReversed(list: List<ItemLaporaneResponse>?) {
+        val reversedList = list?.reversed()
+        submitList(reversedList)
+    }
+
 
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -33,6 +41,12 @@ class AdapterLaporan
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
+
+
+                Glide.with(itemView.context)
+                    .load(data.foto)
+                    .into(imgPelaporan)
+                Log.d("cekfoto:::::::", data.foto.toString())
 
                 itemView.setOnClickListener {
                     onItemClick(data)

@@ -21,9 +21,13 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
 
     companion object {
         const val TAG_BUNDLE = "kode"
-        const val TAG_NAMA = "nama"
-        const val TAG_STATUS = "status"
         const val TAG_TIPE = "tipe"
+        const val TAG_TANGGAL = "tanggal"
+        const val TAG_LOKASI = "lokasi"
+
+//        const val TAG_NAMA = "nama"
+//        const val TAG_STATUS = "status"
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +48,14 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         val bundle = intent.getBundleExtra(TAG_BUNDLE)
         if (bundle != null) {
             binding.apply {
-                etNameStatus.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_NAMA))
 
-                etJenisStatus.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_STATUS))
+                etType.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))
 
-                etTipe.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))
+                etTanggal.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TANGGAL))
+
+                etLokasi.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_LOKASI))
+
+
 
                 btnBack.setOnClickListener {
                     finish()
@@ -61,7 +68,7 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
 
 
     private fun getDataLaporan() {
-        Log.d("IKO_ID:::::::", id.toString())
+        Log.d("IKO_ID:::::::", id)
         viewModel.getUser().observe(this@DetailStatusLaporanActivity) {
             viewModel.getDataLaporan(it.getToken, id)
                 .observe(this@DetailStatusLaporanActivity) { item ->
@@ -73,7 +80,7 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             val laporan = item.data.laporan
                             binding.apply {
-                                etNameStatus.setText(laporan!!.merk.toString())
+                                etType.setText(laporan!!.merk.toString())
                             }
                         }
 

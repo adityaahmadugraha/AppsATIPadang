@@ -13,19 +13,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.adapter.AdapterLaporan
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_LOKASI
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_BUNDLE
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_TANGGAL
+import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_TIPE
 import com.aditya.appsatipadang.user.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.user.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.user.laporan.status.ActivityStatus
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_BUNDLE
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_NAMA
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_STATUS
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_TIPE
+import com.aditya.appsatipadang.user.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
 
                         Log.d(TAG, "listadapter::::::: ${result.data}")
 
-                        //membatasi 5 data terbaru
+
                         val latestFiveData = if (result.data.laporan?.size!! > 5)
                             result.data.laporan?.let {
                                 result.data.laporan.subList(
@@ -100,7 +100,7 @@ class HomeFragment : Fragment() {
                         else
                             result.data.laporan
 
-                        mAdapter.submitList(latestFiveData)
+                        mAdapter.submitListReversed(latestFiveData)
                         setupRecyclerView()
                     }
 
@@ -131,9 +131,9 @@ class HomeFragment : Fragment() {
         val bundle = Bundle().apply {
 
 
-            putString(TAG_NAMA, itemLaporaneResponse.lokasi)
-            putString(TAG_STATUS, itemLaporaneResponse.type)
-            putString(TAG_TIPE, itemLaporaneResponse.merk)
+            putString(TAG_TIPE, itemLaporaneResponse.type)
+            putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
+            putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
 
 
         }

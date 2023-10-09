@@ -282,12 +282,10 @@ class SaranaActivity : AppCompatActivity() {
                     when (result) {
                         is Resource.Loading -> {
                             showLoadingInput(true)
-                            Log.d("SaranaActivity", "Loading...")
                         }
 
                         is Resource.Success -> {
                             showLoadingInput(false)
-                            Log.d("SaranaActivity", "Success")
                             Intent(
                                 this@SaranaActivity,
                                 ActivityPemberitahuan::class.java
@@ -301,7 +299,6 @@ class SaranaActivity : AppCompatActivity() {
 
                         is Resource.Error -> {
                             showLoadingInput(false)
-                            Log.e("SaranaActivity", "Error: ${result.error}")
                             Toast.makeText(
                                 this@SaranaActivity, result.error,
                                 Toast.LENGTH_SHORT

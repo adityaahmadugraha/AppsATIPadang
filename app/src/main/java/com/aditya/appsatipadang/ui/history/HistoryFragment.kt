@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
@@ -124,9 +125,9 @@ class HistoryFragment : Fragment() {
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
 
         val bundle = Bundle().apply {
-            putString(DetailStatusLaporanActivity.TAG_NAMA, itemLaporaneResponse.type)
-            putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.merk)
-            putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.lokasi)
+            putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
+            putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
+            putString(DetailStatusLaporanActivity.TAG_LOKASI, itemLaporaneResponse.lokasi)
 
 
         }

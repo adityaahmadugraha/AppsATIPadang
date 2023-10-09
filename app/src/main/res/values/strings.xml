@@ -29,11 +29,12 @@
     <string name="keluar">Keluar</string>
     <string name="jabatan">Manager</string>
     <string name="hari_tanggal">Tanggal :</string>
+    <string name="tanggal">Tanggal</string>
     <string name="waktu_kejadian">Waktu Kejadian:</string>
     <string name="laporan_sarana_title">Laporan Sarana</string>
     <string name="title_pengaduan">Pengaduan</string>
     <string name="senin_25_september_2023">Tanggal/Bulan/Tahun</string>
-    <string name="ddhh">DD/HH</string>
+    <string name="ddhh">00:00</string>
     <string name="merk">Merk :</string>
     <string name="jenis_kerusakan">Jenis Kerusakan :</string>
     <string name="masukan_merk_produk">Masukan Merk Produk</string>
@@ -56,6 +57,7 @@
     <string name="bangunan">Bangunan</string>
     <string name="ruang_terbuka">Ruang Terbuka</string>
     <string name="lokasi">Lokasi :</string>
+    <string name="lokasi_detail">Lokasi</string>
     <string name="login">Login</string>
     <string name="password">password</string>
     <string name="masukan_username">masukan username</string>
