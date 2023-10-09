@@ -18,6 +18,7 @@ import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.databinding.ActivityLoginBinding
+import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -100,10 +101,18 @@ class LoginActivity : AppCompatActivity() {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }
-                }else if (userData.roles == "Pelapor"){
+                }
+                else if (userData.roles == "Pelapor"){
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
                     Log.d("LOGIN:::::", userData.token)
                     Intent(this@LoginActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(this)
+                    }
+                }       else if (userData.roles == "Teknisi"){
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                    Log.d("LOGINTEKNISI:::::", userData.token)
+                    Intent(this@LoginActivity, ActivityTeknik::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_tekni"
+    app:startDestination="@+id/navigation_home_teknik">
+
+
+    <fragment
+        android:id="@+id/navigation_home_teknik"
+        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.THomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_t_home" />
+
+    <fragment
+        android:id="@+id/navigation_history_teknik"
+        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.THistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_t_history">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile_teknik"
+        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.TProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_t_profile">
+
+    </fragment>
+
+</navigation>
