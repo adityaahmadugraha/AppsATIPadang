@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -156,7 +157,6 @@ class SaranaActivity : AppCompatActivity() {
     }
 
 
-
     private fun setTanggal() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -260,17 +260,6 @@ class SaranaActivity : AppCompatActivity() {
         return true
     }
 
-    private fun getDataLaporan() {
-        binding.apply {
-
-            val lokasi = etLokasi.text.toString()
-            val deskripsi = etDeskripsiKerusakan.text.toString()
-            val tanggal = etTanggal.text.toString()
-
-        }
-
-    }
-
     private fun insertLaporan(
         foto: MultipartBody.Part,
         type: RequestBody,
@@ -293,10 +282,12 @@ class SaranaActivity : AppCompatActivity() {
                     when (result) {
                         is Resource.Loading -> {
                             showLoadingInput(true)
+                            Log.d("SaranaActivity", "Loading...")
                         }
 
                         is Resource.Success -> {
                             showLoadingInput(false)
+                            Log.d("SaranaActivity", "Success")
                             Intent(
                                 this@SaranaActivity,
                                 ActivityPemberitahuan::class.java
@@ -310,6 +301,7 @@ class SaranaActivity : AppCompatActivity() {
 
                         is Resource.Error -> {
                             showLoadingInput(false)
+                            Log.e("SaranaActivity", "Error: ${result.error}")
                             Toast.makeText(
                                 this@SaranaActivity, result.error,
                                 Toast.LENGTH_SHORT
@@ -318,6 +310,7 @@ class SaranaActivity : AppCompatActivity() {
                     }
                 }
             }
+
     }
 
     private fun showLoadingInput(condition: Boolean) {

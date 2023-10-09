@@ -1,15 +1,10 @@
 package com.aditya.appsatipadang.network
 
-import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
-import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
-import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -17,7 +12,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -56,6 +50,23 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): LaporanResponse
 
+
+
+
+    @Multipart
+    @POST("laporan")
+    suspend fun insertLaporan(
+        @Header("Authorization") token: String,
+        @Part("type") type: RequestBody,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("lokasi") lokasi: RequestBody,
+        @Part("merk") merk: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part foto: MultipartBody.Part,
+    ): LaporanResponse
+
+
+
 //    @GET("laporan_tahun")
 //    suspend fun getListLaporanTahun(
 //        @Header("Authorization") token: String,
@@ -74,23 +85,23 @@ interface ApiService {
     ): LaporanInfoResponse
 
 
-    @POST("laporan")
-    suspend fun inputLaporan(
-        @Header("Authorization") token: String,
-        @Body inputLaporanRequest: InputLaporanRequest
-    ): LaporanResponse
-
-    @POST("laporan")
-    suspend fun inputLaporanPrasana(
-        @Header("Authorization") token: String,
-        @Body inputLaporanRequest: InputPrasaranaRequest
-    ): LaporanResponse
-
-    @POST("laporan")
-    suspend fun inputLaporanKamtibmas(
-        @Header("Authorization") token: String,
-        @Body inputKamtibmasRequest: InputKamtibmasRequest
-    ): LaporanResponse
+//    @POST("laporan")
+//    suspend fun inputLaporan(
+//        @Header("Authorization") token: String,
+//        @Body inputLaporanRequest: InputLaporanRequest
+//    ): LaporanResponse
+//
+//    @POST("laporan")
+//    suspend fun inputLaporanPrasana(
+//        @Header("Authorization") token: String,
+//        @Body inputLaporanRequest: InputPrasaranaRequest
+//    ): LaporanResponse
+//
+//    @POST("laporan")
+//    suspend fun inputLaporanKamtibmas(
+//        @Header("Authorization") token: String,
+//        @Body inputKamtibmasRequest: InputKamtibmasRequest
+//    ): LaporanResponse
 
 
     @Multipart
@@ -105,17 +116,6 @@ interface ApiService {
     ): LaporanResponse
 
 
-    @Multipart
-    @POST("laporan")
-    suspend fun inputLaporan(
-        @Header("Authorization") token: String,
-        @Part("type") type: RequestBody,
-        @Part("tanggal") tanggal: RequestBody,
-        @Part("lokasi") lokasi: RequestBody,
-        @Part("merk") merk: RequestBody,
-        @Part("deskripsi") deskripsi: RequestBody,
-        @Part foto: MultipartBody.Part,
-    ): LaporanResponse
 
 
     @Multipart

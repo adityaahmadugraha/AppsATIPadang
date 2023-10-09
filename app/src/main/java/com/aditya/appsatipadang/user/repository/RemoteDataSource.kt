@@ -72,24 +72,6 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-//    fun inputLaporan(token: String, request: InputLaporanRequest) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.inputLaporan(token,request)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-//    fun inputLaporanPrasana(token: String, request: InputPrasaranaRequest) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.inputLaporanPrasana(token,request)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
-
-
-
 
     fun getDataLaporan(token: String, id : String) = flow<Resource<LaporanInfoResponse>> {
         emit(Resource.Loading())
@@ -114,7 +96,7 @@ class RemoteDataSource @Inject constructor(
         foto: MultipartBody.Part,
     ) = flow {
         emit(Resource.Loading())
-        val response = apiService.inputLaporan(token, type, tanggal, lokasi, merk,deskripsi, foto)
+        val response = apiService.insertLaporan(token, type, tanggal, lokasi, merk,deskripsi, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
