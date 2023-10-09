@@ -65,7 +65,7 @@ class ActivityStatus : AppCompatActivity() {
 
     private fun getDataUser() {
 
-        viewModel.getUser().observe(this) {
+        viewModel.getUser().observe(this) { it ->
             viewModel.getListLaporan(it.getToken).observe(this) { result ->
                 Log.d(ContentValues.TAG, "getDataUseroken::::: $.it.getToken")
                 when (result) {
@@ -75,8 +75,12 @@ class ActivityStatus : AppCompatActivity() {
 
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
+
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
-                        mAdapter.submitList(result.data.laporan)
+
+                        val sortedData = result.data.laporan?.sortedByDescending {it.id}
+
+                        mAdapter.submitList(sortedData)
                     }
 
                     is Resource.Error -> {

@@ -4,7 +4,7 @@ package com.aditya.appsatipadang.user.laporan.sarana
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
-import com.aditya.appsatipadang.user.repository.DataRepository
+import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

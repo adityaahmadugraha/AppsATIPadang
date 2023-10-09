@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.user.repository
+package com.aditya.appsatipadang.repository
 
 
 import com.aditya.appsatipadang.data.remote.request.LoginRequest

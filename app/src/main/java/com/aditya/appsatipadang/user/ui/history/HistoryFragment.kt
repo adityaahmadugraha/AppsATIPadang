@@ -62,6 +62,7 @@ class HistoryFragment : Fragment() {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
                     }
+
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
@@ -69,6 +70,7 @@ class HistoryFragment : Fragment() {
 
                         mAdapter.submitList(result.data.laporan)
                     }
+
                     is Resource.Error -> {
                         binding.progressBar.isVisible = false
                         Toast.makeText(
@@ -80,28 +82,33 @@ class HistoryFragment : Fragment() {
                 }
             }
 
-            viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
-                    is Resource.Success -> {
-                        binding.progressBar.isVisible = false
+            viewModel.getListLaporanHarian(userLocal.getToken)
+                .observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            binding.progressBar.isVisible = true
+                        }
 
-                        Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
+                        is Resource.Success -> {
+                            binding.progressBar.isVisible = false
 
-                        mAdapter.submitList(result.data.laporan)
-                    }
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(
-                            requireActivity(),
-                            result.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
+
+                            val sortedData = result.data.laporan?.sortedByDescending { it.id }
+
+                            mAdapter.submitList(sortedData)
+                        }
+
+                        is Resource.Error -> {
+                            binding.progressBar.isVisible = false
+                            Toast.makeText(
+                                requireActivity(),
+                                result.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
-            }
 
         }
     }

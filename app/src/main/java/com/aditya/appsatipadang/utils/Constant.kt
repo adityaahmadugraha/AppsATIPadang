@@ -1,18 +1,15 @@
 package com.aditya.appsatipadang.utils
 
-import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import com.google.android.material.textfield.TextInputLayout
@@ -43,11 +40,6 @@ object Constant {
 
     val UserLocal.getToken get() = "Bearer ${this.token}"
 
-
-    fun isAllFieldsFilled(vararg fields: String): Boolean {
-        return fields.all { it.isNotEmpty() }
-    }
-
     fun uriToFile(selectedImg: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver
         val myFile = createCustomTempFile(context)
@@ -68,7 +60,7 @@ object Constant {
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
 
-    fun reduceFileImage(file: File): File{
+    fun reduceFileImage(file: File): File {
         val bitmap = BitmapFactory.decodeFile(file.path)
         var compressQuality = 100
         var streamLength: Int
@@ -82,6 +74,7 @@ object Constant {
         bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
         return file
     }
+
     private val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
         Locale.US
@@ -92,32 +85,7 @@ object Constant {
         this.error = message
         return false
     }
-    private const val MAXIMAL_SIZE = 5000000
 
-    fun createFile(application: Application): File {
-        val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
-            File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
-        }
-
-        val outputDirectory = if (
-            mediaDir != null && mediaDir.exists()
-        ) mediaDir else application.filesDir
-
-        return File(outputDirectory, "$timeStamp.jpg")
-    }
-
-    fun rotateFile(file: File, isBackCamera: Boolean = false): Bitmap {
-        val matrix = Matrix()
-        val bitmap = BitmapFactory.decodeFile(file.path)
-        val rotation = if (isBackCamera) 90f else -90f
-        matrix.postRotate(rotation)
-        if (!isBackCamera) {
-            matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
-        }
-        val result = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-        result.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
-        return result
-    }
     fun bitmapToFile(bitmap: Bitmap, context: Context): Uri {
         val wrapper = ContextWrapper(context)
 
@@ -135,8 +103,6 @@ object Constant {
 
         return Uri.parse(file.absolutePath)
     }
-
-
 
     fun getRotatedBitmap(file: File): Bitmap? {
         val imgBitmap = BitmapFactory.decodeFile(file.path)
@@ -172,7 +138,4 @@ object Constant {
         }
         return rotatedBitmap
     }
-
-
-
 }

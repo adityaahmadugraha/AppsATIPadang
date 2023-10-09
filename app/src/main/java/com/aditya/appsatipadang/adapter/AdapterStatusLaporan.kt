@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
+import com.bumptech.glide.Glide
 
 class AdapterStatusLaporan
     (
     private val onItemClick: (ItemLaporaneResponse) -> Unit
-)
-    : ListAdapter<ItemLaporaneResponse, AdapterStatusLaporan.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<ItemLaporaneResponse, AdapterStatusLaporan.ViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -32,7 +33,10 @@ class AdapterStatusLaporan
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
-
+                tvStatusLaporan.text = data.status
+                Glide.with(itemView.context)
+                    .load(data.foto)
+                    .into(imgPelaporan)
                 itemView.setOnClickListener {
                     onItemClick(data)
                 }

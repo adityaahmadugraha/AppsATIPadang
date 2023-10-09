@@ -2,7 +2,7 @@ package com.aditya.appsatipadang.admin.fragment.history_admin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.aditya.appsatipadang.user.repository.DataRepository
+import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

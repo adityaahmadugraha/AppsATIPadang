@@ -41,6 +41,7 @@ class AdapterLaporan
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
+                tvStatusLaporan.text = data.status
 
 
                 Glide.with(itemView.context)
