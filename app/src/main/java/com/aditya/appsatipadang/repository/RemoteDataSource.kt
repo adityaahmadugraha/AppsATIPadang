@@ -23,6 +23,15 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
+    fun getTeknisiList(token: String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getTeknisiList(token)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
     fun getUserProfile(token: String) = flow {
         emit(Resource.Loading())
         val response = apiService.getProfile(token)
@@ -30,7 +39,6 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
-
 
     fun updateUserProfile(
         token: String,

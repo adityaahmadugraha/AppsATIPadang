@@ -55,6 +55,7 @@ class ActivityStatus : AppCompatActivity() {
             putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
             putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
             putString(DetailStatusLaporanActivity.TAG_LOKASI, itemLaporaneResponse.lokasi)
+            putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.status)
 
         }
         Intent(this@ActivityStatus, DetailStatusLaporanActivity::class.java).apply {

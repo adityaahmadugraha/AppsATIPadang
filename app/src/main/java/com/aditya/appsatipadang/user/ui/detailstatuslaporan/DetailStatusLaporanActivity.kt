@@ -24,9 +24,9 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         const val TAG_TIPE = "tipe"
         const val TAG_TANGGAL = "tanggal"
         const val TAG_LOKASI = "lokasi"
+        const val TAG_STATUS = "status"
+        const val TAG_FOTO = "foto"
 
-//        const val TAG_NAMA = "nama"
-//        const val TAG_STATUS = "status"
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +58,12 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
                 etLokasi.text = Editable.Factory.getInstance().newEditable(bundle.getString(
                     TAG_LOKASI
                 ))
+
+                tvStatus.text = Editable.Factory.getInstance().newEditable(bundle.getString(
+                    TAG_STATUS
+                ))
+
+
 
 
 

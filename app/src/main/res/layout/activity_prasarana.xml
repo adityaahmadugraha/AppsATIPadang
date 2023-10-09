@@ -278,8 +278,8 @@
 
             <ImageView
                 android:id="@+id/camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/camera"
                 app:layout_constraintEnd_toEndOf="@+id/txt_upload_foto"
@@ -301,8 +301,8 @@
 
             <ImageView
                 android:id="@+id/galery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="24dp"
                 android:src="@drawable/galery"
                 app:layout_constraintStart_toEndOf="@+id/camera"
@@ -325,7 +325,7 @@
             <ImageView
                 android:id="@+id/img_foto"
                 android:layout_width="60dp"
-                android:layout_height="80dp"
+                android:layout_height="55dp"
                 app:layout_constraintBottom_toBottomOf="@+id/camera"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/camera"

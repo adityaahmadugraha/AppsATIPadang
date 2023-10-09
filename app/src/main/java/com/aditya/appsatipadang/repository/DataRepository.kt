@@ -40,7 +40,8 @@ class DataRepository @Inject constructor(
 
     fun getListLaporanBulanan(token: String) = remoteData.getListLaporanBulanan(token)
 
-//    fun inputLaporan(token: String, inputLaporanRequest: InputLaporanRequest) = remoteData.inputLaporan(token,inputLaporanRequest)
+    fun getTeknisiList(token: String) = remoteData.getTeknisiList(token)
+
 
 
     fun inputLaporan(

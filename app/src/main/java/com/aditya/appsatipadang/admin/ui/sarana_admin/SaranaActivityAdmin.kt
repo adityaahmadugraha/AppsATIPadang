@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.widget.ImageView
 import androidx.activity.viewModels
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.ActivitySaranaAdminBinding
 import com.aditya.appsatipadang.utils.Constant.getToken
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -53,8 +56,6 @@ class SaranaActivityAdmin : AppCompatActivity() {
             binding.apply {
                 etMerk.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_NAMA))
 
-//                etType.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_JENIS))
-
                 etJenis.text =
                     Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))
 
@@ -67,11 +68,18 @@ class SaranaActivityAdmin : AppCompatActivity() {
                 etTanggal.text =
                     Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TANGGAL))
 
+                val imageUrl = bundle.getString(TAG_FOTO)
 
-//                val imageUrl = bundle.getString(TAG_FOTO)
-//                Picasso.get().load(imageUrl).into(imgBuktiSarana)
-//                val drawableResourceId = resources.getIdentifier(bundle.getString(TAG_FOTO), "drawable", packageName)
-//                imgBuktiSarana.setImageResource(drawableResourceId)
+                if (!imageUrl.isNullOrEmpty()) {
+                    Glide.with(this@SaranaActivityAdmin)
+                        .load(imageUrl)
+                        .placeholder(R.drawable.no_image)
+                        .into(imgBuktiSarana)
+                } else {
+
+                    imgBuktiSarana.setImageResource(R.drawable.no_image)
+                }
+
 
             }
         }
@@ -83,6 +91,7 @@ class SaranaActivityAdmin : AppCompatActivity() {
     private fun getDataLaporan() {
         Log.d("IKO_ID:::::::", id.toString())
         viewModel.getUser().observe(this@SaranaActivityAdmin) {
+
             viewModel.getDataLaporan(it.getToken, id)
                 .observe(this@SaranaActivityAdmin) { item ->
                     when (item) {

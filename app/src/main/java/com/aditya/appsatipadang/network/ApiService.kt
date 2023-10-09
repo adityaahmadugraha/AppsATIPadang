@@ -63,6 +63,13 @@ interface ApiService {
         @Part foto: MultipartBody.Part,
     ): LaporanResponse
 
+    @GET("getUser")
+    suspend fun getTeknisiList(
+        @Header("Authorization") token: String
+    ): List<String>
+
+
+
 
 //    @GET("laporan_tahun")
 //    suspend fun getListLaporanTahun(
@@ -110,6 +117,9 @@ interface ApiService {
     suspend fun insertTeknisi(
         @Header("Authorization") token: String,
     ): LaporanResponse
+
+
+
 
 
 }
