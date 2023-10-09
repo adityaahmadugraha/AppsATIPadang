@@ -19,20 +19,20 @@ class ActivitySupervisor : AppCompatActivity() {
 
         binding = ActivitySupervisorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        supportActionBar?.hide()
+
 
         val navView: BottomNavigationView = binding.navViewSpp
 
         val navController = findNavController(R.id.nav_host_fragment_activity_spp)
 
-        val appBarConfiguration = AppBarConfiguration(
+        AppBarConfiguration(
             setOf(
                 R.id.navigation_home_spp,
                 R.id.navigation_history_spp,
                 R.id.navigation_profile
             )
         )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+
         navView.setupWithNavController(navController)
     }
 }

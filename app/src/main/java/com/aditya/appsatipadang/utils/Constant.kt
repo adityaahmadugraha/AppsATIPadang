@@ -9,6 +9,7 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
@@ -30,7 +31,7 @@ object Constant {
     val KEY_USERNAME = stringPreferencesKey("username")
     val KEY_PASSWORD = stringPreferencesKey("password")
     val KEY_EMAIL = stringPreferencesKey("email")
-    val KEY_NOTLP = stringPreferencesKey("no_telp")
+    val KEY_NO_TLP = stringPreferencesKey("no_telp")
     val KEY_ROLES = stringPreferencesKey("roles")
     val KEY_ALAMAT = stringPreferencesKey("alamat")
     val KEY_TOKEN = stringPreferencesKey("token")

@@ -122,11 +122,6 @@ class HistoryFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
         }
-        binding.rvHistoryHariIni.apply {
-            adapter = mAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
-            setHasFixedSize(true)
-        }
     }
 
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {

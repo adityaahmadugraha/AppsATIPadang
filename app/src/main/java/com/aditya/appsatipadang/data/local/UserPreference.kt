@@ -14,18 +14,19 @@ class UserPreference(context: Context) {
     private val userDataStore = context.userStore
     fun getUser(): Flow<UserLocal> {
         return userDataStore.data.map { preferences ->
-            UserLocal(
+            val userLocal = UserLocal(
                 preferences[Constant.KEY_NAME] ?: "",
                 preferences[Constant.KEY_USERNAME] ?: "",
                 preferences[Constant.KEY_PASSWORD] ?: "",
                 preferences[Constant.KEY_EMAIL] ?: "",
-                preferences[Constant.KEY_NOTLP] ?: "",
+                preferences[Constant.KEY_NO_TLP] ?:"",
                 preferences[Constant.KEY_ROLES] ?: "",
                 preferences[Constant.KEY_ALAMAT] ?: "",
                 preferences[Constant.KEY_TOKEN] ?: ""
 
 
-                )
+            )
+            userLocal
 
         }
     }
@@ -36,7 +37,7 @@ class UserPreference(context: Context) {
             preferences[Constant.KEY_USERNAME] = user.username
             preferences[Constant.KEY_PASSWORD] = user.password
             preferences[Constant.KEY_EMAIL] = user.email
-            preferences[Constant.KEY_NOTLP] = user.no_telp
+            preferences[Constant.KEY_NO_TLP] = user.no_telp
             preferences[Constant.KEY_ROLES] = user.roles
             preferences[Constant.KEY_ALAMAT] = user.alamat
             preferences[Constant.KEY_TOKEN] = user.token

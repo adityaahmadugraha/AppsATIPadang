@@ -106,5 +106,10 @@ interface ApiService {
         @Part foto: MultipartBody.Part,
     ): LaporanResponse
 
+        @POST("laporan(id)")
+    suspend fun insertTeknisi(
+        @Header("Authorization") token: String,
+    ): LaporanResponse
+
 
 }
