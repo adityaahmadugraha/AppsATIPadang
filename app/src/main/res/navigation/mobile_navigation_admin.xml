@@ -25,10 +25,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_profile_admin"
-        android:name="com.aditya.appsatipadang.admin.fragment.profil_admin.ProfilFragmentAdmin"
+        android:id="@+id/navigation_profile"
+        android:name="com.aditya.appsatipadang.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profil_admin" >
+        tools:layout="@layout/fragment_profile">
 
         <action
             android:id="@+id/action_navigation_profile_admin_to_loginActivity"
