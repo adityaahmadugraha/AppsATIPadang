@@ -68,15 +68,16 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_sarana"
+                android:id="@+id/card_laporan"
                 android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/card_prasarana"
+                app:layout_constraintEnd_toStartOf="@+id/card_rekap_laporan"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -85,7 +86,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/img_sarana"
+                        android:id="@+id/img_laporan"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="8dp"
@@ -102,12 +103,12 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
                         android:fontFamily="@font/poppinssembiold"
+                        android:text="Laporan"
                         android:textSize="10sp"
-                        android:text="@string/sarana"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/img_sarana"
-                        app:layout_constraintStart_toStartOf="@+id/img_sarana"
-                        app:layout_constraintTop_toBottomOf="@+id/img_sarana" />
+                        app:layout_constraintEnd_toEndOf="@+id/img_laporan"
+                        app:layout_constraintStart_toStartOf="@+id/img_laporan"
+                        app:layout_constraintTop_toBottomOf="@+id/img_laporan" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -115,23 +116,23 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_prasarana"
+                android:id="@+id/card_rekap_laporan"
                 android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/card_sarana"
-                app:layout_constraintEnd_toStartOf="@+id/card_kamtibmas"
-                app:layout_constraintStart_toEndOf="@+id/card_sarana"
-                app:layout_constraintTop_toTopOf="@+id/card_sarana">
+                app:layout_constraintBottom_toBottomOf="@+id/card_laporan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card_laporan"
+                app:layout_constraintTop_toTopOf="@+id/card_laporan">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/img_prasarana"
+                        android:id="@+id/img_rekap_laporan"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="8dp"
@@ -148,12 +149,12 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
                         android:fontFamily="@font/poppinssembiold"
+                        android:text="Rekap laporan"
                         android:textSize="10sp"
-                        android:text="@string/prasarana"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/img_prasarana"
-                        app:layout_constraintStart_toStartOf="@+id/img_prasarana"
-                        app:layout_constraintTop_toBottomOf="@+id/img_prasarana" />
+                        app:layout_constraintEnd_toEndOf="@+id/img_rekap_laporan"
+                        app:layout_constraintStart_toStartOf="@+id/img_rekap_laporan"
+                        app:layout_constraintTop_toBottomOf="@+id/img_rekap_laporan" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

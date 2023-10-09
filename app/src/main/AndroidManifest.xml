@@ -36,6 +36,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".supervisor.ActivitySupervisor"
+            android:exported="false" />
+        <activity
             android:name=".teknik.ActivityTeknik"
             android:exported="false" />
         <activity

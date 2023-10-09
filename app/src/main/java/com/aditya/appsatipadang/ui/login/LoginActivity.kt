@@ -18,6 +18,7 @@ import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.databinding.ActivityLoginBinding
+import com.aditya.appsatipadang.supervisor.ActivitySupervisor
 import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -94,25 +95,35 @@ class LoginActivity : AppCompatActivity() {
     private fun checkUserLogin() {
         viewModel.getUser().observe(this@LoginActivity) { userData ->
             if (userData.username.isNotEmpty() || userData.token.isNotEmpty()) {
-                if (userData.roles == "Admin"){
-                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                if (userData.roles == "Admin") {
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+                        .show()
                     Log.d("LOGINADMIN:::::", userData.token)
                     Intent(this@LoginActivity, HomeActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }
-                }
-                else if (userData.roles == "Pelapor"){
-                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                } else if (userData.roles == "Pelapor") {
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+                        .show()
                     Log.d("LOGIN:::::", userData.token)
                     Intent(this@LoginActivity, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }
-                }       else if (userData.roles == "Teknisi"){
-                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                } else if (userData.roles == "Teknisi") {
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+                        .show()
                     Log.d("LOGINTEKNISI:::::", userData.token)
                     Intent(this@LoginActivity, ActivityTeknik::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(this)
+                    }
+                } else if (userData.roles == "Supervisor") {
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+                        .show()
+                    Log.d("LOGINSPP:::::", userData.token)
+                    Intent(this@LoginActivity, ActivitySupervisor::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }

@@ -2,21 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation_tekni"
-    app:startDestination="@+id/navigation_home_teknik">
-
+    android:id="@+id/mobile_navigation_spp"
+    app:startDestination="@+id/navigation_home_spp">
 
     <fragment
-        android:id="@+id/navigation_home_teknik"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.THomeFragment"
+        android:id="@+id/navigation_home_spp"
+        android:name="com.aditya.appsatipadang.supervisor.ui_supervisor.SppHomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_t_home" />
+        tools:layout="@layout/fragment_spp_home" />
 
     <fragment
-        android:id="@+id/navigation_history_teknik"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.THistoryFragment"
+        android:id="@+id/navigation_history_spp"
+        android:name="com.aditya.appsatipadang.supervisor.ui_supervisor.SppHistoryFragment"
         android:label="@string/title_history"
-        tools:layout="@layout/fragment_t_history">
+        tools:layout="@layout/fragment_spp_history">
 
     </fragment>
 
@@ -27,5 +26,6 @@
         tools:layout="@layout/fragment_profile">
 
     </fragment>
+
 
 </navigation>

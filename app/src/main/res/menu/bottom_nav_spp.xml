@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:id="@+id/navigation_home_teknik"
+        android:id="@+id/navigation_home_spp"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_history_teknik"
+        android:id="@+id/navigation_history_spp"
         android:icon="@drawable/ic_history"
         android:title="@string/title_history" />
 
@@ -14,4 +15,5 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profil"
         android:title="@string/title_profile" />
+
 </menu>
