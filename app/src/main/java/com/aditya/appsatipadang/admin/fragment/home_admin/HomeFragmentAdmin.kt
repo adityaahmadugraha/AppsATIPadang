@@ -24,7 +24,7 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Compan
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TIPE
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse

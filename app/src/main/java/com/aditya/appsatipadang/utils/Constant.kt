@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.user.utils
+package com.aditya.appsatipadang.utils
 
 import android.app.Application
 import android.content.ContentResolver

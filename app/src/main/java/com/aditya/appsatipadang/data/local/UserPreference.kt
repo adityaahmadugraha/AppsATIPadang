@@ -3,8 +3,8 @@ package com.aditya.appsatipadang.data.local
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import com.aditya.appsatipadang.user.utils.Constant
-import com.aditya.appsatipadang.user.utils.Constant.PREF_NAME
+import com.aditya.appsatipadang.utils.Constant
+import com.aditya.appsatipadang.utils.Constant.PREF_NAME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

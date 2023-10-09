@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.history
+package com.aditya.appsatipadang.user.ui.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

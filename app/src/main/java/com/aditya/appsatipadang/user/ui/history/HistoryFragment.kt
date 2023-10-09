@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.history
+package com.aditya.appsatipadang.user.ui.history
 
 import android.content.ContentValues
 import android.content.Intent
@@ -19,8 +19,8 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.utils.Constant.getToken
+import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

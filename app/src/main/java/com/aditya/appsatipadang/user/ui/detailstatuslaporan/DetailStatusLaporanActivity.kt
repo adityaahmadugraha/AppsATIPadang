@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.detailstatuslaporan
+package com.aditya.appsatipadang.user.ui.detailstatuslaporan
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.ActivityDetailStatusLaporanBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,9 +51,13 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
 
                 etType.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))
 
-                etTanggal.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TANGGAL))
+                etTanggal.text = Editable.Factory.getInstance().newEditable(bundle.getString(
+                    TAG_TANGGAL
+                ))
 
-                etLokasi.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_LOKASI))
+                etLokasi.text = Editable.Factory.getInstance().newEditable(bundle.getString(
+                    TAG_LOKASI
+                ))
 
 
 

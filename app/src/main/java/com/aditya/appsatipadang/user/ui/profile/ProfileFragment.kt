@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.profile
+package com.aditya.appsatipadang.user.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentProfileBinding
-import com.aditya.appsatipadang.ui.login.LoginActivity
+import com.aditya.appsatipadang.user.ui.login.LoginActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 

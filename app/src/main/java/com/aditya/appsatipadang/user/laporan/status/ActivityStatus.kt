@@ -13,8 +13,8 @@ import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityStatusBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.utils.Constant.getToken
+import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 

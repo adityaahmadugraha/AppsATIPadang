@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.detailstatuslaporan
+package com.aditya.appsatipadang.user.ui.detailstatuslaporan
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

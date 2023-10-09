@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.pemberitahuan
+package com.aditya.appsatipadang.user.ui.pemberitahuan
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

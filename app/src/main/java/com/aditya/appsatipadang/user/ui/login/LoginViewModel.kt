@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.login
+package com.aditya.appsatipadang.user.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.splash
+package com.aditya.appsatipadang.user.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import android.os.Looper
 import android.view.WindowManager
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.HomeActivity
-import com.aditya.appsatipadang.ui.login.LoginActivity
+import com.aditya.appsatipadang.user.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

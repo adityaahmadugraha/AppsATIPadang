@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.ActivityPrasaranaAdminBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

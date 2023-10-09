@@ -15,12 +15,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.FragmentHistoryAdminBinding
-import com.aditya.appsatipadang.user.utils.Constant.getToken
+import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
-import com.aditya.appsatipadang.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

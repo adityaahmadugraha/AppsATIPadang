@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.home
+package com.aditya.appsatipadang.user.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

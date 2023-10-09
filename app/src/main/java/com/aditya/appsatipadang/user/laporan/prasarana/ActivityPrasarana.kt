@@ -22,11 +22,11 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityPrasaranaBinding
-import com.aditya.appsatipadang.ui.pemberitahuan.ActivityPemberitahuan
+import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.user.MainActivity
-import com.aditya.appsatipadang.user.utils.Constant
-import com.aditya.appsatipadang.user.utils.Constant.getToken
-import com.aditya.appsatipadang.user.utils.Constant.setInputError
+import com.aditya.appsatipadang.utils.Constant
+import com.aditya.appsatipadang.utils.Constant.getToken
+import com.aditya.appsatipadang.utils.Constant.setInputError
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup

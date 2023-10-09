@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.ui.pemberitahuan
+package com.aditya.appsatipadang.user.ui.pemberitahuan
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
