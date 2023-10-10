@@ -19,8 +19,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_pelaporan"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="67dp"
+                android:layout_height="86dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"

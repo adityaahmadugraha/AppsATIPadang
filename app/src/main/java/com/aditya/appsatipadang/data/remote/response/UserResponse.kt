@@ -15,8 +15,8 @@ data class UserResponse (
     @field:SerializedName("email")
     val email: String? = null,
 
-    @field:SerializedName("no_tlp")
-    val no_tlp: String? = null,
+    @field:SerializedName("no_telp")
+    val no_telp: String? = null,
 
     @field:SerializedName("roles")
     val roles: String? = null,
