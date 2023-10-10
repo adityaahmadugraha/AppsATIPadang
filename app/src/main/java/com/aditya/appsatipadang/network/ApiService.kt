@@ -40,6 +40,12 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): LaporanResponse
 
+
+    @GET("laporan")
+    suspend fun getListPengerjaan(
+        @Header("Authorization") token: String,
+    ): LaporanResponse
+
     @GET("laporan_harian")
     suspend fun getListLaporanHarian(
         @Header("Authorization") token: String,
@@ -68,8 +74,6 @@ interface ApiService {
     suspend fun getTeknisiList(
         @Header("Authorization") token: String
     ): List<String>
-
-
 
 
 //    @GET("laporan_tahun")

@@ -36,6 +36,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi"
+            android:exported="false" />
+        <activity
             android:name=".teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi"
             android:exported="false"
             android:label="@string/title_activity_nontofikasi_laporan_teknisi"

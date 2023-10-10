@@ -15,15 +15,15 @@ class UserPreference(context: Context) {
     fun getUser(): Flow<UserLocal> {
         return userDataStore.data.map { preferences ->
             val userLocal = UserLocal(
-                preferences[Constant.KEY_NAME] ?: "",
-                preferences[Constant.KEY_USERNAME] ?: "",
-                preferences[Constant.KEY_PASSWORD] ?: "",
-                preferences[Constant.KEY_EMAIL] ?: "",
-                preferences[Constant.KEY_NO_TLP] ?:"",
-                preferences[Constant.KEY_ROLES] ?: "",
-                preferences[Constant.KEY_ALAMAT] ?: "",
-                preferences[Constant.KEY_TOKEN] ?: ""
 
+                preferences[Constant.TAG_NAME] ?: "",
+                preferences[Constant.TAG_USERNAME] ?: "",
+                preferences[Constant.TAG_EMAIL] ?: "",
+                preferences[Constant.TAG_NO_TLP] ?: "",
+                preferences[Constant.TAG_PASSWORD] ?: "",
+                preferences[Constant.TAG_ROLES] ?: "",
+                preferences[Constant.TAG_ALAMAT] ?: "",
+                preferences[Constant.TAG_TOKEN] ?: "",
 
             )
             userLocal
@@ -33,14 +33,18 @@ class UserPreference(context: Context) {
 
     suspend fun saveUser(user: UserLocal) {
         userDataStore.edit { preferences ->
-            preferences[Constant.KEY_NAME] = user.name
-            preferences[Constant.KEY_USERNAME] = user.username
-            preferences[Constant.KEY_PASSWORD] = user.password
-            preferences[Constant.KEY_EMAIL] = user.email
-            preferences[Constant.KEY_NO_TLP] = user.no_telp
-            preferences[Constant.KEY_ROLES] = user.roles
-            preferences[Constant.KEY_ALAMAT] = user.alamat
-            preferences[Constant.KEY_TOKEN] = user.token
+
+            preferences[Constant.TAG_NAME] = user.name
+            preferences[Constant.TAG_USERNAME] = user.username
+            preferences[Constant.TAG_EMAIL] = user.email
+            preferences[Constant.TAG_NO_TLP] = user.no_telp
+            preferences[Constant.TAG_PASSWORD] = user.password
+            preferences[Constant.TAG_ROLES] = user.roles
+            preferences[Constant.TAG_ALAMAT] = user.alamat
+            preferences[Constant.TAG_TOKEN] = user.token
+
+
+
         }
     }
 

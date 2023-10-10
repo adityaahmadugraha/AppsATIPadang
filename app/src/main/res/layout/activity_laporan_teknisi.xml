@@ -75,6 +75,7 @@
                 app:boxCornerRadiusTopStart="10dp"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_hari">
@@ -120,6 +121,7 @@
                 app:boxCornerRadiusTopStart="10dp"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_no_pengaduan">
@@ -163,6 +165,7 @@
                 app:boxCornerRadiusTopStart="10dp"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_type">
@@ -206,6 +209,7 @@
                 app:boxCornerRadiusTopStart="10dp"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_tanggal">
@@ -215,7 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Prasarana"
+                    android:hint="mm/hh/dddd"
                     android:maxLength="25"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -247,8 +251,8 @@
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
                 app:boxCornerRadiusTopStart="15dp"
-                app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_lokasi">
@@ -294,6 +298,7 @@
                 app:boxCornerRadiusTopStart="15dp"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="false"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_tindak_lanjut">
