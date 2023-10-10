@@ -25,17 +25,17 @@ import java.util.Locale
 import java.util.UUID
 
 object Constant {
+
+
     const val PREF_NAME = "userInfo" //nama preference datastore
-
-    val KEY_NAME = stringPreferencesKey("name")
-    val KEY_USERNAME = stringPreferencesKey("username")
-    val KEY_PASSWORD = stringPreferencesKey("password")
-    val KEY_EMAIL = stringPreferencesKey("email")
-    val KEY_NO_TLP = stringPreferencesKey("no_telp")
-    val KEY_ROLES = stringPreferencesKey("roles")
-    val KEY_ALAMAT = stringPreferencesKey("alamat")
-    val KEY_TOKEN = stringPreferencesKey("token")
-
+    val TAG_NAME = stringPreferencesKey("name")
+    val TAG_USERNAME = stringPreferencesKey("username")
+    val TAG_EMAIL = stringPreferencesKey("email")
+    val TAG_NO_TLP = stringPreferencesKey("no_telp")
+    val TAG_PASSWORD = stringPreferencesKey("password")
+    val TAG_ROLES = stringPreferencesKey("roles")
+    val TAG_ALAMAT = stringPreferencesKey("alamat")
+    val TAG_TOKEN = stringPreferencesKey("token")
 
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 

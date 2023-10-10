@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_home_teknik"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.THomeFragment"
+        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.Thome.THomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_t_home" />
 

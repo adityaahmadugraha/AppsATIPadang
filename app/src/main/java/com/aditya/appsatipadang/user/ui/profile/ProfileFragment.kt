@@ -2,6 +2,7 @@ package com.aditya.appsatipadang.user.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,11 +52,13 @@ class ProfileFragment : Fragment() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
             binding?.tvNameProfil?.text = data.name
             binding?.tvJabatanProfil?.text = data.roles
-            binding?.etEmail?.setText(data.email)
+            binding?.etEmail?.setText(data.no_telp)
             binding?.etNotlp?.setText(data.no_telp)
             binding?.etAlamatProfil?.setText(data.alamat)
 
         }
+
+
     }
 
     private fun showAlertLogout() {
