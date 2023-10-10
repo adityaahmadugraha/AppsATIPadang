@@ -1,5 +1,6 @@
 package com.aditya.appsatipadang.network
 
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
@@ -58,16 +59,10 @@ interface ApiService {
 
 
     //inout sarana
-    @Multipart
     @POST("laporan")
     suspend fun insertLaporan(
         @Header("Authorization") token: String,
-        @Part("type") type: RequestBody,
-        @Part("tanggal") tanggal: RequestBody,
-        @Part("lokasi") lokasi: RequestBody,
-        @Part("merk") merk: RequestBody,
-        @Part("deskripsi") deskripsi: RequestBody,
-        @Part foto: MultipartBody.Part,
+        @Body body : RequestBody
     ): LaporanResponse
 
     @GET("getUser")

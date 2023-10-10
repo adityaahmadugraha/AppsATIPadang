@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
@@ -17,10 +18,8 @@ class AdapterLaporan
     private val onItemClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -43,7 +42,7 @@ class AdapterLaporan
                 tvNameAlat.text = data.merk
                 tvStatusLaporan.text = data.status
                 Glide.with(itemView.context)
-                    .load(data.foto)
+                    .load(BuildConfig.IMAGE_URL+data.foto)
                     .into(binding.imgPelaporan)
 
                 Log.d("cekfoto:::::::", data.foto.toString())

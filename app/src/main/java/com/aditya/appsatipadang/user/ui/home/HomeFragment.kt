@@ -77,9 +77,7 @@ class HomeFragment : Fragment() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
             binding.tvName.text = userLocal.name
 
-
             viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                Log.d(TAG, "getDataUser: ${userLocal.getToken}")
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
@@ -88,19 +86,7 @@ class HomeFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-
-                        Log.d(TAG, "listadapter::::::: ${result.data}")
-
-
-                        val latestFiveData = if (result.data.laporan?.size!! > 5)
-                            result.data.laporan?.let {
-                                result.data.laporan.subList(
-                                    result.data.laporan.size - 5,
-                                    it.size
-                                )
-                            }
-                        else
-                            result.data.laporan
+                        val latestFiveData = result.data.laporan
 
                         mAdapter.submitListReversed(latestFiveData)
                         setupRecyclerView()

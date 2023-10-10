@@ -22,6 +22,7 @@ import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan.Companion.TAG_ID_LAPORAN
@@ -51,6 +52,7 @@ import java.util.Calendar
 import java.util.Locale
 
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class SaranaActivity : AppCompatActivity() {
 
@@ -60,7 +62,6 @@ class SaranaActivity : AppCompatActivity() {
 
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
-
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -137,7 +138,6 @@ class SaranaActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-
     }
 
     private fun startCamera() {
@@ -155,7 +155,6 @@ class SaranaActivity : AppCompatActivity() {
             launcherIntentCamera.launch(intent)
         }
     }
-
 
     private fun setTanggal() {
         val calendar = Calendar.getInstance()
@@ -210,25 +209,23 @@ class SaranaActivity : AppCompatActivity() {
             if (validateInput(tanggal, lokasi, deskripsiKerusakan, fotoKerusakan)) {
                 val fileProfilePicture: File = reduceFileImage(fotoKerusakan as File)
 
-                val rType = type.toRequestBody("text/plain".toMediaType())
-                val rLokasi = lokasi.toRequestBody("text/plain".toMediaType())
-                val rDeskripsi = deskripsiKerusakan.toRequestBody("text/plain".toMediaType())
-                val rTanggal = tanggal.toRequestBody("text/plain".toMediaType())
-                val rMerk = merk.toRequestBody("text/plain".toMediaType())
-
-                val fotoAlat =
-                    fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val foto: MultipartBody.Part = MultipartBody.Part.createFormData(
-                    "foto",
-                    fileProfilePicture.name,
-                    fotoAlat
-                )
+                val requestBody: RequestBody = MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("type", type)
+                    .addFormDataPart("lokasi", lokasi)
+                    .addFormDataPart("deskripsi", deskripsiKerusakan)
+                    .addFormDataPart("tanggal", tanggal)
+                    .addFormDataPart("merek", merk)
+                    .addFormDataPart(
+                        "foto",
+                        fileProfilePicture.name,
+                        RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
+                    ).build()
 
                 insertLaporan(
-                    foto, rType, rLokasi, rDeskripsi, rTanggal, rMerk
+                    requestBody
                 )
             }
-
         }
     }
 
@@ -261,23 +258,12 @@ class SaranaActivity : AppCompatActivity() {
     }
 
     private fun insertLaporan(
-        foto: MultipartBody.Part,
-        type: RequestBody,
-        lokasi: RequestBody,
-        deskripsi: RequestBody,
-        tanggal: RequestBody,
-        rMerk: RequestBody
+        requestBody : RequestBody
     ) {
         viewModel.inputLaporan(
             user?.getToken.toString(),
-            type,
-            tanggal,
-            lokasi,
-            rMerk,
-            deskripsi,
-            foto
-        )
-            .observe(this@SaranaActivity) { result ->
+        requestBody
+        ).observe(this@SaranaActivity) { result ->
                 binding.apply {
                     when (result) {
                         is Resource.Loading -> {
@@ -291,16 +277,11 @@ class SaranaActivity : AppCompatActivity() {
                                 this@SaranaActivity, ActivityPemberitahuan::class.java
                             )
                                 .apply {
-                                Log.d("INTENTIDLAPORAN:::", TAG_ID_LAPORAN)
                                 putExtra(TAG_ID_LAPORAN, result.data.id)
 
-                                flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                                Log.d("INPUTSUCCES:::::", TAG_ID_LAPORAN)
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
                             }
-                            startActivity(intent)
                         }
 
                         is Resource.Error -> {

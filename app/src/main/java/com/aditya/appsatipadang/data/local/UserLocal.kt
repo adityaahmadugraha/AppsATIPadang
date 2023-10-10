@@ -9,4 +9,4 @@ data class UserLocal(
     val roles: String,
     val alamat: String,
     val token: String,
-    )
+)
