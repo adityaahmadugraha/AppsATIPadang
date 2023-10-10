@@ -23,7 +23,7 @@ data class InputLaporanRequest(
     @field:SerializedName("deskripsi")
     val deskripsi: String? = null,
 
-    @field:SerializedName("gambar")
-    val gambar: String? = null
+//    @field:SerializedName("gambar")
+//    val gambar: String? = null
 
 )
