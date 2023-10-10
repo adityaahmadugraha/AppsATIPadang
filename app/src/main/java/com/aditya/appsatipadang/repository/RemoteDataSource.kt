@@ -1,8 +1,10 @@
 package com.aditya.appsatipadang.repository
 
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
+import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.network.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -95,16 +97,14 @@ class RemoteDataSource @Inject constructor(
     //input gambar
     fun insertLaporan(
         token: String,
-        type: RequestBody,
-        tanggal: RequestBody,
-        lokasi: RequestBody,
-        merk: RequestBody,
-        deskripsi: RequestBody,
-        foto: MultipartBody.Part,
-    ) = flow {
+        requestBody: RequestBody
+    ) = flow<Resource<LaporanResponse>> {
         emit(Resource.Loading())
-        val response = apiService.insertLaporan(token, type, tanggal, lokasi, merk, deskripsi, foto)
-        emit(Resource.Success(response))
+        val response = apiService.insertLaporan(token, requestBody)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemuan"))
+        }
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
