@@ -277,8 +277,7 @@ class SaranaActivity : AppCompatActivity() {
                                 this@SaranaActivity, ActivityPemberitahuan::class.java
                             )
                                 .apply {
-//                                Log.d("INTENTDATA:::", TAG_ID_LAPORAN)
-//                                putExtra(TAG_ID_LAPORAN, result.data.id)
+                                putExtra(TAG_ID_LAPORAN, result.data.id)
 
                                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)

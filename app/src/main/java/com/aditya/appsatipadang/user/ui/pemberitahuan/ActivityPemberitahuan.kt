@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ActivityPemberitahuan : AppCompatActivity() {
 
     private lateinit var binding: ActivityPemberitahuanBinding
-    var id: String = ""
+    var id: Int = 0
 
     private val viewModel: PemberitahuanViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +22,9 @@ class ActivityPemberitahuan : AppCompatActivity() {
         binding = ActivityPemberitahuanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        id = intent.getIntExtra(TAG_ID_LAPORAN, 0).toString()
-        Log.d("IKO_ID_PEMBERITAHUAN:::::", id)
+        id = intent.getIntExtra(TAG_ID_LAPORAN, 0)
 
-        binding.tvIdLaporan.text = id
+        binding.tvIdLaporan.text = id.toString()
 
         binding.btnCekLaporan.setOnClickListener {
             intent = Intent(this@ActivityPemberitahuan, MainActivity::class.java)
