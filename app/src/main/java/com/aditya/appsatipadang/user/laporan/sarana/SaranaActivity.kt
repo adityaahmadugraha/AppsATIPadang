@@ -285,16 +285,22 @@ class SaranaActivity : AppCompatActivity() {
                         }
 
                         is Resource.Success -> {
+
                             showLoadingInput(false)
                             Intent(
-                                this@SaranaActivity,
-                                ActivityPemberitahuan::class.java
-                            ).apply {
-                                putExtra(TAG_ID_LAPORAN, result.data.id)
-                                flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(this)
-                            }
+                                this@SaranaActivity, ActivityPemberitahuan::class.java
+                            )
+//                                .apply {
+//                                Log.d("INTENTDATA:::", TAG_ID_LAPORAN)
+//                                putExtra(TAG_ID_LAPORAN, result.data.id)
+//
+//                                flags =
+//                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//
+//                                Log.d("INPUTSUCCES:::::", TAG_ID_LAPORAN)
+//                                startActivity(this)
+//                            }
+                            startActivity(intent)
                         }
 
                         is Resource.Error -> {

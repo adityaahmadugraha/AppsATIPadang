@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi">
+
+
+    <ImageView
+        android:id="@+id/img_back_kamtibmas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsextrabold"
+        android:text="@string/laporan_kamtibmas"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_back_kamtibmas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_back_kamtibmas" />
+
+
+    <TextView
+        android:id="@+id/txt_nontofikasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Nontifikasi :"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/txt_title"
+        app:layout_constraintStart_toStartOf="@+id/txt_title"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        app:layout_constraintVertical_bias="0.32999998" />
+
+    <TextView
+        android:id="@+id/txt_laporan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Laporan Pengaduan Diposisikan Kepada Anda!"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txt_title"
+        app:layout_constraintStart_toStartOf="@+id/txt_title"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nontofikasi" />
+
+    <Button
+        android:id="@+id/btn_cek_detail_laporan"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/blue"
+        android:text="Cek Laporan"
+        app:layout_constraintEnd_toEndOf="@+id/txt_nontofikasi"
+        app:layout_constraintStart_toStartOf="@+id/txt_nontofikasi"
+        app:layout_constraintTop_toBottomOf="@+id/txt_laporan" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

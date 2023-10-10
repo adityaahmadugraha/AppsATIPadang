@@ -42,11 +42,10 @@ class AdapterLaporan
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
                 tvStatusLaporan.text = data.status
-
-
                 Glide.with(itemView.context)
                     .load(data.foto)
-                    .into(imgPelaporan)
+                    .into(binding.imgPelaporan)
+
                 Log.d("cekfoto:::::::", data.foto.toString())
 
                 itemView.setOnClickListener {

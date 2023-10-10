@@ -51,6 +51,7 @@ interface ApiService {
     ): LaporanResponse
 
 
+    //inout sarana
     @Multipart
     @POST("laporan")
     suspend fun insertLaporan(

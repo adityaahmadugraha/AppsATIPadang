@@ -86,7 +86,7 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="@string/senin_25_september_2023"
+                    android:hint="Aditya ahmad nugraha"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -304,7 +304,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
-                    android:hint="Yogi"
+                    android:hint="Tindak Lanjut"
                     android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -312,10 +312,195 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/txt_kegiatan_peerbaikan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Kegiatan Perbaikan :"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/il_tindak_lanjut"
+                app:layout_constraintTop_toBottomOf="@+id/il_tindak_lanjut" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/il_kegiatan_perbaikan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_kegiatan_peerbaikan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_kegiatan_perbaikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:gravity="top"
+                    android:hint="Kegiatan Perbaikan"
+                    android:maxLength="500"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/txt_pihak_terlibat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tindak Lanjut :"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/il_kegiatan_perbaikan"
+                app:layout_constraintTop_toBottomOf="@+id/il_kegiatan_perbaikan" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/il_pihak_terlibat"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_pihak_terlibat">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_pihak_terlibat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:gravity="top"
+                    android:hint="Pihak Terlibat"
+                    android:maxLength="500"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/txt_biaya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Biaya :"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/il_pihak_terlibat"
+                app:layout_constraintTop_toBottomOf="@+id/il_pihak_terlibat" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/il_biaya"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_biaya">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_biaya"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:gravity="top"
+                    android:hint="50000"
+                    android:maxLength="500"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/txt_foto_perbaikan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Foto Perbaikan :"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/il_biaya"
+                app:layout_constraintTop_toBottomOf="@+id/il_biaya" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/il_foto_perbaikan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_foto_perbaikan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_foto_perbaikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:gravity="top"
+                    android:hint="Foto Perbaikan"
+                    android:maxLength="500"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/btn_kirim"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="Kirim"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/il_foto_perbaikan" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
