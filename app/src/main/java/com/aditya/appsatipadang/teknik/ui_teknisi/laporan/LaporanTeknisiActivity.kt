@@ -83,11 +83,14 @@ class LaporanTeknisiActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
+    private var idLaporan = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLaporanTeknisiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        idLaporan = intent.getStringExtra(Constant.IDLAPORAN).toString()
 
         binding.apply {
             btnKirim.setOnClickListener {
@@ -104,6 +107,8 @@ class LaporanTeknisiActivity : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
         }
 
+        getDataLaporan()
+
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -111,6 +116,23 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                 REQUIRED_PERMISSIONS,
                 REQUEST_CODE_PERMISSIONS
             )
+        }
+    }
+
+    private fun getDataLaporan() {
+        viewModel.getUser().observe(this@LaporanTeknisiActivity){
+//            masukan data berdasarkan id
+            viewModel.getLaporanId(it.getToken, idLaporan).observe(this@LaporanTeknisiActivity){ item ->
+                when(item){
+                    is Resource.Loading ->{}
+                    is Resource.Success -> {
+                        val dataItem = item.data.laporan
+//                        kirim data ke dalam tek view
+
+                    }
+                    is Resource.Error -> {}
+                }
+            }
         }
     }
 
@@ -149,6 +171,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
 
                 val requestBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
+                    .addFormDataPart("status", "perbaikan")
                     .addFormDataPart("kegiatan_perbaikan", kegiatan_perbaikan)
                     .addFormDataPart("pihak_terlibat", pihak_terlibat)
                     .addFormDataPart("biaya", biaya)

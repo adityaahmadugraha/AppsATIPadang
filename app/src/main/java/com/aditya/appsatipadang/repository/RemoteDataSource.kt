@@ -2,6 +2,7 @@ package com.aditya.appsatipadang.repository
 
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.network.ApiService
@@ -108,6 +109,20 @@ class RemoteDataSource @Inject constructor(
     ) = flow<Resource<LaporanResponse>> {
         emit(Resource.Loading())
         val response = apiService.insertLaporan(token, requestBody)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemuan"))
+        }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    fun getLaporanId(
+        token: String,
+        id: String
+    ) = flow<Resource<LaporanIdResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.getLaporan(token, id)
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemuan"))
