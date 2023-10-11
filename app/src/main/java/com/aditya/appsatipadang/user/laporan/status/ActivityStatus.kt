@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
@@ -23,15 +24,13 @@ class ActivityStatus : AppCompatActivity() {
 
     private lateinit var binding: ActivityStatusBinding
     private val viewModel: StatusViewModel by viewModels()
-    private lateinit var mAdapter: AdapterStatusLaporan
+    private lateinit var mAdapter: AdapterLaporan
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityStatusBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportActionBar?.hide()
 
         binding.imgBackStatusLaporan.setOnClickListener {
             finish()
@@ -42,7 +41,7 @@ class ActivityStatus : AppCompatActivity() {
     }
 
     private fun setupList() {
-        mAdapter = AdapterStatusLaporan {
+        mAdapter = AdapterLaporan() {
             goToDetailScreen(it)
 
         }

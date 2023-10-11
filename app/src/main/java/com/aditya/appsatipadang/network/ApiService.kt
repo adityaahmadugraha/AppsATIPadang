@@ -1,11 +1,11 @@
 package com.aditya.appsatipadang.network
 
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
+import com.aditya.appsatipadang.data.remote.response.TeknisiUserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -24,7 +24,13 @@ interface ApiService {
     @GET("getUser")
     suspend fun getProfile(
         @Header("Authorization") token: String
-    ): ProfileUserResponse
+    ): TeknisiUserResponse
+
+    @GET("getUser/{roles}")
+    suspend fun getTeknisiList(
+        @Header("Authorization") token: String,
+        @Path("roles") roles: String
+    ): LaporanResponse
 
     @Multipart
     @POST("profile/update")
@@ -58,28 +64,12 @@ interface ApiService {
     ): LaporanResponse
 
 
-    //inout sarana
+    //input sarana
     @POST("laporan")
     suspend fun insertLaporan(
         @Header("Authorization") token: String,
-        @Body body : RequestBody
+        @Body body: RequestBody
     ): LaporanResponse
-
-    @GET("getUser")
-    suspend fun getTeknisiList(
-        @Header("Authorization") token: String
-    ): List<String>
-
-
-//    @GET("laporan_tahun")
-//    suspend fun getListLaporanTahun(
-//        @Header("Authorization") token: String,
-//    ): LaporanResponse
-
-//    @GET("laporan_bulanan")
-//    suspend fun getListLaporan(
-//        @Header("Authorization") token: String,
-//    ): LaporanResponse
 
 
     @GET("getlaporan/{id}")
@@ -113,13 +103,10 @@ interface ApiService {
         @Part foto: MultipartBody.Part,
     ): LaporanResponse
 
-        @POST("laporan(id)")
-    suspend fun insertTeknisi(
-        @Header("Authorization") token: String,
-    ): LaporanResponse
-
-
-
+//        @POST("laporan(id)")
+//    suspend fun insertTeknisi(
+//        @Header("Authorization") token: String,
+//    ): LaporanResponse
 
 
 }

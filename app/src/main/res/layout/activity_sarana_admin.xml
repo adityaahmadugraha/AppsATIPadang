@@ -351,7 +351,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/txt_jenis_kerusakan"
+                android:id="@+id/txt_deskripsi_kerusakan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -364,7 +364,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/il_merk" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/il_jenis_kerusakan"
+                android:id="@+id/il_deskripsi_kerusakan"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="220dp"
@@ -379,14 +379,15 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_jenis_kerusakan">
+                app:layout_constraintTop_toBottomOf="@+id/txt_deskripsi_kerusakan">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_jenis_kerusakan"
+                    android:id="@+id/et_deskripi_kerusakan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
+                    android:focusable="false"
                     android:hint="@string/deskripsi_kerusakan"
                     android:maxLength="500"
                     android:textColor="@color/black"
@@ -406,7 +407,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/il_jenis_kerusakan" />
+                app:layout_constraintTop_toBottomOf="@+id/il_deskripsi_kerusakan" />
 
 
             <ImageView

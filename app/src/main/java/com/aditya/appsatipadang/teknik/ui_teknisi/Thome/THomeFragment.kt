@@ -18,6 +18,8 @@ import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
 import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
+import com.aditya.appsatipadang.teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi
+import com.aditya.appsatipadang.teknik.ui_teknisi.rekap_laporan.RekapLaporanTeknisiViewModel
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,7 +50,7 @@ class THomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.cardRekapLaporan.setOnClickListener {
-            val intent = Intent(activity, LaporanTeknisiActivity::class.java)
+            val intent = Intent(activity, RekapActivityTeknisi::class.java)
             startActivity(intent)
         }
 

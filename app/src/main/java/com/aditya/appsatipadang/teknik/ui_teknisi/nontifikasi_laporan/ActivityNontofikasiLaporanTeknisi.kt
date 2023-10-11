@@ -11,7 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.ActivityNontofikasiLaporanTeknisiBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class ActivityNontofikasiLaporanTeknisi : AppCompatActivity() {
 
     private lateinit var binding: ActivityNontofikasiLaporanTeknisiBinding
