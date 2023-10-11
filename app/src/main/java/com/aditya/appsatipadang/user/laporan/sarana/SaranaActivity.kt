@@ -211,6 +211,7 @@ class SaranaActivity : AppCompatActivity() {
 
                 val requestBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
+                    .addFormDataPart("status", "permohonan")
                     .addFormDataPart("type", type)
                     .addFormDataPart("lokasi", lokasi)
                     .addFormDataPart("deskripsi", deskripsiKerusakan)

@@ -2,6 +2,7 @@ package com.aditya.appsatipadang.network
 
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
+import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
@@ -70,6 +71,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body body: RequestBody
     ): LaporanResponse
+
+    @GET("laporan-id/{id}")
+    suspend fun getLaporan(
+        @Header("Authorization") token: String,
+        @Path("id") id : String
+    ): LaporanIdResponse
+
 
 
     @GET("getlaporan/{id}")

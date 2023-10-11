@@ -26,6 +26,8 @@ import java.util.UUID
 
 object Constant {
 
+    const val IDLAPORAN = "id_laporan"
+
     const val FCM_CHANNEL_ID = "FCM_CHANNEL_ID"
     const val FCM_CHANNEL_NAME = "FCM_CHANNEL_NAME"
 
@@ -40,9 +42,6 @@ object Constant {
     val TAG_ALAMAT = stringPreferencesKey("alamat")
     val TAG_TOKEN = stringPreferencesKey("token")
     val TAG_FCMTOKEN = stringPreferencesKey("fcmtoken")
-
-
-
 
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
