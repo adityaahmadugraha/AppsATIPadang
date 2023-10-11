@@ -52,7 +52,7 @@ class ProfileFragment : Fragment() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
             binding?.tvNameProfil?.text = data.name
             binding?.tvJabatanProfil?.text = data.roles
-            binding?.etEmail?.setText(data.no_telp)
+            binding?.etEmail?.setText(data.email)
             binding?.etNotlp?.setText(data.no_telp)
             binding?.etAlamatProfil?.setText(data.alamat)
 

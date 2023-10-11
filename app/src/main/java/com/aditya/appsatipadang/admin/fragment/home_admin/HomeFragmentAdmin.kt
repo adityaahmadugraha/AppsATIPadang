@@ -4,31 +4,31 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.KamtibmasActivityAdmin
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin
+import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_LOKASI
+import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_TANGGAL
+import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_TIPE
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_DESKRIPSI
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_JENIS
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_LOKASI
-
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_NAMA
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TANGGAL
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_TIPE
-import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
-import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
-import com.aditya.appsatipadang.utils.Constant.getToken
-import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_FOTO
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_MERK
+
+import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
+import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_STATUS
+import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -126,12 +126,19 @@ class HomeFragmentAdmin : Fragment() {
         val bundle = Bundle().apply {
 
             putString(TAG_TIPE, itemLaporaneResponse.type)
-            putString(TAG_NAMA, itemLaporaneResponse.merk)
             putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
-            putString(TAG_JENIS, itemLaporaneResponse.jenis)
             putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
-            putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
+            putString(TAG_STATUS, itemLaporaneResponse.status)
             putString(TAG_FOTO, itemLaporaneResponse.foto)
+            putString(TAG_MERK, itemLaporaneResponse.merk)
+            putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
+
+//            putString(TAG_NAMA, itemLaporaneResponse.merk)
+//            putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
+//            putString(TAG_JENIS, itemLaporaneResponse.jenis)
+//            putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
+//            putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
+//            putString(TAG_FOTO, itemLaporaneResponse.foto)
 
 
         }

@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.repository
 
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
@@ -20,14 +19,6 @@ class RemoteDataSource @Inject constructor(
     fun loginUser(request: LoginRequest) = flow {
         emit(Resource.Loading())
         val response = apiService.login(request)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
-
-    fun getTeknisiList(token: String) = flow {
-        emit(Resource.Loading())
-        val response = apiService.getTeknisiList(token)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
@@ -96,6 +87,15 @@ class RemoteDataSource @Inject constructor(
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemukan"))
         }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun getTeknisiList(token: String, roles: String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getTeknisiList(token, roles)
+        emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)

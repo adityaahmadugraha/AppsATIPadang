@@ -4,10 +4,6 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.request.InputKamtibmasRequest
-import com.aditya.appsatipadang.data.remote.request.InputLaporanRequest
-import com.aditya.appsatipadang.data.remote.request.InputPrasaranaRequest
-import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -42,7 +38,7 @@ class DataRepository @Inject constructor(
 
     fun getListLaporanBulanan(token: String) = remoteData.getListLaporanBulanan(token)
 
-    fun getTeknisiList(token: String) = remoteData.getTeknisiList(token)
+
 
 
 
@@ -73,6 +69,8 @@ class DataRepository @Inject constructor(
 
 
     fun getDataLaporan(token: String, id: String) = remoteData.getDataLaporan(token, id)
+
+    fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
 
 
 }

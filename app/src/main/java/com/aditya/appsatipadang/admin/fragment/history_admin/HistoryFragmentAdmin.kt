@@ -127,7 +127,7 @@ class HistoryFragmentAdmin : Fragment() {
         val bundle = Bundle().apply {
             putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
             putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
-            putString(SaranaActivityAdmin.TAG_LOKASI, itemLaporaneResponse.lokasi)
+//            putString(SaranaActivityAdmin.TAG_LOKASI, itemLaporaneResponse.lokasi)
 
 
 

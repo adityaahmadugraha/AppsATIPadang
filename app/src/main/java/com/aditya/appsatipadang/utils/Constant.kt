@@ -37,6 +37,9 @@ object Constant {
     val TAG_ALAMAT = stringPreferencesKey("alamat")
     val TAG_TOKEN = stringPreferencesKey("token")
 
+
+
+
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
     val UserLocal.getToken get() = "Bearer ${this.token}"

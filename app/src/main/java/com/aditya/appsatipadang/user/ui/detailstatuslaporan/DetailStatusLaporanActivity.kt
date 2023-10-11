@@ -25,7 +25,7 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         const val TAG_TANGGAL = "tanggal"
         const val TAG_LOKASI = "lokasi"
         const val TAG_STATUS = "status"
-        const val TAG_FOTO = "foto"
+//        const val TAG_FOTO = "foto"
 
 
     }
@@ -34,7 +34,7 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
 
         binding = ActivityDetailStatusLaporanBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
+
 
         id = intent.getStringExtra("ID_LAPORAN").toString()
 

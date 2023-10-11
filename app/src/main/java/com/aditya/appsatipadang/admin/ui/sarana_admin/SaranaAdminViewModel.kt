@@ -16,6 +16,6 @@ class SaranaAdminViewModel @Inject constructor(
     fun getUser() = dataRepository.getUser().asLiveData()
     fun getDataLaporan(token : String,id : String) = dataRepository.getDataLaporan(token,id).asLiveData()
 
-    fun getTeknisiList(token: String) = dataRepository.getTeknisiList(token).asLiveData()
+    fun getTeknisiList(token: String, roles : String) = dataRepository.getTeknisiList(token, roles).asLiveData()
 
 }

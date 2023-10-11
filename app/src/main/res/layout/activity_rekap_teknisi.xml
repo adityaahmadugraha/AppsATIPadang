@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/img_back" />
 
 
-    <ScrollView
+    <HorizontalScrollView
         android:id="@+id/sc_laporan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -258,19 +258,33 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_biaya" />
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_rekap_teknisi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_teknisi"
+                tools:listitem="@layout/list_laporan" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </HorizontalScrollView>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/sc_laporan"
-        app:layout_constraintStart_toStartOf="@+id/sc_laporan"
-        app:layout_constraintTop_toBottomOf="@+id/sc_laporan"
-        tools:listitem="@layout/list_laporan" />
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/sc_laporan"
+        app:layout_constraintEnd_toStartOf="@+id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
