@@ -31,12 +31,7 @@ class RekapActivityTeknisi : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.imgBackStatusLaporan.setOnClickListener {
-            finish()
-        }
 
-        setupList()
-        getDataUser()
     }
 
     private fun setupList() {
@@ -44,7 +39,6 @@ class RekapActivityTeknisi : AppCompatActivity() {
             goToDetailScreen(it)
 
         }
-        setupRecyclerView()
     }
 
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
@@ -56,50 +50,8 @@ class RekapActivityTeknisi : AppCompatActivity() {
             putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.status)
 
         }
-        Intent(this@ActivityStatus, DetailStatusLaporanActivity::class.java).apply {
-            putExtra(DetailStatusLaporanActivity.TAG_BUNDLE, bundle)
-            startActivity(this)
-        }
+
     }
 
-    private fun getDataUser() {
 
-        viewModel.getUser().observe(this) { it ->
-            viewModel.getListLaporan(it.getToken).observe(this) { result ->
-                Log.d(ContentValues.TAG, "getDataUseroken::::: $.it.getToken")
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
-
-                    is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-
-                        Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
-
-                        val sortedData = result.data.laporan?.sortedByDescending {it.id}
-
-                        mAdapter.submitList(sortedData)
-                    }
-
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(
-                            this@ActivityStatus,
-                            result.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setupRecyclerView() {
-        binding.rvStatusLaporan.apply {
-            adapter = mAdapter
-            layoutManager = LinearLayoutManager(this@ActivityStatus)
-            setHasFixedSize(true)
-        }
-    }
 }

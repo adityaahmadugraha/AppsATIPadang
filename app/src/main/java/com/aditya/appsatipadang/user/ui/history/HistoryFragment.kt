@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
+import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
@@ -31,6 +32,7 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var mAdapter: AdapterHistoryLaporan
+    private lateinit var mAdapterHarian: AdapterHystoryHarian
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +46,8 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupButtonBackClicked()
-        setupRecyclerView()
         getDataUser()
+        goSettup()
     }
 
     private fun setupButtonBackClicked() {
@@ -65,10 +67,8 @@ class HistoryFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
-
-                        Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
-
                         mAdapter.submitList(result.data.laporan)
+                        setupRecyclerView()
                     }
 
                     is Resource.Error -> {
@@ -82,8 +82,7 @@ class HistoryFragment : Fragment() {
                 }
             }
 
-            viewModel.getListLaporanHarian(userLocal.getToken)
-                .observe(viewLifecycleOwner) { result ->
+            viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is Resource.Loading -> {
                             binding.progressBar.isVisible = true
@@ -91,12 +90,8 @@ class HistoryFragment : Fragment() {
 
                         is Resource.Success -> {
                             binding.progressBar.isVisible = false
-
-                            Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
-
                             val sortedData = result.data.laporan?.sortedByDescending { it.id }
-
-                            mAdapter.submitList(sortedData)
+                            mAdapterHarian.submitList(sortedData)
                         }
 
                         is Resource.Error -> {
@@ -114,13 +109,26 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        mAdapter = AdapterHistoryLaporan {
-            goToDetailScreen(it)
-        }
         binding.rvHistoryKemarin.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
+        }
+
+        binding.rvHistoryHariIni.apply {
+            adapter = mAdapterHarian
+            layoutManager = LinearLayoutManager(requireActivity())
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun goSettup(){
+        mAdapter = AdapterHistoryLaporan {
+            goToDetailScreen(it)
+        }
+
+        mAdapterHarian = AdapterHystoryHarian {
+
         }
     }
 
@@ -130,7 +138,6 @@ class HistoryFragment : Fragment() {
             putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
             putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
             putString(DetailStatusLaporanActivity.TAG_LOKASI, itemLaporaneResponse.lokasi)
-
 
         }
         Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
