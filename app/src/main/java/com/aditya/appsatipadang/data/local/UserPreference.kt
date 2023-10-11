@@ -24,6 +24,7 @@ class UserPreference(context: Context) {
                 preferences[Constant.TAG_ROLES] ?: "",
                 preferences[Constant.TAG_ALAMAT] ?: "",
                 preferences[Constant.TAG_TOKEN] ?: "",
+                preferences[Constant.TAG_FCMTOKEN] ?: "",
 
             )
             userLocal
@@ -33,7 +34,6 @@ class UserPreference(context: Context) {
 
     suspend fun saveUser(user: UserLocal) {
         userDataStore.edit { preferences ->
-
             preferences[Constant.TAG_NAME] = user.name
             preferences[Constant.TAG_USERNAME] = user.username
             preferences[Constant.TAG_EMAIL] = user.email
@@ -42,18 +42,13 @@ class UserPreference(context: Context) {
             preferences[Constant.TAG_ROLES] = user.roles
             preferences[Constant.TAG_ALAMAT] = user.alamat
             preferences[Constant.TAG_TOKEN] = user.token
-
-
-
-
+            preferences[Constant.TAG_FCMTOKEN] = user.fcmtoken
         }
     }
-
 
     suspend fun deleteUser() {
         userDataStore.edit { preferences ->
             preferences.clear()
         }
-
     }
 }

@@ -30,18 +30,12 @@ class RekapActivityTeknisi : AppCompatActivity() {
 
 
 
-        setupList()
-        getDataUser()
     }
 
     private fun setupList() {
-        mAdapter = AdapterRakapLaporanTeknisi (
-
-        )
+        mAdapter = AdapterRakapLaporanTeknisi ()
         setupRecyclerView()
     }
-
-
 
     private fun getDataUser() {
 
