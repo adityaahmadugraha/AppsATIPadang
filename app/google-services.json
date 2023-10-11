@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "575641251585",
+    "project_id": "example-fcm-57b5a",
+    "storage_bucket": "example-fcm-57b5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575641251585:android:1c026836377bfae300b500",
+        "android_client_info": {
+          "package_name": "com.aditya.appsatipadang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRzZpiUgrMGmKjvnfEl3zx2zA21w2j3fI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575641251585:android:0d7b4fc764ba80b700b500",
+        "android_client_info": {
+          "package_name": "com.gema.examplefcm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRzZpiUgrMGmKjvnfEl3zx2zA21w2j3fI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,7 +20,10 @@ import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.databinding.ActivityLoginBinding
 import com.aditya.appsatipadang.supervisor.ActivitySupervisor
 import com.aditya.appsatipadang.teknik.ActivityTeknik
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,12 +31,25 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
 
+    private var fcmToken = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        //        get token fcm
+        FirebaseApp.initializeApp(this)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.i("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            fcmToken = task.result
+        })
+
+        //        end token fcm
         checkUserLogin()
 
         binding.btnLogin.setOnClickListener {
@@ -41,12 +57,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
     private fun loginUser() {
         val username = binding.txtUsername.text.toString()
         val password = binding.txtPassword.text.toString()
 
-        viewModel.loginUser(LoginRequest(username, password))
+        viewModel.loginUser(LoginRequest(username, password , fcmToken))
             .observe(this@LoginActivity) { result ->
                 when (result) {
                     is Resource.Loading -> {
@@ -68,7 +83,8 @@ class LoginActivity : AppCompatActivity() {
                                     userData?.no_telp.toString(),
                                     userData?.roles.toString(),
                                     userData?.alamat.toString(),
-                                    userData?.token.toString()
+                                    userData?.token.toString(),
+                                    userData?.fcmtoken.toString(),
                                 )
                             )
                             checkUserLogin()
