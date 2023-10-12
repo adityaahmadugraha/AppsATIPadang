@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/navigation_history_teknik"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.THistoryFragment"
+        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.history.THistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_t_history">
 

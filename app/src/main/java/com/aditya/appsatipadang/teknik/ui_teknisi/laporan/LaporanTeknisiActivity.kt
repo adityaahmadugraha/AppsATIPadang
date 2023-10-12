@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.aditya.appsatipadang.BuildConfig
@@ -25,6 +26,7 @@ import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityLaporanTeknisiBinding
+import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.utils.Constant
@@ -46,7 +48,6 @@ import java.io.File
 class LaporanTeknisiActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLaporanTeknisiBinding
-
     private val viewModel: LaporanTeknisiViewModel by viewModels()
 
     private var user: UserLocal? = null
@@ -55,35 +56,13 @@ class LaporanTeknisiActivity : AppCompatActivity() {
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
 
+    private var idLaporan = ""
+
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (!allPermissionsGranted()) {
-                Toast.makeText(
-                    this,
-                    "Tidak mendapatkan permission.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
-            }
-        }
-
-    }
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private var idLaporan = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -108,7 +87,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
         }
 
         getDataLaporan()
-
+        kirimLaporanPerbaikan()
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -119,16 +98,119 @@ class LaporanTeknisiActivity : AppCompatActivity() {
         }
     }
 
+    private fun kirimLaporanPerbaikan() {
+        binding.apply {
+            btnKirim.setOnClickListener {
+                val biaya = etBiaya.text.toString()
+                val kegiatan = etKegiatanPerbaikan.text.toString()
+                val tindakan = etPihakTerlibat.text.toString()
+                if (validateInput(biaya, tindakan, kegiatan, fotoKerusakan)) {
+
+                    viewModel.getUser().observe(this@LaporanTeknisiActivity){
+                        val fileProfilePicture: File = Constant.reduceFileImage(fotoKerusakan as File)
+
+                        var requestBody: RequestBody = MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("biaya", biaya)
+                            .addFormDataPart("kegiatan_perbaikan", kegiatan)
+                            .addFormDataPart("pihak_terlibat", tindakan)
+                            .addFormDataPart("id_laporan", idLaporan)
+                            .addFormDataPart("id_teknisi", it.id)
+                            .addFormDataPart(
+                                "foto",
+                                fileProfilePicture.name,
+                                RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
+                            ).build()
+                        viewModel.kirimLaporanPerbaikan(it.getToken, requestBody).observe(this@LaporanTeknisiActivity){ item ->
+                            when(item){
+                                is Resource.Loading -> {}
+                                is Resource.Success -> {
+                                    if (item.data.status == 200){
+                                        Toast.makeText(this@LaporanTeknisiActivity, "Data Berhasil Dikirm", Toast.LENGTH_SHORT).show()
+                                        Intent(
+                                            this@LaporanTeknisiActivity,
+                                            ActivityTeknik::class.java
+                                        ).apply {
+                                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            startActivity(this)
+                                        }
+                                    }
+                                }
+                                is Resource.Error -> {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun validateInput(
+        biaya: String,
+        tindakan: String,
+        kegiatan: String,
+        fotoKerusakan: File?
+    ): Boolean {
+        binding.apply {
+            if (biaya.isEmpty()) {
+                return ilBiaya.setInputError(getString(R.string.must_not_empty))
+            }
+            if (tindakan.isEmpty()) {
+                return ilPihakTerlibat.setInputError(getString(R.string.must_not_empty))
+            }
+            if (kegiatan.isEmpty()) {
+                return ilKegiatanPerbaikan.setInputError(getString(R.string.must_not_empty))
+            }
+            if (fotoKerusakan == null) {
+                Toast.makeText(
+                    this@LaporanTeknisiActivity,
+                    getString(R.string.pick_photo_first),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+        }
+        return true
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (!allPermissionsGranted()) {
+                Toast.makeText(
+                    this,
+                    "Tidak mendapatkan permission.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
     private fun getDataLaporan() {
         viewModel.getUser().observe(this@LaporanTeknisiActivity){
-//            masukan data berdasarkan id
+        // masukan data berdasarkan id
             viewModel.getLaporanId(it.getToken, idLaporan).observe(this@LaporanTeknisiActivity){ item ->
                 when(item){
                     is Resource.Loading ->{}
                     is Resource.Success -> {
                         val dataItem = item.data.laporan
-//                        kirim data ke dalam tek view
+                        // kirim data ke dalam tek view
+                        binding.apply {
+                            etNamaPelapor.setText(dataItem!!.name.toString())
+                            etPengaduan.setText(dataItem.id.toString())
+                            etType.setText(dataItem.type)
+                            etTangal.setText(dataItem.tanggal)
+                            etLokasi.setText(dataItem.lokasi)
 
+                        }
                     }
                     is Resource.Error -> {}
                 }
@@ -188,37 +270,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(
-        tanggal: String,
-        lokasi: String,
-        deskripsiKerusakan: String,
-        fotoKerusakan: File?
-    ): Boolean {
-        binding.apply {
-            if (tanggal.isEmpty()) {
-                return ilKegiatanPerbaikan.setInputError(getString(R.string.must_not_empty))
-            }
-            if (lokasi.isEmpty()) {
-                return ilPihakTerlibat.setInputError(getString(R.string.must_not_empty))
-            }
-            if (deskripsiKerusakan.isEmpty()) {
-                return ilBiaya.setInputError(getString(R.string.must_not_empty))
-            }
-            if (fotoKerusakan == null) {
-                Toast.makeText(
-                    this@LaporanTeknisiActivity,
-                    getString(R.string.pick_photo_first),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return false
-            }
-        }
-        return true
-    }
-
-    private fun insertLaporan(
-        requestBody : RequestBody
-    ) {
+    private fun insertLaporan(requestBody : RequestBody) {
         viewModel.inputLaporan(
             user?.getToken.toString(),
             requestBody

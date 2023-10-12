@@ -16,6 +16,7 @@ class UserPreference(context: Context) {
         return userDataStore.data.map { preferences ->
             val userLocal = UserLocal(
 
+                preferences[Constant.TAG_ID] ?: "",
                 preferences[Constant.TAG_NAME] ?: "",
                 preferences[Constant.TAG_USERNAME] ?: "",
                 preferences[Constant.TAG_EMAIL] ?: "",
@@ -34,6 +35,7 @@ class UserPreference(context: Context) {
 
     suspend fun saveUser(user: UserLocal) {
         userDataStore.edit { preferences ->
+            preferences[Constant.TAG_ID] = user.id
             preferences[Constant.TAG_NAME] = user.name
             preferences[Constant.TAG_USERNAME] = user.username
             preferences[Constant.TAG_EMAIL] = user.email

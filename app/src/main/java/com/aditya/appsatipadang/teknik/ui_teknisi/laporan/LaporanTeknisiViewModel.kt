@@ -14,16 +14,14 @@ class LaporanTeknisiViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
     fun getUser() = repository.getUser().asLiveData()
-
-
     fun inputLaporan(
         token: String,
         requestBody: RequestBody
     ) = repository.inputLaporan(token, requestBody).asLiveData ()
-
     fun getLaporanId(
         token: String,
         id: String
     ) = repository.getLaporanId(token, id).asLiveData ()
 
+    fun kirimLaporanPerbaikan(token: String, requestBody: RequestBody) = repository.kirimLaporanPerbaikan(token, requestBody).asLiveData()
 }

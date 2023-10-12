@@ -76,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                             val userData = result.data.user
                             viewModel.saveUserLocal(
                                 UserLocal(
+                                    userData?.id.toString(),
                                     userData?.name.toString(),
                                     userData?.username.toString(),
                                     userData?.email.toString(),

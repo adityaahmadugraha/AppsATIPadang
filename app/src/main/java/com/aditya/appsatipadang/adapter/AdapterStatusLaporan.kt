@@ -13,7 +13,6 @@ class AdapterStatusLaporan
 
     : ListAdapter<ItemLaporaneResponse, AdapterStatusLaporan.ViewHolder>(DIFF_CALLBACK) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ListLaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,37 +29,15 @@ class AdapterStatusLaporan
             binding.apply {
                 tvBiaya.text = data.biaya
 
-//
-//                val id_teknisi: Int? = null,
-//
-//                val jenis: String? = null
-//                val tanggal: String? = null,
-//                val waktu: String? = null,
-//                val lokasi: String? = null,
-//                val merk: String? = null,
-//                val biaya: String? = null,
-//                status: String? = null,
-//                val deskripsi: String? = null,
-//                val foto: String? = null,
-//                val foto_perbaikan: String? = null,
-//                val kegiatan_perbaikan: String? = null,
-//                val pihak_terlibat: String? = null,
-
-
                 tvNoLaporan.text = data.id.toString()
                 tvTipe.text = data.type
                 tvTanggal.text = data.tanggal
                 tvLokasi.text = data.lokasi
-//                tvNamaPelapor.text = data.nama_pelapor
                 tvTeknisi.text = data.id_teknisi.toString()
                 tvKegiatanPerbaikan.text = data.kegiatan_perbaikan
                 tvPihakYangTerlibat.text = data.pihak_terlibat
                 tvBiaya.text = data.biaya
 
-
-//                Glide.with(itemView.context)
-//                    .load(data.foto)
-//                    .into()
             }
         }
     }

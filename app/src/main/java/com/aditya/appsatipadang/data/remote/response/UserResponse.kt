@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 import retrofit2.http.Field
 
 data class UserResponse (
+    @field:SerializedName("id")
+    val id: String? = null,
+
     @field:SerializedName("name")
     val name: String? = null,
 

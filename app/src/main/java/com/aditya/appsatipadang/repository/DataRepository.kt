@@ -23,7 +23,6 @@ class DataRepository @Inject constructor(
     fun getUserProfile(token: String) = remoteData.getUserProfile(token)
 
     fun updateUserProfile(
-
         token: String,
         image: MultipartBody.Part? = null,
         email: RequestBody,
@@ -37,10 +36,6 @@ class DataRepository @Inject constructor(
     fun getListLaporanHarian(token: String) = remoteData.getListLaporanHarian(token)
 
     fun getListLaporanBulanan(token: String) = remoteData.getListLaporanBulanan(token)
-
-
-
-
 
     fun inputLaporan(
         token: String,
@@ -77,5 +72,12 @@ class DataRepository @Inject constructor(
 
     fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
 
+    fun kirimLaporanPerbaikan(
+        token: String,
+        requestBody: RequestBody
+    ) = remoteData.kirimLaporanPerbaian(token, requestBody)
 
+    // teknisi
+    fun getLaporanHarianTeknisi(token: String) = remoteData.getListLaporanharianTeknisi(token)
+    fun getLaporanBulananTeknisi(token: String) = remoteData.getListLaporanbulananTeknisi(token)
 }

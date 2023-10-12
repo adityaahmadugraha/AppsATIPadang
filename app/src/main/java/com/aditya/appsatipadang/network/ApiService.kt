@@ -42,12 +42,10 @@ interface ApiService {
         @Part("fullname") fullname: RequestBody,
     ): ProfileUserResponse
 
-
     @GET("laporan")
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
     ): LaporanResponse
-
 
     @GET("laporan")
     suspend fun getListPengerjaan(
@@ -78,14 +76,11 @@ interface ApiService {
         @Path("id") id : String
     ): LaporanIdResponse
 
-
-
     @GET("getlaporan/{id}")
     suspend fun getDataLaporan(
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): LaporanInfoResponse
-
 
     @Multipart
     @POST("laporan")
@@ -109,6 +104,12 @@ interface ApiService {
         @Part("tanggal") tanggal: RequestBody,
         @Part("waktu") waktu: RequestBody,
         @Part foto: MultipartBody.Part,
+    ): LaporanResponse
+
+    @POST("kirimlaporan")
+    suspend fun kirimLaporanPerbaikan(
+        @Header("Authorization") token: String,
+        @Body body: RequestBody
     ): LaporanResponse
 
 //        @POST("laporan(id)")

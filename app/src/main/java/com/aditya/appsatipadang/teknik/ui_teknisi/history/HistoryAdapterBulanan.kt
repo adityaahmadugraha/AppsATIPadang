@@ -1,7 +1,6 @@
-package com.aditya.appsatipadang.adapter
+package com.aditya.appsatipadang.teknik.ui_teknisi.history
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,24 +11,18 @@ import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
 
-
-class AdapterLaporan
-    (
+data class HistoryAdapterBulanan(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
-) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<ItemLaporaneResponse, HistoryAdapterBulanan.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
-    }
-
-    fun submitListReversed(list: List<ItemLaporaneResponse>?) {
-        val reversedList = list?.reversed()
-        submitList(reversedList)
     }
 
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
@@ -43,8 +36,6 @@ class AdapterLaporan
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL+data.foto)
                     .into(binding.imgPelaporan)
-
-                Log.d("cekfoto:::::::", data.foto.toString())
 
                 itemView.setOnClickListener {
                     onItemClick(data)
@@ -60,7 +51,7 @@ class AdapterLaporan
                     oldItem: ItemLaporaneResponse,
                     newItem: ItemLaporaneResponse
                 ): Boolean {
-                    return oldItem.id == newItem.id
+                    return oldItem.id_pelapor == newItem.id_pelapor
                 }
 
                 @SuppressLint("DiffUtilEquals")
@@ -73,3 +64,4 @@ class AdapterLaporan
             }
     }
 }
+
