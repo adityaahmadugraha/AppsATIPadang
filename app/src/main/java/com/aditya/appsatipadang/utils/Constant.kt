@@ -33,6 +33,7 @@ object Constant {
 
     const val TAG = "RESPONSE:::::"
     const val PREF_NAME = "userInfo" //nama preference datastore
+    val TAG_ID = stringPreferencesKey("id")
     val TAG_NAME = stringPreferencesKey("name")
     val TAG_USERNAME = stringPreferencesKey("username")
     val TAG_EMAIL = stringPreferencesKey("email")

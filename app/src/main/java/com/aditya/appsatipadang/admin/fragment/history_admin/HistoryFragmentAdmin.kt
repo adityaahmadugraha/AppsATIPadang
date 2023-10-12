@@ -110,7 +110,7 @@ class HistoryFragmentAdmin : Fragment() {
         mAdapter = AdapterHistoryLaporan {
             goToDetailScreen(it)
         }
-        binding.rvHistoryKemarin.apply {
+        binding.rvHistoryBulanan.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)

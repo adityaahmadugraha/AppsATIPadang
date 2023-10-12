@@ -44,7 +44,6 @@ class THomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.cardLaporan.setOnClickListener {
             val intent = Intent(activity, ActivityNontofikasiLaporanTeknisi::class.java)
             startActivity(intent)
@@ -61,7 +60,15 @@ class THomeFragment : Fragment() {
 
     private fun setupList() {
         mAdapter = AdapterLaporanTeknisi {
-//            goToDetailScreen(it)
+
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding?.rvLaporanHome?.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
+            setHasFixedSize(true)
         }
     }
 
@@ -71,7 +78,6 @@ class THomeFragment : Fragment() {
 
 
             viewModel.getListPengerjaan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                Log.d(ContentValues.TAG, "getDataUser: ${userLocal.getToken}")
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
@@ -79,10 +85,6 @@ class THomeFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
-
-
-                        Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
-
 
                         val latestFiveData = if (result.data.laporan?.size!! > 5)
                             result.data.laporan?.let {
@@ -110,29 +112,6 @@ class THomeFragment : Fragment() {
                 }
             }
 
-        }
-    }
-
-
-//    private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
-////
-////        val bundle = Bundle().apply {
-////
-////
-////            itemLaporaneResponse.id?.let { putInt(ActivityNontofikasiLaporanTeknisi.TAG_ID, it) }
-////
-////        }
-//        Intent(requireActivity(), ActivityNontofikasiLaporanTeknisi::class.java).apply {
-////            putExtra(ActivityNontofikasiLaporanTeknisi.TAG_BUNDLE, bundle)
-//            startActivity(this)
-//        }
-//    }
-
-    private fun setupRecyclerView() {
-        binding?.rvLaporanHome?.apply {
-            adapter = mAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
-            setHasFixedSize(true)
         }
     }
 }

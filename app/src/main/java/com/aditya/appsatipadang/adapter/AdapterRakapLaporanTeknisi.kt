@@ -13,7 +13,6 @@ class AdapterRakapLaporanTeknisi
 
     : ListAdapter<ItemLaporaneResponse, AdapterRakapLaporanTeknisi.ViewHolder>(DIFF_CALLBACK) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ListLaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,12 +32,9 @@ class AdapterRakapLaporanTeknisi
                 tvNoLaporan.text = data.id.toString()
                 tvLokasi.text = data.lokasi
                 tvBiaya.text = data.biaya
-//                tvNamaPelapor.text = data.
                 tvKegiatanPerbaikan.text = data.kegiatan_perbaikan
                 tvPihakYangTerlibat.text = data.pihak_terlibat
-//                Glide.with(itemView.context)
-//                    .load(data.foto)
-//                    .into()
+
             }
         }
     }

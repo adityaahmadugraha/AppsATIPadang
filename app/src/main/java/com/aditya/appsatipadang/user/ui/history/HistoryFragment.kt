@@ -109,7 +109,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvHistoryKemarin.apply {
+        binding.rvHistoryBulanan.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)

@@ -1,6 +1,7 @@
 package com.aditya.appsatipadang.data.local
 
 data class UserLocal(
+    val id: String,
     val name: String,
     val username: String,
     val email: String,
