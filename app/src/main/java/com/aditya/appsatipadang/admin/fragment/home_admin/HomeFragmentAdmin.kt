@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.adapter.AdapterLaporan
+import com.aditya.appsatipadang.admin.ui.AddUserActivity
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.KamtibmasActivityAdmin
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_LOKASI
@@ -58,19 +59,14 @@ class HomeFragmentAdmin : Fragment() {
             val intent = Intent(activity, SaranaActivityAdmin::class.java)
             startActivity(intent)
         }
-        binding.cardPrasaranaAdmin.setOnClickListener {
-            val intent = Intent(activity, PrasaranaActivityAdmin::class.java)
+        binding.cardAddUser.setOnClickListener {
+            val intent = Intent(activity, AddUserActivity::class.java)
             startActivity(intent)
         }
-        binding.cardKamtibmasAdmin.setOnClickListener {
-            val intent = Intent(activity, KamtibmasActivityAdmin::class.java)
-            startActivity(intent)
-        }
-        binding.cardStatusAdmin.setOnClickListener {
+        binding.cardLaporan.setOnClickListener {
             val intent = Intent(activity, StatusActivityAdmin::class.java)
             startActivity(intent)
         }
-
 
 
         getDataUser()
@@ -129,7 +125,7 @@ class HomeFragmentAdmin : Fragment() {
             putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
             putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
             putString(TAG_STATUS, itemLaporaneResponse.status)
-            putString(TAG_FOTO, itemLaporaneResponse.foto)
+//            putString(TAG_FOTO, itemLaporaneResponse.foto)
             putString(TAG_MERK, itemLaporaneResponse.merk)
             putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
 

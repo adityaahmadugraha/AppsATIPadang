@@ -6,6 +6,7 @@ import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
+import com.aditya.appsatipadang.data.remote.response.TeknisiReponse
 import com.aditya.appsatipadang.data.remote.response.TeknisiUserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -116,6 +117,19 @@ interface ApiService {
 //    suspend fun insertTeknisi(
 //        @Header("Authorization") token: String,
 //    ): LaporanResponse
+
+
+
+    @POST("laporan(id)")
+    suspend fun insertTeknisi(
+        @Header("Authorization") token: String,
+    ): LaporanResponse
+
+
+    @GET("getnamateknisi")
+    suspend fun getTeknisiNama(
+        @Header("Authorization") token: String,
+    ): TeknisiReponse
 
 
 }

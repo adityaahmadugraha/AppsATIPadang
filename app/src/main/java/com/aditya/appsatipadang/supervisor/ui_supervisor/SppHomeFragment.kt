@@ -17,6 +17,7 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
 import com.aditya.appsatipadang.adapter.AdapterRakapLaporanTeknisi
 import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
+import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentSppHomeBinding
 import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
@@ -49,7 +50,7 @@ class SppHomeFragment : Fragment() {
 
 
         binding.cardRekapLaporan.setOnClickListener {
-            val intent = Intent(activity, RekapActivityTeknisi::class.java)
+            val intent = Intent(activity, StatusActivityAdmin::class.java)
             startActivity(intent)
         }
 

@@ -19,9 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class StatusActivityAdmin : AppCompatActivity() {
     private lateinit var binding: ActivityStatusAdminBinding
     private val viewModel: StatusAdminViewModel by viewModels()
-
-
     private lateinit var mAdapter: AdapterStatusLaporan
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +29,25 @@ class StatusActivityAdmin : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        binding.imgBack.setOnClickListener {
+            finish()
+        }
+
         setupList()
         getDataUser()
     }
 
     private fun setupList() {
-        mAdapter = AdapterStatusLaporan(
+        mAdapter = AdapterStatusLaporan()
 
-
-        )
-        setupRecyclerView()
     }
 
 
     private fun getDataUser() {
+        viewModel.getUser().observe(this) { userLocal ->
 
-        viewModel.getUser().observe(this) { it ->
-            viewModel.getListLaporan(it.getToken).observe(this) { result ->
-                Log.d(ContentValues.TAG, "getDataUseroken::::: $.it.getToken")
+            viewModel.getListLaporan(userLocal.getToken).observe(this) { result ->
+                Log.d(ContentValues.TAG, "getDataUser: ${userLocal.getToken}")
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
@@ -56,11 +56,11 @@ class StatusActivityAdmin : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
+
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
 
-                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
-
-                        mAdapter.submitList(sortedData)
+                        mAdapter.submitList(result.data.laporan)
+                        setupRecyclerView()
                     }
 
                     is Resource.Error -> {
@@ -71,8 +71,10 @@ class StatusActivityAdmin : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                 }
             }
+
         }
     }
 

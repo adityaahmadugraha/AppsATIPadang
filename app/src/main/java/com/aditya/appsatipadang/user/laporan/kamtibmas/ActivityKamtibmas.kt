@@ -194,7 +194,7 @@ class ActivityKamtibmas : AppCompatActivity() {
     }
 
     private fun getUserInput() {
-        val type = "Sarana"
+        val type = "Kamtibmas"
 
         binding.apply {
             val deskripsiKerusakan = etDeskripsiKerusakanKamtibmas.text.toString()
@@ -291,8 +291,7 @@ class ActivityKamtibmas : AppCompatActivity() {
                                 ActivityPemberitahuan::class.java
                             ).apply {
                                 putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
-                                flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
                             }
                         }
