@@ -185,7 +185,7 @@ class ActivityPrasarana : AppCompatActivity() {
     }
 
     private fun getUserInput() {
-        val type = "Sarana"
+        val type = "Prasarana"
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
         val selectedChipId = chipGroup.checkedChipId
         val chip: String
@@ -285,8 +285,7 @@ class ActivityPrasarana : AppCompatActivity() {
                                 ActivityPemberitahuan::class.java
                             ).apply {
                                 putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
-                                flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
                             }
                         }

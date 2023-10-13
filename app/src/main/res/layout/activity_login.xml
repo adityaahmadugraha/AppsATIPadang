@@ -110,19 +110,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <TextView
-                android:id="@+id/tv_lupa_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Lupa Password?"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppinsblack"
-                android:textColor="@color/blue"
-                app:layout_constraintEnd_toEndOf="@+id/ti_password"
-                app:layout_constraintTop_toBottomOf="@+id/ti_password" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

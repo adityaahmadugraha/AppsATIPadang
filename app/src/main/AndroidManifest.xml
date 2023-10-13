@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.aditya.appsatipadang" >
+    package="com.aditya.appsatipadang">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -35,8 +35,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppsATIPadang"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
-        <service android:name=".FirebaseMessagingService"
+        tools:targetApi="31">
+        <activity
+            android:name=".admin.ui.AddUserActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".FirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -102,7 +107,7 @@
         <activity
             android:name=".user.ui.splash.SplashActivity"
             android:exported="true"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -115,12 +120,11 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.aditya.appsatipadang"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
 
 </manifest>

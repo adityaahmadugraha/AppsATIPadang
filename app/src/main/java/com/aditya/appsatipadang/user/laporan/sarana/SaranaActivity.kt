@@ -280,7 +280,7 @@ class SaranaActivity : AppCompatActivity() {
                                 .apply {
                                 putExtra(TAG_ID_LAPORAN, result.data.id)
 
-                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
                             }
                         }

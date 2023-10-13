@@ -27,8 +27,6 @@ class ActivityPemberitahuan : AppCompatActivity() {
         binding.tvIdLaporan.text = id.toString()
 
         binding.btnCekLaporan.setOnClickListener {
-            intent = Intent(this@ActivityPemberitahuan, MainActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

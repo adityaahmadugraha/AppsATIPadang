@@ -30,7 +30,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
-
     private var fcmToken = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +59,11 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser() {
         val username = binding.txtUsername.text.toString()
         val password = binding.txtPassword.text.toString()
+
+        if (!binding.cbConfimLogin.isChecked) {
+            Toast.makeText(this, "Harap centang kotak konfirmasi sebelum login.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         viewModel.loginUser(LoginRequest(username, password , fcmToken))
             .observe(this@LoginActivity) { result ->
