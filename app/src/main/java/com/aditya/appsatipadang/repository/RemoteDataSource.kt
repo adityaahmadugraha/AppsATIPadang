@@ -1,7 +1,9 @@
 package com.aditya.appsatipadang.repository
 
+import android.view.View
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
@@ -35,12 +37,10 @@ class RemoteDataSource @Inject constructor(
 
     fun updateUserProfile(
         token: String,
-        image: MultipartBody.Part? = null,
-        email: RequestBody,
-        fullname: RequestBody,
+        foto: MultipartBody.Part? = null,
     ) = flow {
         emit(Resource.Loading())
-        val response = apiService.updateProfile(token, image, email, fullname)
+        val response = apiService.updateProfile(token, foto)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
@@ -111,6 +111,35 @@ class RemoteDataSource @Inject constructor(
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemuan"))
+        }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun insertLaporanTeknisi(
+        token: String,
+        requestBody: View
+    ) = flow<Resource<LaporanResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.insertLaporanTeknisi(token, requestBody)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemukan"))
+        }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    fun updateLaporan(
+        token: String,
+        requestBody: RequestBody
+    ) = flow<Resource<LaporanResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.updateLaporan(token, requestBody)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemukan"))
         }
     }.catch {
         emit(Resource.Error(it.message ?: ""))
@@ -199,6 +228,23 @@ class RemoteDataSource @Inject constructor(
     fun getTeknisiList(token: String) = flow {
         emit(Resource.Loading())
         val response = apiService.getTeknisiNama(token)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+//    fun addUser(token: String) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.addUser(token)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
+
+
+    fun insertUser(token: String, request: AddUserRequest) = flow {
+        emit(Resource.Loading())
+        val response = apiService.addUser(token, request)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))

@@ -68,52 +68,18 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_tgl_laporan_sarana" />
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_rp"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="100dp"-->
-<!--                android:fontFamily="@font/opensansbold"-->
-<!--                android:text="@string/rp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="12sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/tv_title_laporan"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tv_title_laporan" />-->
+            <TextView
+                android:id="@+id/tv_merk_alat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/poppinssembiold"
+                android:textSize="12sp"
+                android:text="Samsung"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name_alat"
+                app:layout_constraintStart_toEndOf="@+id/tv_name_alat"
+                app:layout_constraintTop_toTopOf="@+id/tv_name_alat" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_harga"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:fontFamily="@font/opensansbold"-->
-<!--                android:text="3.000"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="12sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/tv_rp"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tv_rp"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/tv_rp" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/img_jumlah_pelapor"-->
-<!--                android:layout_width="18dp"-->
-<!--                android:layout_height="18dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:src="@drawable/ic_person"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/tv_rp"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tv_harga" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv_jumlah_pelapor"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:fontFamily="@font/opensanscondensedextrabold"-->
-<!--                android:text="@string/jumlah_pelapor"-->
-<!--                android:textSize="16sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/img_jumlah_pelapor"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/img_jumlah_pelapor"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/img_jumlah_pelapor" />-->
 
 
             <TextView

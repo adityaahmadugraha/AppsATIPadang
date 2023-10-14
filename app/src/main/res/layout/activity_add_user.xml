@@ -4,20 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.ui.AddUserActivity">
+    tools:context=".admin.ui.kamtibmas_admin.AddUserActivity">
+
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppinssembiold"
         android:text="Form Register"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/img_back" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -118,7 +129,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_eamil"
+                    android:id="@+id/txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
@@ -201,23 +212,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ti_alamat" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_roles"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
-                android:layout_height="62dp"
-                app:hintEnabled="false"
-                app:layout_constraintStart_toStartOf="@+id/tv_roles"
-                app:layout_constraintTop_toBottomOf="@+id/tv_roles">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_roles"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinssembiold"
-                    android:inputType="textEmailAddress"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <Spinner
+                android:id="@+id/spiner_roles"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="8dp"
+                android:background="@drawable/border_background_spiner"
+                android:dropDownHorizontalOffset="16dp"
+                android:dropDownVerticalOffset="48dp"
+                android:foregroundGravity="center_vertical"
+                android:layoutDirection="ltr"
+                android:layoutMode="clipBounds"
+                android:popupBackground="#FFFFFF"
+                android:popupElevation="6dp"
+                android:textColor="#000000"
+                android:typeface="monospace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_roles"
+                app:layout_constraintTop_toBottomOf="@+id/tv_roles" />
 
 
             <TextView
@@ -229,8 +245,8 @@
                 android:text="@string/password"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/ti_roles"
-                app:layout_constraintTop_toBottomOf="@+id/ti_roles" />
+                app:layout_constraintStart_toStartOf="@+id/tv_roles"
+                app:layout_constraintTop_toBottomOf="@+id/spiner_roles" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_password"

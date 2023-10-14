@@ -13,17 +13,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.adapter.AdapterLaporan
-import com.aditya.appsatipadang.admin.ui.AddUserActivity
-import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.KamtibmasActivityAdmin
-import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin
+import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
+
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_LOKASI
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_TANGGAL
 import com.aditya.appsatipadang.admin.ui.prasarana_admin.PrasaranaActivityAdmin.Companion.TAG_TIPE
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_DESKRIPSI
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_FOTO
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_ID_PENGADUAN
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_JENIS
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_MERK
-
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
@@ -125,16 +125,13 @@ class HomeFragmentAdmin : Fragment() {
             putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
             putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
             putString(TAG_STATUS, itemLaporaneResponse.status)
-//            putString(TAG_FOTO, itemLaporaneResponse.foto)
+            putString(TAG_FOTO, itemLaporaneResponse.foto)
             putString(TAG_MERK, itemLaporaneResponse.merk)
             putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
+            putString(TAG_ID_PENGADUAN, itemLaporaneResponse.id.toString())
+            putString(TAG_JENIS, itemLaporaneResponse.jenis.toString())
 
-//            putString(TAG_NAMA, itemLaporaneResponse.merk)
-//            putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
-//            putString(TAG_JENIS, itemLaporaneResponse.jenis)
-//            putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
-//            putString(TAG_DESKRIPSI, itemLaporaneResponse.deskripsi)
-//            putString(TAG_FOTO, itemLaporaneResponse.foto)
+
 
 
         }

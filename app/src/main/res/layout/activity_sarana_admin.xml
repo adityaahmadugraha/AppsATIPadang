@@ -121,7 +121,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="LCD Proyektor"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -166,7 +165,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Aditya"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -462,6 +460,7 @@
                 android:dropDownVerticalOffset="48dp"
                 android:foregroundGravity="center_vertical"
                 android:layoutDirection="ltr"
+                android:paddingStart="8dp"
                 android:layoutMode="clipBounds"
                 android:popupBackground="#FFFFFF"
                 android:popupElevation="6dp"

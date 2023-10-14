@@ -173,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppinssembiold"
-        android:text="@string/hisotry_pengerjaaan"
+        android:text="@string/history_pelaporan"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/img_profil"

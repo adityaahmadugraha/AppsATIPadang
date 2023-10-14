@@ -1,9 +1,11 @@
 package com.aditya.appsatipadang.repository
 
 
-import com.aditya.appsatipadang.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.data.local.UserPreference
+import android.view.View
 import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.local.UserPreference
+import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -24,10 +26,8 @@ class DataRepository @Inject constructor(
 
     fun updateUserProfile(
         token: String,
-        image: MultipartBody.Part? = null,
-        email: RequestBody,
-        fullname: RequestBody,
-    ) = remoteData.updateUserProfile(token, image, email, fullname)
+        foto: MultipartBody.Part? = null,
+    ) = remoteData.updateUserProfile(token, foto)
 
     fun getListLaporan(token: String) = remoteData.getListLaporan(token)
 
@@ -38,6 +38,16 @@ class DataRepository @Inject constructor(
     fun getListLaporanBulanan(token: String) = remoteData.getListLaporanBulanan(token)
 
     fun getTeknisiList(token: String) = remoteData.getTeknisiList(token)
+
+    fun insertLaporanTeknisi(
+        token: String,
+        requestBody: View
+    ) = remoteData.insertLaporanTeknisi(token, requestBody)
+
+    fun updateLaporan(
+        token: String,
+        requestBody: RequestBody
+    ) = remoteData.updateLaporan(token, requestBody)
 
 
     fun inputLaporan(
@@ -83,4 +93,8 @@ class DataRepository @Inject constructor(
     // teknisi
     fun getLaporanHarianTeknisi(token: String) = remoteData.getListLaporanharianTeknisi(token)
     fun getLaporanBulananTeknisi(token: String) = remoteData.getListLaporanbulananTeknisi(token)
+
+
+    fun insertUser(token: String, request: AddUserRequest) =
+        remoteData.insertUser(token, request)
 }

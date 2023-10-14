@@ -23,6 +23,18 @@ class PrasaranaActivityAdmin : AppCompatActivity() {
     private lateinit var binding: ActivityPrasaranaAdminBinding
     private val viewModel: PrasaranaViewModel by viewModels()
     var id: String = ""
+
+    companion object {
+        const val TAG_BUNDLE = "kode"
+        const val TAG_NAMA = "nama"
+        const val TAG_LOKASI = "lokasi"
+        const val TAG_DESKRIPSI = "deskripsi"
+        const val TAG_TIPE = "tipe"
+        const val TAG_TANGGAL = "tanggal"
+
+//        const val TAG_GAMBAR = "gambar"
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -85,17 +97,7 @@ class PrasaranaActivityAdmin : AppCompatActivity() {
         }
     }
 
-    companion object {
-        const val TAG_BUNDLE = "kode"
-        const val TAG_NAMA = "nama"
-        const val TAG_LOKASI = "lokasi"
-        const val TAG_DESKRIPSI = "deskripsi"
-        const val TAG_TIPE = "tipe"
-        const val TAG_TANGGAL = "tanggal"
-        const val TAG_JENIS = "jenis"
-//        const val TAG_GAMBAR = "gambar"
 
-    }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {

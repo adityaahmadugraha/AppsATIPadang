@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,4 +20,9 @@ class ProfileViewModel @Inject constructor(
         fun deleteUser() = viewModelScope.launch {
             repository.deleteUser()
     }
+
+    fun updateUserProfile(
+        token: String,
+        foto: MultipartBody.Part? = null,
+    ) = repository.updateUserProfile(token, foto).asLiveData()
 }

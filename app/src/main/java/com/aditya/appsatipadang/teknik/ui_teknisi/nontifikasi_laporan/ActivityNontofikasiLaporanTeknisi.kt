@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aditya.appsatipadang.databinding.ActivityNontofikasiLaporanTeknisiBinding
+import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
 import com.aditya.appsatipadang.utils.Constant.IDLAPORAN
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,11 @@ class ActivityNontofikasiLaporanTeknisi : AppCompatActivity() {
 
         binding = ActivityNontofikasiLaporanTeknisiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.imgBack.setOnClickListener {
+            intent = Intent(this@ActivityNontofikasiLaporanTeknisi,ActivityTeknik::class.java)
+            startActivity(intent)
+        }
 
         binding.btnCekDetailLaporan.setOnClickListener {
             val idLaporan = intent.getStringExtra(IDLAPORAN).toString()

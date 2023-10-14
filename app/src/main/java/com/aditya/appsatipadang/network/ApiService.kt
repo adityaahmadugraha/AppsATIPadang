@@ -1,6 +1,10 @@
 package com.aditya.appsatipadang.network
 
+import android.view.View
+import com.aditya.appsatipadang.data.local.UserPreference
+import com.aditya.appsatipadang.data.remote.request.AddUserResponse
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
@@ -39,8 +43,6 @@ interface ApiService {
     suspend fun updateProfile(
         @Header("Authorization") token: String,
         @Part image: MultipartBody.Part? = null,
-        @Part("email") email: RequestBody,
-        @Part("fullname") fullname: RequestBody,
     ): ProfileUserResponse
 
     @GET("laporan")
@@ -67,6 +69,19 @@ interface ApiService {
     //input sarana
     @POST("laporan")
     suspend fun insertLaporan(
+        @Header("Authorization") token: String,
+        @Body body: RequestBody
+    ): LaporanResponse
+
+
+    @POST("laporan")
+    suspend fun insertLaporanTeknisi(
+        @Header("Authorization") token: String,
+        @Body body: View
+    ): LaporanResponse
+
+    @POST("laporan")
+    suspend fun updateLaporan(
         @Header("Authorization") token: String,
         @Body body: RequestBody
     ): LaporanResponse
@@ -130,6 +145,13 @@ interface ApiService {
     suspend fun getTeknisiNama(
         @Header("Authorization") token: String,
     ): TeknisiReponse
+
+
+    @POST("addUser")
+    suspend fun addUser(
+        @Header("Authorization") token: String,
+        @Body request : AddUserRequest
+    ): AddUserResponse
 
 
 }

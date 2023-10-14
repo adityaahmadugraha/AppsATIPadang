@@ -14,6 +14,7 @@ import androidx.datastore.preferences.protobuf.Internal.MapAdapter
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
 import com.aditya.appsatipadang.adapter.AdapterRakapLaporanTeknisi
 import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
@@ -35,7 +36,9 @@ class SppHomeFragment : Fragment() {
 
     private val binding get() = _binding!!
     private val viewModel: THomeViewModel by viewModels()
-    private lateinit var mAdapter: AdapterRakapLaporanTeknisi
+
+
+    private lateinit var mAdapter: AdapterLaporan
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,18 +63,14 @@ class SppHomeFragment : Fragment() {
 
     }
 
-    private fun setupList() {
-        mAdapter = AdapterRakapLaporanTeknisi(
 
-        )
-    }
 
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
             binding.tvName.text = userLocal.name
 
 
-            viewModel.getListPengerjaan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                 Log.d(ContentValues.TAG, "getDataUser: ${userLocal.getToken}")
                 when (result) {
                     is Resource.Loading -> {
@@ -84,18 +83,7 @@ class SppHomeFragment : Fragment() {
 
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
 
-
-                        val latestFiveData = if (result.data.laporan?.size!! > 5)
-                            result.data.laporan?.let {
-                                result.data.laporan.subList(
-                                    result.data.laporan.size - 5,
-                                    it.size
-                                )
-                            }
-                        else
-                            result.data.laporan
-
-
+                        mAdapter.submitList(result.data.laporan)
                         setupRecyclerView()
                     }
 
@@ -114,6 +102,10 @@ class SppHomeFragment : Fragment() {
         }
     }
 
+    private fun setupList() {
+        mAdapter = AdapterLaporan {
+        }
+    }
 
     private fun setupRecyclerView() {
         binding?.rvLaporanHome?.apply {
