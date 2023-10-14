@@ -13,8 +13,7 @@ import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
 
 
-class AdapterLaporan
-    (
+class AdapterLaporan(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
 
@@ -40,12 +39,9 @@ class AdapterLaporan
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
                 tvStatusLaporan.text = data.status
-//                tvNameAlat.text = data.status
                 Glide.with(itemView.context)
-                    .load(BuildConfig.IMAGE_URL+data.foto)
+                    .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(binding.imgPelaporan)
-
-                Log.d("cekfoto:::::::", data.foto.toString())
 
                 itemView.setOnClickListener {
                     onItemClick(data)

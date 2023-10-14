@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -26,9 +27,9 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
+import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan.Companion.TAG_ID_LAPORAN
-import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.utils.Constant.bitmapToFile
 import com.aditya.appsatipadang.utils.Constant.createCustomTempFile
 import com.aditya.appsatipadang.utils.Constant.getRotatedBitmap
@@ -59,12 +60,11 @@ class SaranaActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
     private var user: UserLocal? = null
-
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
+    var chip = ""
 
     companion object {
-        const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -85,13 +85,11 @@ class SaranaActivity : AppCompatActivity() {
                 finish()
             }
         }
-
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,21 +113,24 @@ class SaranaActivity : AppCompatActivity() {
             }
 
             chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                group.checkedChipId?.let { group.findViewById<Chip>(it) }
+                val selectedChip = group.findViewById<Chip>(checkedId)
+
                 for (i in 0 until group.childCount) {
-                    val chip = group.getChildAt(i) as Chip
-                    chip.setChipBackgroundColorResource(android.R.color.background_light)
+                    val chip = group.getChildAt(i) as? Chip
+                    chip?.setChipBackgroundColorResource(android.R.color.background_light)
                 }
 
                 if (checkedId != View.NO_ID) {
-                    val selectedChip = findViewById<Chip>(checkedId)
-                    selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+                    selectedChip?.setChipBackgroundColorResource(R.color.status_bar)
+                    chip = selectedChip?.text.toString()
+                    Log.d("SelectedChipText", "Selected Chip: $chip")
                 }
             }
 
             camera.setOnClickListener { startCamera() }
             galery.setOnClickListener { startGallery() }
         }
-
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -189,16 +190,22 @@ class SaranaActivity : AppCompatActivity() {
     private fun getUserInput() {
         val type = "Sarana"
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        val selectedChipId = chipGroup.checkedChipId
-        val chip: String
+        var selectedChipText = ""
 
-        if (selectedChipId != View.NO_ID) {
-            val selectedChip = findViewById<Chip>(selectedChipId)
-            chip = selectedChip.text.toString()
-        } else {
+        for (i in 0 until chipGroup.childCount) {
+            val chip = chipGroup.getChildAt(i) as Chip
+            if (chip.isChecked) {
+                selectedChipText = chip.text.toString()
+                break
+            }
+        }
+
+        if (selectedChipText.isEmpty()) {
             Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
             return
+
         }
+
 
         binding.apply {
             val tanggal = etTanggal.text.toString()
@@ -217,18 +224,18 @@ class SaranaActivity : AppCompatActivity() {
                     .addFormDataPart("deskripsi", deskripsiKerusakan)
                     .addFormDataPart("tanggal", tanggal)
                     .addFormDataPart("merek", merk)
+                    .addFormDataPart("jenis", selectedChipText)
                     .addFormDataPart(
                         "foto",
                         fileProfilePicture.name,
                         RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
                     ).build()
 
-                insertLaporan(
-                    requestBody
-                )
+                insertLaporan(requestBody)
             }
         }
     }
+
 
     private fun validateInput(
         tanggal: String,
@@ -259,42 +266,44 @@ class SaranaActivity : AppCompatActivity() {
     }
 
     private fun insertLaporan(
-        requestBody : RequestBody
+        requestBody: RequestBody
     ) {
         viewModel.inputLaporan(
             user?.getToken.toString(),
-        requestBody
+            requestBody
         ).observe(this@SaranaActivity) { result ->
-                binding.apply {
-                    when (result) {
-                        is Resource.Loading -> {
-                            showLoadingInput(true)
-                        }
+            binding.apply {
+                when (result) {
+                    is Resource.Loading -> {
+                        showLoadingInput(true)
+                    }
 
-                        is Resource.Success -> {
+                    is Resource.Success -> {
 
-                            showLoadingInput(false)
-                            Intent(
-                                this@SaranaActivity, ActivityPemberitahuan::class.java
-                            )
-                                .apply {
+                        showLoadingInput(false)
+
+
+                        Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
+                            .apply {
                                 putExtra(TAG_ID_LAPORAN, result.data.id)
 
 //                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
                             }
-                        }
 
-                        is Resource.Error -> {
-                            showLoadingInput(false)
-                            Toast.makeText(
-                                this@SaranaActivity, result.error,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+
+                    }
+
+                    is Resource.Error -> {
+                        showLoadingInput(false)
+                        Toast.makeText(
+                            this@SaranaActivity, result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
+        }
 
     }
 

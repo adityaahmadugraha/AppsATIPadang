@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.BuildConfig.IMAGE_URL
 import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
@@ -152,12 +153,18 @@ class SaranaActivityAdmin : AppCompatActivity() {
                 etMerk.text =
                     Editable.Factory.getInstance().newEditable(bundle.getString(TAG_MERK))
 
-                val data = intent.getStringExtra(TAG_FOTO)
-                Log.d("fotoSaranaAdmin", "Data gambar: $data")
-                Glide.with(this@SaranaActivityAdmin)
-                    .load(BuildConfig.IMAGE_URL+data)
-                    .into(binding.imgBuktiSarana)
 
+//                val data = intent.getStringExtra(TAG_FOTO)
+//                Log.d("fotoSaranaAdmin", "Data gambar: $data")
+//                Glide.with(this@SaranaActivityAdmin)
+//                    .load(IMAGE_URL+data)
+//                    .into(binding.imgBuktiSarana)
+
+                val data = intent.getStringExtra(TAG_FOTO)
+                val imageUrl = "$IMAGE_URL$data"
+                Glide.with(this@SaranaActivityAdmin)
+                    .load(imageUrl)
+                    .into(binding.imgBuktiSarana)
 
 
 

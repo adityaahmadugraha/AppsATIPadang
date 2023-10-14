@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -26,8 +27,9 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityPrasaranaBinding
-import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.user.MainActivity
+import com.aditya.appsatipadang.user.laporan.sarana.SaranaViewModel
+import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.utils.Constant.setInputError
@@ -38,12 +40,9 @@ import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -54,14 +53,12 @@ import java.util.Locale
 class ActivityPrasarana : AppCompatActivity() {
 
     private lateinit var binding: ActivityPrasaranaBinding
-    private val viewModel: PrasaranaViewModel by viewModels()
+    private val viewModel: SaranaViewModel by viewModels()
     private var user: UserLocal? = null
-
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
-
+    var chip = ""
     companion object {
-        const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -82,7 +79,6 @@ class ActivityPrasarana : AppCompatActivity() {
                 finish()
             }
         }
-
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -100,6 +96,7 @@ class ActivityPrasarana : AppCompatActivity() {
             btnKirim.setOnClickListener {
                 getUserInput()
             }
+
             etTanggal.setOnClickListener {
                 setTanggal()
             }
@@ -111,14 +108,18 @@ class ActivityPrasarana : AppCompatActivity() {
             }
 
             chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                group.checkedChipId?.let { group.findViewById<Chip>(it) }
+                val selectedChip = group.findViewById<Chip>(checkedId)
+
                 for (i in 0 until group.childCount) {
-                    val chip = group.getChildAt(i) as Chip
-                    chip.setChipBackgroundColorResource(android.R.color.background_light)
+                    val chip = group.getChildAt(i) as? Chip
+                    chip?.setChipBackgroundColorResource(android.R.color.background_light)
                 }
 
                 if (checkedId != View.NO_ID) {
-                    val selectedChip = findViewById<Chip>(checkedId)
-                    selectedChip.setChipBackgroundColorResource(R.color.status_bar)
+                    selectedChip?.setChipBackgroundColorResource(R.color.status_bar)
+                    chip = selectedChip?.text.toString()
+                    Log.d("SelectedChipText", "Selected Chip: $chip")
                 }
             }
 
@@ -187,15 +188,20 @@ class ActivityPrasarana : AppCompatActivity() {
     private fun getUserInput() {
         val type = "Prasarana"
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        val selectedChipId = chipGroup.checkedChipId
-        val chip: String
+        var selectedChipText = ""
 
-        if (selectedChipId != View.NO_ID) {
-            val selectedChip = findViewById<Chip>(selectedChipId)
-            chip = selectedChip.text.toString()
-        } else {
+        for (i in 0 until chipGroup.childCount) {
+            val chip = chipGroup.getChildAt(i) as Chip
+            if (chip.isChecked) {
+                selectedChipText = chip.text.toString()
+                break
+            }
+        }
+
+        if (selectedChipText.isEmpty()) {
             Toast.makeText(this, "Pilih jenis sarana terlebih dahulu.", Toast.LENGTH_SHORT).show()
             return
+
         }
 
         binding.apply {
@@ -207,26 +213,26 @@ class ActivityPrasarana : AppCompatActivity() {
             if (validateInput(tanggal, lokasi, deskripsiKerusakan, fotoKerusakan)) {
                 val fileProfilePicture: File = Constant.reduceFileImage(fotoKerusakan as File)
 
-                val rType = type.toRequestBody("text/plain".toMediaType())
-                val rLokasi = lokasi.toRequestBody("text/plain".toMediaType())
-                val rDeskripsi = deskripsiKerusakan.toRequestBody("text/plain".toMediaType())
-                val rTanggal = tanggal.toRequestBody("text/plain".toMediaType())
+                val requestBody: RequestBody = MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("status", "permohonan")
+                    .addFormDataPart("type", type)
+                    .addFormDataPart("lokasi", lokasi)
+                    .addFormDataPart("deskripsi", deskripsiKerusakan)
+                    .addFormDataPart("tanggal", tanggal)
+                    .addFormDataPart("jenis", selectedChipText)
+                    .addFormDataPart(
+                        "foto",
+                        fileProfilePicture.name,
+                        RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
+                    ).build()
 
-                val fotoAlat =
-                    fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val foto: MultipartBody.Part = MultipartBody.Part.createFormData(
-                    "foto",
-                    fileProfilePicture.name,
-                    fotoAlat
-                )
-
-                insertLaporan(
-                    foto, rType, rTanggal, rLokasi, rDeskripsi,
-                )
+                insertLaporan(requestBody)
             }
         }
-
     }
+
+
 
     private fun validateInput(
         tanggal: String,
@@ -257,21 +263,12 @@ class ActivityPrasarana : AppCompatActivity() {
     }
 
     private fun insertLaporan(
-        foto: MultipartBody.Part,
-        type: RequestBody,
-        tanggal: RequestBody,
-        lokasi: RequestBody,
-        deskripsi: RequestBody
-    ) {
-        viewModel.inputPrasana(
+        requestBody: RequestBody
+    )  {
+        viewModel.inputLaporan(
             user?.getToken.toString(),
-            type,
-            tanggal,
-            lokasi,
-            deskripsi,
-            foto
-        )
-            .observe(this@ActivityPrasarana) { result ->
+            requestBody
+        ).observe(this@ActivityPrasarana) { result ->
                 binding.apply {
                     when (result) {
                         is Resource.Loading -> {
