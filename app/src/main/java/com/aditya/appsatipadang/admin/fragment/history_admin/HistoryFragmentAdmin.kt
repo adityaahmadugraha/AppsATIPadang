@@ -1,24 +1,18 @@
 package com.aditya.appsatipadang.admin.fragment.history_admin
 
-import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
+import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryAdminBinding
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.teknik.ui_teknisi.history.HistoryAdapterBulanan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +23,8 @@ class HistoryFragmentAdmin : Fragment() {
     private val viewModel: HistoryAdminViewModel by viewModels()
     private val binding get() = _binding!!
 
-    private lateinit var mAdapter: AdapterHistoryLaporan
+    private lateinit var mAdapterHarian: AdapterHystoryHarian
+    private lateinit var mAdapterBulanan: HistoryAdapterBulanan
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +38,18 @@ class HistoryFragmentAdmin : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupButtonBackClicked()
-        setupRecyclerView()
         getDataUser()
+        setupAdapter()
+    }
+
+    private fun setupAdapter() {
+        mAdapterHarian = AdapterHystoryHarian {
+
+        }
+
+        mAdapterBulanan = HistoryAdapterBulanan {
+
+        }
     }
 
     private fun setupButtonBackClicked() {
@@ -55,91 +60,48 @@ class HistoryFragmentAdmin : Fragment() {
 
     private fun getDataUser() {
 
-        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
+        // harian
+        viewModel.getUser().observe(viewLifecycleOwner){
+            viewModel.getListLaporanHarian(it.getToken).observe(viewLifecycleOwner){ result ->
+                when(result){
+                    is Resource.Loading -> {}
                     is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-
-                        Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
-
-                        mAdapter.submitList(result.data.laporan)
+                        val data = result.data
+                        mAdapterHarian.submitList(data.laporan)
+                        setupRecyclerView()
                     }
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(
-                            requireActivity(),
-                            result.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    is Resource.Error -> {}
                 }
             }
-
-            viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
+        }
+        // bulanan
+        viewModel.getUser().observe(viewLifecycleOwner){
+            viewModel.getListLaporanBulanan(it.getToken).observe(viewLifecycleOwner){ result ->
+                when(result){
+                    is Resource.Loading -> {}
                     is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-
-                        Log.d(ContentValues.TAG, "listHistory::::::: ${result.data}")
-
-                        mAdapter.submitList(result.data.laporan)
+                        val data = result.data
+                        mAdapterBulanan.submitList(data.laporan)
+                        setupRecyclerView()
                     }
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(
-                            requireActivity(),
-                            result.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    is Resource.Error -> {}
                 }
             }
-
         }
     }
 
     private fun setupRecyclerView() {
-        mAdapter = AdapterHistoryLaporan {
-            goToDetailScreen(it)
-        }
         binding.rvHistoryBulanan.apply {
-            adapter = mAdapter
+            adapter = mAdapterBulanan
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
         }
         binding.rvHistoryHariIni.apply {
-            adapter = mAdapter
+            adapter = mAdapterHarian
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
         }
     }
-
-    private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
-
-        val bundle = Bundle().apply {
-            putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
-            putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
-//            putString(SaranaActivityAdmin.TAG_LOKASI, itemLaporaneResponse.lokasi)
-
-
-
-
-
-
-        }
-        Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
-            putExtra(DetailStatusLaporanActivity.TAG_BUNDLE, bundle)
-            startActivity(this)
-        }
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

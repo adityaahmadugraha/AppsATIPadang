@@ -126,7 +126,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <TextView
                 android:id="@+id/txt_name_pelapor"
                 android:layout_width="wrap_content"

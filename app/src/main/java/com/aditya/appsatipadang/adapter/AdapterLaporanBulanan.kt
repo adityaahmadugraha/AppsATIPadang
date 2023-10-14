@@ -11,12 +11,13 @@ import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
 
-class AdapterHistoryLaporan(
+class AdapterLaporanBulanan(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
-) : ListAdapter<ItemLaporaneResponse, AdapterHistoryLaporan.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<ItemLaporaneResponse, AdapterLaporanBulanan.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

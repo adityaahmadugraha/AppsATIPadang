@@ -12,7 +12,6 @@ import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
 
 class AdapterHystoryHarian(
-
     private val onItemClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, AdapterHystoryHarian.ViewHolder>(DIFF_CALLBACK) {
 

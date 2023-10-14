@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityDetailStatusLaporanBinding
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,51 +26,25 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         const val TAG_TANGGAL = "tanggal"
         const val TAG_LOKASI = "lokasi"
         const val TAG_STATUS = "status"
-//        const val TAG_FOTO = "foto"
-
-
+        const val TAG_IDLAPORAN = "id_laporan"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailStatusLaporanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        id = intent.getStringExtra(TAG_IDLAPORAN).toString()
 
-        id = intent.getStringExtra("ID_LAPORAN").toString()
-
-
-        binding.imgBackStatusLaporan.setOnClickListener {
-            intent = Intent(this@DetailStatusLaporanActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        val bundle = intent.getBundleExtra(TAG_BUNDLE)
-        if (bundle != null) {
-            binding.apply {
-
-                etType.text = Editable.Factory.getInstance().newEditable(bundle.getString(TAG_TIPE))
-
-                etTanggal.text = Editable.Factory.getInstance().newEditable(bundle.getString(
-                    TAG_TANGGAL
-                ))
-
-                etLokasi.text = Editable.Factory.getInstance().newEditable(bundle.getString(
-                    TAG_LOKASI
-                ))
-
-                tvStatus.text = Editable.Factory.getInstance().newEditable(bundle.getString(
-                    TAG_STATUS
-                ))
-
-
-
-
-
-                btnBack.setOnClickListener {
-                    finish()
-                }
+        binding.apply {
+            imgBackStatusLaporan.setOnClickListener {
+                intent = Intent(this@DetailStatusLaporanActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+            btnBack.setOnClickListener {
+                intent = Intent(this@DetailStatusLaporanActivity, MainActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -90,7 +65,9 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             val laporan = item.data.laporan
                             binding.apply {
-                                etType.setText(laporan!!.merk.toString())
+                                etType.setText(laporan?.merk.toString())
+                                etTanggal.setText(laporan?.tanggal.toString())
+                                etLokasi.setText(laporan?.lokasi.toString())
                             }
                         }
 
