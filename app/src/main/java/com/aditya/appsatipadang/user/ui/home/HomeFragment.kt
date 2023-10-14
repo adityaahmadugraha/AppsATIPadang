@@ -85,9 +85,11 @@ class HomeFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-                        val latestFiveData = result.data.laporan
+                        //menampilkan data hanya lima terbaru
+                        val allData = result.data.laporan
+                        val latestFiveData = if (allData?.size!! >= 5) allData.subList(0, 5) else allData
 
-                        mAdapter.submitListReversed(latestFiveData)
+                        mAdapter.submitList(latestFiveData) // Mengirim lima data terbaru ke adapter
                         setupRecyclerView()
                     }
 
@@ -132,7 +134,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding?.rvLaporanHome?.apply {
+        binding.rvLaporanHome.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
