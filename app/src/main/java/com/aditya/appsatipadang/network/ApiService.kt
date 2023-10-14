@@ -3,6 +3,7 @@ package com.aditya.appsatipadang.network
 import android.view.View
 import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.remote.request.AddUserResponse
+import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
@@ -74,10 +75,10 @@ interface ApiService {
     ): LaporanResponse
 
 
-    @POST("laporan")
+    @POST("kirimlaporanTeknisi")
     suspend fun insertLaporanTeknisi(
         @Header("Authorization") token: String,
-        @Body body: View
+        @Body body: KirimTeknisiRequest
     ): LaporanResponse
 
     @POST("laporan")

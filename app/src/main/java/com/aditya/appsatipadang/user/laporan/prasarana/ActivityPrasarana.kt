@@ -281,7 +281,7 @@ class ActivityPrasarana : AppCompatActivity() {
                                 this@ActivityPrasarana,
                                 ActivityPemberitahuan::class.java
                             ).apply {
-                                putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
+                                putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
 //                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
                             }

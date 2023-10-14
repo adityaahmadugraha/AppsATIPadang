@@ -29,7 +29,7 @@ import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
-import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan.Companion.TAG_ID_LAPORAN
+import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan.Companion.ID_LAPORAN_PEMBERITAHUAN
 import com.aditya.appsatipadang.utils.Constant.bitmapToFile
 import com.aditya.appsatipadang.utils.Constant.createCustomTempFile
 import com.aditya.appsatipadang.utils.Constant.getRotatedBitmap
@@ -282,16 +282,11 @@ class SaranaActivity : AppCompatActivity() {
 
                         showLoadingInput(false)
 
-
                         Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
                             .apply {
-                                putExtra(TAG_ID_LAPORAN, result.data.id)
-
-//                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                putExtra(ID_LAPORAN_PEMBERITAHUAN, result.data.id)
                                 startActivity(this)
                             }
-
-
                     }
 
                     is Resource.Error -> {

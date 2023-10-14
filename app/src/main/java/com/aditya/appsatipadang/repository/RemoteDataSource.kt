@@ -2,6 +2,7 @@ package com.aditya.appsatipadang.repository
 
 import android.view.View
 import com.aditya.appsatipadang.data.Resource
+import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
@@ -119,10 +120,10 @@ class RemoteDataSource @Inject constructor(
 
     fun insertLaporanTeknisi(
         token: String,
-        requestBody: View
+        kirimTeknisiRequest: KirimTeknisiRequest
     ) = flow<Resource<LaporanResponse>> {
         emit(Resource.Loading())
-        val response = apiService.insertLaporanTeknisi(token, requestBody)
+        val response = apiService.insertLaporanTeknisi(token, kirimTeknisiRequest)
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemukan"))

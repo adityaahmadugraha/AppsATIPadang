@@ -16,19 +16,16 @@ data class LaporanIdResponse(
 		val merk: String? = null,
 
 		@field:SerializedName("pihak_terlibat")
-		val pihakTerlibat: Any? = null,
+		val pihakTerlibat: String? = null,
 
 		@field:SerializedName("id_teknisi")
-		val idTeknisi: Any? = null,
+		val idTeknisi: Int? = null,
 
 		@field:SerializedName("type")
 		val type: String? = null,
 
-		@field:SerializedName("name")
-		val name: String? = null,
-
 		@field:SerializedName("kegiatan_perbaikan")
-		val kegiatanPerbaikan: Any? = null,
+		val kegiatanPerbaikan: String? = null,
 
 		@field:SerializedName("biaya")
 		val biaya: Int? = null,
@@ -39,6 +36,9 @@ data class LaporanIdResponse(
 		@field:SerializedName("lokasi")
 		val lokasi: String? = null,
 
+		@field:SerializedName("name")
+		val name: String? = null,
+
 		@field:SerializedName("id_pelapor")
 		val idPelapor: Int? = null,
 
@@ -46,10 +46,13 @@ data class LaporanIdResponse(
 		val waktu: String? = null,
 
 		@field:SerializedName("foto_perbaikan")
-		val fotoPerbaikan: Any? = null,
+		val fotoPerbaikan: String? = null,
 
 		@field:SerializedName("id")
 		val id: Int? = null,
+
+		@field:SerializedName("nama_pelapor")
+		val namaPelapor: String? = null,
 
 		@field:SerializedName("tanggal")
 		val tanggal: String? = null,
@@ -58,7 +61,7 @@ data class LaporanIdResponse(
 		val deskripsi: String? = null,
 
 		@field:SerializedName("status")
-		val status: String? = null
+		val status: String? = null,
 	)
 }
 

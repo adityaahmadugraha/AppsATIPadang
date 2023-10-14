@@ -11,6 +11,8 @@ data class TeknisiReponse(
     val status: Int? = null
 ) {
     data class TeknisiItem(
+        @field:SerializedName("id")
+        val id: String? = null,
 
         @field:SerializedName("name")
         val name: String? = null

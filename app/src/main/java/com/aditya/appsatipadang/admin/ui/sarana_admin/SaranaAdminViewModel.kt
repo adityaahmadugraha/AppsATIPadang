@@ -3,6 +3,7 @@ package com.aditya.appsatipadang.admin.ui.sarana_admin
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.RequestBody
@@ -15,8 +16,10 @@ class SaranaAdminViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getUser() = dataRepository.getUser().asLiveData()
+    fun getDataLaporanId(token: String, id: String) =
+        dataRepository.getLaporanId(token, id).asLiveData()
     fun getDataLaporan(token: String, id: String) =
-        dataRepository.getDataLaporan(token, id).asLiveData()
+            dataRepository.getDataLaporan(token, id).asLiveData()
 
     fun getTeknisiList(token: String, roles: String) =
         dataRepository.getTeknisiList(token, roles).asLiveData()
@@ -33,9 +36,8 @@ class SaranaAdminViewModel @Inject constructor(
 
     fun inputLaporanTeknisi(
         token: String,
-        selectedTeknisi: String,
-        requestBody: View
-    ) = dataRepository.insertLaporanTeknisi(token, requestBody).asLiveData()
+        kirimTeknisiRequest: KirimTeknisiRequest
+    ) = dataRepository.insertLaporanTeknisi(token, kirimTeknisiRequest).asLiveData()
 
 }
 

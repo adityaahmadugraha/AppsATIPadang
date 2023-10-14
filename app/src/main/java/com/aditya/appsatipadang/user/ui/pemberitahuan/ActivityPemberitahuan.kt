@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.databinding.ActivityPemberitahuanBinding
+import com.aditya.appsatipadang.supervisor.ActivitySupervisor
+import com.aditya.appsatipadang.teknik.ActivityTeknik
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -22,16 +25,31 @@ class ActivityPemberitahuan : AppCompatActivity() {
         binding = ActivityPemberitahuanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        id = intent.getIntExtra(TAG_ID_LAPORAN, 0)
+        id = intent.getIntExtra(ID_LAPORAN_PEMBERITAHUAN, 0)
 
         binding.tvIdLaporan.text = id.toString()
 
         binding.btnCekLaporan.setOnClickListener {
-            finish()
+            viewModel.getUser().observe(this@ActivityPemberitahuan){
+                if (it.roles == "Admin"){
+                    val intent = Intent(this@ActivityPemberitahuan, HomeActivity::class.java)
+                    startActivity(intent)
+                }else if (it.roles == "Teknisi"){
+                    val intent = Intent(this@ActivityPemberitahuan, ActivityTeknik::class.java)
+                    startActivity(intent)
+                }else if (it.roles == "Pelapor"){
+                    val intent = Intent(this@ActivityPemberitahuan, MainActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(this@ActivityPemberitahuan, ActivitySupervisor::class.java)
+                    startActivity(intent)
+                }
+            }
+
         }
     }
 
     companion object {
-        const val TAG_ID_LAPORAN = "idLaporan"
+        const val ID_LAPORAN_PEMBERITAHUAN = "idLaporan"
     }
 }

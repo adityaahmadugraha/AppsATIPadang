@@ -4,6 +4,7 @@ package com.aditya.appsatipadang.repository
 import android.view.View
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.local.UserPreference
+import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import okhttp3.MultipartBody
@@ -41,8 +42,8 @@ class DataRepository @Inject constructor(
 
     fun insertLaporanTeknisi(
         token: String,
-        requestBody: View
-    ) = remoteData.insertLaporanTeknisi(token, requestBody)
+        kirimTeknisiRequest: KirimTeknisiRequest
+    ) = remoteData.insertLaporanTeknisi(token, kirimTeknisiRequest)
 
     fun updateLaporan(
         token: String,
@@ -80,8 +81,7 @@ class DataRepository @Inject constructor(
         foto: MultipartBody.Part,
     ) = remoteData.inputKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto)
 
-
-    fun getDataLaporan(token: String, id: String) = remoteData.getDataLaporan(token, id)
+    fun getDataLaporan(token: String, id: String) = remoteData.getLaporanId(token, id)
 
     fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
 

@@ -24,6 +24,7 @@ import com.aditya.appsatipadang.user.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.user.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.user.laporan.status.ActivityStatus
+import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_IDLAPORAN
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_LOKASI
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_STATUS
 import com.aditya.appsatipadang.utils.Constant.getToken
@@ -49,7 +50,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding.cardSarana.setOnClickListener {
             val intent = Intent(activity, SaranaActivity::class.java)
@@ -87,9 +87,8 @@ class HomeFragment : Fragment() {
 
                         //menampilkan data hanya lima terbaru
                         val allData = result.data.laporan
-                        val latestFiveData = if (allData?.size!! >= 5) allData.subList(0, 5) else allData
 
-                        mAdapter.submitList(latestFiveData) // Mengirim lima data terbaru ke adapter
+                        mAdapter.submitList(allData) // Mengirim lima data terbaru ke adapter
                         setupRecyclerView()
                     }
 
@@ -111,25 +110,10 @@ class HomeFragment : Fragment() {
 
     private fun setupList() {
         mAdapter = AdapterLaporan {
-            goToDetailScreen(it)
-        }
-    }
-
-    private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
-
-        val bundle = Bundle().apply {
-
-
-            putString(TAG_TIPE, itemLaporaneResponse.type)
-            putString(TAG_TANGGAL, itemLaporaneResponse.tanggal)
-            putString(TAG_LOKASI, itemLaporaneResponse.lokasi)
-            putString(TAG_STATUS, itemLaporaneResponse.status)
-
-
-        }
-        Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
-            putExtra(TAG_BUNDLE, bundle)
-            startActivity(this)
+            Intent(requireActivity(), DetailStatusLaporanActivity::class.java).apply {
+                putExtra(TAG_IDLAPORAN, it.id.toString())
+                startActivity(this)
+            }
         }
     }
 

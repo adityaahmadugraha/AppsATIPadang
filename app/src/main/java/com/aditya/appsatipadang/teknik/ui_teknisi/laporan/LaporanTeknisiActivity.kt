@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.aditya.appsatipadang.BuildConfig
@@ -27,7 +26,6 @@ import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityLaporanTeknisiBinding
 import com.aditya.appsatipadang.teknik.ActivityTeknik
-import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
@@ -78,7 +76,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
 
             getUserData()
             imgBack.setOnClickListener {
-                val intent = Intent(this@LaporanTeknisiActivity, MainActivity::class.java)
+                val intent = Intent(this@LaporanTeknisiActivity, ActivityTeknik::class.java)
                 startActivity(intent)
             }
 
@@ -288,7 +286,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                             this@LaporanTeknisiActivity, ActivityPemberitahuan::class.java
                         )
                             .apply {
-                                putExtra(ActivityPemberitahuan.TAG_ID_LAPORAN, result.data.id)
+                                putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
 
                                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(this)
