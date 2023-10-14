@@ -1,25 +1,37 @@
 package com.aditya.appsatipadang.user.ui.profile
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.FragmentProfileBinding
 import com.aditya.appsatipadang.user.ui.login.LoginActivity
+import com.aditya.appsatipadang.utils.Constant
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private var binding: FragmentProfileBinding? = null
     private val viewModel: ProfileViewModel by viewModels()
+
+    private var editMode: Boolean = false
+
+    private var profilePicture: File? = null
+
+    private var user: UserLocal? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +44,21 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //add foto profil
+        binding?.imgEdit?.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_GET_CONTENT
+            intent.type = "image/*"
+            val chooser = Intent.createChooser(intent, "Choose a Picture")
+            launcherIntentGallery.launch(chooser)
+        }
+
+//        btnSave.setOnClickListener {
+//
+//        }
+
+
 
         setupButtonBackClicked()
         getDataUser()
@@ -47,6 +74,18 @@ class ProfileFragment : Fragment() {
     }
 
 
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+
+            profilePicture = Constant.uriToFile(selectedImg, requireContext())
+            binding?.apply {
+                imgEdit.setImageURI(selectedImg)
+            }
+        }
+    }
     //menampilkan data profil
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
@@ -60,6 +99,9 @@ class ProfileFragment : Fragment() {
 
 
     }
+
+
+
 
     private fun showAlertLogout() {
         MaterialAlertDialogBuilder(requireContext())
@@ -89,9 +131,12 @@ class ProfileFragment : Fragment() {
     private fun setupButtonBackClicked() {
 
         binding?.imgBackProfil?.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_navigation_home)
+            activity?.onBackPressed()
         }
+
     }
+
+
 
 
 }

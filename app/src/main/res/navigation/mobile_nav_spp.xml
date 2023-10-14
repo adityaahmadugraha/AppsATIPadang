@@ -17,6 +17,9 @@
         android:label="@string/title_history"
         tools:layout="@layout/fragment_spp_history">
 
+        <action
+            android:id="@+id/action_navigation_history_spp_to_navigation_home_spp"
+            app:destination="@id/navigation_home_spp" />
     </fragment>
 
     <fragment

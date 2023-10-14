@@ -37,7 +37,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".admin.ui.AddUserActivity"
+            android:name=".admin.ui.kamtibmas_admin.ActivityBerhasilAddUser"
             android:exported="false" />
 
         <service
@@ -48,6 +48,9 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".admin.ui.kamtibmas_admin.AddUserActivity"
+            android:exported="false" />
         <activity
             android:name=".teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi"
             android:exported="false" />

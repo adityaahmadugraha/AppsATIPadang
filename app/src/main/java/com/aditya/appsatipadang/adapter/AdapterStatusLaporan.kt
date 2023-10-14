@@ -27,8 +27,8 @@ class AdapterStatusLaporan
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
-                tvBiaya.text = data.biaya
 
+                tvBiaya.text = "Rp ."+data.biaya
                 tvNoLaporan.text = data.id.toString()
                 tvTipe.text = data.type
                 tvTanggal.text = data.tanggal
@@ -36,7 +36,7 @@ class AdapterStatusLaporan
                 tvTeknisi.text = data.id_teknisi.toString()
                 tvKegiatanPerbaikan.text = data.kegiatan_perbaikan
                 tvPihakYangTerlibat.text = data.pihak_terlibat
-                tvBiaya.text = data.biaya
+
 
             }
         }

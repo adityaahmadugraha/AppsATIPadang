@@ -4,23 +4,22 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.databinding.FragmentHistoryAdminBinding
-import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.databinding.FragmentHistoryAdminBinding
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -45,14 +45,18 @@
 
             <TextView
                 android:id="@+id/txt_history_hari_ini"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/background_text"
                 android:fontFamily="@font/poppinssembiold"
-                android:text="Hari Ini :"
+                android:gravity="center"
+                android:text="Hari Ini"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_back_history" />
 
@@ -71,13 +75,18 @@
 
             <TextView
                 android:id="@+id/txt_history_bulan_ini"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/poppinssembiold"
-                android:text="Bulan Ini :"
+                android:background="@drawable/background_text"
+                android:gravity="center"
+                android:text="Bulan Ini"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txt_history_hari_ini"
                 app:layout_constraintTop_toBottomOf="@+id/rv_history_hari_ini" />
 

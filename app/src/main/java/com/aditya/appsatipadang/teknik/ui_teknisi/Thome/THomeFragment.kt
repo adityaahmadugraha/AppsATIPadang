@@ -1,9 +1,7 @@
 package com.aditya.appsatipadang.teknik.ui_teknisi.Thome
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +10,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
+import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
-import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
 import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
-import com.aditya.appsatipadang.teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi
-import com.aditya.appsatipadang.teknik.ui_teknisi.rekap_laporan.RekapLaporanTeknisiViewModel
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,7 +44,7 @@ class THomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.cardRekapLaporan.setOnClickListener {
-            val intent = Intent(activity, RekapActivityTeknisi::class.java)
+            val intent = Intent(activity, StatusActivityAdmin::class.java)
             startActivity(intent)
         }
 

@@ -129,10 +129,19 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="hisotry_pengerjaaan">Hisotry Pengerjaaan</string>
+    <string name="history_pengerjaaan">History Pengerjaaan</string>
     <string name="egg_notification_channel_id">INFORMATION</string>
     <string name="notification_title">NOTIFIKASI</string>
     <string name="snooze">Snooze</string>
     <string name="eggs_ready">INFORMATION</string>
     <string name="default_notification_channel_id">POST_NOTIFICATION</string>
+
+    <string-array name="pilih_roles">
+        <item>Pilih Roles</item>
+        <item>Admin</item>
+        <item>Pelapor</item>
+        <item>Teknisi</item>
+        <item>Supervisor</item>
+    </string-array>
+
 </resources>

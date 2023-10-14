@@ -208,7 +208,6 @@
         android:paddingTop="20dp"
         android:paddingEnd="20dp"
         android:paddingBottom="20dp"
-        android:text="Lihat Foto"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="normal"

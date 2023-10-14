@@ -40,6 +40,7 @@ class AdapterLaporan
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
                 tvStatusLaporan.text = data.status
+//                tvNameAlat.text = data.status
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL+data.foto)
                     .into(binding.imgPelaporan)
