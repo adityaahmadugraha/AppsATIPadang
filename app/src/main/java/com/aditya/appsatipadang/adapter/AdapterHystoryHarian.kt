@@ -32,6 +32,7 @@ class AdapterHystoryHarian(
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.merk
+                tvStatusLaporan.text = data.status
 
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL+data.foto)
