@@ -24,6 +24,9 @@ data class LaporanIdResponse(
 		@field:SerializedName("type")
 		val type: String? = null,
 
+		@field:SerializedName("jenis")
+		val jenis: String? = null,
+
 		@field:SerializedName("kegiatan_perbaikan")
 		val kegiatanPerbaikan: String? = null,
 

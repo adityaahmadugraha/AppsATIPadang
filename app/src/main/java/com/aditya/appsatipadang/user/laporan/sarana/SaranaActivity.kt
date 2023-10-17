@@ -60,6 +60,7 @@ class SaranaActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
     private var user: UserLocal? = null
+
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
     var chip = ""
@@ -214,6 +215,7 @@ class SaranaActivity : AppCompatActivity() {
             val merk = etMerk.text.toString()
 
             if (validateInput(tanggal, lokasi, deskripsiKerusakan, fotoKerusakan)) {
+
                 val fileProfilePicture: File = reduceFileImage(fotoKerusakan as File)
 
                 val requestBody: RequestBody = MultipartBody.Builder()
@@ -265,12 +267,8 @@ class SaranaActivity : AppCompatActivity() {
         return true
     }
 
-    private fun insertLaporan(
-        requestBody: RequestBody
-    ) {
-        viewModel.inputLaporan(
-            user?.getToken.toString(),
-            requestBody
+    private fun insertLaporan(requestBody: RequestBody) {
+        viewModel.inputLaporan(user?.getToken.toString(), requestBody
         ).observe(this@SaranaActivity) { result ->
             binding.apply {
                 when (result) {
@@ -350,6 +348,10 @@ class SaranaActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
+
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {

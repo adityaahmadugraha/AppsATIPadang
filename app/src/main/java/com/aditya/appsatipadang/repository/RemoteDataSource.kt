@@ -1,6 +1,5 @@
 package com.aditya.appsatipadang.repository
 
-import android.view.View
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
@@ -8,6 +7,7 @@ import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
+import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import com.aditya.appsatipadang.network.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -112,6 +112,21 @@ class RemoteDataSource @Inject constructor(
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemuan"))
+        }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun inputFotoProfil(
+        token: String,
+        requestBody: RequestBody
+    ) = flow<Resource<ProfileUserResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.insertFoto(token, requestBody)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Error"))
         }
     }.catch {
         emit(Resource.Error(it.message ?: ""))

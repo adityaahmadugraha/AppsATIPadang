@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.datastore.preferences.protobuf.Internal.MapAdapter
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
@@ -26,6 +27,7 @@ import com.aditya.appsatipadang.teknik.ui_teknisi.Thome.THomeViewModel
 import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
 import com.aditya.appsatipadang.teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi
 import com.aditya.appsatipadang.utils.Constant.getToken
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -68,7 +70,11 @@ class SppHomeFragment : Fragment() {
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
             binding.tvName.text = userLocal.name
-
+            binding.let {
+                Glide.with(requireContext())
+                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
+                    .error(android.R.color.darker_gray)
+                    .into(it.imgProfil) }
 
             viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                 Log.d(ContentValues.TAG, "getDataUser: ${userLocal.getToken}")

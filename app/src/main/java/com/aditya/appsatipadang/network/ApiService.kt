@@ -1,7 +1,5 @@
 package com.aditya.appsatipadang.network
 
-import android.view.View
-import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.remote.request.AddUserResponse
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
@@ -74,6 +72,13 @@ interface ApiService {
         @Body body: RequestBody
     ): LaporanResponse
 
+    //image Profil
+//    @POST("imageProfil/{id}")
+    @POST("imageProfil/{id}")
+    suspend fun insertFoto(
+        @Header("Authorization") token: String,
+        @Body body: RequestBody
+    ): ProfileUserResponse
 
     @POST("kirimlaporanTeknisi")
     suspend fun insertLaporanTeknisi(
@@ -127,18 +132,6 @@ interface ApiService {
     suspend fun kirimLaporanPerbaikan(
         @Header("Authorization") token: String,
         @Body body: RequestBody
-    ): LaporanResponse
-
-//        @POST("laporan(id)")
-//    suspend fun insertTeknisi(
-//        @Header("Authorization") token: String,
-//    ): LaporanResponse
-
-
-
-    @POST("laporan(id)")
-    suspend fun insertTeknisi(
-        @Header("Authorization") token: String,
     ): LaporanResponse
 
 

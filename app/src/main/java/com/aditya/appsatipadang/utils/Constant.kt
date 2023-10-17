@@ -41,6 +41,7 @@ object Constant {
     val TAG_PASSWORD = stringPreferencesKey("password")
     val TAG_ROLES = stringPreferencesKey("roles")
     val TAG_ALAMAT = stringPreferencesKey("alamat")
+    val TAG_FOTO = stringPreferencesKey("foto")
     val TAG_TOKEN = stringPreferencesKey("token")
     val TAG_FCMTOKEN = stringPreferencesKey("fcmtoken")
 

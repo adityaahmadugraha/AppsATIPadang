@@ -1,20 +1,23 @@
 package com.aditya.appsatipadang.user.ui.pemberitahuan
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.aditya.appsatipadang.admin.HomeActivity
-import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.databinding.ActivityPemberitahuanBinding
 import com.aditya.appsatipadang.supervisor.ActivitySupervisor
 import com.aditya.appsatipadang.teknik.ActivityTeknik
+import com.aditya.appsatipadang.user.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class ActivityPemberitahuan : AppCompatActivity() {
+
+    companion object {
+        const val ID_LAPORAN_PEMBERITAHUAN = "idLaporan"
+    }
 
     private lateinit var binding: ActivityPemberitahuanBinding
     var id: Int = 0
@@ -49,7 +52,5 @@ class ActivityPemberitahuan : AppCompatActivity() {
         }
     }
 
-    companion object {
-        const val ID_LAPORAN_PEMBERITAHUAN = "idLaporan"
-    }
+
 }

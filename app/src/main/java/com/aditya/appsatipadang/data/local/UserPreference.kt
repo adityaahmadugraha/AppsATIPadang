@@ -24,10 +24,11 @@ class UserPreference(context: Context) {
                 preferences[Constant.TAG_PASSWORD] ?: "",
                 preferences[Constant.TAG_ROLES] ?: "",
                 preferences[Constant.TAG_ALAMAT] ?: "",
+                preferences[Constant.TAG_FOTO] ?: "",
                 preferences[Constant.TAG_TOKEN] ?: "",
                 preferences[Constant.TAG_FCMTOKEN] ?: "",
 
-            )
+                )
             userLocal
 
         }
@@ -43,6 +44,7 @@ class UserPreference(context: Context) {
             preferences[Constant.TAG_PASSWORD] = user.password
             preferences[Constant.TAG_ROLES] = user.roles
             preferences[Constant.TAG_ALAMAT] = user.alamat
+            preferences[Constant.TAG_FOTO] = user.foto
             preferences[Constant.TAG_TOKEN] = user.token
             preferences[Constant.TAG_FCMTOKEN] = user.fcmtoken
         }

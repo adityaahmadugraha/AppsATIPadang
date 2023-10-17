@@ -61,14 +61,15 @@ class SaranaActivityAdmin : AppCompatActivity() {
     }
 
     private fun getLpaoranData() {
-        viewModel.getUser().observe(this@SaranaActivityAdmin){
-            viewModel.getDataLaporanId(it.getToken,id).observe(this@SaranaActivityAdmin){ item ->
-                when(item){
+        viewModel.getUser().observe(this@SaranaActivityAdmin) {
+            viewModel.getDataLaporanId(it.getToken, id).observe(this@SaranaActivityAdmin) { item ->
+                when (item) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val dataItem = item.data.laporan
                         binding.apply {
-                            etType.setText(dataItem?.type)
+                            etType.setText(dataItem?.jenis)
+                            etJenis.setText(dataItem?.type)
                             etNamePelapor.setText(dataItem?.namaPelapor)
                             etNamePelapor.setText(dataItem?.namaPelapor)
                             etMerk.setText(dataItem?.merk)
@@ -82,6 +83,7 @@ class SaranaActivityAdmin : AppCompatActivity() {
                                 .into(imgBuktiSarana)
                         }
                     }
+
                     is Resource.Error -> {}
                 }
             }
@@ -95,25 +97,27 @@ class SaranaActivityAdmin : AppCompatActivity() {
             return
         }
 
-        val dataKirim = KirimTeknisiRequest(selectedTeknisi,id)
+        val dataKirim = KirimTeknisiRequest(selectedTeknisi, id)
 
-        viewModel.getUser().observe(this@SaranaActivityAdmin){
-            viewModel.inputLaporanTeknisi(it.getToken, dataKirim).observe(this@SaranaActivityAdmin) { result ->
-                when (result) {
-                    is Resource.Loading -> {}
+        viewModel.getUser().observe(this@SaranaActivityAdmin) {
+            viewModel.inputLaporanTeknisi(it.getToken, dataKirim)
+                .observe(this@SaranaActivityAdmin) { result ->
+                    when (result) {
+                        is Resource.Loading -> {}
 
-                    is Resource.Success -> {
-                        val intent = Intent(this@SaranaActivityAdmin, ActivityPemberitahuan::class.java)
-                        intent.putExtra(ID_LAPORAN_PEMBERITAHUAN, id.toInt())
-                        startActivity(intent)
-                    }
+                        is Resource.Success -> {
+                            val intent =
+                                Intent(this@SaranaActivityAdmin, ActivityPemberitahuan::class.java)
+                            intent.putExtra(ID_LAPORAN_PEMBERITAHUAN, id.toInt())
+                            startActivity(intent)
+                        }
 
-                    is Resource.Error -> {
-                        val errorMessage = result.error
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                        is Resource.Error -> {
+                            val errorMessage = result.error
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
-            }
         }
     }
 
@@ -124,7 +128,10 @@ class SaranaActivityAdmin : AppCompatActivity() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val teknisiList = result.data.teknisi.orEmpty().toMutableList()
-                        teknisiList.add(0, TeknisiReponse.TeknisiItem("0", "Silahkan Pilih Teknisi"))
+                        teknisiList.add(
+                            0,
+                            TeknisiReponse.TeknisiItem("0", "Silahkan Pilih Teknisi")
+                        )
 
                         val adapter = ArrayAdapter(
                             this,
@@ -133,24 +140,25 @@ class SaranaActivityAdmin : AppCompatActivity() {
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         binding.spinerPosisiSaranaAdmin.adapter = adapter
 
-                        binding.spinerPosisiSaranaAdmin.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                            override fun onItemSelected(
-                                parent: AdapterView<*>?,
-                                view: View?,
-                                position: Int,
-                                id: Long
-                            ) {
-                                if (position > 0) {
-                                    selectedTeknisi = teknisiList[position]?.id ?: ""
-                                } else {
+                        binding.spinerPosisiSaranaAdmin.onItemSelectedListener =
+                            object : AdapterView.OnItemSelectedListener {
+                                override fun onItemSelected(
+                                    parent: AdapterView<*>?,
+                                    view: View?,
+                                    position: Int,
+                                    id: Long
+                                ) {
+                                    if (position > 0) {
+                                        selectedTeknisi = teknisiList[position]?.id ?: ""
+                                    } else {
+                                        selectedTeknisi = ""
+                                    }
+                                }
+
+                                override fun onNothingSelected(parent: AdapterView<*>?) {
                                     selectedTeknisi = ""
                                 }
                             }
-
-                            override fun onNothingSelected(parent: AdapterView<*>?) {
-                                selectedTeknisi = ""
-                            }
-                        }
                     }
 
                     is Resource.Error -> {}

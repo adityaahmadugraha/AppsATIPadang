@@ -10,12 +10,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
 import com.aditya.appsatipadang.utils.Constant.getToken
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -70,6 +72,11 @@ class THomeFragment : Fragment() {
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
             binding.tvName.text = userLocal.name
+            binding.let {
+                Glide.with(requireContext())
+                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
+                    .error(android.R.color.darker_gray)
+                    .into(it.imgProfil) }
 
 
             viewModel.getListPengerjaan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
