@@ -9,6 +9,7 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
@@ -59,7 +60,6 @@ class ActivityKamtibmas : AppCompatActivity() {
     private var fotoKerusakanPath: String? = null
 
     companion object {
-        const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -229,9 +229,9 @@ class ActivityKamtibmas : AppCompatActivity() {
 
     private fun validateInput(
         tanggal: String,
+        waktu: String,
         lokasi: String,
         deskripsiKerusakan: String,
-        waktu: String,
         fotoKerusakan: File?
     ): Boolean {
         binding.apply {
@@ -286,14 +286,23 @@ class ActivityKamtibmas : AppCompatActivity() {
 
                         is Resource.Success -> {
                             showLoadingInput(false)
+                            Log.d("ActivityKamtibmas", "Waktu yang akan dikirim ke database: $waktu"
+                            )
+
+                            val tanggal = etTanggalKamtibmas.text.toString()
+
                             Intent(
                                 this@ActivityKamtibmas,
                                 ActivityPemberitahuan::class.java
                             ).apply {
-                                putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
-//                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                putExtra(
+                                    ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN,
+                                    result.data.id
+                                )
+                                putExtra("tanggalLaporan", tanggal)
                                 startActivity(this)
                             }
+
                         }
 
                         is Resource.Error -> {

@@ -277,12 +277,13 @@ class ActivityPrasarana : AppCompatActivity() {
 
                         is Resource.Success -> {
                             showLoadingInput(false)
-                            Intent(
-                                this@ActivityPrasarana,
-                                ActivityPemberitahuan::class.java
-                            ).apply {
+
+
+                            val tanggal = etTanggal.text.toString()
+
+                            Intent(this@ActivityPrasarana, ActivityPemberitahuan::class.java).apply {
                                 putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
-//                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                putExtra("tanggalLaporan", tanggal)
                                 startActivity(this)
                             }
                         }
