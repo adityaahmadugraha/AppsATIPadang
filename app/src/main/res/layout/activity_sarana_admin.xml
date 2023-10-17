@@ -254,6 +254,49 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/txt_waktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Waktu :"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/il_tanggal" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/il_waktu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_waktu">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_waktu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppinssembiold"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/txt_lokasi"
@@ -266,7 +309,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/il_tanggal" />
+                app:layout_constraintTop_toBottomOf="@+id/il_waktu" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/il_lokasi"
@@ -293,7 +336,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Jl.Dr Sutomo"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -515,6 +557,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/kirim"
+                android:backgroundTint="@color/blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -59,30 +59,38 @@ class HistoryFragmentAdmin : Fragment() {
     }
 
     private fun getDataUser() {
-
         // harian
-        viewModel.getUser().observe(viewLifecycleOwner){
-            viewModel.getListLaporanHarian(it.getToken).observe(viewLifecycleOwner){ result ->
-                when(result){
+        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+            viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                when (result) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val data = result.data
                         mAdapterHarian.submitList(data.laporan)
-                        setupRecyclerView()
+                        setupRecyclerViewHarian()
+                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
+                        mAdapterHarian.submitList(sortedData)
+
+                        mAdapterHarian = mAdapterHarian
                     }
                     is Resource.Error -> {}
                 }
             }
         }
+
         // bulanan
-        viewModel.getUser().observe(viewLifecycleOwner){
-            viewModel.getListLaporanBulanan(it.getToken).observe(viewLifecycleOwner){ result ->
-                when(result){
+        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+            viewModel.getListLaporanBulanan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                when (result) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val data = result.data
                         mAdapterBulanan.submitList(data.laporan)
-                        setupRecyclerView()
+                        setupRecyclerViewBulanan()
+                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
+                        mAdapterBulanan.submitList(sortedData)
+
+                        mAdapterBulanan = mAdapterBulanan
                     }
                     is Resource.Error -> {}
                 }
@@ -90,18 +98,24 @@ class HistoryFragmentAdmin : Fragment() {
         }
     }
 
-    private fun setupRecyclerView() {
-        binding.rvHistoryBulanan.apply {
-            adapter = mAdapterBulanan
-            layoutManager = LinearLayoutManager(requireActivity())
-            setHasFixedSize(true)
-        }
+    private fun setupRecyclerViewHarian() {
         binding.rvHistoryHariIni.apply {
             adapter = mAdapterHarian
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
         }
     }
+
+    private fun setupRecyclerViewBulanan() {
+        binding.rvHistoryBulanan.apply {
+            adapter = mAdapterBulanan
+            layoutManager = LinearLayoutManager(requireActivity())
+            setHasFixedSize(true)
+        }
+    }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

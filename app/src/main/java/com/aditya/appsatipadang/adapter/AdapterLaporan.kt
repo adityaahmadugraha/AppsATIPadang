@@ -27,9 +27,12 @@ class AdapterLaporan(
     }
 
     fun submitListReversed(list: List<ItemLaporaneResponse>?) {
-        val reversedList = list?.reversed()
+        val reversedList = list?.toMutableList()
+        reversedList?.add(0, getItem(0))
         submitList(reversedList)
     }
+
+
 
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {

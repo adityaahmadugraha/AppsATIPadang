@@ -71,11 +71,11 @@ class SaranaActivityAdmin : AppCompatActivity() {
                             etType.setText(dataItem?.jenis)
                             etJenis.setText(dataItem?.type)
                             etNamePelapor.setText(dataItem?.namaPelapor)
-                            etNamePelapor.setText(dataItem?.namaPelapor)
                             etMerk.setText(dataItem?.merk)
                             etLokasi.setText(dataItem?.lokasi)
                             etDeskripiKerusakan.setText(dataItem?.deskripsi)
                             etTanggal.setText(dataItem?.tanggal)
+                            etWaktu.setText(dataItem?.waktu)
                             etNoPengaduan.setText(dataItem?.idPelapor.toString())
 
                             Glide.with(this@SaranaActivityAdmin)

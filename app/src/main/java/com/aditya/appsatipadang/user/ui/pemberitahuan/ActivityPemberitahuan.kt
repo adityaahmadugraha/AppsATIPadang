@@ -28,9 +28,14 @@ class ActivityPemberitahuan : AppCompatActivity() {
         binding = ActivityPemberitahuanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        id = intent.getIntExtra(ID_LAPORAN_PEMBERITAHUAN, 0)
 
-        binding.tvIdLaporan.text = id.toString()
+        val id = intent.getIntExtra(ID_LAPORAN_PEMBERITAHUAN, 0)
+        val formattedId = String.format("%03d", id)
+        val tanggalLaporan = intent.getStringExtra("tanggalLaporan")
+        val nomorLaporan = "$tanggalLaporan-$formattedId"
+        binding.tvTanggal.text = nomorLaporan
+
+
 
         binding.btnCekLaporan.setOnClickListener {
             viewModel.getUser().observe(this@ActivityPemberitahuan){

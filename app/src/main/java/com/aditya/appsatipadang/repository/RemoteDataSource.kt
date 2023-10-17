@@ -118,12 +118,29 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
+//    fun inputFotoProfil(
+//        token: String,
+//        requestBody: RequestBody
+//    ) = flow<Resource<ProfileUserResponse>> {
+//        emit(Resource.Loading())
+//        val response = apiService.insertFoto(token, requestBody)
+//        response.let {
+//            if (it.status == 200) emit(Resource.Success(it))
+//            else emit(Resource.Error("Error"))
+//        }
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
+
     fun inputFotoProfil(
         token: String,
-        requestBody: RequestBody
+        userId: String, // Tambahkan parameter ID pengguna
+        requestBody: MultipartBody.Part
     ) = flow<Resource<ProfileUserResponse>> {
         emit(Resource.Loading())
-        val response = apiService.insertFoto(token, requestBody)
+
+        val response = apiService.insertFoto(userId, token, requestBody) // Kirim ID pengguna ke server
+
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Error"))
@@ -131,6 +148,7 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
 
 
     fun insertLaporanTeknisi(
@@ -175,20 +193,20 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-    fun inputPrasana(
-        token: String,
-        type: RequestBody,
-        tanggal: RequestBody,
-        lokasi: RequestBody,
-        deskripsi: RequestBody,
-        foto: MultipartBody.Part,
-    ) = flow {
-        emit(Resource.Loading())
-        val response = apiService.inputPrasana(token, type, tanggal, lokasi, deskripsi, foto)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
+//    fun inputPrasana(
+//        token: String,
+//        type: RequestBody,
+//        tanggal: RequestBody,
+//        lokasi: RequestBody,
+//        deskripsi: RequestBody,
+//        foto: MultipartBody.Part,
+//    ) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.inputPrasana(token, type, tanggal, lokasi, deskripsi, foto)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
 
 
     fun inputKamtibmas(

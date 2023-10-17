@@ -72,13 +72,14 @@ interface ApiService {
         @Body body: RequestBody
     ): LaporanResponse
 
-    //image Profil
-//    @POST("imageProfil/{id}")
+
     @POST("imageProfil/{id}")
     suspend fun insertFoto(
+        @Path("id") userId: String,
         @Header("Authorization") token: String,
-        @Body body: RequestBody
+        @Body body: MultipartBody.Part
     ): ProfileUserResponse
+
 
     @POST("kirimlaporanTeknisi")
     suspend fun insertLaporanTeknisi(
@@ -103,17 +104,6 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): LaporanInfoResponse
-
-    @Multipart
-    @POST("laporan")
-    suspend fun inputPrasana(
-        @Header("Authorization") token: String,
-        @Part("type") type: RequestBody,
-        @Part("tanggal") tanggal: RequestBody,
-        @Part("lokasi") lokasi: RequestBody,
-        @Part("deskripsi") deskripsi: RequestBody,
-        @Part foto: MultipartBody.Part,
-    ): LaporanResponse
 
 
     @Multipart

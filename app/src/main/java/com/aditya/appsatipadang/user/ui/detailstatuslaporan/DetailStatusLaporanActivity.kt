@@ -1,15 +1,13 @@
 package com.aditya.appsatipadang.user.ui.detailstatuslaporan
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import androidx.activity.viewModels
-import com.aditya.appsatipadang.user.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityDetailStatusLaporanBinding
+import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,9 +23,10 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         const val TAG_TIPE = "tipe"
         const val TAG_TANGGAL = "tanggal"
         const val TAG_JENIS = "jenis"
-//        const val TAG_LOKASI = "lokasi"
         const val TAG_STATUS = "status"
         const val TAG_IDLAPORAN = "id_laporan"
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +36,7 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         id = intent.getStringExtra(TAG_IDLAPORAN).toString()
+        id = intent.getStringExtra(DetailStatusLaporanActivity.TAG_IDLAPORAN).toString()
 
         binding.apply {
             imgBackStatusLaporan.setOnClickListener {
@@ -51,6 +51,8 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
 
         getDataLaporan()
     }
+
+
 
 
     private fun getDataLaporan() {

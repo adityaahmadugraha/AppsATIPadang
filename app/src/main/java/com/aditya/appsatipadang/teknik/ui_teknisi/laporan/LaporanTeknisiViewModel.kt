@@ -24,4 +24,6 @@ class LaporanTeknisiViewModel @Inject constructor(
     ) = repository.getLaporanId(token, id).asLiveData ()
 
     fun kirimLaporanPerbaikan(token: String, requestBody: RequestBody) = repository.kirimLaporanPerbaikan(token, requestBody).asLiveData()
+
+
 }

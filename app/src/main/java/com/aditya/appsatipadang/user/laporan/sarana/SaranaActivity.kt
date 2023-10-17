@@ -280,11 +280,17 @@ class SaranaActivity : AppCompatActivity() {
 
                         showLoadingInput(false)
 
-                        Intent(this@SaranaActivity, ActivityPemberitahuan::class.java)
-                            .apply {
-                                putExtra(ID_LAPORAN_PEMBERITAHUAN, result.data.id)
-                                startActivity(this)
-                            }
+                        val tanggal = etTanggal.text.toString()
+
+                        Intent(this@SaranaActivity, ActivityPemberitahuan::class.java).apply {
+                            putExtra(ID_LAPORAN_PEMBERITAHUAN, result.data.id)
+                            putExtra("tanggalLaporan", tanggal)
+                            startActivity(this)
+                        }
+
+
+
+
                     }
 
                     is Resource.Error -> {

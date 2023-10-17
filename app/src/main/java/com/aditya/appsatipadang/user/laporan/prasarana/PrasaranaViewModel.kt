@@ -15,14 +15,14 @@ class PrasaranaViewModel @Inject constructor(
 
 
     fun getUser() = repository.getUser().asLiveData()
-    fun inputPrasana(
-        token: String,
-        type: RequestBody,
-        tanggal: RequestBody,
-        lokasi: RequestBody,
-        merk: RequestBody,
-        foto: MultipartBody.Part,
-    ) = repository.inputPrasana(token, type, tanggal, lokasi, merk, foto).asLiveData()
+//    fun inputPrasana(
+//        token: String,
+//        type: RequestBody,
+//        tanggal: RequestBody,
+//        lokasi: RequestBody,
+//        merk: RequestBody,
+//        foto: MultipartBody.Part,
+//    ) = repository.inputPrasana(token, type, tanggal, lokasi, merk, foto).asLiveData()
 
 
 }

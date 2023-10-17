@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,7 +59,6 @@ class ProfileFragment : Fragment() {
                     "Tidak mendapatkan permission.",
                     Toast.LENGTH_SHORT
                 ).show()
-//                finish()
             }
         }
     }
@@ -90,7 +90,8 @@ class ProfileFragment : Fragment() {
             .setType(MultipartBody.FORM)
             .addFormDataPart(
                 "foto",
-                fotoProfilPath, RequestBody.create("image/*".toMediaTypeOrNull(), fotoProfilPath.toString())
+                fotoProfilPath,
+                RequestBody.create("image/*".toMediaTypeOrNull(), fotoProfilPath.toString())
 
             ).build()
 
@@ -125,7 +126,7 @@ class ProfileFragment : Fragment() {
                 intent.type = "image/*"
                 val chooser = Intent.createChooser(intent, "Choose a Picture")
                 launcherIntentGallery.launch(chooser)
-                saveFotoprofil()
+
             }
         } else {
             requestPermissions(arrayOf(permission), hashCode())
@@ -142,6 +143,8 @@ class ProfileFragment : Fragment() {
         launcherIntentGallery.launch(chooser)
     }
 
+
+
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -153,10 +156,56 @@ class ProfileFragment : Fragment() {
 
                 val requestBody = RequestBody.create("image/*".toMediaType(), profilePicture!!)
                 MultipartBody.Part.createFormData("image", profilePicture!!.name, requestBody)
+
+                uploadFotoProfil()
             }
+
 
         }
     }
+
+
+
+
+    private fun uploadFotoProfil() {
+        val requestBody = profilePicture?.let { RequestBody.create("image/*".toMediaType(), it) }
+        val imagePart = MultipartBody.Part.createFormData("image", profilePicture!!.name, requestBody!!)
+
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(getString(R.string.saveimage))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+                viewModel.getUser().observe(viewLifecycleOwner) { user ->
+                    viewModel.insertFoto(user.id, user.getToken, imagePart).observe(viewLifecycleOwner) { data ->
+                        when (data) {
+                            is Resource.Loading -> {
+                                Log.d("UploadFoto", "Sedang mengunggah foto profil...")
+                            }
+                            is Resource.Success -> {
+                                if (data.data.status == 200) {
+                                    Log.d("UploadFoto", "Foto profil berhasil diunggah")
+                                    Toast.makeText(requireContext(), "Foto profil berhasil disimpan", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Log.e("UploadFoto", "Gagal mengunggah foto profil: Status tidak valid")
+                                }
+                            }
+                            is Resource.Error -> {
+                                Log.e("UploadFoto", "Gagal mengunggah foto profil: ${data.error}")
+                            }
+                        }
+                    }
+                    dialog.dismiss()
+                }
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+
+
+
 
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
@@ -177,46 +226,6 @@ class ProfileFragment : Fragment() {
             }
 
         }
-    }
-
-
-    private fun saveFotoprofil() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setMessage(getString(R.string.saveimage))
-            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-                viewModel.getUser().observe(viewLifecycleOwner){
-
-
-                    //ini masalah
-                    val fileProfilePicture: File = Constant.reduceFileImage(profilePicture as File)
-
-
-                    val requestBody: RequestBody = MultipartBody.Builder()
-                        .addFormDataPart(
-                            "foto",
-                            fileProfilePicture.name,
-                            RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
-                        ).build()
-                    viewModel.insertFoto(it.getToken, requestBody)
-                        .observe(viewLifecycleOwner) { data ->
-                            when(data){
-                                is Resource.Loading -> {}
-                                is Resource.Success -> {
-                                    if (data.data.status == 200){
-
-                                        Toast.makeText(requireContext(), "Foto profil berhasil disimpan", Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                                is Resource.Error -> {}
-                            }
-                        }
-                }
-                dialog.dismiss()
-            }
-            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
     }
 
     private fun showAlertLogout() {

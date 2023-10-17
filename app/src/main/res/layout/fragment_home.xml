@@ -161,7 +161,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_kamtibmas"
-                android:layout_width="60dp"
+                android:layout_width="64dp"
                 android:layout_height="60dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="12dp"
