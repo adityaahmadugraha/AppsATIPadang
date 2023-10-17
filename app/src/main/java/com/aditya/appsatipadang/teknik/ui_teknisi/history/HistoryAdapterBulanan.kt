@@ -25,6 +25,12 @@ data class HistoryAdapterBulanan(
         holder.bind(getItem(position))
     }
 
+    fun submitListReversed(list: List<ItemLaporaneResponse>?) {
+        val reversedList = list?.reversed()
+        submitList(reversedList)
+    }
+
+
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {

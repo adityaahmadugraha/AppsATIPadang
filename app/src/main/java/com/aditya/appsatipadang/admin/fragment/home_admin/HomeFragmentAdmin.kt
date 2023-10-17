@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.BuildConfig.BASE_URL
 import com.aditya.appsatipadang.adapter.AdapterLaporan
+import com.aditya.appsatipadang.admin.fragment.history_admin.HistoryAdminViewModel
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
 
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
@@ -34,7 +35,7 @@ class HomeFragmentAdmin : Fragment() {
 
     private var _binding: FragmentHomeAdminBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HomeAdminViewModel by viewModels()
+    private val viewModel: HistoryAdminViewModel by viewModels()
 
     private lateinit var mAdapter: AdapterLaporan
 
@@ -113,9 +114,45 @@ class HomeFragmentAdmin : Fragment() {
 
     private fun setupRecyclerView() {
         binding.rvLaporanHome.apply {
-            adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
+
+            viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+                binding.tvName.text = userLocal.name
+                binding.let {
+                    Glide.with(requireContext())
+                        .load(BuildConfig.IMAGE_URL + userLocal.foto)
+                        .error(android.R.color.darker_gray)
+                        .into(it.imgProfil)
+                }
+
+                viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            binding.progressBar.isVisible = true
+                        }
+
+                        is Resource.Success -> {
+                            binding.progressBar.isVisible = false
+
+                            val sortedData = result.data.laporan?.sortedByDescending { it.id }
+                            mAdapter.submitList(sortedData)
+
+                            adapter = mAdapter
+                        }
+
+                        is Resource.Error -> {
+                            binding.progressBar.isVisible = false
+                            Toast.makeText(
+                                requireActivity(),
+                                result.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
         }
     }
+
 }

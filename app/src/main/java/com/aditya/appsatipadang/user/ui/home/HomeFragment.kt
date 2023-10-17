@@ -86,10 +86,9 @@ class HomeFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-                        //menampilkan data hanya lima terbaru
                         val allData = result.data.laporan
 
-                        mAdapter.submitList(allData) // Mengirim lima data terbaru ke adapter
+                        mAdapter.submitList(allData)
                         setupRecyclerView()
                     }
 

@@ -2,20 +2,19 @@ package com.aditya.appsatipadang.user.laporan.status
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.adapter.AdapterLaporan
-import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ActivityStatusBinding
-import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -41,27 +40,30 @@ class ActivityStatus : AppCompatActivity() {
     }
 
     private fun setupList() {
-        mAdapter = AdapterLaporan() {
+            mAdapter = AdapterLaporan() {
             goToDetailScreen(it)
 
         }
         setupRecyclerView()
     }
-
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
-
+        Log.d("ActivityStatus::::::::::::::::::", "ID Laporan: ${itemLaporaneResponse.id}")
         val bundle = Bundle().apply {
+            putString(DetailStatusLaporanActivity.TAG_IDLAPORAN, itemLaporaneResponse.id.toString())
             putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
             putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
             putString(DetailStatusLaporanActivity.TAG_JENIS, itemLaporaneResponse.jenis)
             putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.status)
-
         }
         Intent(this@ActivityStatus, DetailStatusLaporanActivity::class.java).apply {
-            putExtra(DetailStatusLaporanActivity.TAG_BUNDLE, bundle)
+            putExtras(bundle)
             startActivity(this)
         }
+
+
     }
+
+
 
     private fun getDataUser() {
 

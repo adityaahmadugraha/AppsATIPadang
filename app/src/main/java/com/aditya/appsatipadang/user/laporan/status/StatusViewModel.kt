@@ -14,4 +14,6 @@ class StatusViewModel @Inject constructor(
 
     fun getUser() = repository.getUser().asLiveData()
     fun getListLaporan(token : String) = repository.getListLaporan(token).asLiveData()
+
+
 }

@@ -1,9 +1,7 @@
 package com.aditya.appsatipadang.user.ui.history
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,22 +12,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.adapter.AdapterHistoryLaporan
 import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
 import com.aditya.appsatipadang.adapter.AdapterLaporanBulanan
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
-import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
+import com.aditya.appsatipadang.user.ui.home.HomeViewModel
+import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
-    private val viewModel: HistoryViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private val binding get() = _binding!!
 
     private lateinit var mAdapterBulanan: AdapterLaporanBulanan
@@ -60,6 +56,7 @@ class HistoryFragment : Fragment() {
     private fun getDataUser() {
 
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+
             viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {
@@ -68,7 +65,8 @@ class HistoryFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
-                        mAdapterHarian.submitList(result.data.laporan)
+                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
+                        mAdapterHarian.submitList(sortedData)
                         setupRecyclerView()
                     }
 
@@ -82,6 +80,7 @@ class HistoryFragment : Fragment() {
                     }
                 }
             }
+
 
             viewModel.getListLaporanBulanan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                     when (result) {

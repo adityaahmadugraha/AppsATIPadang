@@ -1,10 +1,9 @@
 package com.aditya.appsatipadang.admin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.databinding.ActivityHomeBinding
