@@ -53,7 +53,7 @@ class ActivityStatus : AppCompatActivity() {
         val bundle = Bundle().apply {
             putString(DetailStatusLaporanActivity.TAG_TIPE, itemLaporaneResponse.type)
             putString(DetailStatusLaporanActivity.TAG_TANGGAL, itemLaporaneResponse.tanggal)
-            putString(DetailStatusLaporanActivity.TAG_LOKASI, itemLaporaneResponse.lokasi)
+            putString(DetailStatusLaporanActivity.TAG_JENIS, itemLaporaneResponse.jenis)
             putString(DetailStatusLaporanActivity.TAG_STATUS, itemLaporaneResponse.status)
 
         }

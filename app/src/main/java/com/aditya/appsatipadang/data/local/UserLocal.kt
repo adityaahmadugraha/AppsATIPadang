@@ -9,6 +9,7 @@ data class UserLocal(
     val password: String,
     val roles: String,
     val alamat: String,
+    val foto: String,
     val token: String,
     val fcmtoken: String,
 )

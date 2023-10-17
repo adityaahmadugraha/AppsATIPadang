@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/jenis"
+                android:text="@string/type"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -79,7 +79,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Kamtibmas"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -91,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/type"
+                android:text="Jenis :"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -207,7 +206,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="20..2020200202"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -251,7 +249,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="20.20.2024"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -341,7 +338,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Jl.Dr Sutomo"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -385,7 +381,6 @@
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
-                    android:hint="@string/deskripsi_kerusakan"
                     android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />

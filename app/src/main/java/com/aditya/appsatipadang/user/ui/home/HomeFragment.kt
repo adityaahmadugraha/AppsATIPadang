@@ -1,9 +1,7 @@
 package com.aditya.appsatipadang.user.ui.home
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,22 +10,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
-import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_BUNDLE
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_TANGGAL
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_TIPE
 import com.aditya.appsatipadang.user.laporan.kamtibmas.ActivityKamtibmas
 import com.aditya.appsatipadang.user.laporan.prasarana.ActivityPrasarana
 import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.user.laporan.status.ActivityStatus
+import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_IDLAPORAN
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_LOKASI
-import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_STATUS
 import com.aditya.appsatipadang.utils.Constant.getToken
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +30,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
-
     private lateinit var mAdapter: AdapterLaporan
 
     override fun onCreateView(
@@ -74,7 +67,15 @@ class HomeFragment : Fragment() {
 
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
+
+
             binding.tvName.text = userLocal.name
+            binding.let {
+                Glide.with(requireContext())
+                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
+                    .error(android.R.color.darker_gray)
+                    .into(it.imgProfil)
+            }
 
             viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                 when (result) {

@@ -88,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                                     userData?.password.toString(),
                                     userData?.roles.toString(),
                                     userData?.alamat.toString(),
+                                    userData?.foto.toString(),
                                     userData?.token.toString(),
                                     userData?.fcmtoken.toString(),
                                 )

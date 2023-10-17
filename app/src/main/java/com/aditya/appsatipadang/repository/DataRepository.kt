@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.repository
 
 
-import android.view.View
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
@@ -23,12 +22,12 @@ class DataRepository @Inject constructor(
 
     suspend fun deleteUser() = localData.deleteUser()
 
-    fun getUserProfile(token: String) = remoteData.getUserProfile(token)
+//    fun getUserProfile(token: String) = remoteData.getUserProfile(token)
 
-    fun updateUserProfile(
-        token: String,
-        foto: MultipartBody.Part? = null,
-    ) = remoteData.updateUserProfile(token, foto)
+//    fun updateUserProfile(
+//        token: String,
+//        foto: MultipartBody.Part? = null,
+//    ) = remoteData.updateUserProfile(token, foto)
 
     fun getListLaporan(token: String) = remoteData.getListLaporan(token)
 
@@ -55,6 +54,11 @@ class DataRepository @Inject constructor(
         token: String,
         requestBody: RequestBody
     ) = remoteData.insertLaporan(token, requestBody)
+
+    fun insertFoto(
+        token: String,
+        requestBody: RequestBody
+    ) = remoteData.inputFotoProfil(token, requestBody)
 
     fun getLaporanId(
         token: String,

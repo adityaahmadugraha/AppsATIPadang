@@ -12,6 +12,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.BuildConfig.BASE_URL
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
 
@@ -20,8 +22,11 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Compan
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
+import com.aditya.appsatipadang.supervisor.LaporanKeseluruhanActivity
 import com.aditya.appsatipadang.utils.Constant.getToken
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import java.net.URL
 
 
 @AndroidEntryPoint
@@ -54,7 +59,7 @@ class HomeFragmentAdmin : Fragment() {
             startActivity(intent)
         }
         binding.cardLaporan.setOnClickListener {
-            val intent = Intent(activity, StatusActivityAdmin::class.java)
+            val intent = Intent(activity, LaporanKeseluruhanActivity::class.java)
             startActivity(intent)
         }
 
@@ -65,6 +70,13 @@ class HomeFragmentAdmin : Fragment() {
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
             binding.tvName.text = userLocal.name
+            binding.let {
+                Glide.with(requireContext())
+                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
+                    .error(android.R.color.darker_gray)
+                    .into(it.imgProfil) }
+
+
             viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {

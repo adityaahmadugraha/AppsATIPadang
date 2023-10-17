@@ -23,7 +23,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="8dp"
-        android:src="@color/yellow"
+        android:src="@drawable/icon_pp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

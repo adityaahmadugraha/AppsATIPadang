@@ -35,8 +35,7 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="16dp"
-        android:src="@color/purple_200"
-        app:civ_border_color="@color/yellow"
+        android:src="@drawable/icon_pp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_profil"
@@ -57,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppinssembiold"
-        android:textSize="22sp"
         android:textColor="@color/blue"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/img_profil"
         app:layout_constraintStart_toStartOf="@+id/img_profil"
         app:layout_constraintTop_toBottomOf="@+id/img_profil" />
@@ -102,10 +101,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/email"
                 android:fontFamily="@font/poppinssembiold"
-                android:textSize="16sp"
+                android:text="@string/email"
                 android:textColor="@color/blue"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,10 +135,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/no_hp"
                 android:fontFamily="@font/poppinssembiold"
-                android:textSize="16sp"
+                android:text="@string/no_hp"
                 android:textColor="@color/blue"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/il_email_profil" />
 
@@ -171,10 +170,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/alamat"
                 android:fontFamily="@font/poppinssembiold"
-                android:textSize="16sp"
+                android:text="@string/alamat"
                 android:textColor="@color/blue"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/il_no_tlp" />
 

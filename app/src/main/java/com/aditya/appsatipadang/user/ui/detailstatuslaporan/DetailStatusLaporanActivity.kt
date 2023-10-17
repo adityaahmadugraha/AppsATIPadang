@@ -24,7 +24,8 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         const val TAG_BUNDLE = "kode"
         const val TAG_TIPE = "tipe"
         const val TAG_TANGGAL = "tanggal"
-        const val TAG_LOKASI = "lokasi"
+        const val TAG_JENIS = "jenis"
+//        const val TAG_LOKASI = "lokasi"
         const val TAG_STATUS = "status"
         const val TAG_IDLAPORAN = "id_laporan"
     }
@@ -65,9 +66,10 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             val laporan = item.data.laporan
                             binding.apply {
-                                etType.setText(laporan?.merk.toString())
+                                etType.setText(laporan?.type.toString())
                                 etTanggal.setText(laporan?.tanggal.toString())
                                 etLokasi.setText(laporan?.lokasi.toString())
+                                tvStatus.text = laporan?.status.toString()
                             }
                         }
 
