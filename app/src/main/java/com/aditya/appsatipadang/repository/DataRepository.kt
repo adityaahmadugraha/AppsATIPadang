@@ -96,7 +96,7 @@ class DataRepository @Inject constructor(
 
     fun getDataLaporan(token: String, id: String) = remoteData.getLaporanId(token, id)
 
-    fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
+//    fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
 
     fun kirimLaporanPerbaikan(
         token: String,

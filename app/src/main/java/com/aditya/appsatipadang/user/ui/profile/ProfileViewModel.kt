@@ -6,15 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val repository: DataRepository
-//    private val apiService: ApiService
-
 ) : ViewModel() {
 
     fun getUser() = repository.getUser().asLiveData()
@@ -22,14 +19,10 @@ class ProfileViewModel @Inject constructor(
     fun deleteUser() = viewModelScope.launch {
         repository.deleteUser()
     }
-
-//    fun insertFoto( token: String, requestBody) = repository.insertFoto( token, requestBody).asLiveData()
-
     fun insertFoto(
         token: String,
         requestBody: RequestBody
     ) = repository.insertFoto(token, requestBody).asLiveData ()
-
 
     fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
 

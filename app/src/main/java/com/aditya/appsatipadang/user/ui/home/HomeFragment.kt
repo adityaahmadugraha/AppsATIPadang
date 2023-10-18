@@ -44,40 +44,53 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cardSarana.setOnClickListener {
-            val intent = Intent(activity, SaranaActivity::class.java)
-            startActivity(intent)
+
+        binding.apply {
+            cardSarana.setOnClickListener {
+                val intent = Intent(activity, SaranaActivity::class.java)
+                startActivity(intent)
+            }
+            cardPrasarana.setOnClickListener {
+                val intent = Intent(activity, ActivityPrasarana::class.java)
+                startActivity(intent)
+            }
+            cardKamtibmas.setOnClickListener {
+                val intent = Intent(activity, ActivityKamtibmas::class.java)
+                startActivity(intent)
+            }
+            cardStatus.setOnClickListener {
+                val intent = Intent(activity, ActivityStatus::class.java)
+                startActivity(intent)
+            }
         }
-        binding.cardPrasarana.setOnClickListener {
-            val intent = Intent(activity, ActivityPrasarana::class.java)
-            startActivity(intent)
-        }
-        binding.cardKamtibmas.setOnClickListener {
-            val intent = Intent(activity, ActivityKamtibmas::class.java)
-            startActivity(intent)
-        }
-        binding.cardStatus.setOnClickListener {
-            val intent = Intent(activity, ActivityStatus::class.java)
-            startActivity(intent)
-        }
+
 
         getDataUser()
         setupList()
+
     }
 
     private fun getDataUser() {
-        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
 
+        viewModel.getUser().observe(viewLifecycleOwner) { data ->
+            viewModel.getDataUser(data.getToken).observe(viewLifecycleOwner) { item ->
+                when (item) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val dataIem = item.data.user
+                        binding?.apply {
+                            tvName.text = dataIem?.name
+                            Glide.with(requireContext())
+                                .load(BuildConfig.IMAGE_URL + dataIem?.foto)
+                                .into(imgProfil)
+                        }
+                    }
 
-            binding.tvName.text = userLocal.name
-            binding.let {
-                Glide.with(requireContext())
-                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
-                    .error(android.R.color.darker_gray)
-                    .into(it.imgProfil)
+                    is Resource.Error -> {}
+                }
             }
 
-            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+            viewModel.getListLaporan(data.getToken).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true

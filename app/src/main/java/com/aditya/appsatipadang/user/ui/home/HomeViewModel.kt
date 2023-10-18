@@ -14,11 +14,11 @@ class HomeViewModel @Inject constructor(
 
     fun getUser() = repository.getUser().asLiveData()
 
-    fun getListLaporan(token : String) = repository.getListLaporan(token).asLiveData()
+    fun getListLaporan(token: String) = repository.getListLaporan(token).asLiveData()
 
- fun getListLaporanHarian(token : String) = repository.getLaporanHarianTeknisi(token).asLiveData()
-    fun getListLaporanBulanan(token : String) = repository.getLaporanBulananTeknisi(token).asLiveData()
+    fun getListLaporanHarian(token: String) = repository.getLaporanHarianTeknisi(token).asLiveData()
+    fun getListLaporanBulanan(token: String) =
+        repository.getLaporanBulananTeknisi(token).asLiveData()
 
-
-    fun getDataLaporan(token : String,id : String) = repository.getDataLaporan(token,id).asLiveData()
+    fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
 }

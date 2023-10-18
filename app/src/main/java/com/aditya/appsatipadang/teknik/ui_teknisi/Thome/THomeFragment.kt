@@ -41,14 +41,18 @@ class THomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cardLaporan.setOnClickListener {
-            val intent = Intent(activity, ActivityNontofikasiLaporanTeknisi::class.java)
-            startActivity(intent)
+
+        binding.apply {
+            cardLaporan.setOnClickListener {
+                val intent = Intent(activity, ActivityNontofikasiLaporanTeknisi::class.java)
+                startActivity(intent)
+            }
+            cardRekapLaporan.setOnClickListener {
+                val intent = Intent(activity, StatusActivityAdmin::class.java)
+                startActivity(intent)
+            }
         }
-        binding.cardRekapLaporan.setOnClickListener {
-            val intent = Intent(activity, StatusActivityAdmin::class.java)
-            startActivity(intent)
-        }
+
 
         getDataUser()
         setupList()
@@ -62,7 +66,7 @@ class THomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding?.rvLaporanHome?.apply {
+        binding.rvLaporanHome.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
@@ -70,16 +74,26 @@ class THomeFragment : Fragment() {
     }
 
     private fun getDataUser() {
-        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            binding.tvName.text = userLocal.name
-            binding.let {
-                Glide.with(requireContext())
-                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
-                    .error(android.R.color.darker_gray)
-                    .into(it.imgProfil) }
 
+        viewModel.getUser().observe(viewLifecycleOwner) { data ->
+            viewModel.getDataUser(data.getToken).observe(viewLifecycleOwner) { item ->
+                when (item) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val dataIem = item.data.user
+                        binding.apply {
+                            tvName.text = dataIem?.name
+                            Glide.with(requireContext())
+                                .load(BuildConfig.IMAGE_URL + dataIem?.foto)
+                                .into(imgProfil)
+                        }
+                    }
 
-            viewModel.getListPengerjaan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                    is Resource.Error -> {}
+                }
+            }
+
+            viewModel.getListLaporan(data.getToken).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
@@ -88,17 +102,9 @@ class THomeFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-                        val latestFiveData = if (result.data.laporan?.size!! > 5)
-                            result.data.laporan?.let {
-                                result.data.laporan.subList(
-                                    result.data.laporan.size - 5,
-                                    it.size
-                                )
-                            }
-                        else
-                            result.data.laporan
+                        val allData = result.data.laporan
 
-                        mAdapter.submitListReversed(latestFiveData)
+                        mAdapter.submitList(allData)
                         setupRecyclerView()
                     }
 
@@ -116,4 +122,5 @@ class THomeFragment : Fragment() {
 
         }
     }
+
 }

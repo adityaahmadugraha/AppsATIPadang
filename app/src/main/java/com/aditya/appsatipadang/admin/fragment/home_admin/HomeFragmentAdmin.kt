@@ -2,7 +2,6 @@ package com.aditya.appsatipadang.admin.fragment.home_admin
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.fragment.history_admin.HistoryAdminViewModel
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
-import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.KamtibmasActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_ID_PENGADUAN
 import com.aditya.appsatipadang.data.Resource
@@ -49,10 +47,6 @@ class HomeFragmentAdmin : Fragment() {
 
 
         binding.apply {
-//            cardSaranaAdmin.setOnClickListener {
-//                val intent = Intent(activity, SaranaActivityAdmin::class.java)
-//                startActivity(intent)
-//            }
             cardAddUser.setOnClickListener {
                 val intent = Intent(activity, AddUserActivity::class.java)
                 startActivity(intent)
@@ -68,16 +62,26 @@ class HomeFragmentAdmin : Fragment() {
     }
 
     private fun getDataUser() {
-        viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            binding.tvName.text = userLocal.name
-            binding.let {
-                Glide.with(requireContext())
-                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
-                    .error(android.R.color.darker_gray)
-                    .into(it.imgProfil) }
 
+        viewModel.getUser().observe(viewLifecycleOwner) { data ->
+            viewModel.getDataUser(data.getToken).observe(viewLifecycleOwner) { item ->
+                when (item) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val dataIem = item.data.user
+                        binding.apply {
+                            tvName.text = dataIem?.name
+                            Glide.with(requireContext())
+                                .load(BuildConfig.IMAGE_URL + dataIem?.foto)
+                                .into(imgProfil)
+                        }
+                    }
 
-            viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
+                    is Resource.Error -> {}
+                }
+            }
+
+            viewModel.getListLaporan(data.getToken).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
@@ -86,7 +90,9 @@ class HomeFragmentAdmin : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-                        mAdapter.submitList(result.data.laporan)
+                        val allData = result.data.laporan
+
+                        mAdapter.submitList(allData)
                         setupRecyclerView()
                     }
 
@@ -98,8 +104,10 @@ class HomeFragmentAdmin : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                 }
             }
+
         }
     }
 

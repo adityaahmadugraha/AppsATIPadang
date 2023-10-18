@@ -149,6 +149,7 @@ class ProfileFragment : Fragment() {
                 profilePicture = Constant.uriToFile(
                     uri, requireContext()
                 )
+                //menambahkan ini disini agar tidak refresh agar foto barubah
                 uploadFotoProfil()
             }
         }
@@ -170,6 +171,7 @@ class ProfileFragment : Fragment() {
             .setMessage(getString(R.string.saveimage))
 
             .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+
                 viewModel.getUser().observe(viewLifecycleOwner) { user ->
 
 
@@ -218,7 +220,11 @@ class ProfileFragment : Fragment() {
 
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
+
+
             viewModel.getDataUser(data.getToken).observe(viewLifecycleOwner) { item ->
+
+
                 when (item) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
@@ -226,7 +232,6 @@ class ProfileFragment : Fragment() {
                         binding?.apply {
                             tvNameProfil.text = dataIem?.name
                             tvJabatanProfil.text = dataIem?.roles
-
                             etEmail.setText(dataIem?.email)
                             etNotlp.setText(dataIem?.noTelp)
                             etAlamatProfil.setText(dataIem?.alamat)
