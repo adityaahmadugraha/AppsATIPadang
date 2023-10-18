@@ -18,7 +18,8 @@ class AdapterLaporan(
 ) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -33,14 +34,14 @@ class AdapterLaporan(
     }
 
 
-
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
-                tvNameAlat.text = data.merk
+                tvNameAlat.text = data.jenis
+                tvMerkAlat.text = data.merk
                 tvStatusLaporan.text = data.status
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)

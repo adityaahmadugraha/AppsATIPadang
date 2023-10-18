@@ -128,9 +128,9 @@ class ActivityKamtibmas : AppCompatActivity() {
     }
 
     private fun setWaktu() {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
+        val waktu = Calendar.getInstance()
+        val hour = waktu.get(Calendar.HOUR_OF_DAY)
+        val minute = waktu.get(Calendar.MINUTE)
 
         val timePickerDialog = TimePickerDialog(
             this,

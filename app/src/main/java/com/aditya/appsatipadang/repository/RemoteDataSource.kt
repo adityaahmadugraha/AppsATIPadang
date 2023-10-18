@@ -30,7 +30,7 @@ class RemoteDataSource @Inject constructor(
 
     fun getUserProfile(token: String) = flow {
         emit(Resource.Loading())
-        val response = apiService.getProfile(token)
+        val response = apiService.getDataProfile(token)
         emit(Resource.Success(response))
     }.catch {
         emit(Resource.Error(it.message ?: ""))
@@ -132,22 +132,36 @@ class RemoteDataSource @Inject constructor(
 //        emit(Resource.Error(it.message ?: ""))
 //    }.flowOn(Dispatchers.IO)
 
+
+
     fun inputFotoProfil(
         token: String,
-        userId: String, // Tambahkan parameter ID pengguna
-        requestBody: MultipartBody.Part
+        requestBody: RequestBody
     ) = flow<Resource<ProfileUserResponse>> {
         emit(Resource.Loading())
-
-        val response = apiService.insertFoto(userId, token, requestBody) // Kirim ID pengguna ke server
-
+        val response = apiService.insertFoto(token, requestBody)
         response.let {
             if (it.status == 200) emit(Resource.Success(it))
-            else emit(Resource.Error("Error"))
+            else emit(Resource.Error("Data Tidak Ditemuan"))
         }
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
+
+//    fun inputFotoProfil(
+//        token: String,
+//        requestBody: MultipartBody.Part
+//    ) = flow<Resource<ProfileUserResponse>> {
+//        emit(Resource.Loading())
+//        val response = apiService.insertFoto( token, requestBody)
+//        response.let {
+//            if (it.status == 200) emit(Resource.Success(it))
+//            else emit(Resource.Error("Error"))
+//        }
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
 
 
 

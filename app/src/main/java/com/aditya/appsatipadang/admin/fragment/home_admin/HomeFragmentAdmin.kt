@@ -49,10 +49,10 @@ class HomeFragmentAdmin : Fragment() {
 
 
         binding.apply {
-            cardSaranaAdmin.setOnClickListener {
-                val intent = Intent(activity, SaranaActivityAdmin::class.java)
-                startActivity(intent)
-            }
+//            cardSaranaAdmin.setOnClickListener {
+//                val intent = Intent(activity, SaranaActivityAdmin::class.java)
+//                startActivity(intent)
+//            }
             cardAddUser.setOnClickListener {
                 val intent = Intent(activity, AddUserActivity::class.java)
                 startActivity(intent)

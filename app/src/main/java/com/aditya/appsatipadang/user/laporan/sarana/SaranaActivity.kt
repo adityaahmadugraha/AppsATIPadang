@@ -227,6 +227,7 @@ class SaranaActivity : AppCompatActivity() {
                     .addFormDataPart("tanggal", tanggal)
                     .addFormDataPart("merek", merk)
                     .addFormDataPart("jenis", selectedChipText)
+
                     .addFormDataPart(
                         "foto",
                         fileProfilePicture.name,

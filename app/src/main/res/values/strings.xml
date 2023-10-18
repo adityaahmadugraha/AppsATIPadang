@@ -68,7 +68,7 @@
     <string name="kirim">Kirim</string>
     <string name="must_not_empty">Form Tidak Boleh Kosong</string>
     <string name="logoutMessage">Apakah Anda Ingin Keluar?</string>
-    <string name="saveimage">Simpan Perubahan?</string>
+    <string name="saveimage">Simpan Foto Profil?</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="hello_user">%1$s</string>
