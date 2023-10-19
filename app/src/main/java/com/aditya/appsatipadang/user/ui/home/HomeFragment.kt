@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val dataIem = item.data.user
-                        binding?.apply {
+                        binding.apply {
                             tvName.text = dataIem?.name
                             Glide.with(requireContext())
                                 .load(BuildConfig.IMAGE_URL + dataIem?.foto)
@@ -99,10 +99,13 @@ class HomeFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-                        val allData = result.data.laporan
 
-                        mAdapter.submitList(allData)
+                        val allData = result.data.laporan
+                        val latest5Data = allData?.take(5)
+
+                        mAdapter.submitList(latest5Data)
                         setupRecyclerView()
+
                     }
 
                     is Resource.Error -> {
@@ -129,6 +132,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     private fun setupRecyclerView() {
         binding.rvLaporanHome.apply {

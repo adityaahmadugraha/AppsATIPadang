@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -17,6 +16,8 @@ class AdapterLaporan(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
 
+    private val maxItemCount = 5
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,12 +28,13 @@ class AdapterLaporan(
         holder.bind(getItem(position))
     }
 
+
     fun submitListReversed(list: List<ItemLaporaneResponse>?) {
         val reversedList = list?.toMutableList()
         reversedList?.add(0, getItem(0))
-        submitList(reversedList)
+        val limitedList = reversedList?.take(maxItemCount)
+        submitList(limitedList)
     }
-
 
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -15,7 +15,10 @@ import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
+import com.aditya.appsatipadang.supervisor.LaporanKeseluruhanActivity
+import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
 import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
+import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +51,7 @@ class THomeFragment : Fragment() {
                 startActivity(intent)
             }
             cardRekapLaporan.setOnClickListener {
-                val intent = Intent(activity, StatusActivityAdmin::class.java)
+                val intent = Intent(activity, LaporanKeseluruhanActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -61,7 +64,9 @@ class THomeFragment : Fragment() {
 
     private fun setupList() {
         mAdapter = AdapterLaporanTeknisi {
-
+            val intent = Intent(requireContext(), LaporanTeknisiActivity::class.java)
+            intent.putExtra(Constant.IDLAPORAN, it.id.toString())
+            startActivity(intent)
         }
     }
 

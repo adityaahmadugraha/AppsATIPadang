@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppinssembiold"
-                android:text="No Telphone"
+                android:text="No Telephone"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"

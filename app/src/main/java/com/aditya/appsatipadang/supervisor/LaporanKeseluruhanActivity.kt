@@ -41,7 +41,7 @@ class LaporanKeseluruhanActivity : AppCompatActivity() {
             }
         }
 
-        webView.loadUrl("https://sisfo.upiyptk.ac.id/")
+        webView.loadUrl("https://atipadang.diatakasir.com/cetaklaporan")
     }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)

@@ -7,6 +7,7 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
@@ -49,7 +50,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
     private val viewModel: LaporanTeknisiViewModel by viewModels()
 
     private var user: UserLocal? = null
-    private lateinit var mAdapter : AdapterLaporan
+    private lateinit var mAdapter: AdapterLaporan
 
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
@@ -94,6 +95,8 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+
+        Log.d("idLaporan:::::", "onCreate: $idLaporan")
     }
 
     private fun kirimLaporanPerbaikan() {
@@ -104,8 +107,9 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                 val tindakan = etPihakTerlibat.text.toString()
                 if (validateInput(biaya, tindakan, kegiatan, fotoKerusakan)) {
 
-                    viewModel.getUser().observe(this@LaporanTeknisiActivity){
-                        val fileProfilePicture: File = Constant.reduceFileImage(fotoKerusakan as File)
+                    viewModel.getUser().observe(this@LaporanTeknisiActivity) {
+                        val fileProfilePicture: File =
+                            Constant.reduceFileImage(fotoKerusakan as File)
 
                         var requestBody: RequestBody = MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
@@ -117,26 +121,36 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                             .addFormDataPart(
                                 "foto",
                                 fileProfilePicture.name,
-                                RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
+                                RequestBody.create(
+                                    "image/*".toMediaTypeOrNull(),
+                                    fileProfilePicture
+                                )
                             ).build()
-                        viewModel.kirimLaporanPerbaikan(it.getToken, requestBody).observe(this@LaporanTeknisiActivity){ item ->
-                            when(item){
-                                is Resource.Loading -> {}
-                                is Resource.Success -> {
-                                    if (item.data.status == 200){
-                                        Toast.makeText(this@LaporanTeknisiActivity, "Data Berhasil Dikirm", Toast.LENGTH_SHORT).show()
-                                        Intent(
-                                            this@LaporanTeknisiActivity,
-                                            ActivityTeknik::class.java
-                                        ).apply {
-                                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                            startActivity(this)
+                        viewModel.kirimLaporanPerbaikan(it.getToken, requestBody)
+                            .observe(this@LaporanTeknisiActivity) { item ->
+                                when (item) {
+                                    is Resource.Loading -> {}
+                                    is Resource.Success -> {
+                                        if (item.data.status == 200) {
+                                            Toast.makeText(
+                                                this@LaporanTeknisiActivity,
+                                                "Data Berhasil Dikirm",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            Intent(
+                                                this@LaporanTeknisiActivity,
+                                                ActivityTeknik::class.java
+                                            ).apply {
+                                                flags =
+                                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                startActivity(this)
+                                            }
                                         }
                                     }
+
+                                    is Resource.Error -> {}
                                 }
-                                is Resource.Error -> {}
                             }
-                        }
                     }
                 }
             }
@@ -192,27 +206,30 @@ class LaporanTeknisiActivity : AppCompatActivity() {
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-    private fun getDataLaporan() {
-        viewModel.getUser().observe(this@LaporanTeknisiActivity){
-        // masukan data berdasarkan id
-            viewModel.getLaporanId(it.getToken, idLaporan).observe(this@LaporanTeknisiActivity){ item ->
-                when(item){
-                    is Resource.Loading ->{}
-                    is Resource.Success -> {
-                        val dataItem = item.data.laporan
-                        // kirim data ke dalam tek view
-                        binding.apply {
-                            etNamaPelapor.setText(dataItem!!.name.toString())
-                            etPengaduan.setText(dataItem.id.toString())
-                            etType.setText(dataItem.type)
-                            etTangal.setText(dataItem.tanggal)
-                            etLokasi.setText(dataItem.lokasi)
 
+    private fun getDataLaporan() {
+        viewModel.getUser().observe(this@LaporanTeknisiActivity) {
+            // masukan data berdasarkan id
+            viewModel.getLaporanId(it.getToken, idLaporan)
+                .observe(this@LaporanTeknisiActivity) { item ->
+                    when (item) {
+                        is Resource.Loading -> {}
+                        is Resource.Success -> {
+                            val dataItem = item.data.laporan
+                            // kirim data ke dalam tek view
+                            binding.apply {
+                                etNamaPelapor.setText(dataItem!!.name.toString())
+                                etPengaduan.setText(dataItem.id.toString())
+                                etType.setText(dataItem.type)
+                                etTangal.setText(dataItem.tanggal)
+                                etLokasi.setText(dataItem.lokasi)
+
+                            }
                         }
+
+                        is Resource.Error -> {}
                     }
-                    is Resource.Error -> {}
                 }
-            }
         }
     }
 
@@ -268,7 +285,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
         }
     }
 
-    private fun insertLaporan(requestBody : RequestBody) {
+    private fun insertLaporan(requestBody: RequestBody) {
         viewModel.inputLaporan(
             user?.getToken.toString(),
             requestBody
@@ -282,15 +299,17 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                     is Resource.Success -> {
 
                         showLoadingInput(false)
-                        Intent(
-                            this@LaporanTeknisiActivity, ActivityPemberitahuan::class.java
-                        )
-                            .apply {
-                                putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
 
-                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(this)
-                            }
+
+                        val tanggal = binding.etTangal.text.toString()
+
+                        val intent =
+                            Intent(this@LaporanTeknisiActivity, ActivityPemberitahuan::class.java)
+                        intent.putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, idLaporan)
+                        intent.putExtra("tanggalLaporan", tanggal)
+                        startActivity(intent)
+
+
                     }
 
                     is Resource.Error -> {

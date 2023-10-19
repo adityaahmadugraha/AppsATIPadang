@@ -87,7 +87,6 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Aditya ahmad nugraha"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -131,7 +130,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="NO Pengaduan"
                     android:maxLength="100"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -175,7 +173,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="Prasarana"
                     android:maxLength="25"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -219,7 +216,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssembiold"
-                    android:hint="mm/hh/dddd"
                     android:maxLength="25"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -263,7 +259,6 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
-                    android:hint="@string/deskripsi_kerusakan"
                     android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -307,7 +302,6 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
-                    android:hint="Kegiatan Perbaikan"
                     android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -320,7 +314,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Tindak Lanjut :"
+                android:text="Pihak Terlibat :"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -351,7 +345,6 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
-                    android:hint="Pihak Terlibat"
                     android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -395,7 +388,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppinssembiold"
                     android:gravity="top"
-                    android:hint="50000"
+                    android:inputType="number"
                     android:maxLength="500"
                     android:textColor="@color/black"
                     android:textSize="12sp" />

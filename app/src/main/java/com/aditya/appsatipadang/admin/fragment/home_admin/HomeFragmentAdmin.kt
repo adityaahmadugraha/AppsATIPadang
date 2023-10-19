@@ -91,8 +91,9 @@ class HomeFragmentAdmin : Fragment() {
                         binding.progressBar.isVisible = false
 
                         val allData = result.data.laporan
+                        val latest5Data = allData?.take(5)
 
-                        mAdapter.submitList(allData)
+                        mAdapter.submitList(latest5Data)
                         setupRecyclerView()
                     }
 
