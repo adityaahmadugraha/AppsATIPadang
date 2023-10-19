@@ -214,11 +214,15 @@ class SaranaActivity : AppCompatActivity() {
             val deskripsiKerusakan = etDeskripsiKerusakan.text.toString()
             val merk = etMerk.text.toString()
 
+
+
+
             if (validateInput(tanggal, lokasi, deskripsiKerusakan, fotoKerusakan)) {
 
                 val fileProfilePicture: File = reduceFileImage(fotoKerusakan as File)
 
                 val requestBody: RequestBody = MultipartBody.Builder()
+
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("status", "permohonan")
                     .addFormDataPart("type", type)

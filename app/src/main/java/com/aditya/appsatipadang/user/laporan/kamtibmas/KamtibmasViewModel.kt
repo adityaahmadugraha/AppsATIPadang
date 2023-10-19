@@ -16,15 +16,10 @@ class KamtibmasViewModel @Inject constructor(
 
     fun getUser() = repository.getUser().asLiveData()
 
-    fun inputKamtibmas(
+    fun inputLaporan(
         token: String,
-        type: RequestBody,
-        lokasi: RequestBody,
-        deskripsi: RequestBody,
-        tanggal: RequestBody,
-        waktu: RequestBody,
-        foto: MultipartBody.Part,
-    ) = repository.inputKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto).asLiveData()
+        requestBody: RequestBody
+    ) = repository.inputLaporan(token, requestBody).asLiveData ()
 
 
 }

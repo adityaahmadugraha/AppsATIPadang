@@ -197,32 +197,36 @@ class ActivityKamtibmas : AppCompatActivity() {
         val type = "Kamtibmas"
 
         binding.apply {
-            val deskripsiKerusakan = etDeskripsiKerusakanKamtibmas.text.toString()
+            val deskripsi = etDeskripsiKerusakanKamtibmas.text.toString()
             val lokasi = etLokasiKamtibmas.text.toString()
             val tanggal = etTanggalKamtibmas.text.toString()
             val waktu = etWaktuKamtibmas.text.toString()
 
+            Log.d("ActivityKamtibmas", "Waktu dikirim: $waktu")
 
-            if (validateInput(deskripsiKerusakan, lokasi, tanggal, waktu, fotoKerusakan)) {
+
+            if (validateInput(deskripsi, lokasi, tanggal, waktu, fotoKerusakan)) {
+
                 val fileProfilePicture: File = Constant.reduceFileImage(fotoKerusakan as File)
+                val requestBody: RequestBody = MultipartBody.Builder()
 
-                val rType = type.toRequestBody("text/plain".toMediaType())
-                val rDeskripsi = deskripsiKerusakan.toRequestBody("text/plain".toMediaType())
-                val rLokasi = lokasi.toRequestBody("text/plain".toMediaType())
-                val rTanggal = tanggal.toRequestBody("text/plain".toMediaType())
-                val rWaktu = waktu.toRequestBody("text/plain".toMediaType())
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("status", "permohonan")
+                    .addFormDataPart("type", type)
+                    .addFormDataPart("deskripsi", deskripsi)
+                    .addFormDataPart("lokasi", lokasi)
+                    .addFormDataPart("tanggal", tanggal)
+                    .addFormDataPart("waktu", waktu)
 
-                val fotoAlat =
-                    fileProfilePicture.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val foto: MultipartBody.Part = MultipartBody.Part.createFormData(
-                    "foto",
-                    fileProfilePicture.name,
-                    fotoAlat
-                )
 
-                insertLaporan(
-                    foto, rType, rDeskripsi, rLokasi, rTanggal, rWaktu,
-                )
+                    .addFormDataPart(
+                        "foto",
+                        fileProfilePicture.name,
+                        RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
+                    ).build()
+
+
+                insertLaporan(requestBody)
             }
         }
     }
@@ -259,62 +263,42 @@ class ActivityKamtibmas : AppCompatActivity() {
         return true
     }
 
-    private fun insertLaporan(
-        foto: MultipartBody.Part,
-        type: RequestBody,
-        lokasi: RequestBody,
-        deskripsi: RequestBody,
-        tanggal: RequestBody,
-        waktu: RequestBody,
+    private fun insertLaporan(requestBody: RequestBody) {
+        viewModel.inputLaporan(
+            user?.getToken.toString(), requestBody
+        ).observe(this@ActivityKamtibmas) { result ->
+            binding.apply {
+                when (result) {
+                    is Resource.Loading -> {
+                        showLoadingInput(true)
+                    }
 
-        ) {
-        viewModel.inputKamtibmas(
-            user?.getToken.toString(),
-            type,
-            lokasi,
-            deskripsi,
-            tanggal,
-            waktu,
-            foto
-        )
-            .observe(this@ActivityKamtibmas) { result ->
-                binding.apply {
-                    when (result) {
-                        is Resource.Loading -> {
-                            showLoadingInput(true)
+                    is Resource.Success -> {
+
+                        showLoadingInput(false)
+
+                        val tanggal = etTanggalKamtibmas.text.toString()
+
+                        Intent(this@ActivityKamtibmas, ActivityPemberitahuan::class.java).apply {
+                            putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
+                            putExtra("tanggalLaporan", tanggal)
+                            startActivity(this)
                         }
 
-                        is Resource.Success -> {
-                            showLoadingInput(false)
-                            Log.d("ActivityKamtibmas", "Waktu yang akan dikirim ke database: $waktu"
-                            )
 
-                            val tanggal = etTanggalKamtibmas.text.toString()
+                    }
 
-                            Intent(
-                                this@ActivityKamtibmas,
-                                ActivityPemberitahuan::class.java
-                            ).apply {
-                                putExtra(
-                                    ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN,
-                                    result.data.id
-                                )
-                                putExtra("tanggalLaporan", tanggal)
-                                startActivity(this)
-                            }
-
-                        }
-
-                        is Resource.Error -> {
-                            showLoadingInput(false)
-                            Toast.makeText(
-                                this@ActivityKamtibmas, result.error,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                    is Resource.Error -> {
+                        showLoadingInput(false)
+                        Toast.makeText(
+                            this@ActivityKamtibmas, result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
+        }
+
     }
 
 
