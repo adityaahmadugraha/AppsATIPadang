@@ -141,15 +141,16 @@ class LoginActivity : AppCompatActivity() {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }
-                } else if (userData.roles == "Supervisor") {
-                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
-                        .show()
-                    Log.d("LOGINSPP:::::", userData.token)
-                    Intent(this@LoginActivity, ActivitySupervisor::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(this)
-                    }
                 }
+//                else if (userData.roles == "Supervisor") {
+//                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+//                        .show()
+//                    Log.d("LOGINSPP:::::", userData.token)
+//                    Intent(this@LoginActivity, ActivitySupervisor::class.java).apply {
+//                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                        startActivity(this)
+//                    }
+//                }
 
             }
 

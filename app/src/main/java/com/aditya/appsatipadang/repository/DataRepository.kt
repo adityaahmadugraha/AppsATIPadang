@@ -60,9 +60,14 @@ class DataRepository @Inject constructor(
 //        requestBody: RequestBody
 //    ) = remoteData.inputFotoProfil(token, requestBody)
 
-     fun insertFoto(token: String, userId: String, requestBody: MultipartBody.Part) =
-        remoteData.inputFotoProfil(token, userId, requestBody)
+//     fun insertFoto(token: String, requestBody: MultipartBody.Part) =
+//        remoteData.inputFotoProfil(token, requestBody)
 
+
+    fun insertFoto(
+        token: String,
+        requestBody: RequestBody
+    ) = remoteData.inputFotoProfil(token, requestBody)
 
     fun getLaporanId(
         token: String,
@@ -91,7 +96,7 @@ class DataRepository @Inject constructor(
 
     fun getDataLaporan(token: String, id: String) = remoteData.getLaporanId(token, id)
 
-    fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
+//    fun getTeknisiList(token: String, roles:String) = remoteData.getTeknisiList(token, roles)
 
     fun kirimLaporanPerbaikan(
         token: String,
@@ -102,6 +107,7 @@ class DataRepository @Inject constructor(
     fun getLaporanHarianTeknisi(token: String) = remoteData.getListLaporanharianTeknisi(token)
     fun getLaporanBulananTeknisi(token: String) = remoteData.getListLaporanbulananTeknisi(token)
 
+    fun getDataUser(token : String) = remoteData.getUserProfile(token)
 
     fun insertUser(token: String, request: AddUserRequest) =
         remoteData.insertUser(token, request)

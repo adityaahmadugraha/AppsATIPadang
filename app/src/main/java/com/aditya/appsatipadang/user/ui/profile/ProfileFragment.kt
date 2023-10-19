@@ -13,9 +13,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.BuildConfig.IMAGE_URL
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
@@ -26,6 +29,8 @@ import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -86,15 +91,6 @@ class ProfileFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-        MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart(
-                "foto",
-                fotoProfilPath,
-                RequestBody.create("image/*".toMediaTypeOrNull(), fotoProfilPath.toString())
-
-            ).build()
-
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -144,53 +140,71 @@ class ProfileFragment : Fragment() {
     }
 
 
-
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             val selectedImg = result.data?.data as Uri
             selectedImg.let { uri ->
-                profilePicture = Constant.uriToFile(uri, requireContext())
-                binding?.imgProfil?.setImageURI(uri)
-
-                val requestBody = RequestBody.create("image/*".toMediaType(), profilePicture!!)
-                MultipartBody.Part.createFormData("image", profilePicture!!.name, requestBody)
-
+                profilePicture = Constant.uriToFile(
+                    uri, requireContext()
+                )
+                //menambahkan ini disini agar tidak refresh agar foto barubah
                 uploadFotoProfil()
             }
-
-
         }
     }
 
 
-
-
     private fun uploadFotoProfil() {
-        val requestBody = profilePicture?.let { RequestBody.create("image/*".toMediaType(), it) }
-        val imagePart = MultipartBody.Part.createFormData("image", profilePicture!!.name, requestBody!!)
+        val fileProfilePicture: File = Constant.reduceFileImage(profilePicture as File)
+        val requestBody: RequestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
 
+            .addFormDataPart(
+                "foto",
+                fileProfilePicture.name,
+                RequestBody.create("image/*".toMediaTypeOrNull(), fileProfilePicture)
+            ).build()
 
         MaterialAlertDialogBuilder(requireContext())
             .setMessage(getString(R.string.saveimage))
+
             .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+
                 viewModel.getUser().observe(viewLifecycleOwner) { user ->
-                    viewModel.insertFoto(user.id, user.getToken, imagePart).observe(viewLifecycleOwner) { data ->
+
+
+                    viewModel.insertFoto(
+                        user?.getToken.toString(), requestBody
+                    ).observe(viewLifecycleOwner) { data ->
                         when (data) {
                             is Resource.Loading -> {
                                 Log.d("UploadFoto", "Sedang mengunggah foto profil...")
                             }
+
                             is Resource.Success -> {
                                 if (data.data.status == 200) {
                                     Log.d("UploadFoto", "Foto profil berhasil diunggah")
-                                    Toast.makeText(requireContext(), "Foto profil berhasil disimpan", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Foto profil berhasil disimpan",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    getDataUser()
                                 } else {
-                                    Log.e("UploadFoto", "Gagal mengunggah foto profil: Status tidak valid")
+                                    Log.e(
+                                        "UploadFoto",
+                                        "Gagal mengunggah foto profil: Status tidak valid"
+                                    )
                                 }
                             }
+
                             is Resource.Error -> {
-                                Log.e("UploadFoto", "Gagal mengunggah foto profil: ${data.error}")
+                                Log.e(
+                                    "UploadFoto",
+                                    "Gagal mengunggah foto profil: ${data.error}"
+                                )
                             }
                         }
                     }
@@ -204,27 +218,34 @@ class ProfileFragment : Fragment() {
     }
 
 
-
-
-
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { data ->
 
-            binding?.apply {
-                tvNameProfil.text = data.name
-                tvJabatanProfil.text = data.roles
-                etEmail.setText(data.email)
-                etNotlp.setText(data.no_telp)
-                etAlamatProfil.setText(data.alamat)
-                let {
-                    Glide.with(requireContext())
-                        .load(IMAGE_URL + data?.foto)
-                        .error(android.R.color.darker_gray)
-                        .into(it.imgProfil)
+
+            viewModel.getDataUser(data.getToken).observe(viewLifecycleOwner) { item ->
+
+
+                when (item) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val dataIem = item.data.user
+                        binding?.apply {
+                            tvNameProfil.text = dataIem?.name
+                            tvJabatanProfil.text = dataIem?.roles
+                            etEmail.setText(dataIem?.email)
+                            etNotlp.setText(dataIem?.noTelp)
+                            etAlamatProfil.setText(dataIem?.alamat)
+
+                            Glide.with(requireContext())
+                                .load(IMAGE_URL + dataIem?.foto)
+                                .into(imgProfil)
+                        }
+
+                    }
+
+                    is Resource.Error -> {}
                 }
-
             }
-
         }
     }
 

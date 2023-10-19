@@ -106,9 +106,13 @@ class SaranaActivityAdmin : AppCompatActivity() {
                         is Resource.Loading -> {}
 
                         is Resource.Success -> {
+
+                            val tanggal = binding.etTanggal.text.toString()
+
                             val intent =
                                 Intent(this@SaranaActivityAdmin, ActivityPemberitahuan::class.java)
                             intent.putExtra(ID_LAPORAN_PEMBERITAHUAN, id.toInt())
+                            intent.putExtra("tanggalLaporan", tanggal)
                             startActivity(intent)
                         }
 

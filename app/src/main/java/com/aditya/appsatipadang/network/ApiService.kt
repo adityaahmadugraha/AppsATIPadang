@@ -5,6 +5,7 @@ import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
+import com.aditya.appsatipadang.data.remote.response.DataUserResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
@@ -30,6 +31,11 @@ interface ApiService {
     suspend fun getProfile(
         @Header("Authorization") token: String
     ): TeknisiUserResponse
+
+    @GET("getDataUser")
+    suspend fun getDataProfile(
+        @Header("Authorization") token: String
+    ): DataUserResponse
 
     @GET("getUser/{roles}")
     suspend fun getTeknisiList(
@@ -73,11 +79,10 @@ interface ApiService {
     ): LaporanResponse
 
 
-    @POST("imageProfil/{id}")
+    @POST("imageProfil")
     suspend fun insertFoto(
-        @Path("id") userId: String,
         @Header("Authorization") token: String,
-        @Body body: MultipartBody.Part
+        @Body body: RequestBody
     ): ProfileUserResponse
 
 

@@ -18,4 +18,8 @@ class THomeViewModel @Inject constructor(
 
     fun getListPengerjaan(token : String) = repository.getListPengerjaan(token).asLiveData()
 
+    fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
+
+
+
 }
