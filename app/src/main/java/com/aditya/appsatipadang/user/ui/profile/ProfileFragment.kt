@@ -236,8 +236,16 @@ class ProfileFragment : Fragment() {
                             etNotlp.setText(dataIem?.noTelp)
                             etAlamatProfil.setText(dataIem?.alamat)
 
+//                            if (dataIem?.foto.n == true) {
+//                                imgProfil.setImageResource(R.color.blue)
+//                            } else {
+//                                Glide.with(requireContext())
+//                                    .load(IMAGE_URL + dataIem?.foto)
+//                                    .into(imgProfil)
+//                            }
                             Glide.with(requireContext())
                                 .load(IMAGE_URL + dataIem?.foto)
+                                .error(R.color.status_bar)
                                 .into(imgProfil)
                         }
 

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHomeBinding
@@ -82,6 +83,7 @@ class HomeFragment : Fragment() {
                             tvName.text = dataIem?.name
                             Glide.with(requireContext())
                                 .load(BuildConfig.IMAGE_URL + dataIem?.foto)
+                                .error(R.color.white)
                                 .into(imgProfil)
                         }
                     }

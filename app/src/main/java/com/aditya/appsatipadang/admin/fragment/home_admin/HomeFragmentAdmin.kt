@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.fragment.history_admin.HistoryAdminViewModel
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
@@ -130,7 +131,7 @@ class HomeFragmentAdmin : Fragment() {
                 binding.let {
                     Glide.with(requireContext())
                         .load(BuildConfig.IMAGE_URL + userLocal.foto)
-                        .error(android.R.color.darker_gray)
+                        .error(R.color.white)
                         .into(it.imgProfil)
                 }
 

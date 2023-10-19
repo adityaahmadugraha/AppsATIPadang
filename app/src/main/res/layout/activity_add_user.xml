@@ -32,9 +32,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="357dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_register"
@@ -61,10 +63,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
+                android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:layout_marginStart="8dp"
                 app:hintEnabled="false"
-                app:layout_constraintStart_toStartOf="@+id/tv_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -91,9 +95,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_username"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
+                android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_username"
                 app:layout_constraintTop_toBottomOf="@+id/tv_username">
 
@@ -122,9 +129,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
+                android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_email"
                 app:layout_constraintTop_toBottomOf="@+id/tv_email">
 
@@ -153,9 +163,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_no_telp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
+                android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_no_telp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_no_telp">
 
@@ -184,9 +197,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_alamat"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
+                android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_alamat"
                 app:layout_constraintTop_toBottomOf="@+id/tv_alamat">
 
@@ -220,13 +236,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:paddingStart="8dp"
                 android:background="@drawable/border_background_spiner"
                 android:dropDownHorizontalOffset="16dp"
                 android:dropDownVerticalOffset="48dp"
                 android:foregroundGravity="center_vertical"
                 android:layoutDirection="ltr"
                 android:layoutMode="clipBounds"
+                android:paddingStart="8dp"
                 android:popupBackground="#FFFFFF"
                 android:popupElevation="6dp"
                 android:textColor="#000000"
@@ -251,10 +267,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="335dp"
+                android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:hintEnabled="false"
-                app:layout_constraintStart_toStartOf="@+id/tv_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_password"
                 app:passwordToggleEnabled="true">
 

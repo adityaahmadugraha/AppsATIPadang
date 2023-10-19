@@ -12,84 +12,98 @@
     android:layout_height="wrap_content">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_pelaporan"
-                android:layout_width="67dp"
-                android:layout_height="86dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:src="@color/blue"
-                app:civ_border_color="@color/yellow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!--            <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                android:id="@+id/img_pelaporan"-->
+        <!--                android:layout_width="67dp"-->
+        <!--                android:layout_height="86dp"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_marginBottom="8dp"-->
+        <!--                android:src="@color/blue"-->
+        <!--                app:civ_border_color="@color/yellow"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <TextView
-                android:id="@+id/tv_title_laporan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/poppinssembiold"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/img_pelaporan"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_title_laporan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppinssembiold"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Aditya Ahmad" />
 
-            <TextView
-                android:id="@+id/tv_tgl_laporan_sarana"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/poppinssembiold"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_name_alat"
-                app:layout_constraintStart_toStartOf="@+id/tv_title_laporan"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan" />
+        <TextView
+            android:id="@+id/tv_tgl_laporan_sarana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppinssembiold"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_name_alat"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_laporan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan"
+            tools:text="Sarana" />
 
-            <TextView
-                android:id="@+id/tv_name_alat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/poppinssembiold"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_tgl_laporan_sarana" />
-
-
-            <TextView
-                android:id="@+id/tv_merk_alat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/poppinssembiold"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_name_alat"
-                app:layout_constraintStart_toEndOf="@+id/tv_name_alat"
-                app:layout_constraintTop_toTopOf="@+id/tv_name_alat" />
+        <TextView
+            android:id="@+id/tv_name_alat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppinssembiold"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_tgl_laporan_sarana"
+            tools:text="10-10-2020" />
 
 
+        <TextView
+            android:id="@+id/tv_merk_alat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinssembiold"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name_alat"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_alat"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_alat"
+            tools:text="Samsung" />
 
-            <TextView
-                android:id="@+id/tv_status_laporan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/poppinssembiold"
-                android:text="Diproses"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_status_laporan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppinssembiold"
+            tools:text="Diproses"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_status" />
+
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinssembiold"
+            android:text="Diproses"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
