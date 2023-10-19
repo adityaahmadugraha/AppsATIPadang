@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -60,7 +59,7 @@ class AdapterLaporanTeknisi
                     oldItem: ItemLaporaneResponse,
                     newItem: ItemLaporaneResponse
                 ): Boolean {
-                    return oldItem.id_pelapor == newItem.id_pelapor
+                    return oldItem.idPelapor == newItem.idPelapor
                 }
 
                 @SuppressLint("DiffUtilEquals")

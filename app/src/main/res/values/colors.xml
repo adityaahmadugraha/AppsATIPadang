@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#218BFF</color>
+    <color name="orange">#FFC107</color>
+    <color name="hijau">#38D63E</color>
     <color name="bg_login">#AFB8C1</color>
     <color name="bg_spiner">#999EA3</color>
     <color name="yellow">#EBDA42</color>

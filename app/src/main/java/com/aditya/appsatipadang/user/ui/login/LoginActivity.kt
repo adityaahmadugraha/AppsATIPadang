@@ -56,16 +56,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
     private fun loginUser() {
         val username = binding.txtUsername.text.toString()
         val password = binding.txtPassword.text.toString()
 
         if (!binding.cbConfimLogin.isChecked) {
-            Toast.makeText(this, "Harap centang kotak konfirmasi sebelum login.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Harap centang kotak konfirmasi sebelum login.",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
-        viewModel.loginUser(LoginRequest(username, password , fcmToken))
+        viewModel.loginUser(LoginRequest(username, password, fcmToken))
             .observe(this@LoginActivity) { result ->
                 when (result) {
                     is Resource.Loading -> {
@@ -76,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
                         setInputLoading(false)
 
                         if (result.data.status == 200) {
-
                             val userData = result.data.user
                             viewModel.saveUserLocal(
                                 UserLocal(
@@ -95,16 +99,22 @@ class LoginActivity : AppCompatActivity() {
                             )
                             checkUserLogin()
                         }
-
                     }
-
                     is Resource.Error -> {
                         setInputLoading(false)
-                        Toast.makeText(this@LoginActivity, result.error, Toast.LENGTH_SHORT)
-                            .show()
+                        if (result.error?.contains("Username atau password salah", ignoreCase = true) == true) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Username atau password salah",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+
+                        }
                     }
                 }
             }
+
     }
 
     private fun setInputLoading(condition: Boolean) {

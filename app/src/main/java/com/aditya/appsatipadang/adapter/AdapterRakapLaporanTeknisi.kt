@@ -31,9 +31,9 @@ class AdapterRakapLaporanTeknisi
                 tvTanggal.text = data.tanggal
                 tvNoLaporan.text = data.id.toString()
                 tvLokasi.text = data.lokasi
-                tvBiaya.text = data.biaya
-                tvKegiatanPerbaikan.text = data.kegiatan_perbaikan
-                tvPihakYangTerlibat.text = data.pihak_terlibat
+                tvBiaya.text = data.biaya.toString()
+                tvKegiatanPerbaikan.text = data.kegiatanPerbaikan
+                tvPihakYangTerlibat.text = data.pihakTerlibat
 
             }
         }

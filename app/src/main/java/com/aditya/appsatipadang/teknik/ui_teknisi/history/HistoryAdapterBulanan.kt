@@ -57,7 +57,7 @@ data class HistoryAdapterBulanan(
                     oldItem: ItemLaporaneResponse,
                     newItem: ItemLaporaneResponse
                 ): Boolean {
-                    return oldItem.id_pelapor == newItem.id_pelapor
+                    return oldItem.idPelapor == newItem.idPelapor
                 }
 
                 @SuppressLint("DiffUtilEquals")

@@ -1,12 +1,15 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
@@ -38,13 +41,22 @@ class AdapterLaporan(
 
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("ResourceAsColor")
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
+
+//                tvNameUser.text = data.namaPelapor
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.jenis
                 tvMerkAlat.text = data.merk
                 tvStatusLaporan.text = data.status
+                when (data.status) {
+                    "sudah diterima admin" -> tvStatusLaporan.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue))
+                    "sedang dikerjakan" -> tvStatusLaporan.setTextColor(ContextCompat.getColor(itemView.context, R.color.orange))
+                    "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
+                    else -> tvStatusLaporan.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                }
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(binding.imgPelaporan)

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppsATIPadang</string>
+    <string name="app_name">Maintence ATI Padang</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_history">History</string>
@@ -142,7 +142,11 @@
         <item>Admin</item>
         <item>Pelapor</item>
         <item>Teknisi</item>
-        <item>Supervisor</item>
+        <item>Pimpinan</item>
     </string-array>
+
+    <string name="email_not_valid">Format email tidak valid</string>
+    <string name="lupa_password">Lupa Password?</string>
+
 
 </resources>
