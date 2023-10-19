@@ -56,6 +56,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
     private var fotoKerusakanPath: String? = null
 
     private var idLaporan = ""
+//    private var tanggal = ""
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -223,6 +224,12 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                                 etType.setText(dataItem.type)
                                 etTangal.setText(dataItem.tanggal)
                                 etLokasi.setText(dataItem.lokasi)
+                                etKegiatanPerbaikan.setText(dataItem.kegiatanPerbaikan)
+                                etPihakTerlibat.setText(dataItem.pihakTerlibat)
+                                etBiaya.setText(dataItem.biaya.toString())
+
+
+
 
                             }
                         }
@@ -300,14 +307,17 @@ class LaporanTeknisiActivity : AppCompatActivity() {
 
                         showLoadingInput(false)
 
-
-                        val tanggal = binding.etTangal.text.toString()
-
                         val intent =
                             Intent(this@LaporanTeknisiActivity, ActivityPemberitahuan::class.java)
-                        intent.putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, idLaporan)
-                        intent.putExtra("tanggalLaporan", tanggal)
+                        intent.putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
+                        intent.putExtra("tanggalLaporan", etTangal.text.toString())
                         startActivity(intent)
+                        Log.d(
+                            "LaporanTeknisiActivity::::::",
+                            "Intent ke ActivityPemberitahuan berhasil dilakukan"
+                        )
+
+
 
 
                     }
