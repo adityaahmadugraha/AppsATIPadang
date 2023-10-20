@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ItemLaporaneResponse(
 
-
     @field:SerializedName("merk")
     val merk: String? = null,
 

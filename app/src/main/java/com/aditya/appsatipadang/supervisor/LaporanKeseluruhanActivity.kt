@@ -30,6 +30,9 @@ import java.util.Calendar
 class LaporanKeseluruhanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLaporanKeseluruhanBinding
 
+    private lateinit var context: Context
+
+
     var tanggalDari = ""
     var tanggalSamapi = ""
     var statusLaporan = ""

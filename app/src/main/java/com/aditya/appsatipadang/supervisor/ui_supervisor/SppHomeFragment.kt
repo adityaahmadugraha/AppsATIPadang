@@ -10,22 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.datastore.preferences.protobuf.Internal.MapAdapter
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
-import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
-import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
-import com.aditya.appsatipadang.adapter.AdapterRakapLaporanTeknisi
-import com.aditya.appsatipadang.adapter.AdapterStatusLaporan
-import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentSppHomeBinding
-import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
+import com.aditya.appsatipadang.supervisor.LaporanKeseluruhanActivity
 import com.aditya.appsatipadang.teknik.ui_teknisi.Thome.THomeViewModel
-import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
-import com.aditya.appsatipadang.teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,14 +29,14 @@ class SppHomeFragment : Fragment() {
     private var _binding: FragmentSppHomeBinding? = null
 
     private val binding get() = _binding!!
-    private val viewModel: THomeViewModel by viewModels()
+    private val viewModel: SppHomeViewMoel by viewModels()
 
 
     private lateinit var mAdapter: AdapterLaporan
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSppHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,7 +47,7 @@ class SppHomeFragment : Fragment() {
 
 
         binding.cardRekapLaporan.setOnClickListener {
-            val intent = Intent(activity, StatusActivityAdmin::class.java)
+            val intent = Intent(activity, LaporanKeseluruhanActivity::class.java)
             startActivity(intent)
         }
 
@@ -66,7 +58,6 @@ class SppHomeFragment : Fragment() {
     }
 
 
-
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
             binding.tvName.text = userLocal.name
@@ -74,7 +65,8 @@ class SppHomeFragment : Fragment() {
                 Glide.with(requireContext())
                     .load(BuildConfig.IMAGE_URL + userLocal.foto)
                     .error(android.R.color.darker_gray)
-                    .into(it.imgProfil) }
+                    .into(it.imgProfil)
+            }
 
             viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
                 Log.d(ContentValues.TAG, "getDataUser: ${userLocal.getToken}")
@@ -114,7 +106,7 @@ class SppHomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding?.rvLaporanHome?.apply {
+        binding.rvLaporanHome.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)

@@ -76,7 +76,6 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): LaporanResponse
 
-
     //input sarana
     @POST("laporan")
     suspend fun insertLaporan(
@@ -84,13 +83,11 @@ interface ApiService {
         @Body body: RequestBody
     ): LaporanResponse
 
-
     @POST("imageProfil")
     suspend fun insertFoto(
         @Header("Authorization") token: String,
         @Body body: RequestBody
     ): ProfileUserResponse
-
 
     @POST("kirimlaporanTeknisi")
     suspend fun insertLaporanTeknisi(
@@ -148,5 +145,9 @@ interface ApiService {
         @Body request : AddUserRequest
     ): AddUserResponse
 
-
+//    @POST("lupaPassword")
+//    suspend fun lupaPassword(
+//        @Header("Authorization") token: String,
+//        @Body body: User
+//    ): DataUserResponse
 }

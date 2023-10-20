@@ -1,8 +1,7 @@
-package com.aditya.appsatipadang.admin.ui.kamtibmas_admin
+package com.aditya.appsatipadang.admin.ui.add_user
 
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -13,7 +12,6 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.databinding.ActivityAddUserBinding
-import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint

@@ -46,18 +46,34 @@ class AdapterLaporan(
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
 
-//                tvNameUser.text = data.namaPelapor
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = convertDateFormat(data.tanggal.toString())
-                tvNameAlat.text = data.jenis
-                tvMerkAlat.text = data.merk
+                tvMerk.text = data.merk
+                tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
 
                 when (data.status) {
-                    "sudah diterima admin" -> tvStatusLaporan.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue))
-                    "sedang dikerjakan" -> tvStatusLaporan.setTextColor(ContextCompat.getColor(itemView.context, R.color.orange))
+                    "sudah diterima admin" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.blue
+                        )
+                    )
+
+                    "sedang dikerjakan" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.orange
+                        )
+                    )
+
                     "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
-                    else -> tvStatusLaporan.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                    else -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.black
+                        )
+                    )
                 }
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)

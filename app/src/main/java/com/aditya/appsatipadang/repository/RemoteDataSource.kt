@@ -3,6 +3,7 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.request.User
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
@@ -89,27 +90,6 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun getDataLaporan(token: String, id: String) = flow<Resource<LaporanInfoResponse>> {
-        emit(Resource.Loading())
-        val response = apiService.getDataLaporan(token, id)
-        response.let {
-            if (it.status == 200) emit(Resource.Success(it))
-            else emit(Resource.Error("Data Tidak Ditemukan"))
-        }
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
-
-
-    fun getTeknisiList(token: String, roles: String) = flow {
-        emit(Resource.Loading())
-        val response = apiService.getTeknisiList(token, roles)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
-
-
     //input gambar
     fun insertLaporan(
         token: String,
@@ -154,20 +134,6 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-    fun updateLaporan(
-        token: String,
-        requestBody: RequestBody
-    ) = flow<Resource<LaporanResponse>> {
-        emit(Resource.Loading())
-        val response = apiService.updateLaporan(token, requestBody)
-        response.let {
-            if (it.status == 200) emit(Resource.Success(it))
-            else emit(Resource.Error("Data Tidak Ditemukan"))
-        }
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
-
     fun getLaporanId(
         token: String,
         id: String
@@ -181,25 +147,6 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
-
-    fun inputKamtibmas(
-        token: String,
-        type: RequestBody,
-        lokasi: RequestBody,
-        deskripsi: RequestBody,
-        tanggal: RequestBody,
-        waktu: RequestBody,
-        foto: MultipartBody.Part,
-    ) = flow {
-        emit(Resource.Loading())
-        val response =
-            apiService.inputKamtibmas(token, type, lokasi, deskripsi, tanggal, waktu, foto)
-        emit(Resource.Success(response))
-    }.catch {
-        emit(Resource.Error(it.message ?: ""))
-    }.flowOn(Dispatchers.IO)
-
-
 
     fun kirimLaporanPerbaian(
         token: String,
@@ -249,4 +196,13 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
+//    fun lupaPassword(token: String, request: User) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.lupaPassword(token, request)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
+
 }

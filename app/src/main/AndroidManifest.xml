@@ -48,7 +48,7 @@
             android:name=".supervisor.LaporanKeseluruhanActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.kamtibmas_admin.ActivityBerhasilAddUser"
+            android:name=".admin.ui.add_user.ActivityBerhasilAddUser"
             android:exported="false" />
 
         <service
@@ -60,7 +60,7 @@
         </service>
 
         <activity
-            android:name=".admin.ui.kamtibmas_admin.AddUserActivity"
+            android:name=".admin.ui.add_user.AddUserActivity"
             android:exported="false" />
         <activity
             android:name=".teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi"
@@ -78,15 +78,6 @@
             android:exported="false" />
         <activity
             android:name=".teknik.ActivityTeknik"
-            android:exported="false" />
-        <activity
-            android:name=".admin.ui.kamtibmas_admin.KamtibmasActivityAdmin"
-            android:exported="false" />
-        <activity
-            android:name=".admin.ui.status_admin.StatusActivityAdmin"
-            android:exported="false" />
-        <activity
-            android:name=".admin.ui.prasarana_admin.PrasaranaActivityAdmin"
             android:exported="false" />
         <activity
             android:name=".admin.ui.sarana_admin.SaranaActivityAdmin"

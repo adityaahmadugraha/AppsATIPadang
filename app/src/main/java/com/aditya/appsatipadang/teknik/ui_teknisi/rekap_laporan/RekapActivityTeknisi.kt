@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.appsatipadang.adapter.AdapterRakapLaporanTeknisi
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.ActivityRekapTeknisiBinding
 import com.aditya.appsatipadang.utils.Constant.getToken
@@ -20,7 +18,7 @@ class RekapActivityTeknisi : AppCompatActivity() {
 
     private lateinit var binding: ActivityRekapTeknisiBinding
     private val viewModel: RekapLaporanTeknisiViewModel by viewModels()
-    private lateinit var mAdapter: AdapterRakapLaporanTeknisi
+//    private lateinit var mAdapter: AdapterRakapLaporanTeknisi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +30,10 @@ class RekapActivityTeknisi : AppCompatActivity() {
 
     }
 
-    private fun setupList() {
-        mAdapter = AdapterRakapLaporanTeknisi ()
-        setupRecyclerView()
-    }
+//    private fun setupList() {
+//        mAdapter = AdapterRakapLaporanTeknisi ()
+//        setupRecyclerView()
+//    }
 
     private fun getDataUser() {
 
@@ -53,8 +51,8 @@ class RekapActivityTeknisi : AppCompatActivity() {
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
 
                         val sortedData = result.data.laporan?.sortedByDescending {it.id}
-
-                        mAdapter.submitList(sortedData)
+//
+//                        mAdapter.submitList(sortedData)
                     }
 
                     is Resource.Error -> {
@@ -70,11 +68,11 @@ class RekapActivityTeknisi : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerView() {
-        binding.rvRekapTeknisi.apply {
-            adapter = mAdapter
-            layoutManager = LinearLayoutManager(this@RekapActivityTeknisi)
-            setHasFixedSize(true)
-        }
-    }
+//    private fun setupRecyclerView() {
+//        binding.rvRekapTeknisi.apply {
+//            adapter = mAdapter
+//            layoutManager = LinearLayoutManager(this@RekapActivityTeknisi)
+//            setHasFixedSize(true)
+//        }
+//    }
 }

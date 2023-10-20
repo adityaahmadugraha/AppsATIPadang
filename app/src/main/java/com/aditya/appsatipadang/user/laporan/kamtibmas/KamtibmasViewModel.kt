@@ -15,7 +15,6 @@ class KamtibmasViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getUser() = repository.getUser().asLiveData()
-
     fun inputLaporan(
         token: String,
         requestBody: RequestBody

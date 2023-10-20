@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.ui.kamtibmas_admin.AddUserActivity">
+    tools:context=".admin.ui.add_user.AddUserActivity">
 
 
     <ScrollView
@@ -77,8 +77,9 @@
                         android:id="@+id/ti_name"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +110,7 @@
                         android:id="@+id/ti_username"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         app:hintEnabled="false"
@@ -143,7 +144,7 @@
                         android:id="@+id/ti_email"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         app:hintEnabled="true"
@@ -177,7 +178,7 @@
                         android:id="@+id/ti_no_telp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         app:hintEnabled="false"
@@ -211,7 +212,7 @@
                         android:id="@+id/ti_alamat"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         app:hintEnabled="false"
@@ -245,7 +246,7 @@
                     <Spinner
                         android:id="@+id/spiner_roles"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="62dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
@@ -281,7 +282,7 @@
                         android:id="@+id/ti_password"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         app:hintEnabled="false"

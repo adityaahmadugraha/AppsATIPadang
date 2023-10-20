@@ -78,8 +78,9 @@ class LaporanTeknisiActivity : AppCompatActivity() {
 
             getUserData()
             imgBack.setOnClickListener {
-                val intent = Intent(this@LaporanTeknisiActivity, ActivityTeknik::class.java)
-                startActivity(intent)
+                finish()
+//                val intent = Intent(this@LaporanTeknisiActivity, ActivityTeknik::class.java)
+//                startActivity(intent)
             }
 
             camera.setOnClickListener { startCamera() }
@@ -112,7 +113,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                         val fileProfilePicture: File =
                             Constant.reduceFileImage(fotoKerusakan as File)
 
-                        var requestBody: RequestBody = MultipartBody.Builder()
+                        val requestBody: RequestBody = MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
                             .addFormDataPart("biaya", biaya)
                             .addFormDataPart("kegiatan_perbaikan", kegiatan)
@@ -217,7 +218,7 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                         is Resource.Loading -> {}
                         is Resource.Success -> {
                             val dataItem = item.data.laporan
-                            // kirim data ke dalam tek view
+                            // kirim data ke dalam tekview
                             binding.apply {
                                 etNamaPelapor.setText(dataItem!!.name.toString())
                                 etPengaduan.setText(dataItem.id.toString())

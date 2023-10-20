@@ -32,11 +32,11 @@ class AdapterLaporanBulanan(
             binding.apply {
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
-                tvNameAlat.text = data.merk
-
-//                Glide.with(itemView.context)
-//                    .load(BuildConfig.IMAGE_URL+data.foto)
-//                    .into(imgPelaporan)
+                tvLokasi.text = data.lokasi
+                tvMerk.text = data.merk
+                Glide.with(itemView.context)
+                    .load(BuildConfig.IMAGE_URL+data.foto)
+                    .into(imgPelaporan)
 
                 itemView.setOnClickListener {
                     onItemClick(data)
