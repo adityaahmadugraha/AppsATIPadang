@@ -33,9 +33,9 @@ class AdapterStatusLaporan
                 tvTipe.text = data.type
                 tvTanggal.text = data.tanggal
                 tvLokasi.text = data.lokasi
-                tvTeknisi.text = data.id_teknisi.toString()
-                tvKegiatanPerbaikan.text = data.kegiatan_perbaikan
-                tvPihakYangTerlibat.text = data.pihak_terlibat
+                tvTeknisi.text = data.idTeknisi.toString()
+                tvKegiatanPerbaikan.text = data.kegiatanPerbaikan
+                tvPihakYangTerlibat.text = data.pihakTerlibat
 
 
             }

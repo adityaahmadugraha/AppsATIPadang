@@ -226,6 +226,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/card_profil" />
 
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_logout"
+                app:layout_constraintEnd_toEndOf="@+id/btn_logout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_logout"
+                tools:visibility="visible" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
