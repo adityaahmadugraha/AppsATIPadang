@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.adapter.AdapterHomeLaporan
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.fragment.history_admin.HistoryAdminViewModel
 import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
@@ -32,7 +33,7 @@ class HomeFragmentAdmin : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HistoryAdminViewModel by viewModels()
 
-    private lateinit var mAdapter: AdapterLaporan
+    private lateinit var mAdapter: AdapterHomeLaporan
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,7 +115,7 @@ class HomeFragmentAdmin : Fragment() {
     }
 
     private fun setupList() {
-        mAdapter = AdapterLaporan {item ->
+        mAdapter = AdapterHomeLaporan {item ->
             val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
             intent.putExtra(TAG_ID_PENGADUAN, item.id.toString())
             startActivity(intent)
