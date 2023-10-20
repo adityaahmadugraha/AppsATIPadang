@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.adapter
+package com.aditya.appsatipadang.admin.ui.pengaduan_admin
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
-import com.aditya.appsatipadang.utils.Constant.convertDateFormat
+import com.aditya.appsatipadang.utils.Constant
 
-
-class AdapterLaporan(
+class PengaduanAdapter(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
-) : ListAdapter<ItemLaporaneResponse, AdapterLaporan.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<ItemLaporaneResponse, PengaduanAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     private val maxItemCount = 5
 
@@ -27,20 +26,12 @@ class AdapterLaporan(
         holder.bind(getItem(position))
     }
 
-
-    fun submitListReversed(list: List<ItemLaporaneResponse>?) {
-        val reversedList = list?.toMutableList()
-        reversedList?.add(0, getItem(0))
-        val limitedList = reversedList?.take(maxItemCount)
-        submitList(limitedList)
-    }
-
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
                 tvTitleLaporan.text = data.type
-                tvTglLaporanSarana.text = convertDateFormat(data.tanggal.toString())
+                tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
                 tvNameAlat.text = data.jenis
                 tvMerkAlat.text = data.merk
                 tvStatusLaporan.text = data.status

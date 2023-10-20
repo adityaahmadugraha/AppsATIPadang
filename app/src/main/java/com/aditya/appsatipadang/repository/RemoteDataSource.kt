@@ -56,6 +56,14 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
+    fun getLaporanStatus(token: String, status : String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getLaporanStatus(token, status)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
     fun getListPengerjaan(token: String) = flow {
         emit(Resource.Loading())
         val response = apiService.getListPengerjaan(token)

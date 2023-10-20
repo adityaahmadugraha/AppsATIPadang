@@ -30,6 +30,7 @@ class DataRepository @Inject constructor(
 //    ) = remoteData.updateUserProfile(token, foto)
 
     fun getListLaporan(token: String) = remoteData.getListLaporan(token)
+    fun getLaporanStatus(token: String, status : String) = remoteData.getLaporanStatus(token, status)
 
     fun getListPengerjaan(token: String) = remoteData.getListPengerjaan(token)
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
+import com.aditya.appsatipadang.admin.ui.pengaduan_admin.MenuAdapter
 import com.aditya.appsatipadang.admin.ui.status_admin.StatusActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
@@ -22,6 +23,7 @@ import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNo
 import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -32,6 +34,11 @@ class THomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: THomeViewModel by viewModels()
     private lateinit var mAdapter: AdapterLaporanTeknisi
+
+    private val menuArray = arrayOf(
+        "Dikerjakan",
+        "Selesai"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,8 +64,16 @@ class THomeFragment : Fragment() {
             }
         }
 
+        val viewPager = binding.viewPager
+        val tabLayout = binding.tabLayout
 
-        getDataUser()
+        val adapter = MenuTeknisiAdapter(childFragmentManager, lifecycle)
+        viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = menuArray[position]
+        }.attach()
+
         setupList()
 
     }
@@ -68,65 +83,6 @@ class THomeFragment : Fragment() {
             val intent = Intent(requireContext(), LaporanTeknisiActivity::class.java)
             intent.putExtra(Constant.IDLAPORAN, it.id.toString())
             startActivity(intent)
-        }
-    }
-
-    private fun setupRecyclerView() {
-        binding.rvLaporanHome.apply {
-            adapter = mAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
-            setHasFixedSize(true)
-        }
-    }
-
-    private fun getDataUser() {
-
-        viewModel.getUser().observe(viewLifecycleOwner) { data ->
-            viewModel.getDataUser(data.getToken).observe(viewLifecycleOwner) { item ->
-                when (item) {
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        val dataIem = item.data.user
-                        binding.apply {
-                            tvName.text = dataIem?.name
-                            Glide.with(requireContext())
-                                .load(BuildConfig.IMAGE_URL + dataIem?.foto)
-                                .error(R.color.white)
-                                .into(imgProfil)
-                        }
-                    }
-
-                    is Resource.Error -> {}
-                }
-            }
-
-            viewModel.getListLaporan(data.getToken).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
-
-                    is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-
-                        val allData = result.data.laporan
-
-                        mAdapter.submitList(allData)
-                        setupRecyclerView()
-                    }
-
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(
-                            requireActivity(),
-                            result.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-
-                }
-            }
-
         }
     }
 
