@@ -166,63 +166,38 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
-    <TextView
-        android:id="@+id/tv_title_pelaporan"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppinssembiold"
-        android:text="@string/history_pelaporan"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/img_profil"
-        app:layout_constraintTop_toBottomOf="@+id/card_menu" />
-
-    <ScrollView
-        android:id="@+id/sc_rv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:scrollbars="none"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_pelaporan">
+        app:layout_constraintTop_toBottomOf="@+id/card_menu">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="5dp"
+            app:tabIconTint="@color/black"
+            app:tabIndicatorColor="@color/selected_chip_color"
+            app:tabSelectedTextColor="@color/selected_chip_color"
+            app:tabTextColor="@color/bg_spiner" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_laporan_home"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/list_pelaporan" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="506dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/card_menu"
+            tools:layout_editor_absoluteX="22dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
-    </ScrollView>
-
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
