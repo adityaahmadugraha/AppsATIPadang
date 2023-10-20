@@ -37,11 +37,12 @@ data class HistoryAdapterBulanan(
             binding.apply {
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
-                tvNameAlat.text = data.merk
+                tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
-//                Glide.with(itemView.context)
-//                    .load(BuildConfig.IMAGE_URL+data.foto)
-//                    .into(binding.imgPelaporan)
+                tvMerk.text = data.merk
+                Glide.with(itemView.context)
+                    .load(BuildConfig.IMAGE_URL+data.foto)
+                    .into(binding.imgPelaporan)
 
                 itemView.setOnClickListener {
                     onItemClick(data)

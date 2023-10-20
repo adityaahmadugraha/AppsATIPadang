@@ -11,10 +11,11 @@ class HistoryAdminViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
     fun getUser() = repository.getUser().asLiveData()
-    fun getListLaporanHarian(token : String) = repository.getLaporanHarianTeknisi(token).asLiveData()
-    fun getListLaporanBulanan(token : String) = repository.getLaporanBulananTeknisi(token).asLiveData()
+    fun getListLaporanHarian(token: String) = repository.getLaporanHarianTeknisi(token).asLiveData()
+    fun getListLaporanBulanan(token: String) =
+        repository.getLaporanBulananTeknisi(token).asLiveData()
 
-    fun getListLaporan(token : String) = repository.getListLaporan(token).asLiveData()
+    fun getListLaporan(token: String) = repository.getListLaporan(token).asLiveData()
 
     fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
 

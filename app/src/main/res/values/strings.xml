@@ -62,7 +62,7 @@
     <string name="password">password</string>
     <string name="masukan_username">masukan username</string>
     <string name="masukan_password">masukan password</string>
-    <string name="useraname">useraname</string>
+    <string name="useraname">username</string>
     <string name="masuk_ke_akun_anda">Masuk Ke Akun Anda</string>
     <string name="format_tgl">21 Setember 2023</string>
     <string name="kirim">Kirim</string>
@@ -142,7 +142,7 @@
         <item>Admin</item>
         <item>Pelapor</item>
         <item>Teknisi</item>
-        <item>Pimpinan</item>
+        <item>Supervisor</item>
     </string-array>
 
     <string name="email_not_valid">Format email tidak valid</string>

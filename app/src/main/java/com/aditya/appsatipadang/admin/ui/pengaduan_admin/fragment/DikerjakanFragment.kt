@@ -2,18 +2,16 @@ package com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.databinding.FragmentDikerjakanBinding
-import com.aditya.appsatipadang.databinding.FragmentHistoryAdminBinding
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -72,5 +70,6 @@ class DikerjakanFragment : Fragment() {
             setHasFixedSize(true)
         }
     }
+
 
 }

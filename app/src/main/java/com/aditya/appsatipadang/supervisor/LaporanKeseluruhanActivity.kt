@@ -19,7 +19,7 @@ class LaporanKeseluruhanActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var binding: ActivityLaporanKeseluruhanBinding
     private lateinit var context: Context
-//    private lateinit var layout: ConstraintLayout
+
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +34,7 @@ class LaporanKeseluruhanActivity : AppCompatActivity() {
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
-                // WebView page finished loading
-//                binding.fabPdf.setOnClickListener {
-//                    convertViewsToPdf()
-//                }
+
             }
         }
 
@@ -45,45 +42,6 @@ class LaporanKeseluruhanActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
-
-//
-//    private fun convertViewsToPdf() {
-//        // Create a PDF file
-//        val pdfFile = File(
-//            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-//            "bill.pdf"
-//        )
-//
-//        try {
-//            // Convert TextViews to PDF
-//            val document = Document()
-//            PdfWriter.getInstance(document, FileOutputStream(pdfFile))
-//            document.open()
-//
-//            val view = layout
-//
-//
-//            val bitmap = viewToBitmap(view)
-//            val image = Image.getInstance(bitmapToByteArray(bitmap))
-//            image.scaleToFit(PageSize.A4.width, PageSize.A4.height)
-//            document.add(image)
-//
-//            document.close()
-//
-//            Toast.makeText(
-//                this,
-//                "PDF downloaded Sukses",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        } catch (e: Exception) {
-//            Toast.makeText(
-//                this,
-//                "Gagal Convert to pdf",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//            e.printStackTrace()
-//        }
-//    }
 
     private fun viewToBitmap(view: View): Bitmap {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)

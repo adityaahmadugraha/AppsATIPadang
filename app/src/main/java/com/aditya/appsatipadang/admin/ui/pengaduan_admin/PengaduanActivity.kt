@@ -1,8 +1,7 @@
 package com.aditya.appsatipadang.admin.ui.pengaduan_admin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.aditya.appsatipadang.R
+import androidx.appcompat.app.AppCompatActivity
 import com.aditya.appsatipadang.databinding.ActivityPengaduanBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint

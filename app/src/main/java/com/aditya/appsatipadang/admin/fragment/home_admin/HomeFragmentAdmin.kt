@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHomeLaporan
-import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.admin.fragment.history_admin.HistoryAdminViewModel
-import com.aditya.appsatipadang.admin.ui.kamtibmas_admin.AddUserActivity
+import com.aditya.appsatipadang.admin.ui.add_user.AddUserActivity
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanActivity
-import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_ID_PENGADUAN
 import com.aditya.appsatipadang.data.Resource
@@ -76,11 +74,11 @@ class HomeFragmentAdmin : Fragment() {
                 when (item) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
-                        val dataIem = item.data.user
+                        val dataItem = item.data.user
                         binding.apply {
-                            tvName.text = dataIem?.name
+                            tvName.text = dataItem?.name
                             Glide.with(requireContext())
-                                .load(BuildConfig.IMAGE_URL + dataIem?.foto)
+                                .load(BuildConfig.IMAGE_URL + dataItem?.foto)
                                 .into(imgProfil)
                         }
                     }
@@ -121,6 +119,7 @@ class HomeFragmentAdmin : Fragment() {
     }
 
     private fun setupList() {
+
         mAdapter = AdapterHomeLaporan {item ->
             val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
             intent.putExtra(TAG_ID_PENGADUAN, item.id.toString())

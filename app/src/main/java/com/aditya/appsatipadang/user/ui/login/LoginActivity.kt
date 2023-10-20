@@ -13,13 +13,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.aditya.appsatipadang.admin.HomeActivity
-import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.databinding.ActivityLoginBinding
 import com.aditya.appsatipadang.supervisor.ActivitySupervisor
 import com.aditya.appsatipadang.teknik.ActivityTeknik
+import com.aditya.appsatipadang.user.MainActivity
+import com.aditya.appsatipadang.user.ui.lupa_password.ActivityLupaPassword
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseApp
@@ -53,6 +54,11 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             loginUser()
+        }
+        binding.txtLupaPassword.setOnClickListener {
+            intent = Intent(this@LoginActivity, ActivityLupaPassword::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
@@ -100,9 +106,14 @@ class LoginActivity : AppCompatActivity() {
                             checkUserLogin()
                         }
                     }
+
                     is Resource.Error -> {
                         setInputLoading(false)
-                        if (result.error?.contains("Username atau password salah", ignoreCase = true) == true) {
+                        if (result.error.contains(
+                                "Username atau password salah",
+                                ignoreCase = true
+                            )
+                        ) {
                             Toast.makeText(
                                 this@LoginActivity,
                                 "Username atau password salah",
@@ -152,15 +163,15 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(this)
                     }
                 }
-//                else if (userData.roles == "Supervisor") {
-//                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
-//                        .show()
-//                    Log.d("LOGINSPP:::::", userData.token)
-//                    Intent(this@LoginActivity, ActivitySupervisor::class.java).apply {
-//                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                        startActivity(this)
-//                    }
-//                }
+                else if (userData.roles == "Supervisor") {
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+                        .show()
+                    Log.d("LOGINSPP:::::", userData.token)
+                    Intent(this@LoginActivity, ActivitySupervisor::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(this)
+                    }
+                }
 
             }
 

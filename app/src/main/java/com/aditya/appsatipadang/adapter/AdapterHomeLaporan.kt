@@ -12,7 +12,6 @@ import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
-import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
 
 class AdapterHomeLaporan(
@@ -31,7 +30,6 @@ class AdapterHomeLaporan(
         holder.bind(getItem(position))
     }
 
-
     fun submitListReversed(list: List<ItemLaporaneResponse>?) {
         val reversedList = list?.toMutableList()
         reversedList?.add(0, getItem(0))
@@ -46,6 +44,7 @@ class AdapterHomeLaporan(
             binding.apply {
 
                 tvNameUser.text = data.namaPelapor
+
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvNameAlat.text = data.jenis
