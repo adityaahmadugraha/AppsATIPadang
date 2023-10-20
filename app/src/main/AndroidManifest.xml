@@ -38,10 +38,9 @@
         <activity
             android:name=".admin.ui.pengaduan_admin.PengaduanActivity"
             android:exported="false" />
-      <activity
+        <activity
             android:name=".user.ui.lupa_password.ActivityLupaPassword"
             android:exported="false" />
-        <activity
         <activity
             android:name=".supervisor.LaporanKeseluruhanActivity"
             android:exported="false" />
