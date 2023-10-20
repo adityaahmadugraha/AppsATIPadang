@@ -127,6 +127,8 @@ class HomeFragmentAdmin : Fragment() {
         }
     }
 
+
+
     private fun setupRecyclerView() {
         binding.rvLaporanHome.apply {
             layoutManager = LinearLayoutManager(requireActivity())

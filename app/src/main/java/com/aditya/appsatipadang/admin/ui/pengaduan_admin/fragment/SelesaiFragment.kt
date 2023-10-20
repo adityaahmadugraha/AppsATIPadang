@@ -12,6 +12,7 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
+import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentDikerjakanBinding
 import com.aditya.appsatipadang.databinding.FragmentSelesaiBinding
 import com.aditya.appsatipadang.utils.Constant.getToken
@@ -44,13 +45,16 @@ class SelesaiFragment : Fragment() {
         viewModel.getUser().observe(viewLifecycleOwner){
             viewModel.getLaporanStatus(it.getToken,"selesai").observe(viewLifecycleOwner){ item ->
                 when(item){
-                    is com.aditya.appsatipadang.data.Resource.Loading -> {}
-                    is com.aditya.appsatipadang.data.Resource.Success -> {
+                    is Resource.Loading -> {}
+
+                    is Resource.Success -> {
                         val dataItem = item.data.laporan
-                        mAdapter.submitList(dataItem)
+                        val filteredDataItem =
+                            dataItem?.filter { it.status == "selesai" }
+                        mAdapter.submitList(filteredDataItem)
                         setupRecyclerView()
                     }
-                    is com.aditya.appsatipadang.data.Resource.Error -> {}
+                    is Resource.Error -> {}
 
                 }
             }

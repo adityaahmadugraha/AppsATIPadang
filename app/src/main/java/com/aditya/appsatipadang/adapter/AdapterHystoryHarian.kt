@@ -1,12 +1,15 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.aditya.appsatipadang.utils.Constant
@@ -22,6 +25,9 @@ class AdapterHystoryHarian(
         return ViewHolder(binding)
     }
 
+
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -34,6 +40,29 @@ class AdapterHystoryHarian(
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
                 tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
+                when (data.status) {
+                    "sudah diterima admin" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.blue
+                        )
+                    )
+
+                    "sedang dikerjakan" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.orange
+                        )
+                    )
+
+                    "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
+                    else -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.black
+                        )
+                    )
+                }
                 tvMerk.text = data.merk
 
                 Glide.with(itemView.context)

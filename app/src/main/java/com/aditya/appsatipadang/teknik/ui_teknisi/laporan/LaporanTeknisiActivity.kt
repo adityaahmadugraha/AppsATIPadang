@@ -23,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_ID_PENGADUAN
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityLaporanTeknisiBinding
@@ -61,6 +62,9 @@ class LaporanTeknisiActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        const val TAG_ID_TEKNISI = "idTeknisi"
+        const val IDLAPORAN = "idLaporan"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,9 +82,8 @@ class LaporanTeknisiActivity : AppCompatActivity() {
 
             getUserData()
             imgBack.setOnClickListener {
-                finish()
-//                val intent = Intent(this@LaporanTeknisiActivity, ActivityTeknik::class.java)
-//                startActivity(intent)
+                val intent = Intent(this@LaporanTeknisiActivity, ActivityTeknik::class.java)
+                startActivity(intent)
             }
 
             camera.setOnClickListener { startCamera() }
@@ -230,8 +233,6 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                                 etBiaya.setText(dataItem.biaya.toString())
 
 
-
-
                             }
                         }
 
@@ -310,15 +311,16 @@ class LaporanTeknisiActivity : AppCompatActivity() {
 
                         val intent =
                             Intent(this@LaporanTeknisiActivity, ActivityPemberitahuan::class.java)
-                        intent.putExtra(ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN, result.data.id)
+                        intent.putExtra(
+                            ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN,
+                            result.data.id
+                        )
                         intent.putExtra("tanggalLaporan", etTangal.text.toString())
                         startActivity(intent)
                         Log.d(
                             "LaporanTeknisiActivity::::::",
                             "Intent ke ActivityPemberitahuan berhasil dilakukan"
                         )
-
-
 
 
                     }

@@ -1,13 +1,13 @@
 package com.aditya.appsatipadang.user.ui.detailstatuslaporan
 
-import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.ActivityDetailStatusLaporanBinding
-import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,23 +36,18 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         id = intent.getStringExtra(TAG_IDLAPORAN).toString()
-        id = intent.getStringExtra(DetailStatusLaporanActivity.TAG_IDLAPORAN).toString()
 
         binding.apply {
             imgBackStatusLaporan.setOnClickListener {
-                intent = Intent(this@DetailStatusLaporanActivity, MainActivity::class.java)
-                startActivity(intent)
+                finish()
             }
             btnBack.setOnClickListener {
-                intent = Intent(this@DetailStatusLaporanActivity, MainActivity::class.java)
-                startActivity(intent)
+                finish()
             }
         }
 
         getDataLaporan()
     }
-
-
 
 
     private fun getDataLaporan() {
@@ -71,9 +66,29 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
                                 etType.setText(laporan?.type.toString())
                                 etTanggal.setText(laporan?.tanggal.toString())
                                 etLokasi.setText(laporan?.lokasi.toString())
-                                tvStatus.text = laporan?.status.toString()
+                                val status = laporan?.status.toString()
+                                tvStatus.text = status
+
+                                when (status) {
+                                    "sudah diterima admin" -> {
+                                        tvStatus.setTextColor(resources.getColor(R.color.blue))
+                                    }
+
+                                    "sedang dikerjakan" -> {
+                                        tvStatus.setTextColor(Color.YELLOW)
+                                    }
+
+                                    "selesai" -> {
+                                        tvStatus.setTextColor(Color.GREEN)
+                                    }
+
+                                    else -> {
+                                        tvStatus.setTextColor(Color.BLACK)
+                                    }
+                                }
                             }
                         }
+
 
                         is Resource.Error -> {
 
