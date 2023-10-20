@@ -13,6 +13,7 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.aditya.appsatipadang.utils.Constant.convertDateFormat
+import com.bumptech.glide.Glide
 
 
 class AdapterLaporan(

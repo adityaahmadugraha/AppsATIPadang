@@ -36,7 +36,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_pengaduan"
+                android:text="PENGADUAN"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"

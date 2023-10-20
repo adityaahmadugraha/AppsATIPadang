@@ -36,6 +36,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".admin.cetaklaporan.CetakLaporanActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.ui.pengaduan_admin.PengaduanActivity"
             android:exported="false" />
         <activity
