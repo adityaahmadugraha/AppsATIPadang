@@ -145,6 +145,14 @@
         <item>Supervisor</item>
     </string-array>
 
+    <string-array name="spinner_items">
+        <item>pilih semua</item>
+        <item>sudah diterima admin</item>
+        <item>sedang dikerjakan</item>
+        <item>selesai</item>
+        <!-- Add more items as needed -->
+    </string-array>
+
     <string name="email_not_valid">Format email tidak valid</string>
     <string name="lupa_password">Lupa Password?</string>
 

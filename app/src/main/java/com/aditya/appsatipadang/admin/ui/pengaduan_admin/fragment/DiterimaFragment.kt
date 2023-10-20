@@ -54,7 +54,6 @@ class DiterimaFragment : Fragment() {
             }
         }
     }
-
     private fun setupList() {
         mAdapter = PengaduanAdapter {item ->
             val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
