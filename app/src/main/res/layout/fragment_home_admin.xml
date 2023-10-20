@@ -101,7 +101,7 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
                         android:fontFamily="@font/poppinssembiold"
-                        android:text="@string/sarana"
+                        android:text="Pengaduan"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_sarana"

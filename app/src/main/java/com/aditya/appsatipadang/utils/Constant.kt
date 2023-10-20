@@ -1,5 +1,6 @@
 package com.aditya.appsatipadang.utils
 
+import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.content.ContextWrapper
@@ -9,7 +10,6 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
@@ -21,6 +21,8 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
@@ -48,6 +50,15 @@ object Constant {
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
     val UserLocal.getToken get() = "Bearer ${this.token}"
+
+    fun convertDateFormat(inputDate: String): String {
+        val inputFormat = "yyyy-MM-dd"
+        val outputFormat = "dd-MM-yyyy"
+        val inputDateFormat = SimpleDateFormat(inputFormat)
+        val outputDateFormat = SimpleDateFormat(outputFormat)
+        val date = inputDateFormat.parse(inputDate)
+        return outputDateFormat.format(date)
+    }
 
     fun uriToFile(selectedImg: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver

@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
+import com.aditya.appsatipadang.utils.Constant
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class AdapterHistoryLaporan(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
@@ -27,14 +30,15 @@ class AdapterHistoryLaporan(
     inner class ViewHolder(private val binding: ListPelaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
+            val tglIndo = SimpleDateFormat("dd/MM/yyyy", Locale("id", "ID"))
             binding.apply {
                 tvTitleLaporan.text = data.type
-                tvTglLaporanSarana.text = data.tanggal
+                tvTglLaporanSarana.text = tglIndo.format(data.tanggal).toString()
                 tvNameAlat.text = data.merk
 
-                Glide.with(itemView.context)
-                    .load(BuildConfig.IMAGE_URL+data.foto)
-                    .into(imgPelaporan)
+//                Glide.with(itemView.context)
+//                    .load(BuildConfig.IMAGE_URL+data.foto)
+//                    .into(imgPelaporan)
 
                 itemView.setOnClickListener {
                     onItemClick(data)
