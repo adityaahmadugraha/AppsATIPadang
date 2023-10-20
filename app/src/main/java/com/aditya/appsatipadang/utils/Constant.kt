@@ -29,6 +29,9 @@ import java.util.UUID
 object Constant {
 
     const val IDLAPORAN = "id_laporan"
+    const val TANGGAL_DARI = "tgl_dari"
+    const val TANGGAL_SAMPAI = "tgl_sampai"
+    const val STATUS_LAPORAN = "status"
 
     const val FCM_CHANNEL_ID = "FCM_CHANNEL_ID"
     const val FCM_CHANNEL_NAME = "FCM_CHANNEL_NAME"

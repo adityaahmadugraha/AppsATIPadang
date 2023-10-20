@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.aditya.appsatipadang.utils.Constant
+import com.bumptech.glide.Glide
 
 class PengaduanAdapter(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
@@ -35,9 +37,9 @@ class PengaduanAdapter(
                 tvNameAlat.text = data.jenis
                 tvMerkAlat.text = data.merk
                 tvStatusLaporan.text = data.status
-//                Glide.with(itemView.context)
-//                    .load(BuildConfig.IMAGE_URL + data.foto)
-//                    .into(binding.imgPelaporan)
+                Glide.with(itemView.context)
+                    .load(BuildConfig.IMAGE_URL + data.foto)
+                    .into(binding.imgPelaporan)
 
                 itemView.setOnClickListener {
                     onItemClick(data)
