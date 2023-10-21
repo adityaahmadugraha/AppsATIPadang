@@ -4,6 +4,7 @@ package com.aditya.appsatipadang.admin.ui.add_user
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -67,6 +68,7 @@ class AddUserActivity : AppCompatActivity() {
 
                             viewModel.getUser().observe(this@AddUserActivity) {
                                 viewModel.insertUser(it.getToken, request).observe(this@AddUserActivity) { response ->
+
                                     if (response != null) {
                                         Log.d("AddUserActivity", "Data pengguna berhasil ditambahkan")
                                         val intent = Intent(this, ActivityBerhasilAddUser::class.java)

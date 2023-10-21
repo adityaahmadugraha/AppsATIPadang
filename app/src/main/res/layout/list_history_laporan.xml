@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -98,7 +97,7 @@
 
             <TextView
 
-                android:id="@+id/tvNameAlat"
+                android:id="@+id/tvLokasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -106,18 +105,19 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/tvStatusLaporan"
                 app:layout_constraintTop_toBottomOf="@+id/tvStatusLaporan"
-                tools:text="Samsung" />
+                tools:text="Lokasi" />
+
 
 
             <TextView
-                android:id="@+id/tvMerkAlat"
+                android:id="@+id/tv_merk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/tvNameAlat"
-                app:layout_constraintTop_toBottomOf="@+id/tvNameAlat"
+                app:layout_constraintStart_toStartOf="@+id/tvLokasi"
+                app:layout_constraintTop_toBottomOf="@+id/tvLokasi"
                 tools:text="Samsung" />
 
 

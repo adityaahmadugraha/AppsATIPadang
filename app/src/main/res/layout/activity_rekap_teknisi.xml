@@ -265,8 +265,7 @@
                 android:layout_marginTop="32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_teknisi"
-                tools:listitem="@layout/list_laporan" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_teknisi" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@
     <color name="orange">#FFC107</color>
     <color name="hijau">#38D63E</color>
     <color name="bg_login">#AFB8C1</color>
+    <color name="detail">#FEFFFC</color>
     <color name="bg_spiner">#999EA3</color>
     <color name="yellow">#EBDA42</color>
     <color name="pdf">#A7D7ED</color>

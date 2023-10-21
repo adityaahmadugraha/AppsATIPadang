@@ -46,7 +46,6 @@ class DiterimaFragment : Fragment() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val dataItem = item.data.laporan
-                        Log.d("DATAYANGDITERIMA::::", "$dataItem")
                         mAdapter.submitList(dataItem)
                         setupRecyclerView()
                     }
