@@ -68,6 +68,7 @@ class DataRepository @Inject constructor(
     fun insertUser(token: String, request: AddUserRequest) =
         remoteData.insertUser(token, request)
 
-//    fun lupaPassword(token: String, request: User) =
-//        remoteData.lupaPassword(token, request)
+    fun gantiPassword(
+        requestBody: RequestBody
+    ) = remoteData.gantiPassword(requestBody)
 }
