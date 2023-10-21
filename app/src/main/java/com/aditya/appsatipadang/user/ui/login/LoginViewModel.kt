@@ -8,6 +8,7 @@ import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,4 +22,6 @@ class LoginViewModel @Inject constructor(
     fun saveUserLocal(userLocal: UserLocal) = viewModelScope.launch {
         dataRepository.saveUser(userLocal)
     }
+
+    fun gantiPassword(requestBody: RequestBody) = dataRepository.gantiPassword(requestBody).asLiveData()
 }

@@ -196,13 +196,17 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
-
-//    fun lupaPassword(token: String, request: User) = flow {
-//        emit(Resource.Loading())
-//        val response = apiService.lupaPassword(token, request)
-//        emit(Resource.Success(response))
-//    }.catch {
-//        emit(Resource.Error(it.message ?: ""))
-//    }.flowOn(Dispatchers.IO)
+    fun gantiPassword(
+        requestBody: RequestBody
+    ) = flow<Resource<LaporanResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.gantiPassword(requestBody)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemuan"))
+        }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
 
 }

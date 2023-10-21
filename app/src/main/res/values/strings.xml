@@ -142,7 +142,7 @@
         <item>Admin</item>
         <item>Pelapor</item>
         <item>Teknisi</item>
-        <item>Supervisor</item>
+        <item>Pimpinan</item>
     </string-array>
 
     <string-array name="spinner_items">

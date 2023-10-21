@@ -1,6 +1,6 @@
 package com.aditya.appsatipadang.user.ui.login
 
-
+import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.aditya.appsatipadang.admin.HomeActivity
@@ -20,12 +22,13 @@ import com.aditya.appsatipadang.databinding.ActivityLoginBinding
 import com.aditya.appsatipadang.supervisor.ActivitySupervisor
 import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.aditya.appsatipadang.user.MainActivity
-import com.aditya.appsatipadang.user.ui.lupa_password.ActivityLupaPassword
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -56,11 +59,48 @@ class LoginActivity : AppCompatActivity() {
             loginUser()
         }
         binding.txtLupaPassword.setOnClickListener {
-            intent = Intent(this@LoginActivity, ActivityLupaPassword::class.java)
-            startActivity(intent)
-            finish()
-        }
+            showInputDialog(
+                context = this,
+                title = "Masukan Email Akun",
+                message = "Masukan alamat email akun yang akan di reset password..",
+            ) { userInput ->
+                val requestBody: RequestBody = MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("email", userInput)
+                    .build()
 
+                viewModel.gantiPassword(requestBody).observe(this@LoginActivity){
+                    when(it){
+                        is Resource.Loading -> {}
+                        is Resource.Success -> {
+                            if (it.data.status == 200){
+                                Toast.makeText(this@LoginActivity, "Silahkan Cek Alamat Email", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this@LoginActivity, "Email Yang Di Masukan Tidak Valid!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        is Resource.Error -> {}
+                    }
+                }
+            }
+        }
+    }
+
+    fun showInputDialog(context: Context, title: String, message: String, onInputReceived: (String) -> Unit) {
+        val inputEditText = EditText(context)
+
+        val dialog = AlertDialog.Builder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setView(inputEditText)
+            .setPositiveButton("OK") { _, _ ->
+                val userInput = inputEditText.text.toString()
+                onInputReceived(userInput)
+            }
+            .setNegativeButton("Cancel") { _, _ -> }
+            .create()
+
+        dialog.show()
     }
 
     private fun loginUser() {
@@ -125,7 +165,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-
     }
 
     private fun setInputLoading(condition: Boolean) {
@@ -172,10 +211,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(this)
                     }
                 }
-
             }
-
-
         }
     }
 
