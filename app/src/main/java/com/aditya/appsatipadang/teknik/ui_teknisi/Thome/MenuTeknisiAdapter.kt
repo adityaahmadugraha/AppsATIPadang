@@ -5,7 +5,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.DikerjakanFragment
+import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.DikerjakanTeknisiFragment
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.SelesaiFragment
+import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.SelesaiTeknisiFragment
 
 
 private const val NUM_TABS = 2
@@ -18,8 +20,8 @@ class MenuTeknisiAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return DikerjakanFragment()
+            0 -> return DikerjakanTeknisiFragment()
         }
-        return SelesaiFragment()
+        return SelesaiTeknisiFragment()
     }
 }

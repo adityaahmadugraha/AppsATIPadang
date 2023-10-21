@@ -145,9 +145,8 @@ interface ApiService {
         @Body request : AddUserRequest
     ): AddUserResponse
 
-//    @POST("lupaPassword")
-//    suspend fun lupaPassword(
-//        @Header("Authorization") token: String,
-//        @Body body: User
-//    ): DataUserResponse
+    @POST("ganti-password")
+    suspend fun gantiPassword(
+        @Body body: RequestBody
+    ): LaporanResponse
 }

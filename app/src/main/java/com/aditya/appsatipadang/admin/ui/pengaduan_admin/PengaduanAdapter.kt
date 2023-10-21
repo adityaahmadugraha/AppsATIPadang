@@ -42,6 +42,7 @@ class PengaduanAdapter(
                 tvStatusLaporan.text = data.status
                 tvLokasi.text = data.lokasi
                 tvMerk.text = data.merk
+
                 when (data.status) {
                     "sudah diterima admin" -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
@@ -65,6 +66,10 @@ class PengaduanAdapter(
                         )
                     )
                 }
+
+                tvStatusLaporan.text = data.status
+
+
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(binding.imgPelaporan)
