@@ -145,23 +145,14 @@ class LoginActivity : AppCompatActivity() {
                             )
                             checkUserLogin()
                         }
+                        else {
+                            Toast.makeText(this@LoginActivity, "Username atau password salah", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     is Resource.Error -> {
                         setInputLoading(false)
-                        if (result.error.contains(
-                                "Username atau password salah",
-                                ignoreCase = true
-                            )
-                        ) {
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Username atau password salah",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-
-                        }
+                        Toast.makeText(this@LoginActivity, "Terjadi kesalahan saat login", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

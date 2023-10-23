@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
@@ -33,6 +34,7 @@ class THomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: THomeViewModel by viewModels()
     private lateinit var mAdapter: AdapterLaporanTeknisi
+    private lateinit var lySwip: SwipeRefreshLayout
 
     private val menuArray = arrayOf(
         "Dikerjakan",
@@ -73,6 +75,13 @@ class THomeFragment : Fragment() {
             tab.text = menuArray[position]
         }.attach()
 
+
+        lySwip = binding.lySwip
+        lySwip.setOnRefreshListener {
+
+            getDataUser()
+        }
+
         setupList()
         getDataUser()
 
@@ -107,6 +116,7 @@ class THomeFragment : Fragment() {
                     is Resource.Success -> {
                         Log.d(TAG, "getListLaporanTeknisi::::::: ${data.getToken}")
                         binding.progressBar.isVisible = false
+                        lySwip.isRefreshing = false
 
 
                     }

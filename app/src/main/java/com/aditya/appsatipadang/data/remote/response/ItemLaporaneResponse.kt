@@ -46,8 +46,9 @@ data class ItemLaporaneResponse(
     @field:SerializedName("id")
     val id: Int? = null,
 
-    @field:SerializedName("nama_pelapor")
-    val namaPelapor: String? = null,
+    @field:SerializedName("name_pelapor")
+    val namePelapor: String? = null,
+
 
     @field:SerializedName("tanggal")
     val tanggal: String? = null,

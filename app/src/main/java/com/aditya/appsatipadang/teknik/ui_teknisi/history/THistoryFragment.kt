@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
 import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
 import com.aditya.appsatipadang.data.Resource
@@ -25,6 +27,8 @@ class THistoryFragment : Fragment() {
 
     private lateinit var mAdapterHarian: AdapterHystoryHarian
     private lateinit var mAdapterBulanan: HistoryAdapterBulanan
+
+    private lateinit var lySwip: SwipeRefreshLayout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,8 +40,13 @@ class THistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupList()
+        lySwip = binding.lySwip
+        lySwip.setOnRefreshListener {
 
+            getDatalaporan()
+        }
+
+        setupList()
         getDatalaporan()
     }
 
@@ -60,13 +69,19 @@ class THistoryFragment : Fragment() {
         viewModel.getUser().observe(viewLifecycleOwner){
             viewModel.getListLaporanBulanan(it.getToken).observe(viewLifecycleOwner){ result ->
                 when(result){
-                    is Resource.Loading -> {}
+                    is Resource.Loading -> {
+                        binding.progressBar.isVisible = true
+                    }
                     is Resource.Success -> {
+                        binding.progressBar.isVisible = false
+                        lySwip.isRefreshing = false
                         val data = result.data
                         mAdapterBulanan.submitList(data.laporan)
                         setupRecyclerView()
                     }
-                    is Resource.Error -> {}
+                    is Resource.Error -> {
+                        binding.progressBar.isVisible = false
+                    }
                 }
             }
         }
