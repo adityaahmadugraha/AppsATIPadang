@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
@@ -24,7 +25,7 @@ class ActivityStatus : AppCompatActivity() {
     private lateinit var binding: ActivityStatusBinding
     private val viewModel: StatusViewModel by viewModels()
     private lateinit var mAdapter: AdapterLaporan
-
+    private lateinit var lySwip: SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,17 +36,25 @@ class ActivityStatus : AppCompatActivity() {
             finish()
         }
 
+        lySwip = binding.lySwip
+        lySwip.setOnRefreshListener {
+
+            getDataUser()
+        }
+
+
         setupList()
         getDataUser()
     }
 
     private fun setupList() {
-            mAdapter = AdapterLaporan() {
+        mAdapter = AdapterLaporan() {
             goToDetailScreen(it)
 
         }
         setupRecyclerView()
     }
+
     private fun goToDetailScreen(itemLaporaneResponse: ItemLaporaneResponse) {
         Log.d("ActivityStatus::::::::::::::::::", "ID Laporan: ${itemLaporaneResponse.id}")
         val bundle = Bundle().apply {
@@ -64,7 +73,6 @@ class ActivityStatus : AppCompatActivity() {
     }
 
 
-
     private fun getDataUser() {
 
         viewModel.getUser().observe(this) { it ->
@@ -77,10 +85,10 @@ class ActivityStatus : AppCompatActivity() {
 
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
-
+                        lySwip.isRefreshing = false
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
 
-                        val sortedData = result.data.laporan?.sortedByDescending {it.id}
+                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
 
                         mAdapter.submitList(sortedData)
                     }

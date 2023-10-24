@@ -62,7 +62,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Aditya Ahmad" />

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
 import com.aditya.appsatipadang.adapter.AdapterLaporanBulanan
@@ -31,6 +32,8 @@ class HistoryFragment : Fragment() {
     private lateinit var mAdapterBulanan: AdapterLaporanBulanan
     private lateinit var mAdapterHarian: AdapterHystoryHarian
 
+    private lateinit var lySwip: SwipeRefreshLayout
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,12 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lySwip = binding.lySwip
+        lySwip.setOnRefreshListener {
+
+            getDataUser()
+        }
 
         setupButtonBackClicked()
         getDataUser()
@@ -65,6 +74,7 @@ class HistoryFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
+                        lySwip.isRefreshing = false
                         val sortedData = result.data.laporan?.sortedByDescending { it.id }
                         mAdapterHarian.submitList(sortedData)
                         setupRecyclerView()

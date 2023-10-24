@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.BuildConfig.IMAGE_URL
 import com.aditya.appsatipadang.R
@@ -45,6 +46,8 @@ class ProfileFragment : Fragment() {
 
     private var profilePicture: File? = null
     private var fotoProfilPath: String? = null
+
+    private lateinit var lySwip: SwipeRefreshLayout
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -97,6 +100,12 @@ class ProfileFragment : Fragment() {
                 REQUIRED_PERMISSIONS,
                 REQUEST_CODE_PERMISSIONS
             )
+        }
+
+        lySwip = binding!!.lySwip
+        lySwip.setOnRefreshListener {
+
+            getDataUser()
         }
 
         getDataUser()
@@ -240,6 +249,8 @@ class ProfileFragment : Fragment() {
                                 .load(IMAGE_URL + dataIem?.foto)
                                 .error(R.color.status_bar)
                                 .into(imgProfil)
+
+                            lySwip.isRefreshing = false
                         }
 
                     }

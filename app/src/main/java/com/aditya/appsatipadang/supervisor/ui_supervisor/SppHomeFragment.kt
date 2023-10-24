@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
@@ -31,7 +32,7 @@ class SppHomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: SppHomeViewMoel by viewModels()
 
-
+    private lateinit var lySwip: SwipeRefreshLayout
     private lateinit var mAdapter: AdapterLaporan
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +52,11 @@ class SppHomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        lySwip = binding.lySwip
+        lySwip.setOnRefreshListener {
+
+            getDataUser()
+        }
 
         getDataUser()
         setupList()
@@ -78,7 +84,7 @@ class SppHomeFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.isVisible = false
 
-
+                        lySwip.isRefreshing = false
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
 
                         mAdapter.submitList(result.data.laporan)

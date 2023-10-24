@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHomeLaporan
@@ -34,6 +35,8 @@ class HomeFragmentAdmin : Fragment() {
     private val viewModel: HistoryAdminViewModel by viewModels()
 
     private lateinit var mAdapter: AdapterHomeLaporan
+
+    private lateinit var lySwip: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,6 +65,13 @@ class HomeFragmentAdmin : Fragment() {
                 startActivity(intent)
             }
         }
+
+        lySwip = binding.lySwip
+        lySwip.setOnRefreshListener {
+
+            getDataUser()
+        }
+
 
         getDataUser()
         setupList()
@@ -94,13 +104,16 @@ class HomeFragmentAdmin : Fragment() {
                     }
 
                     is Resource.Success -> {
-                        binding.progressBar.isVisible = false
 
                         val allData = result.data.laporan
                         val latest5Data = allData?.take(5)
 
                         mAdapter.submitList(latest5Data)
                         setupRecyclerView()
+
+                        binding.progressBar.isVisible = false
+                        lySwip.isRefreshing = false
+
                     }
 
                     is Resource.Error -> {
