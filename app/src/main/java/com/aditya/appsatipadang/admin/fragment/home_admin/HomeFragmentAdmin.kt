@@ -105,11 +105,17 @@ class HomeFragmentAdmin : Fragment() {
 
                     is Resource.Success -> {
 
-                        val allData = result.data.laporan
-                        val latest5Data = allData?.take(5)
+//                        val allData = result.data.laporan
+//                        val latest5Data = allData?.take(5)
+//
+//                        mAdapter.submitList(latest5Data)
 
-                        mAdapter.submitList(latest5Data)
+
+                        val allData = result.data.laporan
+                        val sortedData = allData?.sortedByDescending { it.id }
                         setupRecyclerView()
+
+                        mAdapter.submitList(sortedData)
 
                         binding.progressBar.isVisible = false
                         lySwip.isRefreshing = false
@@ -133,13 +139,12 @@ class HomeFragmentAdmin : Fragment() {
 
     private fun setupList() {
 
-        mAdapter = AdapterHomeLaporan {item ->
+        mAdapter = AdapterHomeLaporan { item ->
             val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
             intent.putExtra(TAG_ID_PENGADUAN, item.id.toString())
             startActivity(intent)
         }
     }
-
 
 
     private fun setupRecyclerView() {

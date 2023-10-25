@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.aditya.appsatipadang.utils.Constant
 import com.bumptech.glide.Glide
@@ -26,8 +27,6 @@ class AdapterHystoryHarian(
     }
 
 
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -39,6 +38,11 @@ class AdapterHystoryHarian(
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
                 tvLokasi.text = data.lokasi
+
+//                tvNameUser.text = data.namePelapor
+                Glide.with(itemView.context)
+                    .load(BuildConfig.IMAGE_URL + data.foto)
+                    .into(imgPelaporan)
                 tvStatusLaporan.text = data.status
                 when (data.status) {
                     "sudah diterima admin" -> tvStatusLaporan.setTextColor(
@@ -55,7 +59,13 @@ class AdapterHystoryHarian(
                         )
                     )
 
-                    "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
+                    "selesai" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.selesai
+                        )
+                    )
+
                     else -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
                             itemView.context,
@@ -63,11 +73,8 @@ class AdapterHystoryHarian(
                         )
                     )
                 }
-                tvMerk.text = data.merk
 
-                Glide.with(itemView.context)
-                    .load(BuildConfig.IMAGE_URL+data.foto)
-                    .into(imgPelaporan)
+
 
                 itemView.setOnClickListener {
                     onItemClick(data)

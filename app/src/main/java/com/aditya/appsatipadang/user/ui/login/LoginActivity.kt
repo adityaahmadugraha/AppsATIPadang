@@ -193,7 +193,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(this)
                     }
                 }
-                else if (userData.roles == "Supervisor") {
+                else if (userData.roles == "Pimpinan") {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
                     Log.d("LOGINSPP:::::", userData.token)

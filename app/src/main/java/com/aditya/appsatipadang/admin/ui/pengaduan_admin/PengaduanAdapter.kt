@@ -41,7 +41,8 @@ class PengaduanAdapter(
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
                 tvStatusLaporan.text = data.status
                 tvLokasi.text = data.lokasi
-                tvMerk.text = data.merk
+                tvNameUser.text = data.namePelapor
+//                tvMerk.text = data.merk
 
                 when (data.status) {
                     "sudah diterima admin" -> tvStatusLaporan.setTextColor(
@@ -58,7 +59,12 @@ class PengaduanAdapter(
                         )
                     )
 
-                    "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
+                    "selesai" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.selesai
+                        )
+                    )
                     else -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
                             itemView.context,

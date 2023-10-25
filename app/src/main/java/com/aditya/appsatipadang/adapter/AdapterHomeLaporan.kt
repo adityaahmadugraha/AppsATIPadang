@@ -16,9 +16,7 @@ import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.bumptech.glide.Glide
 
 class AdapterHomeLaporan(
-    private val onItemClick: (ItemLaporaneResponse) -> Unit,
-//    private val viewModel: SaranaAdminViewModel,
-//    private val token: String
+    private val onItemClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, AdapterHomeLaporan.ViewHolder>(DIFF_CALLBACK) {
 
     private val maxItemCount = 5
@@ -33,9 +31,6 @@ class AdapterHomeLaporan(
         val item = getItem(position)
         holder.bind(item)
     }
-
-
-
 
 
     fun submitListReversed(list: List<ItemLaporaneResponse>?) {
@@ -53,16 +48,9 @@ class AdapterHomeLaporan(
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = data.tanggal
                 tvLokasi.text = data.lokasi
-                tvMerk.text = data.merk
+//                tvMerk.text = data.merk
                 tvStatusLaporan.text = data.status
-
-
-//                val idPelapor = data.idPelapor.toString()
-//
-//                val namaPelapor = viewModel.getDataLaporanId(token, data.idPelapor.toString())
-//
-//                tvNameUser.text = namaPelapor.toString()
-
+                tvNameUser.text = data.namePelapor
 
 
                 when (data.status) {
@@ -80,7 +68,12 @@ class AdapterHomeLaporan(
                         )
                     )
 
-                    "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
+                    "selesai" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.selesai
+                        )
+                    )
                     else -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
                             itemView.context,
@@ -88,6 +81,7 @@ class AdapterHomeLaporan(
                         )
                     )
                 }
+
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(binding.imgPelaporan)

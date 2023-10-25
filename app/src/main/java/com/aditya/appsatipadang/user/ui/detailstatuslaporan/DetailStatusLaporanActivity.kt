@@ -75,11 +75,11 @@ class DetailStatusLaporanActivity : AppCompatActivity() {
                                     }
 
                                     "sedang dikerjakan" -> {
-                                        tvStatus.setTextColor(Color.YELLOW)
+                                        tvStatus.setTextColor(resources.getColor(R.color.orange))
                                     }
 
                                     "selesai" -> {
-                                        tvStatus.setTextColor(Color.GREEN)
+                                        tvStatus.setTextColor(resources.getColor(R.color.selesai))
                                     }
 
                                     else -> {
