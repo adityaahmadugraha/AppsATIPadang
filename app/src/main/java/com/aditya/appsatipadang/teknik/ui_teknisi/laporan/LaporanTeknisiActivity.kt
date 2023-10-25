@@ -223,17 +223,20 @@ class LaporanTeknisiActivity : AppCompatActivity() {
                             val dataItem = item.data.laporan
                             // kirim data ke dalam tekview
                             binding.apply {
-                                etNamaPelapor.setText(dataItem!!.name.toString())
-                                etPengaduan.setText(dataItem.id.toString())
-                                etType.setText(dataItem.type)
-                                etTangal.setText(dataItem.tanggal)
-                                etLokasi.setText(dataItem.lokasi)
-                                etKegiatanPerbaikan.setText(dataItem.kegiatanPerbaikan)
-                                etPihakTerlibat.setText(dataItem.pihakTerlibat)
-                                etBiaya.setText(dataItem.biaya.toString())
+                                etNamaPelapor.setText(dataItem?.name.toString())
 
-
+                                val idWithLeadingZeros = String.format("%03d", dataItem?.id)
+                                val tanggalId = "${dataItem?.tanggal?.replace(".", "-")}-$idWithLeadingZeros"
+                                etPengaduan.setText(tanggalId)
+                                etType.setText(dataItem?.type)
+                                etTangal.setText(dataItem?.tanggal)
+                                etLokasi.setText(dataItem?.lokasi)
+                                etKegiatanPerbaikan.setText(dataItem?.kegiatanPerbaikan)
+                                etPihakTerlibat.setText(dataItem?.pihakTerlibat)
+                                etBiaya.setText(dataItem?.biaya.toString())
                             }
+
+
                         }
 
                         is Resource.Error -> {}

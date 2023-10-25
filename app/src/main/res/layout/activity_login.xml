@@ -51,7 +51,7 @@
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:text="@string/useraname"
                 android:textColor="@color/black"
@@ -89,8 +89,7 @@
                 android:fontFamily="@font/poppinssembiold"
                 android:text="@string/password"
                 android:textColor="@color/black"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="@+id/ti_username"
+                app:layout_constraintStart_toStartOf="@+id/tv_username"
                 app:layout_constraintTop_toBottomOf="@+id/ti_username" />
 
             <com.google.android.material.textfield.TextInputLayout

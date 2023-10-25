@@ -70,18 +70,36 @@ class SaranaActivityAdmin : AppCompatActivity() {
                         binding.apply {
                             etType.setText(dataItem?.jenis)
                             etJenis.setText(dataItem?.type)
+
                             etNamePelapor.setText(dataItem?.namaPelapor)
                             etMerk.setText(dataItem?.merk)
                             etLokasi.setText(dataItem?.lokasi)
                             etDeskripiKerusakan.setText(dataItem?.deskripsi)
                             etTanggal.setText(dataItem?.tanggal)
                             etWaktu.setText(dataItem?.waktu)
-                            etNoPengaduan.setText(dataItem?.idPelapor.toString())
+//                            val tanggalId = "${dataItem?.tanggal?.replace(".", "-")}-${dataItem?.id}"
+//                            etNoPengaduan.setText(tanggalId)
+                            val idWithLeadingZeros = String.format("%03d", dataItem?.id)
+                            val tanggalId = "${dataItem?.tanggal?.replace(".", "-")}-$idWithLeadingZeros"
+                            etNoPengaduan.setText(tanggalId)
+
+//                            etNoPengaduan.setText(dataItem?.idPelapor.toString())
 
                             Glide.with(this@SaranaActivityAdmin)
                                 .load(BuildConfig.IMAGE_URL + dataItem?.foto)
                                 .into(imgBuktiSarana)
                         }
+
+
+
+
+
+
+
+
+
+
+
                     }
 
                     is Resource.Error -> {}

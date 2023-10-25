@@ -20,7 +20,7 @@ data class HistoryAdapterBulanan(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListHistoryLaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -34,7 +34,7 @@ data class HistoryAdapterBulanan(
     }
 
 
-    inner class ViewHolder(private val binding: ListPelaporanBinding) :
+    inner class ViewHolder(private val binding: ListHistoryLaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
@@ -42,7 +42,7 @@ data class HistoryAdapterBulanan(
                 tvTglLaporanSarana.text = data.tanggal
                 tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
-//                tvNameUser.text = data.namePelapor
+                tvNameUser.text = data.namePelapor
 
                 when (data.status) {
                     "sudah diterima admin" -> tvStatusLaporan.setTextColor(

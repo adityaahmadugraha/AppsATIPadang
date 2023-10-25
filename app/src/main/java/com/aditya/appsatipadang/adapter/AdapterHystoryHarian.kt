@@ -22,7 +22,7 @@ class AdapterHystoryHarian(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListHistoryLaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -31,18 +31,18 @@ class AdapterHystoryHarian(
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(private val binding: ListPelaporanBinding) :
+    inner class ViewHolder(private val binding: ListHistoryLaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
                 tvLokasi.text = data.lokasi
-
-//                tvNameUser.text = data.namePelapor
+                tvNameUser.text = data.namePelapor
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(imgPelaporan)
+
                 tvStatusLaporan.text = data.status
                 when (data.status) {
                     "sudah diterima admin" -> tvStatusLaporan.setTextColor(

@@ -20,7 +20,7 @@ class PengaduanAdapter(
     private val onItemClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, PengaduanAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-//    private val maxItemCount = 5
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -36,13 +36,16 @@ class PengaduanAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
-                tvNameUser.text = data.idPelapor.toString()
+
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
-                tvStatusLaporan.text = data.status
                 tvLokasi.text = data.lokasi
                 tvNameUser.text = data.namePelapor
-//                tvMerk.text = data.merk
+                Glide.with(itemView.context)
+                    .load(BuildConfig.IMAGE_URL + data.foto)
+                    .into(binding.imgPelaporan)
+
+                tvStatusLaporan.text = data.status
 
                 when (data.status) {
                     "sudah diterima admin" -> tvStatusLaporan.setTextColor(
@@ -73,12 +76,7 @@ class PengaduanAdapter(
                     )
                 }
 
-                tvStatusLaporan.text = data.status
 
-
-                Glide.with(itemView.context)
-                    .load(BuildConfig.IMAGE_URL + data.foto)
-                    .into(binding.imgPelaporan)
 
                 itemView.setOnClickListener {
                     onItemClick(data)

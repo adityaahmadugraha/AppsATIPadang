@@ -46,7 +46,9 @@ class DiterimaFragment : Fragment() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val dataItem = item.data.laporan
-                        mAdapter.submitList(dataItem)
+                        val filteredDataItem =
+                            dataItem?.filter { it.status == "sudah diterima admin" }
+                        mAdapter.submitList(filteredDataItem)
                         setupRecyclerView()
                     }
                     is Resource.Error -> {}

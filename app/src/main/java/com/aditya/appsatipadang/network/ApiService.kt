@@ -56,6 +56,12 @@ interface ApiService {
         @Path("status") status : String
     ): LaporanResponse
 
+//    @GET("laporan)")
+//    suspend fun getLaporanStatus(
+//        @Header("Authorization") token: String,
+//        @Path("status") status : String
+//    ): LaporanResponse
+
     @GET("laporan")
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
