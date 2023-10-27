@@ -5,7 +5,6 @@ import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.data.remote.request.PenyerahanTeknisiRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import okhttp3.RequestBody
 import javax.inject.Inject

@@ -3,11 +3,15 @@ package com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan
 import android.Manifest
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Rect
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -27,6 +31,7 @@ import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.utils.Constant.setInputError
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +44,7 @@ import java.util.Calendar
 import java.util.Locale
 
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class ActivityPenyerahan : AppCompatActivity() {
 
@@ -70,9 +76,14 @@ class ActivityPenyerahan : AppCompatActivity() {
             }
 
             getUserData()
+
             imgBack.setOnClickListener {
                 val intent = Intent(this@ActivityPenyerahan, ActivityTeknik::class.java)
                 startActivity(intent)
+            }
+
+            etTanggal.setOnClickListener {
+                setTanggal()
             }
 
             camera.setOnClickListener { startCamera() }
@@ -80,73 +91,59 @@ class ActivityPenyerahan : AppCompatActivity() {
         }
 
 
-//        kirimLaporanPerbaikan()
+        laporanPenyerahan()
+        getUserData()
 
-        binding.etTanggal.setOnClickListener {
-            setTanggal()
-        }
     }
 
-//    private fun kirimLaporanPerbaikan() {
-//        binding.apply {
-//            btnKirim.setOnClickListener {
-//                val nama_penerima = etNamaPenerima.text.toString()
-//                val no_pengaduan = etNoPengaduan.text.toString()
-//                val tanggal = etTanggal.text.toString()
-//
-//
-//
-//                if (validateInput(biaya, tindakan, kegiatan, fotoKerusakan)) {
-//
-//                    viewModel.getUser().observe(this@LaporanTeknisiActivity) {
-//                        val fileProfilePicture: File =
-//                            Constant.reduceFileImage(fotoKerusakan as File)
-//
-//                        val requestBody: RequestBody = MultipartBody.Builder()
-//                            .setType(MultipartBody.FORM)
-//                            .addFormDataPart("biaya", biaya)
-//                            .addFormDataPart("kegiatan_perbaikan", kegiatan)
-//                            .addFormDataPart("pihak_terlibat", tindakan)
-//                            .addFormDataPart("id_laporan", idLaporan)
-//                            .addFormDataPart("id_teknisi", it.id)
-//                            .addFormDataPart(
-//                                "foto",
-//                                fileProfilePicture.name,
-//                                RequestBody.create(
-//                                    "image/*".toMediaTypeOrNull(),
-//                                    fileProfilePicture
-//                                )
-//                            ).build()
-//                        viewModel.kirimLaporanPerbaikan(it.getToken, requestBody)
-//                            .observe(this@LaporanTeknisiActivity) { item ->
-//                                when (item) {
-//                                    is Resource.Loading -> {}
-//                                    is Resource.Success -> {
-//                                        if (item.data.status == 200) {
-//                                            Toast.makeText(
-//                                                this@LaporanTeknisiActivity,
-//                                                "Data Berhasil Dikirm",
-//                                                Toast.LENGTH_SHORT
-//                                            ).show()
-//                                            Intent(
-//                                                this@LaporanTeknisiActivity,
-//                                                ActivityTeknik::class.java
-//                                            ).apply {
-//                                                flags =
-//                                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                                startActivity(this)
-//                                            }
-//                                        }
-//                                    }
-//
-//                                    is Resource.Error -> {}
-//                                }
-//                            }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    private fun laporanPenyerahan() {
+        binding.apply {
+            btnKirim.setOnClickListener {
+                val nama_penerima = etNamaPenerima.text.toString()
+                val no_pengaduan = etNoPengaduan.text.toString()
+                val tanggal = etTanggal.text.toString()
+
+                if (validateInput(nama_penerima, no_pengaduan, tanggal, fotoKerusakan)) {
+
+                    viewModel.getUser().observe(this@ActivityPenyerahan) {
+                        val fileProfilePicture: File =
+                            Constant.reduceFileImage(fotoKerusakan as File)
+
+                        val requestBody: RequestBody = MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("no_pengaduan", no_pengaduan)
+                            .addFormDataPart("nama_penerima", nama_penerima)
+                            .addFormDataPart("tgl_diserahkan", tanggal)
+                            .addFormDataPart(
+                                "foto",
+                                fileProfilePicture.name,
+                                RequestBody.create(
+                                    "image/*".toMediaTypeOrNull(),
+                                    fileProfilePicture
+                                )
+                            ).build()
+                        viewModel.inputPenyerahan(it.getToken, requestBody)
+                            .observe(this@ActivityPenyerahan) { item ->
+                                when (item) {
+                                    is Resource.Loading -> {}
+                                    is Resource.Success -> {
+                                        if (item.data.status == 200) {
+                                            Toast.makeText(
+                                                this@ActivityPenyerahan,
+                                                "Laporan Berhasil Dikirim",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+
+                                    is Resource.Error -> {}
+                                }
+                            }
+                    }
+                }
+            }
+        }
+    }
 
     private fun getUserData() {
         viewModel.getUser().observe(this) {
@@ -193,27 +190,9 @@ class ActivityPenyerahan : AppCompatActivity() {
         ).observe(this@ActivityPenyerahan) { result ->
             binding.apply {
                 when (result) {
-                    is Resource.Loading -> {
-
-                    }
+                    is Resource.Loading -> {}
 
                     is Resource.Success -> {
-
-
-
-                        val intent =
-                            Intent(this@ActivityPenyerahan, ActivityPemberitahuan::class.java)
-                        intent.putExtra(
-                            ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN,
-                            result.data.id
-                        )
-                        intent.putExtra("tanggalLaporan", etTanggal.text.toString())
-                        startActivity(intent)
-                        Log.d(
-                            "LaporanTeknisiActivity::::::",
-                            "Intent ke ActivityPemberitahuan berhasil dilakukan"
-                        )
-
 
                     }
 
@@ -249,7 +228,7 @@ class ActivityPenyerahan : AppCompatActivity() {
             }
             if (fotoKerusakan == null) {
                 Toast.makeText(
-                    this@ActivityPenyerahan ,
+                    this@ActivityPenyerahan,
                     getString(R.string.pick_photo_first),
                     Toast.LENGTH_SHORT
                 ).show()
@@ -341,6 +320,20 @@ class ActivityPenyerahan : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is TextInputEditText || v is AutoCompleteTextView) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
 }

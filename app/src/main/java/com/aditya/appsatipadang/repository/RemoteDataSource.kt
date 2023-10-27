@@ -3,7 +3,6 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.data.remote.request.PenyerahanTeknisiRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
@@ -150,7 +149,6 @@ class RemoteDataSource @Inject constructor(
 
 
 
-
     fun inputFotoProfil(
         token: String,
         requestBody: RequestBody
@@ -213,7 +211,7 @@ class RemoteDataSource @Inject constructor(
     fun inputPenyerahan(
         token: String,
         requestBody: RequestBody
-    ) = flow<Resource<PenyerahanTeknisiRequest>> {
+    ) = flow<Resource<LaporanResponse>> {
         emit(Resource.Loading())
         apiService.inputPenyerahan(token, requestBody)
     }.catch {

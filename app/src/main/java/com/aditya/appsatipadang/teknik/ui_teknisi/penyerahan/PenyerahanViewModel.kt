@@ -20,7 +20,6 @@ class PenyerahanViewModel @Inject constructor(
         id: String
     ) = repository.getLaporanId(token, id).asLiveData ()
 
-    fun inputPenyerahan(token: String,
-                        requestBody: RequestBody) = repository.inputPenyerahan(token, requestBody).asLiveData()
+    fun inputPenyerahan(token: String, requestBody: RequestBody) = repository.inputPenyerahan(token, requestBody).asLiveData()
 
 }
