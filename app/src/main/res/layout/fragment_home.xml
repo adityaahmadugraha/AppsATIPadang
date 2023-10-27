@@ -2,9 +2,9 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_swip"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ly_swip"
     tools:context=".user.ui.home.HomeFragment">
 
 
@@ -28,7 +28,7 @@
             android:id="@+id/img_profil"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:src="@color/white"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +42,7 @@
             android:fontFamily="@font/poppinsextrabold"
             android:textColor="@color/white"
             android:textSize="18sp"
+            tools:text="@tools:sample/lorem"
             app:layout_constraintStart_toEndOf="@+id/img_profil"
             app:layout_constraintTop_toTopOf="@+id/img_profil" />
 
@@ -60,9 +61,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_menu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,12 +79,13 @@
                     android:id="@+id/card_sarana"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     app:cardCornerRadius="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/card_prasarana"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -107,8 +111,8 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/poppinssembiold"
-                            android:textSize="10sp"
                             android:text="@string/sarana"
+                            android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/img_sarana"
                             app:layout_constraintStart_toStartOf="@+id/img_sarana"
@@ -116,6 +120,7 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </androidx.cardview.widget.CardView>
 
@@ -153,13 +158,12 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/poppinssembiold"
-                            android:textSize="10sp"
                             android:text="@string/prasarana"
+                            android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/img_prasarana"
                             app:layout_constraintStart_toStartOf="@+id/img_prasarana"
                             app:layout_constraintTop_toBottomOf="@+id/img_prasarana" />
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,8 +171,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_kamtibmas"
-                    android:layout_width="64dp"
-                    android:layout_height="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginEnd="16dp"
                     app:cardCornerRadius="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_prasarana"
@@ -184,9 +188,7 @@
                             android:id="@+id/img_kamtibmas"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
                             android:src="@drawable/icon_kamtibmas"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -196,16 +198,18 @@
                             android:id="@+id/tv_kamtibmas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="1dp"
                             android:layout_marginTop="4dp"
+                            android:layout_marginEnd="1dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/poppinssembiold"
-                            android:textSize="10sp"
                             android:text="@string/kamtibmas"
+                            android:textAlignment="center"
+                            android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/img_kamtibmas"
-                            app:layout_constraintStart_toStartOf="@+id/img_kamtibmas"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/img_kamtibmas" />
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -215,7 +219,7 @@
                     android:id="@+id/card_status"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="16dp"
                     app:cardCornerRadius="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_kamtibmas"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -245,22 +249,20 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/poppinssembiold"
-                            android:textSize="10sp"
                             android:text="@string/status"
+                            android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/img_status"
                             app:layout_constraintStart_toStartOf="@+id/img_status"
                             app:layout_constraintTop_toBottomOf="@+id/img_status" />
 
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
 
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_title_pelaporan"
@@ -274,7 +276,7 @@
             app:layout_constraintStart_toStartOf="@+id/img_profil"
             app:layout_constraintTop_toBottomOf="@+id/card_menu" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/sc_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -284,9 +286,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_pelaporan">
-
-
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -308,10 +307,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
         <ProgressBar
@@ -319,8 +315,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="16dp"
-            android:visibility="gone"
             android:indeterminateTint="@color/bg_login"
+            android:visibility="gone"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -329,9 +325,7 @@
             tools:visibility="visible" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

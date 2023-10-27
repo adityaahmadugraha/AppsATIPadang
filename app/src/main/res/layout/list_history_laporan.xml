@@ -59,10 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/poppinssembiold"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppinsblack"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Aditya Ahmad" />
@@ -71,13 +71,12 @@
                 android:id="@+id/tv_title_laporan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/tv_name_user"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_name_user"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_user"
                 tools:text="Sarana" />
 
             <TextView
@@ -103,35 +102,35 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/tvStatusLaporan"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/tvStatusLaporan"
                 tools:text="Lokasi" />
-
-
-
-            <TextView
-                android:id="@+id/tv_merk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/poppinssembiold"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/tvLokasi"
-                app:layout_constraintTop_toBottomOf="@+id/tvLokasi"
-                tools:text="Samsung" />
 
 
             <TextView
                 android:id="@+id/tvStatusLaporan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:textColor="@color/blue"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/tv_name_user"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan"
                 tools:text="Sudah Diterima Admin" />
+
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppinssembiold"
+                android:text="Status :"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_name_user"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_laporan" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

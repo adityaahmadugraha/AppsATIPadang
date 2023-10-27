@@ -67,7 +67,12 @@ class AdapterLaporan(
                         )
                     )
 
-                    "selesai" -> tvStatusLaporan.setTextColor(Color.GREEN)
+                    "selesai" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.selesai
+                        )
+                    )
                     else -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
                             itemView.context,

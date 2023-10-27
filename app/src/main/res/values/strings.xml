@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Maintence ATI Padang</string>
+    <string name="app_name">Maintenance ATI Padang</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_history">History</string>
@@ -32,6 +32,7 @@
     <string name="tanggal">Tanggal</string>
     <string name="waktu_kejadian">Waktu Kejadian:</string>
     <string name="laporan_sarana_title">Laporan Sarana</string>
+    <string name="laporan_penyerahan">Laporan Penyerahan</string>
     <string name="title_pengaduan">Pengaduan</string>
     <string name="senin_25_september_2023">Tanggal/Bulan/Tahun</string>
     <string name="ddhh">00:00</string>
@@ -64,6 +65,7 @@
     <string name="masukan_password">masukan password</string>
     <string name="useraname">username</string>
     <string name="masuk_ke_akun_anda">Masuk Ke Akun Anda</string>
+    <string name="title_aplikasi">Maintenance And Repair Piliteknik</string>
     <string name="format_tgl">21 Setember 2023</string>
     <string name="kirim">Kirim</string>
     <string name="must_not_empty">Form Tidak Boleh Kosong</string>
@@ -138,11 +140,10 @@
     <string name="default_notification_channel_id">POST_NOTIFICATION</string>
 
     <string-array name="pilih_roles">
-        <item>Pilih Roles</item>
-        <item>Admin</item>
         <item>Pelapor</item>
-        <item>Teknisi</item>
         <item>Pimpinan</item>
+        <item>Supervisor</item>
+        <item>Teknisi</item>
     </string-array>
 
     <string-array name="spinner_items">

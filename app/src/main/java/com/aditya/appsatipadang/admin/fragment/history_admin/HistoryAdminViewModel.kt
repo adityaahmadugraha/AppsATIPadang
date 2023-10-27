@@ -19,6 +19,7 @@ class HistoryAdminViewModel @Inject constructor(
 
     fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
 
+    fun deleteLaporan(token: String, id : String) = repository.deleteLaporan(token,id).asLiveData()
 
 
 }

@@ -1,7 +1,9 @@
 package com.aditya.appsatipadang.admin.fragment.home_admin
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,10 +108,10 @@ class HomeFragmentAdmin : Fragment() {
                     is Resource.Success -> {
 
                         val allData = result.data.laporan
-                        val latest5Data = allData?.take(5)
-
-                        mAdapter.submitList(latest5Data)
+                        val sortedData = allData?.sortedByDescending { it.id }
                         setupRecyclerView()
+
+                        mAdapter.submitList(sortedData)
 
                         binding.progressBar.isVisible = false
                         lySwip.isRefreshing = false
@@ -128,18 +130,60 @@ class HomeFragmentAdmin : Fragment() {
                 }
             }
 
+
         }
     }
 
     private fun setupList() {
+        mAdapter = AdapterHomeLaporan(
+            onItemClick = { item ->
+                val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
+                intent.putExtra(TAG_ID_PENGADUAN, item.id.toString())
+                startActivity(intent)
+            },
+            onLongClick = { data ->
+                val id = data.id.toString()
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setMessage("Apakah Anda Ingin Menghapus Laporan Ini?")
+                builder.setPositiveButton("IYA") { dialog, which ->
+                    viewModel.getUser().observe(viewLifecycleOwner) {
 
-        mAdapter = AdapterHomeLaporan {item ->
-            val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
-            intent.putExtra(TAG_ID_PENGADUAN, item.id.toString())
-            startActivity(intent)
-        }
+                        Log.d("DeleteLaporan:::::", "Menghapus laporan dengan ID: $id")
+                        viewModel.deleteLaporan(it.getToken, id)
+                            .observe(viewLifecycleOwner) { item ->
+                                when (item) {
+                                    is Resource.Loading -> {
+                                        Log.d("DeleteLaporan", "Sedang menghapus laporan...")
+                                    }
+
+                                    is Resource.Success -> {
+                                        Log.d(
+                                            "DeleteLaporan",
+                                            "Berhasil menghapus laporan: ${item.data.message}"
+                                        )
+                                    }
+
+                                    is Resource.Error -> {
+                                        Log.e(
+                                            "DeleteLaporan",
+                                            "Gagal menghapus laporan: ${item.error}"
+                                        )
+                                    }
+                                }
+                            }
+                    }
+
+                    dialog.dismiss()
+                    getDataUser()
+                }
+                builder.setNegativeButton("TIDAK") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+            }
+        )
     }
-
 
 
     private fun setupRecyclerView() {

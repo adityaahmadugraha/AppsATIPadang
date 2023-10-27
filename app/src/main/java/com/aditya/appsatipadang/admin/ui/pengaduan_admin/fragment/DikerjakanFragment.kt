@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentDikerjakanBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
@@ -63,8 +64,8 @@ class DikerjakanFragment : Fragment() {
 
     private fun setupList() {
         mAdapter = PengaduanAdapter { item ->
-            val intent = Intent(requireActivity(), LaporanTeknisiActivity::class.java)
-            intent.putExtra(LaporanTeknisiActivity.TAG_ID_TEKNISI, item.id.toString())
+            val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
+            intent.putExtra(SaranaActivityAdmin.TAG_ID_PENGADUAN, item.id.toString())
             startActivity(intent)
         }
     }

@@ -24,7 +24,7 @@ class SelesaiTeknisiFragment : Fragment() {
     private var _binding: FragmentSelesaiBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : PengaduanAdminViewModel by viewModels()
+    private val viewModel: PengaduanAdminViewModel by viewModels()
     private lateinit var mAdapter: PengaduanAdapter
 
     override fun onCreateView(
@@ -43,15 +43,16 @@ class SelesaiTeknisiFragment : Fragment() {
     }
 
     private fun getData() {
-        viewModel.getUser().observe(viewLifecycleOwner){
-            viewModel.getLaporanStatus(it.getToken,"selesai").observe(viewLifecycleOwner){ item ->
-                when(item){
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            viewModel.getLaporanStatus(it.getToken, "selesai").observe(viewLifecycleOwner) { item ->
+                when (item) {
                     is com.aditya.appsatipadang.data.Resource.Loading -> {}
                     is com.aditya.appsatipadang.data.Resource.Success -> {
                         val dataItem = item.data.laporan
                         mAdapter.submitList(dataItem)
                         setupRecyclerView()
                     }
+
                     is com.aditya.appsatipadang.data.Resource.Error -> {}
 
                 }

@@ -19,6 +19,7 @@ import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
 import com.aditya.appsatipadang.supervisor.LaporanKeseluruhanActivity
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
 import com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi
+import com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan.ActivityPenyerahan
 import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.TAG
 import com.aditya.appsatipadang.utils.Constant.getToken
@@ -61,6 +62,10 @@ class THomeFragment : Fragment() {
             }
             cardRekapLaporan.setOnClickListener {
                 val intent = Intent(activity, LaporanKeseluruhanActivity::class.java)
+                startActivity(intent)
+            }
+            cardPenyerahan.setOnClickListener {
+                val intent = Intent(activity, ActivityPenyerahan::class.java)
                 startActivity(intent)
             }
         }

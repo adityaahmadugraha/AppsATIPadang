@@ -3,11 +3,14 @@ package com.aditya.appsatipadang.teknik.ui_teknisi.history
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.bumptech.glide.Glide
 
@@ -17,7 +20,7 @@ data class HistoryAdapterBulanan(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListHistoryLaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -31,7 +34,7 @@ data class HistoryAdapterBulanan(
     }
 
 
-    inner class ViewHolder(private val binding: ListPelaporanBinding) :
+    inner class ViewHolder(private val binding: ListHistoryLaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
@@ -39,9 +42,40 @@ data class HistoryAdapterBulanan(
                 tvTglLaporanSarana.text = data.tanggal
                 tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
-                tvMerk.text = data.merk
+                tvNameUser.text = data.namePelapor
+
+                when (data.status) {
+                    "sudah diterima admin" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.blue
+                        )
+                    )
+
+                    "sedang dikerjakan" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.orange
+                        )
+                    )
+
+                    "selesai" -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.selesai
+                        )
+                    )
+
+                    else -> tvStatusLaporan.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.black
+                        )
+                    )
+                }
+
                 Glide.with(itemView.context)
-                    .load(BuildConfig.IMAGE_URL+data.foto)
+                    .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(binding.imgPelaporan)
 
                 itemView.setOnClickListener {
