@@ -16,7 +16,8 @@ import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.bumptech.glide.Glide
 
 class AdapterHomeLaporan(
-    private val onItemClick: (ItemLaporaneResponse) -> Unit
+    private val onItemClick: (ItemLaporaneResponse) -> Unit,
+    private val onLongClick: (ItemLaporaneResponse) -> Unit
 ) : ListAdapter<ItemLaporaneResponse, AdapterHomeLaporan.ViewHolder>(DIFF_CALLBACK) {
 
     private val maxItemCount = 5
@@ -88,6 +89,10 @@ class AdapterHomeLaporan(
 
                 itemView.setOnClickListener {
                     onItemClick(data)
+                }
+             itemView.setOnLongClickListener {
+                    onLongClick(data)
+                    return@setOnLongClickListener true
                 }
             }
         }

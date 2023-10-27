@@ -3,10 +3,9 @@ package com.aditya.appsatipadang.repository
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.data.remote.request.User
+import com.aditya.appsatipadang.data.remote.request.PenyerahanTeknisiRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
-import com.aditya.appsatipadang.data.remote.response.LaporanInfoResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import com.aditya.appsatipadang.network.ApiService
@@ -65,6 +64,49 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
+
+//    fun deleteLaporan(token: String, id : String) = flow {
+//        emit(Resource.Loading())
+//        val response = apiService.deletelaporan(token, id)
+//        emit(Resource.Success(response))
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
+
+
+    fun deleteLaporan(token: String, id: String) = flow {
+        try {
+            emit(Resource.Loading())
+            val response = apiService.deletelaporan(token, id)
+
+            if (response.status == 200) {
+                emit(Resource.Success(response))
+            } else {
+                emit(Resource.Error("Gagal menghapus laporan: ${response.message}"))
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message ?: "Terjadi kesalahan dalam penghapusan laporan"))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+
+//    fun deleteLaporan(
+//        token: String,
+//        id: String
+//    ) = flow<Resource<LaporanResponse>> {
+//        emit(Resource.Loading())
+//        val response = apiService.deletelaporan(token, id)
+//        response.let {
+//            if (it.status == 200) emit(Resource.Success(it))
+//            else emit(Resource.Error("Data Tidak Ditemuan"))
+//        }
+//    }.catch {
+//        emit(Resource.Error(it.message ?: ""))
+//    }.flowOn(Dispatchers.IO)
+
+
+
     fun getListPengerjaan(token: String) = flow {
         emit(Resource.Loading())
         val response = apiService.getListPengerjaan(token)
@@ -105,6 +147,10 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
+
+
+
+
     fun inputFotoProfil(
         token: String,
         requestBody: RequestBody
@@ -134,6 +180,7 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
+
     fun getLaporanId(
         token: String,
         id: String
@@ -158,6 +205,17 @@ class RemoteDataSource @Inject constructor(
             if (it.status == 200) emit(Resource.Success(it))
             else emit(Resource.Error("Data Tidak Ditemuan"))
         }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun inputPenyerahan(
+        token: String,
+        requestBody: RequestBody
+    ) = flow<Resource<PenyerahanTeknisiRequest>> {
+        emit(Resource.Loading())
+        apiService.inputPenyerahan(token, requestBody)
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)

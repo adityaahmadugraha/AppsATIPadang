@@ -24,5 +24,7 @@ class SaranaAdminViewModel @Inject constructor(
         kirimTeknisiRequest: KirimTeknisiRequest
     ) = dataRepository.insertLaporanTeknisi(token, kirimTeknisiRequest).asLiveData()
 
+
+
 }
 

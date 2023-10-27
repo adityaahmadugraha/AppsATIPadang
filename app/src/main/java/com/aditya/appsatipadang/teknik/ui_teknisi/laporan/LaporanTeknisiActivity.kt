@@ -51,7 +51,6 @@ class LaporanTeknisiActivity : AppCompatActivity() {
     private val viewModel: LaporanTeknisiViewModel by viewModels()
 
     private var user: UserLocal? = null
-    private lateinit var mAdapter: AdapterLaporan
 
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
@@ -167,7 +166,8 @@ class LaporanTeknisiActivity : AppCompatActivity() {
         tindakan: String,
         kegiatan: String,
         fotoKerusakan: File?
-    ): Boolean {
+    ):
+            Boolean {
         binding.apply {
             if (biaya.isEmpty()) {
                 return ilBiaya.setInputError(getString(R.string.must_not_empty))

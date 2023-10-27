@@ -69,16 +69,25 @@ class LoginActivity : AppCompatActivity() {
                     .addFormDataPart("email", userInput)
                     .build()
 
-                viewModel.gantiPassword(requestBody).observe(this@LoginActivity){
-                    when(it){
+                viewModel.gantiPassword(requestBody).observe(this@LoginActivity) {
+                    when (it) {
                         is Resource.Loading -> {}
                         is Resource.Success -> {
-                            if (it.data.status == 200){
-                                Toast.makeText(this@LoginActivity, "Silahkan Cek Alamat Email", Toast.LENGTH_SHORT).show()
-                            }else{
-                                Toast.makeText(this@LoginActivity, "Email Yang Di Masukan Tidak Valid!", Toast.LENGTH_SHORT).show()
+                            if (it.data.status == 200) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Silahkan Cek Alamat Email",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Email Yang Di Masukan Tidak Valid!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
+
                         is Resource.Error -> {}
                     }
                 }
@@ -86,7 +95,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun showInputDialog(context: Context, title: String, message: String, onInputReceived: (String) -> Unit) {
+    fun showInputDialog(
+        context: Context,
+        title: String,
+        message: String,
+        onInputReceived: (String) -> Unit
+    ) {
         val inputEditText = EditText(context)
 
         val dialog = AlertDialog.Builder(context)
@@ -106,15 +120,6 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser() {
         val username = binding.txtUsername.text.toString()
         val password = binding.txtPassword.text.toString()
-
-        if (!binding.cbConfimLogin.isChecked) {
-            Toast.makeText(
-                this,
-                "Harap centang kotak konfirmasi sebelum login.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
 
         viewModel.loginUser(LoginRequest(username, password, fcmToken))
             .observe(this@LoginActivity) { result ->
@@ -144,15 +149,22 @@ class LoginActivity : AppCompatActivity() {
                                 )
                             )
                             checkUserLogin()
-                        }
-                        else {
-                            Toast.makeText(this@LoginActivity, "Username atau password salah", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Username atau password salah",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
                     is Resource.Error -> {
                         setInputLoading(false)
-                        Toast.makeText(this@LoginActivity, "Terjadi kesalahan saat login", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Terjadi kesalahan saat login",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -168,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
     private fun checkUserLogin() {
         viewModel.getUser().observe(this@LoginActivity) { userData ->
             if (userData.username.isNotEmpty() || userData.token.isNotEmpty()) {
-                if (userData.roles == "Admin") {
+                if (userData.roles == "Supervisor") {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
                     Log.d("LOGINADMIN:::::", userData.token)
@@ -192,8 +204,7 @@ class LoginActivity : AppCompatActivity() {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(this)
                     }
-                }
-                else if (userData.roles == "Pimpinan") {
+                } else if (userData.roles == "Pimpinan") {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
                     Log.d("LOGINSPP:::::", userData.token)
