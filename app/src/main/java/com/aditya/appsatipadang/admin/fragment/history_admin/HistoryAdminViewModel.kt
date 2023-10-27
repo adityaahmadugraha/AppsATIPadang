@@ -12,14 +12,8 @@ class HistoryAdminViewModel @Inject constructor(
 ) : ViewModel() {
     fun getUser() = repository.getUser().asLiveData()
     fun getListLaporanHarian(token: String) = repository.getLaporanHarianTeknisi(token).asLiveData()
-    fun getListLaporanBulanan(token: String) =
-        repository.getLaporanBulananTeknisi(token).asLiveData()
-
+    fun getListLaporanBulanan(token: String) = repository.getLaporanBulananTeknisi(token).asLiveData()
     fun getListLaporan(token: String) = repository.getListLaporan(token).asLiveData()
-
     fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
-
     fun deleteLaporan(token: String, id : String) = repository.deleteLaporan(token,id).asLiveData()
-
-
 }
