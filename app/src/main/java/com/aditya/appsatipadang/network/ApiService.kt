@@ -60,13 +60,10 @@ interface ApiService {
 
     //delete laporan oleh admin
     @GET("hapus-laporan/{id}")
-    fun deletelaporan(
+   suspend fun deletelaporan(
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): LaporanResponse
-
-
-
 
     @GET("laporan")
     suspend fun getListLaporan(

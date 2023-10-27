@@ -39,7 +39,7 @@ class HomeFragmentAdmin : Fragment() {
     private lateinit var mAdapter: AdapterHomeLaporan
 
     private lateinit var lySwip: SwipeRefreshLayout
-
+    var idLaporan = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,7 +51,6 @@ class HomeFragmentAdmin : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding.apply {
             cardAddUser.setOnClickListener {
@@ -70,7 +69,6 @@ class HomeFragmentAdmin : Fragment() {
 
         lySwip = binding.lySwip
         lySwip.setOnRefreshListener {
-
             getDataUser()
         }
 
@@ -129,8 +127,6 @@ class HomeFragmentAdmin : Fragment() {
 
                 }
             }
-
-
         }
     }
 
@@ -141,48 +137,40 @@ class HomeFragmentAdmin : Fragment() {
                 intent.putExtra(TAG_ID_PENGADUAN, item.id.toString())
                 startActivity(intent)
             },
-            onLongClick = { data ->
-                val id = data.id.toString()
+            onLongClick = { item ->
+                idLaporan = item.id.toString()
+
                 val builder = AlertDialog.Builder(requireContext())
-                builder.setMessage("Apakah Anda Ingin Menghapus Laporan Ini?")
-                builder.setPositiveButton("IYA") { dialog, which ->
-                    viewModel.getUser().observe(viewLifecycleOwner) {
-
-                        Log.d("DeleteLaporan:::::", "Menghapus laporan dengan ID: $id")
-                        viewModel.deleteLaporan(it.getToken, id)
-                            .observe(viewLifecycleOwner) { item ->
-                                when (item) {
-                                    is Resource.Loading -> {
-                                        Log.d("DeleteLaporan", "Sedang menghapus laporan...")
-                                    }
-
-                                    is Resource.Success -> {
-                                        Log.d(
-                                            "DeleteLaporan",
-                                            "Berhasil menghapus laporan: ${item.data.message}"
-                                        )
-                                    }
-
-                                    is Resource.Error -> {
-                                        Log.e(
-                                            "DeleteLaporan",
-                                            "Gagal menghapus laporan: ${item.error}"
-                                        )
-                                    }
-                                }
-                            }
+                builder.setMessage("Apakah Anda Ingin Menghapus Laporan Ini?").setPositiveButton("Ya") { _, _ ->
+                        hapusLaporan()
                     }
-
-                    dialog.dismiss()
-                    getDataUser()
-                }
-                builder.setNegativeButton("TIDAK") { dialog, which ->
-                    dialog.dismiss()
-                }
-                val dialog = builder.create()
-                dialog.show()
+                    .setNegativeButton("Tidak") { _, _ ->
+//                        dialog.dismiss()
+                    }
+                builder.create().show()
             }
         )
+    }
+
+    private fun hapusLaporan(){
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            viewModel.deleteLaporan(it.getToken, idLaporan).observe(viewLifecycleOwner) { items ->
+                when (items) {
+                    is Resource.Loading -> {
+                        Log.d("DeleteLaporan", "Sedang menghapus laporan...")
+                    }
+
+                    is Resource.Success -> {
+                        Toast.makeText(requireContext(), "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+                        getDataUser()
+                    }
+
+                    is Resource.Error -> {
+                        Toast.makeText(requireContext(), "Gagal menghapus laporan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
 
