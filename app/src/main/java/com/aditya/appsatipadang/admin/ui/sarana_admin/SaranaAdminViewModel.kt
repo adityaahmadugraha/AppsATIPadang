@@ -24,6 +24,9 @@ class SaranaAdminViewModel @Inject constructor(
         kirimTeknisiRequest: KirimTeknisiRequest
     ) = dataRepository.insertLaporanTeknisi(token, kirimTeknisiRequest).asLiveData()
 
+    fun deleteLaporan(token: String, id : String) = dataRepository.deleteLaporan(token,id).asLiveData()
+
+
 
 
 }

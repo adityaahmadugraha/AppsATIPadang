@@ -48,7 +48,7 @@ class AdapterLaporan(
 
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = convertDateFormat(data.tanggal.toString())
-                tvMerk.text = data.merk
+                tvMerk.text = data.jenis
                 tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
 
@@ -73,6 +73,7 @@ class AdapterLaporan(
                             R.color.selesai
                         )
                     )
+
                     else -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
                             itemView.context,

@@ -25,8 +25,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="12dp"
@@ -39,8 +39,8 @@
 
                     <ImageView
                         android:id="@+id/img_pelaporan"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
                         android:scaleType="centerCrop"
                         android:src="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinsblack"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -83,8 +83,6 @@
                 android:id="@+id/tv_tgl_laporan_sarana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="3dp"
                 android:fontFamily="@font/poppinssembiold"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -105,6 +103,20 @@
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/tvStatusLaporan"
                 tools:text="Lokasi" />
+
+            <TextView
+
+                android:id="@+id/tv_jenis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/poppinssembiold"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvLokasi"
+                app:layout_constraintTop_toBottomOf="@+id/tvLokasi"
+                tools:text="jenis" />
 
 
             <TextView

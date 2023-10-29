@@ -3,8 +3,8 @@ package com.aditya.appsatipadang.admin.ui.add_user
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.databinding.ActivityBerhasilAddUserBinding
+import com.aditya.appsatipadang.teknik.ActivityTeknik
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,7 +19,7 @@ class ActivityBerhasilAddUser : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnBack.setOnClickListener {
-            intent = Intent(this@ActivityBerhasilAddUser, HomeActivity::class.java)
+            intent = Intent(this@ActivityBerhasilAddUser, ActivityTeknik::class.java)
             startActivity(intent)
             finish()
         }

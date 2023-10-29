@@ -39,18 +39,23 @@ class ActivityPemberitahuan : AppCompatActivity() {
 
         binding.btnCekLaporan.setOnClickListener {
             viewModel.getUser().observe(this@ActivityPemberitahuan){
-                if (it.roles == "Admin"){
-                    val intent = Intent(this@ActivityPemberitahuan, HomeActivity::class.java)
-                    startActivity(intent)
-                }else if (it.roles == "Teknisi"){
-                    val intent = Intent(this@ActivityPemberitahuan, ActivityTeknik::class.java)
-                    startActivity(intent)
-                }else if (it.roles == "Pelapor"){
-                    val intent = Intent(this@ActivityPemberitahuan, MainActivity::class.java)
-                    startActivity(intent)
-                }else{
-                    val intent = Intent(this@ActivityPemberitahuan, ActivitySupervisor::class.java)
-                    startActivity(intent)
+                when (it.roles) {
+                    "Supervisor" -> {
+                        val intent = Intent(this@ActivityPemberitahuan, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "Teknisi" -> {
+                        val intent = Intent(this@ActivityPemberitahuan, ActivityTeknik::class.java)
+                        startActivity(intent)
+                    }
+                    "Pelapor" -> {
+                        val intent = Intent(this@ActivityPemberitahuan, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else -> {
+                        val intent = Intent(this@ActivityPemberitahuan, ActivitySupervisor::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
 

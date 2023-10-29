@@ -6,6 +6,7 @@ import com.aditya.appsatipadang.data.remote.request.LoginRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
+import com.aditya.appsatipadang.data.remote.response.PenyerahanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import com.aditya.appsatipadang.network.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -73,19 +74,15 @@ class RemoteDataSource @Inject constructor(
 //    }.flowOn(Dispatchers.IO)
 
 
-    fun deleteLaporan(token: String, id: String) = flow {
-        try {
-            emit(Resource.Loading())
-            val response = apiService.deletelaporan(token, id)
-
-            if (response.status == 200) {
-                emit(Resource.Success(response))
-            } else {
-                emit(Resource.Error("Gagal menghapus laporan: ${response.message}"))
-            }
-        } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Terjadi kesalahan dalam penghapusan laporan"))
+    fun deleteLaporan(token: String, id: String) = flow<Resource<LaporanResponse>> {
+        emit(Resource.Loading())
+        val response = apiService.deletelaporan(token, id)
+        response.let {
+            if (it.status == 200) emit(Resource.Success(it))
+            else emit(Resource.Error("Data Tidak Ditemuan"))
         }
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
 
@@ -211,7 +208,7 @@ class RemoteDataSource @Inject constructor(
     fun inputPenyerahan(
         token: String,
         requestBody: RequestBody
-    ) = flow<Resource<LaporanResponse>> {
+    ) = flow<Resource<PenyerahanResponse>> {
         emit(Resource.Loading())
         apiService.inputPenyerahan(token, requestBody)
     }.catch {

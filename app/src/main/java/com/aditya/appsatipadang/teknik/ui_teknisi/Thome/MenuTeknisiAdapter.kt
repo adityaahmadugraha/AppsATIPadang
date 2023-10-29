@@ -4,13 +4,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.DikerjakanFragment
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.DikerjakanTeknisiFragment
-import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.SelesaiFragment
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.SelesaiTeknisiFragment
+import com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan.PenyerahanFragment
 
 
-private const val NUM_TABS = 2
+private const val NUM_TABS = 3
+
 class MenuTeknisiAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
@@ -19,9 +19,11 @@ class MenuTeknisiAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
     }
 
     override fun createFragment(position: Int): Fragment {
-        when (position) {
-            0 -> return DikerjakanTeknisiFragment()
+        return when (position) {
+            0 -> DikerjakanTeknisiFragment()
+            1 -> SelesaiTeknisiFragment()
+            2 -> PenyerahanFragment()
+            else -> throw IllegalArgumentException("Invalid position: $position")
         }
-        return SelesaiTeknisiFragment()
     }
 }

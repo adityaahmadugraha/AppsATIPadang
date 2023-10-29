@@ -75,7 +75,7 @@
                 android:id="@+id/card_sarana_admin"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:cardCornerRadius="12dp"
@@ -119,63 +119,65 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_add_user"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/card_sarana_admin"
-                app:layout_constraintEnd_toStartOf="@+id/card_laporan"
-                app:layout_constraintStart_toEndOf="@+id/card_sarana_admin"
-                app:layout_constraintTop_toTopOf="@+id/card_sarana_admin">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/card_add_user"-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                app:cardCornerRadius="12dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/card_sarana_admin"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/card_laporan"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/card_sarana_admin"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/card_sarana_admin">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
 
-                    <ImageView
-                        android:id="@+id/img_prasarana"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/input_user"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img_prasarana"-->
+<!--                        android:layout_width="24dp"-->
+<!--                        android:layout_height="24dp"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginEnd="8dp"-->
+<!--                        android:src="@drawable/input_user"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/poppinssembiold"
-                        android:text="Add User"
-                        android:textSize="10sp"
-                        android:lines="2"
-                        android:textAlignment="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/img_prasarana"
-                        app:layout_constraintStart_toStartOf="@+id/img_prasarana"
-                        app:layout_constraintTop_toBottomOf="@+id/img_prasarana" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:fontFamily="@font/poppinssembiold"-->
+<!--                        android:text="Add User"-->
+<!--                        android:textSize="10sp"-->
+<!--                        android:lines="2"-->
+<!--                        android:textAlignment="center"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/img_prasarana"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/img_prasarana"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/img_prasarana" />-->
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_laporan"
                 android:layout_width="85dp"
                 android:layout_height="60dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 app:cardCornerRadius="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/card_add_user"
+                app:layout_constraintBottom_toBottomOf="@+id/card_sarana_admin"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/card_add_user">
+                app:layout_constraintStart_toEndOf="@+id/card_sarana_admin"
+                app:layout_constraintTop_toTopOf="@+id/card_sarana_admin">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

@@ -387,6 +387,7 @@
                 android:layout_height="wrap_content"
                 android:elevation="16dp"
                 android:visibility="gone"
+                android:indeterminateTint="@color/bg_login"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_kirim"
                 app:layout_constraintEnd_toEndOf="@+id/btn_kirim"
                 app:layout_constraintStart_toStartOf="@+id/btn_kirim"

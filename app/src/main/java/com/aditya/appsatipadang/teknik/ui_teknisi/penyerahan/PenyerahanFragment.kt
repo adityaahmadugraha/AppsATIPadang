@@ -1,4 +1,4 @@
-package com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment
+package com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,34 +8,37 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
-import com.aditya.appsatipadang.databinding.FragmentDikerjakanBinding
+import com.aditya.appsatipadang.databinding.FragmentPenyerahanBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
-import com.aditya.appsatipadang.utils.Constant.IDLAPORAN
+import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class DikerjakanTeknisiFragment : Fragment() {
-    private var _binding: FragmentDikerjakanBinding? = null
+class PenyerahanFragment : Fragment() {
+
+    private var _binding: FragmentPenyerahanBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : PengaduanAdminViewModel by viewModels()
+    private val viewModel: PengaduanAdminViewModel by viewModels()
     private lateinit var mAdapter: PengaduanAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDikerjakanBinding.inflate(inflater, container, false)
-        return binding.root
+
+        return inflater.inflate(R.layout.fragment_penyerahan, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getData()
+//        getData()
         setupList()
     }
 
@@ -56,21 +59,24 @@ class DikerjakanTeknisiFragment : Fragment() {
         }
     }
 
-    private fun setupList() {
-        mAdapter = PengaduanAdapter {item ->
-            val intent = Intent(requireActivity(), LaporanTeknisiActivity::class.java)
-            intent.putExtra(IDLAPORAN, item.id.toString())
-            startActivity(intent)
-        }
-    }
 
     private fun setupRecyclerView() {
-        binding.rvDikerjakan.apply {
+        binding.rvPenyerahan.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
         }
     }
+
+    private fun setupList() {
+//        mAdapter = PengaduanAdapter {item ->
+//            val intent = Intent(requireActivity(), LaporanTeknisiActivity::class.java)
+//            intent.putExtra(Constant.IDLAPORAN, item.id.toString())
+//            startActivity(intent)
+//        }
+    }
+
+
 
 
 }

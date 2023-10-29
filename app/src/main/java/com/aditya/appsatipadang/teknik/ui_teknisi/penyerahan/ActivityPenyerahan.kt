@@ -16,10 +16,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
+import com.aditya.appsatipadang.admin.ui.add_user.ActivityBerhasilAddUser
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivityLaporanTeknisiBinding
@@ -56,7 +58,7 @@ class ActivityPenyerahan : AppCompatActivity() {
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
 
-    private var idLaporan = ""
+//    private var idLaporan = ""
 
 //    companion object {
 //        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -104,7 +106,7 @@ class ActivityPenyerahan : AppCompatActivity() {
                 val tanggal = etTanggal.text.toString()
 
                 if (validateInput(nama_penerima, no_pengaduan, tanggal, fotoKerusakan)) {
-
+                    Log.d("ActivityPenyerahan", "Input data valid") // Pesan log untuk memastikan data valid
                     viewModel.getUser().observe(this@ActivityPenyerahan) {
                         val fileProfilePicture: File =
                             Constant.reduceFileImage(fotoKerusakan as File)
@@ -125,22 +127,44 @@ class ActivityPenyerahan : AppCompatActivity() {
                         viewModel.inputPenyerahan(it.getToken, requestBody)
                             .observe(this@ActivityPenyerahan) { item ->
                                 when (item) {
-                                    is Resource.Loading -> {}
-                                    is Resource.Success -> {
-                                        if (item.data.status == 200) {
+                                    is Resource.Loading -> {
+                                        Log.d("ActivityPenyerahan", "Loading...")
+                                        runOnUiThread {
                                             Toast.makeText(
                                                 this@ActivityPenyerahan,
-                                                "Laporan Berhasil Dikirim",
+                                                "Laporan Anda berhasil terkirim",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
+                                        Intent(this@ActivityPenyerahan, ActivityBerhasilAddUser::class.java).apply {
+                                            startActivity(this)
+                                        }
+                                    }
+                                    is Resource.Success -> {
+                                        if (item.data.status == 200) {
+                                            Log.d("ActivityPenyerahan", "Response: Success (status = 200)")
+                                            runOnUiThread {
+                                                Toast.makeText(
+                                                    this@ActivityPenyerahan,
+                                                    "Laporan Anda berhasil terkirim",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                            Intent(this@ActivityPenyerahan, ActivityBerhasilAddUser::class.java).apply {
+                                                startActivity(this)
+                                            }
+                                        }
+
                                     }
 
-                                    is Resource.Error -> {}
+                                    is Resource.Error -> {
+                                        Log.e("ActivityPenyerahan", "Response: Error - ${item.error}")
+                                    }
                                 }
                             }
                     }
                 }
+
             }
         }
     }
@@ -190,14 +214,16 @@ class ActivityPenyerahan : AppCompatActivity() {
         ).observe(this@ActivityPenyerahan) { result ->
             binding.apply {
                 when (result) {
-                    is Resource.Loading -> {}
+                    is Resource.Loading -> {
+                        showLoadingInput(true)
+                    }
 
                     is Resource.Success -> {
-
+                        showLoadingInput(false)
                     }
 
                     is Resource.Error<*> -> {
-
+                        showLoadingInput(false)
                         Toast.makeText(
                             this@ActivityPenyerahan, result.error,
                             Toast.LENGTH_SHORT
@@ -209,6 +235,13 @@ class ActivityPenyerahan : AppCompatActivity() {
 
     }
 
+    private fun showLoadingInput(condition: Boolean) {
+        binding.apply {
+            progressBar.isVisible = condition
+            btnKirim.isEnabled = !condition
+        }
+    }
+
     private fun validateInput(
         namaPenerima: String,
         noPengaduan: String,
@@ -216,6 +249,7 @@ class ActivityPenyerahan : AppCompatActivity() {
         fotoKerusakan: File?
     ):
             Boolean {
+
         binding.apply {
             if (namaPenerima.isEmpty()) {
                 return ilNamaPenerima.setInputError(getString(R.string.must_not_empty))

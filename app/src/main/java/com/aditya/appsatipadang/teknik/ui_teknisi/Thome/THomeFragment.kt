@@ -39,7 +39,8 @@ class THomeFragment : Fragment() {
 
     private val menuArray = arrayOf(
         "Dikerjakan",
-        "Selesai"
+        "Selesai",
+        "Penyerahan"
     )
 
     override fun onCreateView(

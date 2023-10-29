@@ -2,7 +2,13 @@ package com.aditya.appsatipadang.admin.ui.sarana_admin
 
 import android.content.Intent
 import android.graphics.Rect
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,8 +17,11 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
@@ -20,6 +29,7 @@ import com.aditya.appsatipadang.data.remote.response.TeknisiReponse
 import com.aditya.appsatipadang.databinding.ActivitySaranaAdminBinding
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan.Companion.ID_LAPORAN_PEMBERITAHUAN
+import com.aditya.appsatipadang.user.ui.profile.CustomTypefaceSpan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +41,6 @@ class SaranaActivityAdmin : AppCompatActivity() {
     private lateinit var binding: ActivitySaranaAdminBinding
     private val viewModel: SaranaAdminViewModel by viewModels()
     var id = ""
-
     private var selectedTeknisi: String = ""
 
     companion object {
@@ -45,19 +54,104 @@ class SaranaActivityAdmin : AppCompatActivity() {
 
         id = intent.getStringExtra(TAG_ID_PENGADUAN).toString()
 
+
         binding.apply {
             btnKirim.setOnClickListener {
                 inputNamaTeknisi()
             }
-
             imgBack.setOnClickListener {
                 intent = Intent(this@SaranaActivityAdmin, HomeActivity::class.java)
                 startActivity(intent)
             }
+
+            imgDelete.setOnClickListener {
+
+
+                val customView = LayoutInflater.from(this@SaranaActivityAdmin)
+                    .inflate(R.layout.custom_delate, null)
+
+                val dialog = AlertDialog.Builder(this@SaranaActivityAdmin)
+                    .setView(customView)
+                    .create()
+
+                val yesString = getString(R.string.yes)
+                val noString = getString(R.string.batal)
+
+                val yesSpannable = SpannableString(yesString)
+                val noSpannable = SpannableString(noString)
+
+                val typeface =
+                    ResourcesCompat.getFont(this@SaranaActivityAdmin, R.font.poppinssembiold)
+
+                typeface?.let {
+                    yesSpannable.setSpan(
+                        StyleSpan(Typeface.BOLD),
+                        0,
+                        yesSpannable.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    yesSpannable.setSpan(
+                        CustomTypefaceSpan(typeface.toString()),
+                        0,
+                        yesSpannable.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+
+                    noSpannable.setSpan(
+                        StyleSpan(Typeface.BOLD),
+                        0,
+                        noSpannable.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    noSpannable.setSpan(
+                        CustomTypefaceSpan(typeface.toString()),
+                        0,
+                        noSpannable.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+
+                dialog.setButton(AlertDialog.BUTTON_POSITIVE, yesSpannable) { _, _ ->
+                    hapusLaporan()
+                }
+                dialog.setButton(AlertDialog.BUTTON_NEGATIVE, noSpannable) { _, _ -> }
+
+                dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
+                dialog.window?.decorView?.setPadding(24, 0, 24, 0)
+
+                dialog.show()
+
+            }
+
         }
 
         getLpaoranData()
         getTeknisiData()
+    }
+
+    private fun hapusLaporan() {
+        viewModel.getUser().observe(this) {
+            viewModel.deleteLaporan(it.getToken, id).observe(this) { items ->
+                when (items) {
+                    is Resource.Loading -> {
+                        Log.d("DeleteLaporan", "Sedang menghapus laporan...")
+                    }
+
+                    is Resource.Success -> {
+                        Toast.makeText(this, "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    }
+
+                    is Resource.Error -> {
+                        Toast.makeText(this, "Gagal menghapus laporan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun getLpaoranData() {
@@ -80,24 +174,13 @@ class SaranaActivityAdmin : AppCompatActivity() {
 //                            val tanggalId = "${dataItem?.tanggal?.replace(".", "-")}-${dataItem?.id}"
 //                            etNoPengaduan.setText(tanggalId)
                             val idWithLeadingZeros = String.format("%03d", dataItem?.id)
-                            val tanggalId = "${dataItem?.tanggal?.replace(".", "-")}-$idWithLeadingZeros"
+                            val tanggalId =
+                                "${dataItem?.tanggal?.replace(".", "-")}-$idWithLeadingZeros"
                             etNoPengaduan.setText(tanggalId)
-
-//                            etNoPengaduan.setText(dataItem?.idPelapor.toString())
-
                             Glide.with(this@SaranaActivityAdmin)
                                 .load(BuildConfig.IMAGE_URL + dataItem?.foto)
                                 .into(imgBuktiSarana)
                         }
-
-
-
-
-
-
-
-
-
 
 
                     }
@@ -170,10 +253,10 @@ class SaranaActivityAdmin : AppCompatActivity() {
                                     position: Int,
                                     id: Long
                                 ) {
-                                    if (position > 0) {
-                                        selectedTeknisi = teknisiList[position]?.id ?: ""
+                                    selectedTeknisi = if (position > 0) {
+                                        teknisiList[position]?.id ?: ""
                                     } else {
-                                        selectedTeknisi = ""
+                                        ""
                                     }
                                 }
 

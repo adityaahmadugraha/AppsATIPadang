@@ -27,13 +27,8 @@ class RekapActivityTeknisi : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
     }
 
-//    private fun setupList() {
-//        mAdapter = AdapterRakapLaporanTeknisi ()
-//        setupRecyclerView()
-//    }
 
     private fun getDataUser() {
 
@@ -50,7 +45,7 @@ class RekapActivityTeknisi : AppCompatActivity() {
 
                         Log.d(ContentValues.TAG, "listadapter::::::: ${result.data}")
 
-                        val sortedData = result.data.laporan?.sortedByDescending {it.id}
+                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
 //
 //                        mAdapter.submitList(sortedData)
                     }
@@ -66,13 +61,7 @@ class RekapActivityTeknisi : AppCompatActivity() {
                 }
             }
         }
+
     }
 
-//    private fun setupRecyclerView() {
-//        binding.rvRekapTeknisi.apply {
-//            adapter = mAdapter
-//            layoutManager = LinearLayoutManager(this@RekapActivityTeknisi)
-//            setHasFixedSize(true)
-//        }
-//    }
 }
