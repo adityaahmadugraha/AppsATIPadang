@@ -36,6 +36,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".teknik.ui_teknisi.detailpenyerahan.ActivityDetailPenyerahan"
+            android:exported="false" />
+        <activity
             android:name=".teknik.ui_teknisi.penyerahan.ActivityPenyerahan"
             android:exported="false" />
         <activity

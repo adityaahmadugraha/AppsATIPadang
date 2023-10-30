@@ -7,59 +7,59 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
-import com.aditya.appsatipadang.data.remote.response.PenyerahanResponse
+import com.aditya.appsatipadang.data.remote.request.PenyerahanItem
 import com.aditya.appsatipadang.databinding.ListPenyerahanBinding
 import com.bumptech.glide.Glide
 
 
 class AdapterPenyerahan(
+    private val onItemClick: (PenyerahanItem) -> Unit,
+) : ListAdapter<PenyerahanItem, AdapterPenyerahan.ViewHolder>(DIFF_CALLBACK) {
 
-) : ListAdapter<PenyerahanResponse.Penyerahan, AdapterPenyerahan.ViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ListPenyerahanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ListPenyerahanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+        holder.bind(getItem(position))
     }
 
 
-    inner class ViewHolder(private val binding: ListPenyerahanBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+
+
+    inner class ViewHolder(private val binding: ListPenyerahanBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor")
-        fun bind(data: PenyerahanResponse.Penyerahan) {
+        fun bind(data: PenyerahanItem) {
             binding.apply {
                 tvName.text = data.namaPenerima
-                tvTglLaporanSarana.text = data.tglDserahkan
+                tvTglLaporanSarana.text = data.tglDiserahkan
                 tvNoLaporan.text = data.noPengaduan
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)
-                    .into(binding.imgPelaporan)
-
-
+                    .into(imgPelaporan)
+                itemView.setOnClickListener {
+                    onItemClick(data)
+                }
             }
         }
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<PenyerahanResponse.Penyerahan> =
-            object : DiffUtil.ItemCallback<PenyerahanResponse.Penyerahan>() {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<PenyerahanItem> =
+            object : DiffUtil.ItemCallback<PenyerahanItem>() {
                 override fun areItemsTheSame(
-                    oldItem: PenyerahanResponse.Penyerahan,
-                    newItem: PenyerahanResponse.Penyerahan
+                    oldItem: PenyerahanItem,
+                    newItem: PenyerahanItem
                 ): Boolean {
                     return oldItem.noPengaduan == newItem.noPengaduan
                 }
 
-                @SuppressLint("DiffUtilEquals")
                 override fun areContentsTheSame(
-                    oldItem: PenyerahanResponse.Penyerahan,
-                    newItem: PenyerahanResponse.Penyerahan
+                    oldItem: PenyerahanItem,
+                    newItem: PenyerahanItem
                 ): Boolean {
                     return oldItem == newItem
                 }

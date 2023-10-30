@@ -27,6 +27,7 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Compan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
 import com.aditya.appsatipadang.supervisor.LaporanKeseluruhanActivity
+import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.user.ui.profile.CustomTypefaceSpan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
@@ -65,6 +66,11 @@ class HomeFragmentAdmin : Fragment() {
             }
             cardSaranaAdmin.setOnClickListener {
                 val intent = Intent(activity, PengaduanActivity::class.java)
+                startActivity(intent)
+            }
+
+            cardAddUser.setOnClickListener {
+                val intent = Intent(activity, SaranaActivity::class.java)
                 startActivity(intent)
             }
         }

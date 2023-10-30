@@ -21,7 +21,15 @@ class DataRepository @Inject constructor(
 
     suspend fun deleteUser() = localData.deleteUser()
 
+
+
+
     fun getListLaporan(token: String) = remoteData.getListLaporan(token)
+    fun getListPenyerahan(token: String) = remoteData.getListPenyerahan(token)
+
+
+
+
     fun getLaporanStatus(token: String, status: String) = remoteData.getLaporanStatus(token, status)
 
     fun getListPengerjaan(token: String) = remoteData.getListPengerjaan(token)
@@ -49,6 +57,8 @@ class DataRepository @Inject constructor(
 
     fun deleteLaporan(token: String, id: String) = remoteData.deleteLaporan(token, id)
 
+    fun deletePenyerahan(token: String, id: String) = remoteData.deletePenyerahan(token, id)
+
 
     fun insertFoto(
         token: String,
@@ -59,6 +69,9 @@ class DataRepository @Inject constructor(
         token: String,
         id: String
     ) = remoteData.getLaporanId(token, id)
+
+
+    fun getPenyerahanId(token: String, id: String) = remoteData.getPenyerahanId(token, id)
 
     fun getDataLaporan(token: String, id: String) = remoteData.getLaporanId(token, id)
 

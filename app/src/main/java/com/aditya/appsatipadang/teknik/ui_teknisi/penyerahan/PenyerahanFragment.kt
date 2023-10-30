@@ -8,12 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdapter
-import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
 import com.aditya.appsatipadang.databinding.FragmentPenyerahanBinding
-import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
-import com.aditya.appsatipadang.utils.Constant
+import com.aditya.appsatipadang.teknik.ui_teknisi.detailpenyerahan.ActivityDetailPenyerahan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,41 +20,39 @@ class PenyerahanFragment : Fragment() {
     private var _binding: FragmentPenyerahanBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PengaduanAdminViewModel by viewModels()
-    private lateinit var mAdapter: PengaduanAdapter
+    private val viewModel: PenyerahanViewModel by viewModels()
+    private lateinit var mAdapter: AdapterPenyerahan
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_penyerahan, container, false)
+        _binding = FragmentPenyerahanBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        getData()
+        getData()
         setupList()
     }
 
     private fun getData() {
-        viewModel.getUser().observe(viewLifecycleOwner){
-            viewModel.getLaporanStatus(it.getToken,"sedang dikerjakan").observe(viewLifecycleOwner){ item ->
-                when(item){
+        viewModel.getUser().observe(viewLifecycleOwner) { user ->
+            viewModel.getListPenyerahan(user.getToken).observe(viewLifecycleOwner) { result ->
+                when (result) {
                     is com.aditya.appsatipadang.data.Resource.Loading -> {}
                     is com.aditya.appsatipadang.data.Resource.Success -> {
-                        val dataItem = item.data.laporan
-                        mAdapter.submitList(dataItem)
+                        val dataItems = result.data.penyerahan
+                        mAdapter.submitList(dataItems)
                         setupRecyclerView()
                     }
                     is com.aditya.appsatipadang.data.Resource.Error -> {}
-
                 }
             }
         }
     }
-
 
     private fun setupRecyclerView() {
         binding.rvPenyerahan.apply {
@@ -69,14 +63,16 @@ class PenyerahanFragment : Fragment() {
     }
 
     private fun setupList() {
-//        mAdapter = PengaduanAdapter {item ->
-//            val intent = Intent(requireActivity(), LaporanTeknisiActivity::class.java)
-//            intent.putExtra(Constant.IDLAPORAN, item.id.toString())
-//            startActivity(intent)
-//        }
+        mAdapter = AdapterPenyerahan { penyerahanItem ->
+            val intent = Intent(requireActivity(), ActivityDetailPenyerahan::class.java)
+//            intent.putExtra(ActivityDetailPenyerahan.TAG_TANGGAL, penyerahanItem.tglDiserahkan)
+            startActivity(intent)
+        }
     }
 
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

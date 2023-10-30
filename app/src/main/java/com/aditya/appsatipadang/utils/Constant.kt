@@ -28,6 +28,7 @@ import java.util.UUID
 
 object Constant {
 
+    const val IDPENYERAHAN = "id_penyerahan"
     const val IDLAPORAN = "id_laporan"
     const val TANGGAL_DARI = "tgl_dari"
     const val TANGGAL_SAMPAI = "tgl_sampai"

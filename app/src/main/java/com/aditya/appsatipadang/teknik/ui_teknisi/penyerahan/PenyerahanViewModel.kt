@@ -16,15 +16,20 @@ class PenyerahanViewModel @Inject constructor(
     fun getUser() = repository.getUser().asLiveData()
 
 
-    fun getPenyerahan(token : String, status : String) = repository.getLaporanStatus(token, status).asLiveData()
 
-//    fun getPenyerahan(token : String, status : String) = repository.getPenyerahan(token, status).asLiveData()
 
+    fun getListPenyerahan(token: String) = repository.getListPenyerahan(token).asLiveData()
+
+
+    fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
+
+
+
+    fun deletePenyerahan(token: String, id : String) = repository.deletePenyerahan(token,id).asLiveData()
 
 
 
     fun getLaporanStatus(token : String, status : String) = repository.getLaporanStatus(token, status).asLiveData()
-
 
 
     fun inputPenyerahan(token: String, requestBody: RequestBody) = repository.inputPenyerahan(token, requestBody).asLiveData()

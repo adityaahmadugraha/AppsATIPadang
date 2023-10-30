@@ -1,8 +1,10 @@
 package com.aditya.appsatipadang.network
 
 import com.aditya.appsatipadang.data.remote.request.AddUserResponse
+import com.aditya.appsatipadang.data.remote.request.DetailPenyerahanResponse
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.request.ResponsePenyerahan
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.DataUserResponse
@@ -65,10 +67,23 @@ interface ApiService {
     ): LaporanResponse
 
 
+    @GET("hapus-penyerahan/{id}")
+    suspend fun deletePenyerahan(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): LaporanResponse
+
     @GET("laporan")
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
     ): LaporanResponse
+
+
+    //menampilkan laporan penyerahan
+    @GET("get-penyerahan")
+    suspend fun getListPenyerahan(
+        @Header("Authorization") token: String,
+    ): ResponsePenyerahan
 
     @GET("laporan")
     suspend fun getListPengerjaan(
@@ -119,6 +134,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): LaporanIdResponse
+
+    @GET("detail-penyerahan/{id}")
+    suspend fun getPenyerahan(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): DetailPenyerahanResponse
 
 
     @POST("kirimlaporan")

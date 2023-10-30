@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
-import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.aditya.appsatipadang.utils.Constant
 import com.bumptech.glide.Glide
@@ -25,7 +23,6 @@ class AdapterHystoryHarian(
             ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -73,8 +70,6 @@ class AdapterHystoryHarian(
                         )
                     )
                 }
-
-
 
                 itemView.setOnClickListener {
                     onItemClick(data)
