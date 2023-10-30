@@ -65,10 +65,15 @@ class PenyerahanFragment : Fragment() {
     private fun setupList() {
         mAdapter = AdapterPenyerahan { penyerahanItem ->
             val intent = Intent(requireActivity(), ActivityDetailPenyerahan::class.java)
-//            intent.putExtra(ActivityDetailPenyerahan.TAG_TANGGAL, penyerahanItem.tglDiserahkan)
+            intent.putExtra(ActivityDetailPenyerahan.TAG_TANGGAL, penyerahanItem.tglDiserahkan)
+            intent.putExtra(ActivityDetailPenyerahan.TAG_NAMA_PENERIMA, penyerahanItem.namaPenerima)
+            intent.putExtra(ActivityDetailPenyerahan.TAG_NO, penyerahanItem.noPengaduan)
+            intent.putExtra(ActivityDetailPenyerahan.TAG_FOTO, penyerahanItem.foto)
+
             startActivity(intent)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
