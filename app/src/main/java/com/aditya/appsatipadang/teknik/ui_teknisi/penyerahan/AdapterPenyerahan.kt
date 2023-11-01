@@ -1,6 +1,7 @@
 package com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide
 
 class AdapterPenyerahan(
     private val onItemClick: (PenyerahanItem) -> Unit,
+//    private val itemClick : (PenyerahanItem) -> ClipData.Item
 ) : ListAdapter<PenyerahanItem, AdapterPenyerahan.ViewHolder>(DIFF_CALLBACK) {
 
 

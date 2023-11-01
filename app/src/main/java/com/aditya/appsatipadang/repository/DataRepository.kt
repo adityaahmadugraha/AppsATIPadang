@@ -40,6 +40,8 @@ class DataRepository @Inject constructor(
 
     fun getTeknisiList(token: String) = remoteData.getTeknisiList(token)
 
+    fun getNoPelaporan(token: String) = remoteData.getNoPelaporan(token)
+
     fun insertLaporanTeknisi(
         token: String,
         kirimTeknisiRequest: KirimTeknisiRequest
@@ -55,7 +57,7 @@ class DataRepository @Inject constructor(
     ) = remoteData.insertLaporan(token, requestBody)
 
 
-    fun deleteLaporan(token: String, id: String) = remoteData.deleteLaporan(token, id)
+    fun deleteLaporan(token: String, id: String, requestBody : RequestBody) = remoteData.deleteLaporan(token, id, requestBody)
 
     fun deletePenyerahan(token: String, id: String) = remoteData.deletePenyerahan(token, id)
 

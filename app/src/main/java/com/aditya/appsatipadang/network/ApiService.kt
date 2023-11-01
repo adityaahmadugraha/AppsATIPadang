@@ -10,6 +10,7 @@ import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.DataUserResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
+import com.aditya.appsatipadang.data.remote.response.NoPelaporanTeknisi
 import com.aditya.appsatipadang.data.remote.response.PenyerahanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import com.aditya.appsatipadang.data.remote.response.TeknisiReponse
@@ -60,10 +61,11 @@ interface ApiService {
 
 
     //delete laporan oleh admin
-    @GET("hapus-laporan/{id}")
+    @POST("hapus-laporan/{id}")
     suspend fun deletelaporan(
         @Header("Authorization") token: String,
-        @Path("id") id: String
+        @Path("id") id: String,
+        @Body body: RequestBody
     ): LaporanResponse
 
 
@@ -154,6 +156,11 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): TeknisiReponse
 
+    @GET("getkodepengaduanteknisi")
+    suspend fun getkodepengaduanteknisi(
+        @Header("Authorization") token: String,
+    ): NoPelaporanTeknisi
+
 
     @POST("addUser")
     suspend fun addUser(
@@ -165,6 +172,8 @@ interface ApiService {
     suspend fun gantiPassword(
         @Body body: RequestBody
     ): LaporanResponse
+
+
 
 
 }

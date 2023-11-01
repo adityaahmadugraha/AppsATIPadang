@@ -33,6 +33,9 @@ import com.aditya.appsatipadang.user.ui.profile.CustomTypefaceSpan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 @AndroidEntryPoint
@@ -112,7 +115,13 @@ class SaranaActivityAdmin : AppCompatActivity() {
                 }
 
                 dialog.setButton(AlertDialog.BUTTON_POSITIVE, yesSpannable) { _, _ ->
-                    hapusLaporan()
+
+                    val customDilog = DialogActivity(this@SaranaActivityAdmin)
+                    customDilog.show()
+                    customDilog.setOnDismissListener{
+                        val alasan = customDilog.getResult()
+                        hapusLaporan(alasan.toString())
+                    }
                 }
                 dialog.setButton(AlertDialog.BUTTON_NEGATIVE, noSpannable) { _, _ -> }
 
@@ -129,9 +138,12 @@ class SaranaActivityAdmin : AppCompatActivity() {
         getTeknisiData()
     }
 
-    private fun hapusLaporan() {
+    private fun hapusLaporan(alasan : String) {
+        val requestBody: RequestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("alasan", alasan).build()
         viewModel.getUser().observe(this) {
-            viewModel.deleteLaporan(it.getToken, id).observe(this) { items ->
+            viewModel.deleteLaporan(it.getToken, id, requestBody).observe(this) { items ->
                 when (items) {
                     is Resource.Loading -> {
                         Log.d("DeleteLaporan", "Sedang menghapus laporan...")

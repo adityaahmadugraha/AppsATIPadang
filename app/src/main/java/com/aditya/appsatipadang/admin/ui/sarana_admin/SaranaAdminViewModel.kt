@@ -5,6 +5,7 @@ import androidx.lifecycle.asLiveData
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 
@@ -24,7 +25,7 @@ class SaranaAdminViewModel @Inject constructor(
         kirimTeknisiRequest: KirimTeknisiRequest
     ) = dataRepository.insertLaporanTeknisi(token, kirimTeknisiRequest).asLiveData()
 
-    fun deleteLaporan(token: String, id : String) = dataRepository.deleteLaporan(token,id).asLiveData()
+    fun deleteLaporan(token: String, id : String, requestBody: RequestBody) = dataRepository.deleteLaporan(token,id, requestBody).asLiveData()
 
 
 

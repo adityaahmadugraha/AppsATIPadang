@@ -29,6 +29,9 @@ class PenyerahanViewModel @Inject constructor(
 
 
 
+    fun getNoPelaporan(token: String) = repository.getNoPelaporan(token).asLiveData()
+
+
     fun getLaporanStatus(token : String, status : String) = repository.getLaporanStatus(token, status).asLiveData()
 
 

@@ -21,6 +21,7 @@ import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHomeLaporan
 import com.aditya.appsatipadang.admin.fragment.history_admin.HistoryAdminViewModel
+import com.aditya.appsatipadang.admin.ui.pelaporan.ActivityPelaporanAdmin
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanActivity
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_ID_PENGADUAN
@@ -70,7 +71,7 @@ class HomeFragmentAdmin : Fragment() {
             }
 
             cardAddUser.setOnClickListener {
-                val intent = Intent(activity, SaranaActivity::class.java)
+                val intent = Intent(activity, ActivityPelaporanAdmin::class.java)
                 startActivity(intent)
             }
         }
@@ -189,7 +190,7 @@ class HomeFragmentAdmin : Fragment() {
                 MaterialAlertDialogBuilder(requireContext())
                     .setView(customView)
                     .setPositiveButton(yesSpannable) { dialog, _ ->
-                        hapusLaporan()
+//                        hapusLaporan()
                     }
                     .setNegativeButton(noSpannable) { dialog, _ ->
                         dialog.dismiss()
@@ -201,34 +202,34 @@ class HomeFragmentAdmin : Fragment() {
     }
 
 
-    private fun hapusLaporan() {
-        viewModel.getUser().observe(viewLifecycleOwner) {
-            viewModel.deleteLaporan(it.getToken, idLaporan).observe(viewLifecycleOwner) { items ->
-                when (items) {
-                    is Resource.Loading -> {
-                        Log.d("DeleteLaporan", "Sedang menghapus laporan...")
-                    }
-
-                    is Resource.Success -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Data Berhasil Dihapus",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        getDataUser()
-                    }
-
-                    is Resource.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "Gagal menghapus laporan",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
-    }
+//    private fun hapusLaporan() {
+//        viewModel.getUser().observe(viewLifecycleOwner) {
+//            viewModel.deleteLaporan(it.getToken, idLaporan).observe(viewLifecycleOwner) { items ->
+//                when (items) {
+//                    is Resource.Loading -> {
+//                        Log.d("DeleteLaporan", "Sedang menghapus laporan...")
+//                    }
+//
+//                    is Resource.Success -> {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Data Berhasil Dihapus",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        getDataUser()
+//                    }
+//
+//                    is Resource.Error -> {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Gagal menghapus laporan",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
     private fun setupRecyclerView() {

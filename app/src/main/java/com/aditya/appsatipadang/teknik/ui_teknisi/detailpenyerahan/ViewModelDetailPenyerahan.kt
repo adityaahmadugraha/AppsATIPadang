@@ -15,4 +15,11 @@ class ViewModelDetailPenyerahan @Inject constructor(
     fun getUser() = dataRepository.getUser().asLiveData()
     fun getListPenyerahan(token: String) = dataRepository.getListPenyerahan(token).asLiveData()
 
+    fun getDataLaporanId(token: String, id: String) =
+        dataRepository.getLaporanId(token, id).asLiveData()
+
+
+    fun deletePenyerahan(token: String, id : String) = dataRepository.deletePenyerahan(token,id).asLiveData()
+
+
 }

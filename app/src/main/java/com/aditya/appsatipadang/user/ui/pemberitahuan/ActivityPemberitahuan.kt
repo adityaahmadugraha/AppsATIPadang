@@ -35,10 +35,28 @@ class ActivityPemberitahuan : AppCompatActivity() {
         val nomorLaporan = "$tanggalLaporan-$formattedId"
         binding.tvTanggal.text = nomorLaporan
 
+        viewModel.getUser().observe(this@ActivityPemberitahuan){
+            when (it.roles) {
+//                "Supervisor" -> {
+//                    binding.tvPemberitahuan1.text = "Berhasil Diteruskan ke Teknisi"
+//                }
+                "Teknisi" -> {
+                    binding.tvPemberitahuan.text = "Berhasil Diterima Supervisor"
+                }
+                "Pelapor" -> {
+                    binding.tvPemberitahuan.text = "Berhasil Diterima Supervisor"
+                }
+                else -> {
 
+                }
+            }
+
+
+        }
 
         binding.btnCekLaporan.setOnClickListener {
             viewModel.getUser().observe(this@ActivityPemberitahuan){
+
                 when (it.roles) {
                     "Supervisor" -> {
                         val intent = Intent(this@ActivityPemberitahuan, HomeActivity::class.java)
