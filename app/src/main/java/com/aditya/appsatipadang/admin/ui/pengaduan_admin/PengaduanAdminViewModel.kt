@@ -15,5 +15,10 @@ class PengaduanAdminViewModel @Inject constructor(
 
     fun getLaporanStatus(token : String, status : String) = repository.getLaporanStatus(token, status).asLiveData()
 
+    fun getHistoryDihapus(token : String) = repository.getHistoryDihapus(token).asLiveData()
+
+
+
+
 
 }

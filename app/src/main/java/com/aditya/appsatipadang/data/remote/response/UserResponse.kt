@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.data.remote.response
 
 import com.google.gson.annotations.SerializedName
-import retrofit2.http.Field
 
 data class UserResponse(
     @field:SerializedName("id")
@@ -36,6 +35,5 @@ data class UserResponse(
 
     @field:SerializedName("fcmtoken")
     val fcmtoken: String? = null
-
 
 )

@@ -8,13 +8,15 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PengaduanActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityPengaduanBinding
+    private lateinit var binding: ActivityPengaduanBinding
 
     private val menuArray = arrayOf(
         "Diterima",
         "Dikerjakan",
-        "Selesai"
+        "Selesai",
+        "Dihapus"
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPengaduanBinding.inflate(layoutInflater)

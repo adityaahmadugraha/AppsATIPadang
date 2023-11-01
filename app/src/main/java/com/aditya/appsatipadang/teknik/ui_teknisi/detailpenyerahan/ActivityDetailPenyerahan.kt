@@ -59,63 +59,63 @@ class ActivityDetailPenyerahan : AppCompatActivity() {
             finish()
         }
 
-        binding.imgDelete.setOnClickListener {
-
-            val customView = LayoutInflater.from(this@ActivityDetailPenyerahan)
-                .inflate(R.layout.custom_delate, null)
-
-            val dialog = AlertDialog.Builder(this@ActivityDetailPenyerahan)
-                .setView(customView)
-                .create()
-
-            val yesString = getString(R.string.yes)
-            val noString = getString(R.string.batal)
-
-            val yesSpannable = SpannableString(yesString)
-            val noSpannable = SpannableString(noString)
-
-            val typeface =
-                ResourcesCompat.getFont(this@ActivityDetailPenyerahan, R.font.poppinssembiold)
-
-            typeface?.let {
-                yesSpannable.setSpan(
-                    StyleSpan(Typeface.BOLD),
-                    0,
-                    yesSpannable.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                yesSpannable.setSpan(
-                    CustomTypefaceSpan(typeface.toString()),
-                    0,
-                    yesSpannable.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-
-                noSpannable.setSpan(
-                    StyleSpan(Typeface.BOLD),
-                    0,
-                    noSpannable.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                noSpannable.setSpan(
-                    CustomTypefaceSpan(typeface.toString()),
-                    0,
-                    noSpannable.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }
-
-            dialog.setButton(AlertDialog.BUTTON_POSITIVE, yesSpannable) { _, _ ->
-                hapusLaporan()
-            }
-            dialog.setButton(AlertDialog.BUTTON_NEGATIVE, noSpannable) { _, _ -> }
-
-            dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
-            dialog.window?.decorView?.setPadding(24, 0, 24, 0)
-
-            dialog.show()
-
-        }
+//        binding.imgDelete.setOnClickListener {
+//
+//            val customView = LayoutInflater.from(this@ActivityDetailPenyerahan)
+//                .inflate(R.layout.custom_delate, null)
+//
+//            val dialog = AlertDialog.Builder(this@ActivityDetailPenyerahan)
+//                .setView(customView)
+//                .create()
+//
+//            val yesString = getString(R.string.yes)
+//            val noString = getString(R.string.batal)
+//
+//            val yesSpannable = SpannableString(yesString)
+//            val noSpannable = SpannableString(noString)
+//
+//            val typeface =
+//                ResourcesCompat.getFont(this@ActivityDetailPenyerahan, R.font.poppinssembiold)
+//
+//            typeface?.let {
+//                yesSpannable.setSpan(
+//                    StyleSpan(Typeface.BOLD),
+//                    0,
+//                    yesSpannable.length,
+//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//                )
+//                yesSpannable.setSpan(
+//                    CustomTypefaceSpan(typeface.toString()),
+//                    0,
+//                    yesSpannable.length,
+//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//                )
+//
+//                noSpannable.setSpan(
+//                    StyleSpan(Typeface.BOLD),
+//                    0,
+//                    noSpannable.length,
+//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//                )
+//                noSpannable.setSpan(
+//                    CustomTypefaceSpan(typeface.toString()),
+//                    0,
+//                    noSpannable.length,
+//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//                )
+//            }
+//
+//            dialog.setButton(AlertDialog.BUTTON_POSITIVE, yesSpannable) { _, _ ->
+//                hapusLaporan()
+//            }
+//            dialog.setButton(AlertDialog.BUTTON_NEGATIVE, noSpannable) { _, _ -> }
+//
+//            dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
+//            dialog.window?.decorView?.setPadding(24, 0, 24, 0)
+//
+//            dialog.show()
+//
+//        }
 
         getDataPenyerahan(tanggal)
     }

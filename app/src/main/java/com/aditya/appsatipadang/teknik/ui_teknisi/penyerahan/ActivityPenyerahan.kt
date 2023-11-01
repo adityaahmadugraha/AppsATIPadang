@@ -177,16 +177,16 @@ class ActivityPenyerahan : AppCompatActivity() {
                                 when (item) {
                                     is Resource.Loading -> {
                                         Log.d("ActivityPenyerahan", "Loading...")
-//                                        runOnUiThread {
-//                                            Toast.makeText(
-//                                                this@ActivityPenyerahan,
-//                                                "Laporan Anda berhasil terkirim",
-//                                                Toast.LENGTH_SHORT
-//                                            ).show()
-//                                        }
-//                                        Intent(this@ActivityPenyerahan, ActivityBerhasilAddUser::class.java).apply {
-//                                            startActivity(this)
-//                                        }
+                                        runOnUiThread {
+                                            Toast.makeText(
+                                                this@ActivityPenyerahan,
+                                                "Laporan Anda berhasil terkirim",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                        Intent(this@ActivityPenyerahan, ActivityBerhasilAddUser::class.java).apply {
+                                            startActivity(this)
+                                        }
                                     }
                                     is Resource.Success -> {
                                         if (item.data.status == 200) {

@@ -102,6 +102,11 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): LaporanResponse
 
+    @GET("gethistory")
+    suspend fun getHistoryDihapus(
+        @Header("Authorization") token: String,
+    ): NoPelaporanTeknisi
+
     //input sarana
     @POST("laporan")
     suspend fun insertLaporan(

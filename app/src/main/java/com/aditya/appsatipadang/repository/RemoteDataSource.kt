@@ -129,6 +129,14 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
+    fun getHistoryDihapus(token: String) = flow {
+        emit(Resource.Loading())
+        val response = apiService.getHistoryDihapus(token)
+        emit(Resource.Success(response))
+    }.catch {
+        emit(Resource.Error(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
 
     //input gambar
     fun insertLaporan(
