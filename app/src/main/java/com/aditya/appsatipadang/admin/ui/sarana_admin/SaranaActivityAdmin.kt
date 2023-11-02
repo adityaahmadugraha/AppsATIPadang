@@ -23,6 +23,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.HomeActivity
+import com.aditya.appsatipadang.admin.ui.ActivityPemberitahuanAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.response.TeknisiReponse
@@ -118,7 +119,7 @@ class SaranaActivityAdmin : AppCompatActivity() {
 
                     val customDilog = DialogActivity(this@SaranaActivityAdmin)
                     customDilog.show()
-                    customDilog.setOnDismissListener{
+                    customDilog.setOnDismissListener {
                         val alasan = customDilog.getResult()
                         hapusLaporan(alasan.toString())
                     }
@@ -138,7 +139,7 @@ class SaranaActivityAdmin : AppCompatActivity() {
         getTeknisiData()
     }
 
-    private fun hapusLaporan(alasan : String) {
+    private fun hapusLaporan(alasan: String) {
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("alasan", alasan).build()
@@ -183,8 +184,6 @@ class SaranaActivityAdmin : AppCompatActivity() {
                             etDeskripiKerusakan.setText(dataItem?.deskripsi)
                             etTanggal.setText(dataItem?.tanggal)
                             etWaktu.setText(dataItem?.waktu)
-//                            val tanggalId = "${dataItem?.tanggal?.replace(".", "-")}-${dataItem?.id}"
-//                            etNoPengaduan.setText(tanggalId)
                             val idWithLeadingZeros = String.format("%03d", dataItem?.id)
                             val tanggalId =
                                 "${dataItem?.tanggal?.replace(".", "-")}-$idWithLeadingZeros"
@@ -223,7 +222,10 @@ class SaranaActivityAdmin : AppCompatActivity() {
                             val tanggal = binding.etTanggal.text.toString()
 
                             val intent =
-                                Intent(this@SaranaActivityAdmin, ActivityPemberitahuan::class.java)
+                                Intent(
+                                    this@SaranaActivityAdmin,
+                                    ActivityPemberitahuanAdmin::class.java
+                                )
                             intent.putExtra(ID_LAPORAN_PEMBERITAHUAN, id.toInt())
                             intent.putExtra("tanggalLaporan", tanggal)
                             startActivity(intent)

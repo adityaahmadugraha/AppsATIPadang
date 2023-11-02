@@ -28,6 +28,7 @@ import java.util.UUID
 
 object Constant {
 
+    const val PREF_LOGIN_CONFIRMED = "login_confirmed"
     const val IDPENYERAHAN = "id_penyerahan"
     const val IDLAPORAN = "id_laporan"
     const val TANGGAL_DARI = "tgl_dari"

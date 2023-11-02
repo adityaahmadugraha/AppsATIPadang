@@ -36,6 +36,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".admin.ui.ActivityPemberitahuanAdmin"
+            android:exported="false" />
+        <activity
             android:name=".admin.ui.sarana_admin.DialogActivity"
             android:exported="false" />
         <activity

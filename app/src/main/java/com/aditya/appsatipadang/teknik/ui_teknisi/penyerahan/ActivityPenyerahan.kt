@@ -25,6 +25,7 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.ui.pelaporan.ActivityBerhasilAddUser
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
+import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.response.LaporanItem
 import com.aditya.appsatipadang.databinding.ActivityPenyerahanBinding
 import com.aditya.appsatipadang.teknik.ActivityTeknik
@@ -106,16 +107,26 @@ class ActivityPenyerahan : AppCompatActivity() {
                 when (result) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
-                        val teknisiList = result.data.laporan.orEmpty().toMutableList()
-                        teknisiList.add(
-                            0,
-                            LaporanItem("0", "Silahkan Pilih No Laporan")
-                        )
+                        val noLaporanList = result.data.laporan.orEmpty().toMutableList()
+//                        noLaporanList.add(0, LaporanItem("0", "Silahkan Pilih No Laporan"))
+
+                        val filteredList = noLaporanList.filterNotNull()
 
                         val adapter = ArrayAdapter(
                             this,
                             android.R.layout.simple_spinner_item,
-                            teknisiList.map { it?.id ?: "" })
+                            filteredList.map {
+                                it.let { laporan ->
+                                    "${laporan.tanggal}-${
+                                        String.format(
+                                            "%03d",
+                                            laporan.id?.toInt()
+                                        )
+                                    }"
+                                } ?: ""
+                            }
+                        )
+
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         binding.spinerNolaporan.adapter = adapter
 
@@ -127,9 +138,16 @@ class ActivityPenyerahan : AppCompatActivity() {
                                     position: Int,
                                     id: Long
                                 ) {
-                                    selctedNoPelaporan = if (position > 0) ({
-                                        teknisiList[position]?.id ?: ""
-                                    }).toString() else {
+                                    selctedNoPelaporan = if (position > 0) {
+                                        val selectedLaporan =
+                                            noLaporanList[position - 1]
+                                        "${selectedLaporan?.tanggal}-${
+                                            String.format(
+                                                "%03d",
+                                                selectedLaporan?.id?.toInt()
+                                            )
+                                        }"
+                                    } else {
                                         ""
                                     }
                                 }
@@ -138,6 +156,7 @@ class ActivityPenyerahan : AppCompatActivity() {
                                     selctedNoPelaporan = ""
                                 }
                             }
+
                     }
 
                     is Resource.Error -> {}
@@ -150,18 +169,22 @@ class ActivityPenyerahan : AppCompatActivity() {
         binding.apply {
             btnKirim.setOnClickListener {
                 val nama_penerima = etNamaPenerima.text.toString()
-                val no_pengaduan = spinerNolaporan.toString()
+                val no_pengaduan = selctedNoPelaporan
+
                 val tanggal = etTanggal.text.toString()
 
-                if (validateInput(nama_penerima, no_pengaduan, tanggal)) {
-                    Log.d("ActivityPenyerahan", "Input data valid") // Pesan log untuk memastikan data valid
+                if (validateInput(nama_penerima, no_pengaduan.toString(), tanggal)) {
+                    Log.d(
+                        "ActivityPenyerahan",
+                        "Input data valid"
+                    ) // Pesan log untuk memastikan data valid
                     viewModel.getUser().observe(this@ActivityPenyerahan) {
                         val fileProfilePicture: File =
                             Constant.reduceFileImage(fotoKerusakan as File)
 
                         val requestBody: RequestBody = MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart("no_pengaduan", no_pengaduan)
+                            .addFormDataPart("no_pengaduan", no_pengaduan.toString())
                             .addFormDataPart("nama_penerima", nama_penerima)
                             .addFormDataPart("tgl_diserahkan", tanggal)
                             .addFormDataPart(
@@ -184,13 +207,22 @@ class ActivityPenyerahan : AppCompatActivity() {
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
-                                        Intent(this@ActivityPenyerahan, ActivityBerhasilAddUser::class.java).apply {
+                                        // Tambahkan log laporan berhasil dikirimkan di sini
+                                        Log.d("ActivityPenyerahan", "Laporan berhasil dikirimkan")
+                                        Intent(
+                                            this@ActivityPenyerahan,
+                                            ActivityBerhasilAddUser::class.java
+                                        ).apply {
                                             startActivity(this)
                                         }
                                     }
+
                                     is Resource.Success -> {
                                         if (item.data.status == 200) {
-                                            Log.d("ActivityPenyerahan", "Response: Success (status = 200)")
+                                            Log.d(
+                                                "ActivityPenyerahan",
+                                                "Response: Success (status = 200)"
+                                            )
                                             runOnUiThread {
                                                 Toast.makeText(
                                                     this@ActivityPenyerahan,
@@ -198,7 +230,15 @@ class ActivityPenyerahan : AppCompatActivity() {
                                                     Toast.LENGTH_SHORT
                                                 ).show()
                                             }
-                                            Intent(this@ActivityPenyerahan, ActivityBerhasilAddUser::class.java).apply {
+                                            // Tambahkan log laporan berhasil dikirimkan di sini
+                                            Log.d(
+                                                "ActivityPenyerahan",
+                                                "Laporan berhasil dikirimkan"
+                                            )
+                                            Intent(
+                                                this@ActivityPenyerahan,
+                                                ActivityBerhasilAddUser::class.java
+                                            ).apply {
                                                 startActivity(this)
                                             }
                                         }
@@ -206,16 +246,19 @@ class ActivityPenyerahan : AppCompatActivity() {
                                     }
 
                                     is Resource.Error -> {
-                                        Log.e("ActivityPenyerahan", "Response: Error - ${item.error}")
+                                        Log.e(
+                                            "ActivityPenyerahan",
+                                            "Response: Error - ${item.error}"
+                                        )
                                     }
                                 }
                             }
                     }
                 }
-
             }
         }
     }
+
 
     private fun getUserData() {
         viewModel.getUser().observe(this) {
@@ -225,10 +268,11 @@ class ActivityPenyerahan : AppCompatActivity() {
 
     private fun getUserInput() {
 
+
         binding.apply {
 
             val nama_penerima = etNamaPenerima.text.toString()
-//            val no_pengaduan = etNoPengaduan.text.toString()
+            val no_pengaduan = selctedNoPelaporan
             val tanggal = etTanggal.text.toString()
 
             if (validateInput(nama_penerima, tanggal, fotoKerusakan.toString())) {
@@ -236,7 +280,7 @@ class ActivityPenyerahan : AppCompatActivity() {
 
                 val requestBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-//                    .addFormDataPart("no_pengaduan", no_pengaduan)
+                    .addFormDataPart("no_pengaduan", no_pengaduan)
                     .addFormDataPart("nama_penerima", nama_penerima)
                     .addFormDataPart("tgl_diserahkan", tanggal)
                     .addFormDataPart(
@@ -301,9 +345,15 @@ class ActivityPenyerahan : AppCompatActivity() {
             if (namaPenerima.isEmpty()) {
                 return ilNamaPenerima.setInputError(getString(R.string.must_not_empty))
             }
-//            if (noPengaduan.isEmpty()) {
-//                return ilNoPengaduan.setInputError(getString(R.string.must_not_empty))
-//            }
+            if (noPengaduan == null) {
+                Toast.makeText(
+                    this@ActivityPenyerahan,
+                    getString(R.string.pick_no_laporan),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+
             if (tanggal.isEmpty()) {
                 return ilTanggal.setInputError(getString(R.string.must_not_empty))
             }

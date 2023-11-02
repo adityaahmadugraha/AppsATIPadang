@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,11 +13,8 @@ import com.bumptech.glide.Glide
 
 
 class AdapterPenyerahan(
-    private val onItemClick: (PenyerahanItem) -> Unit,
-//    private val itemClick : (PenyerahanItem) -> ClipData.Item
+    private val onItemClick: (PenyerahanItem) -> Unit
 ) : ListAdapter<PenyerahanItem, AdapterPenyerahan.ViewHolder>(DIFF_CALLBACK) {
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListPenyerahanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,9 +24,6 @@ class AdapterPenyerahan(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
-
-
 
     inner class ViewHolder(private val binding: ListPenyerahanBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor")

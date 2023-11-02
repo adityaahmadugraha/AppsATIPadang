@@ -37,7 +37,6 @@ class PenyerahanFragment : Fragment() {
         getData()
         setupList()
     }
-
     private fun getData() {
         viewModel.getUser().observe(viewLifecycleOwner) { user ->
             viewModel.getListPenyerahan(user.getToken).observe(viewLifecycleOwner) { result ->
@@ -45,7 +44,8 @@ class PenyerahanFragment : Fragment() {
                     is com.aditya.appsatipadang.data.Resource.Loading -> {}
                     is com.aditya.appsatipadang.data.Resource.Success -> {
                         val dataItems = result.data.penyerahan
-                        mAdapter.submitList(dataItems)
+                        val sortedData = dataItems?.sortedByDescending { it?.id }
+                        mAdapter.submitList(sortedData)
                         setupRecyclerView()
                     }
                     is com.aditya.appsatipadang.data.Resource.Error -> {}
@@ -53,6 +53,7 @@ class PenyerahanFragment : Fragment() {
             }
         }
     }
+
 
     private fun setupRecyclerView() {
         binding.rvPenyerahan.apply {
