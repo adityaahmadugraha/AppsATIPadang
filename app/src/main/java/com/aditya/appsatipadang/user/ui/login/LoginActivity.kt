@@ -190,15 +190,14 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
                     Log.d("LOGINADMIN:::::", userData.token)
-                    Intent(this@LoginActivity, HomeActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(this)
-                    }
+                    gotoSupervisor()
                 } else if (userData.roles == "Pelapor") {
-                    if(userData.confirmLogin?.isEmpty() == true) {
+                    Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
+                        .show()
+                    if (userData.confirmLogin?.isEmpty() == true) {
                         showConfirmDialog(userData)
-                    }else {
-                        Intent(this@LoginActivity, ActivityTeknik::class.java).apply {
+                    } else {
+                        Intent(this@LoginActivity, MainActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(this)
                         }
@@ -224,6 +223,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun gotoSupervisor() {
+        Intent(this@LoginActivity, HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(this)
+        }
+    }
+
     private fun showConfirmDialog(userData: UserLocal) {
         val dialogView = layoutInflater.inflate(R.layout.custom_alertdialog, null)
 
@@ -246,7 +252,7 @@ class LoginActivity : AppCompatActivity() {
                             userData.foto,
                             userData.token,
                             userData.fcmtoken,
-                          "ya"
+                            "ya"
 
                         )
                     )

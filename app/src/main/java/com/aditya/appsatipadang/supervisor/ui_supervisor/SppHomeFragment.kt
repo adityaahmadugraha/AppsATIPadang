@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.BuildConfig
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterLaporan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentSppHomeBinding
@@ -55,6 +56,7 @@ class SppHomeFragment : Fragment() {
         lySwip = binding.lySwip
         lySwip.setOnRefreshListener {
 
+
             getDataUser()
         }
 
@@ -66,12 +68,29 @@ class SppHomeFragment : Fragment() {
 
     private fun getDataUser() {
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            binding.tvName.text = userLocal.name
-            binding.let {
-                Glide.with(requireContext())
-                    .load(BuildConfig.IMAGE_URL + userLocal.foto)
-                    .error(android.R.color.darker_gray)
-                    .into(it.imgProfil)
+            viewModel.getDataUser(userLocal.getToken).observe(viewLifecycleOwner) { item ->
+                when (item) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val dataIem = item.data.user
+                        binding.apply {
+                            tvName.text = dataIem?.name
+                            Glide.with(requireContext())
+                                .load(BuildConfig.IMAGE_URL + dataIem?.foto)
+                                .error(R.color.white)
+                                .into(imgProfil)
+                        }
+                    }
+
+                    is Resource.Error -> {}
+                }
+//                binding.tvName.text = userLocal.name
+//                binding.let {
+//                    Glide.with(requireContext())
+//                        .load(BuildConfig.IMAGE_URL + userLocal.foto)
+//                        .error(android.R.color.darker_gray)
+//                        .into(it.imgProfil)
+//                }
             }
 
             viewModel.getListLaporan(userLocal.getToken).observe(viewLifecycleOwner) { result ->

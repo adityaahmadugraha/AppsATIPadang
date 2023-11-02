@@ -62,12 +62,6 @@ class ActivityPenyerahan : AppCompatActivity() {
 
     private var idLaporan = ""
 
-//    companion object {
-//        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-//        private const val REQUEST_CODE_PERMISSIONS = 10
-//
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -108,10 +102,7 @@ class ActivityPenyerahan : AppCompatActivity() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         val noLaporanList = result.data.laporan.orEmpty().toMutableList()
-//                        noLaporanList.add(0, LaporanItem("0", "Silahkan Pilih No Laporan"))
-
                         val filteredList = noLaporanList.filterNotNull()
-
                         val adapter = ArrayAdapter(
                             this,
                             android.R.layout.simple_spinner_item,
@@ -173,18 +164,18 @@ class ActivityPenyerahan : AppCompatActivity() {
 
                 val tanggal = etTanggal.text.toString()
 
-                if (validateInput(nama_penerima, no_pengaduan.toString(), tanggal)) {
+                if (validateInput(nama_penerima, no_pengaduan, tanggal)) {
                     Log.d(
                         "ActivityPenyerahan",
                         "Input data valid"
-                    ) // Pesan log untuk memastikan data valid
+                    )
                     viewModel.getUser().observe(this@ActivityPenyerahan) {
                         val fileProfilePicture: File =
                             Constant.reduceFileImage(fotoKerusakan as File)
 
                         val requestBody: RequestBody = MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart("no_pengaduan", no_pengaduan.toString())
+                            .addFormDataPart("no_pengaduan", no_pengaduan)
                             .addFormDataPart("nama_penerima", nama_penerima)
                             .addFormDataPart("tgl_diserahkan", tanggal)
                             .addFormDataPart(
@@ -207,7 +198,6 @@ class ActivityPenyerahan : AppCompatActivity() {
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
-                                        // Tambahkan log laporan berhasil dikirimkan di sini
                                         Log.d("ActivityPenyerahan", "Laporan berhasil dikirimkan")
                                         Intent(
                                             this@ActivityPenyerahan,
@@ -230,7 +220,6 @@ class ActivityPenyerahan : AppCompatActivity() {
                                                     Toast.LENGTH_SHORT
                                                 ).show()
                                             }
-                                            // Tambahkan log laporan berhasil dikirimkan di sini
                                             Log.d(
                                                 "ActivityPenyerahan",
                                                 "Laporan berhasil dikirimkan"
