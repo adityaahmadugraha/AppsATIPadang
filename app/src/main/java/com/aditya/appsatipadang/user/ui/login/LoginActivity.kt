@@ -195,7 +195,14 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(this)
                     }
                 } else if (userData.roles == "Pelapor") {
-                    showConfirmDialog(userData)
+                    if(userData.confirmLogin?.isEmpty() == true) {
+                        showConfirmDialog(userData)
+                    }else {
+                        Intent(this@LoginActivity, ActivityTeknik::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(this)
+                        }
+                    }
                 } else if (userData.roles == "Teknisi") {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
@@ -239,6 +246,8 @@ class LoginActivity : AppCompatActivity() {
                             userData.foto,
                             userData.token,
                             userData.fcmtoken,
+                          "ya"
+
                         )
                     )
                     moveToMainActivity()

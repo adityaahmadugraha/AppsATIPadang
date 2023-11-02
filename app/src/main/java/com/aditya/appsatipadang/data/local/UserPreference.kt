@@ -27,6 +27,7 @@ class UserPreference(context: Context) {
                 preferences[Constant.TAG_FOTO] ?: "",
                 preferences[Constant.TAG_TOKEN] ?: "",
                 preferences[Constant.TAG_FCMTOKEN] ?: "",
+                preferences[Constant.TAG_CONFIRMLOGIN] ?: "",
 
                 )
             userLocal
@@ -47,6 +48,7 @@ class UserPreference(context: Context) {
             preferences[Constant.TAG_FOTO] = user.foto
             preferences[Constant.TAG_TOKEN] = user.token
             preferences[Constant.TAG_FCMTOKEN] = user.fcmtoken
+            preferences[Constant.TAG_CONFIRMLOGIN] = user.confirmLogin ?: ""
         }
     }
 

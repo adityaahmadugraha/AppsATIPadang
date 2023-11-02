@@ -51,6 +51,7 @@ object Constant {
     val TAG_FOTO = stringPreferencesKey("foto")
     val TAG_TOKEN = stringPreferencesKey("token")
     val TAG_FCMTOKEN = stringPreferencesKey("fcmtoken")
+    val TAG_CONFIRMLOGIN = stringPreferencesKey("confirmlogin")
 
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
