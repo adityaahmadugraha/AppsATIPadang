@@ -10,10 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.PengaduanAdminViewModel
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
 import com.aditya.appsatipadang.databinding.FragmentDikerjakanBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
-import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.utils.Constant.IDLAPORAN
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint

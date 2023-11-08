@@ -24,9 +24,13 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
+import com.aditya.appsatipadang.admin.HomeActivity
+import com.aditya.appsatipadang.admin.ui.pelaporan.ActivityPelaporanAdmin
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.databinding.ActivitySaranaBinding
+import com.aditya.appsatipadang.supervisor.ActivitySupervisor
+import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.aditya.appsatipadang.user.MainActivity
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan.Companion.ID_LAPORAN_PEMBERITAHUAN
@@ -108,9 +112,34 @@ class SaranaActivity : AppCompatActivity() {
             }
 
             getUserData()
+//            imgBack.setOnClickListener {
+//                val intent = Intent(this@SaranaActivity, MainActivity::class.java)
+//                startActivity(intent)
+//            }
+
+
             imgBack.setOnClickListener {
-                val intent = Intent(this@SaranaActivity, MainActivity::class.java)
-                startActivity(intent)
+                viewModel.getUser().observe(this@SaranaActivity){
+                    when (it.roles) {
+                        "Supervisor" -> {
+                            val intent = Intent(this@SaranaActivity, ActivityPelaporanAdmin::class.java)
+                            startActivity(intent)
+                        }
+                        "Teknisi" -> {
+                            val intent = Intent(this@SaranaActivity, ActivityTeknik::class.java)
+                            startActivity(intent)
+                        }
+                        "Pelapor" -> {
+                            val intent = Intent(this@SaranaActivity, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        else -> {
+                            val intent = Intent(this@SaranaActivity, ActivitySupervisor::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+
             }
 
             chipGroup.setOnCheckedChangeListener { group, checkedId ->

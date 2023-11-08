@@ -12,4 +12,5 @@ data class UserLocal(
     val foto: String,
     val token: String,
     val fcmtoken: String,
+    val confirmLogin: String? = null
 )

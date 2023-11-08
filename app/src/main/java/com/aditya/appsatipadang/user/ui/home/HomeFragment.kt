@@ -22,6 +22,7 @@ import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.user.laporan.status.ActivityStatus
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity
 import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_IDLAPORAN
+//import com.aditya.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity.Companion.TAG_IDLAPORAN
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint

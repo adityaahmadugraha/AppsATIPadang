@@ -1,7 +1,6 @@
 package com.aditya.appsatipadang.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaAdminViewModel
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
 import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.bumptech.glide.Glide
@@ -43,6 +41,7 @@ class AdapterHomeLaporan(
                 tvLokasi.text = data.lokasi
                 tvStatusLaporan.text = data.status
                 tvNameUser.text = data.namePelapor
+                tvJenis.text = data.jenis
 
 
                 when (data.status) {
@@ -66,6 +65,7 @@ class AdapterHomeLaporan(
                             R.color.selesai
                         )
                     )
+
                     else -> tvStatusLaporan.setTextColor(
                         ContextCompat.getColor(
                             itemView.context,

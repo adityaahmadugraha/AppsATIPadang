@@ -1,32 +1,39 @@
 package com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan
 
-import android.Manifest
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Rect
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
-import com.aditya.appsatipadang.adapter.AdapterLaporan
+import com.aditya.appsatipadang.admin.ui.pelaporan.ActivityBerhasilAddUser
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.databinding.ActivityLaporanTeknisiBinding
+import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
+import com.aditya.appsatipadang.data.remote.response.LaporanItem
 import com.aditya.appsatipadang.databinding.ActivityPenyerahanBinding
 import com.aditya.appsatipadang.teknik.ActivityTeknik
-import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiViewModel
-import com.aditya.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan
 import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.aditya.appsatipadang.utils.Constant.setInputError
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +46,7 @@ import java.util.Calendar
 import java.util.Locale
 
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class ActivityPenyerahan : AppCompatActivity() {
 
@@ -50,13 +58,9 @@ class ActivityPenyerahan : AppCompatActivity() {
     private var fotoKerusakan: File? = null
     private var fotoKerusakanPath: String? = null
 
-    private var idLaporan = ""
+    private var selctedNoPelaporan: String = ""
 
-//    companion object {
-//        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-//        private const val REQUEST_CODE_PERMISSIONS = 10
-//
-//    }
+    private var idLaporan = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +74,14 @@ class ActivityPenyerahan : AppCompatActivity() {
             }
 
             getUserData()
+
             imgBack.setOnClickListener {
                 val intent = Intent(this@ActivityPenyerahan, ActivityTeknik::class.java)
                 startActivity(intent)
+            }
+
+            etTanggal.setOnClickListener {
+                setTanggal()
             }
 
             camera.setOnClickListener { startCamera() }
@@ -80,73 +89,165 @@ class ActivityPenyerahan : AppCompatActivity() {
         }
 
 
-//        kirimLaporanPerbaikan()
+        laporanPenyerahan()
+        getUserData()
+        getNoLaporan()
 
-        binding.etTanggal.setOnClickListener {
-            setTanggal()
+    }
+
+    private fun getNoLaporan() {
+        viewModel.getUser().observe(this@ActivityPenyerahan) { it ->
+            viewModel.getNoPelaporan(it.getToken).observe(this@ActivityPenyerahan) { result ->
+                when (result) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val noLaporanList = result.data.laporan.orEmpty().toMutableList()
+                        val filteredList = noLaporanList.filterNotNull()
+                        val adapter = ArrayAdapter(
+                            this,
+                            android.R.layout.simple_spinner_item,
+                            filteredList.map {
+                                it.let { laporan ->
+                                    "${laporan.tanggal}-${
+                                        String.format(
+                                            "%03d",
+                                            laporan.id?.toInt()
+                                        )
+                                    }"
+                                } ?: ""
+                            }
+                        )
+
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        binding.spinerNolaporan.adapter = adapter
+
+                        binding.spinerNolaporan.onItemSelectedListener =
+                            object : AdapterView.OnItemSelectedListener {
+                                override fun onItemSelected(
+                                    parent: AdapterView<*>?,
+                                    view: View?,
+                                    position: Int,
+                                    id: Long
+                                ) {
+                                    selctedNoPelaporan = if (position > 0) {
+                                        val selectedLaporan =
+                                            noLaporanList[position - 1]
+                                        "${selectedLaporan?.tanggal}-${
+                                            String.format(
+                                                "%03d",
+                                                selectedLaporan?.id?.toInt()
+                                            )
+                                        }"
+                                    } else {
+                                        ""
+                                    }
+                                }
+
+                                override fun onNothingSelected(parent: AdapterView<*>?) {
+                                    selctedNoPelaporan = ""
+                                }
+                            }
+
+                    }
+
+                    is Resource.Error -> {}
+                }
+            }
         }
     }
 
-//    private fun kirimLaporanPerbaikan() {
-//        binding.apply {
-//            btnKirim.setOnClickListener {
-//                val nama_penerima = etNamaPenerima.text.toString()
-//                val no_pengaduan = etNoPengaduan.text.toString()
-//                val tanggal = etTanggal.text.toString()
-//
-//
-//
-//                if (validateInput(biaya, tindakan, kegiatan, fotoKerusakan)) {
-//
-//                    viewModel.getUser().observe(this@LaporanTeknisiActivity) {
-//                        val fileProfilePicture: File =
-//                            Constant.reduceFileImage(fotoKerusakan as File)
-//
-//                        val requestBody: RequestBody = MultipartBody.Builder()
-//                            .setType(MultipartBody.FORM)
-//                            .addFormDataPart("biaya", biaya)
-//                            .addFormDataPart("kegiatan_perbaikan", kegiatan)
-//                            .addFormDataPart("pihak_terlibat", tindakan)
-//                            .addFormDataPart("id_laporan", idLaporan)
-//                            .addFormDataPart("id_teknisi", it.id)
-//                            .addFormDataPart(
-//                                "foto",
-//                                fileProfilePicture.name,
-//                                RequestBody.create(
-//                                    "image/*".toMediaTypeOrNull(),
-//                                    fileProfilePicture
-//                                )
-//                            ).build()
-//                        viewModel.kirimLaporanPerbaikan(it.getToken, requestBody)
-//                            .observe(this@LaporanTeknisiActivity) { item ->
-//                                when (item) {
-//                                    is Resource.Loading -> {}
-//                                    is Resource.Success -> {
-//                                        if (item.data.status == 200) {
-//                                            Toast.makeText(
-//                                                this@LaporanTeknisiActivity,
-//                                                "Data Berhasil Dikirm",
-//                                                Toast.LENGTH_SHORT
-//                                            ).show()
-//                                            Intent(
-//                                                this@LaporanTeknisiActivity,
-//                                                ActivityTeknik::class.java
-//                                            ).apply {
-//                                                flags =
-//                                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                                startActivity(this)
-//                                            }
-//                                        }
-//                                    }
-//
-//                                    is Resource.Error -> {}
-//                                }
-//                            }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    private fun laporanPenyerahan() {
+        binding.apply {
+            btnKirim.setOnClickListener {
+                val nama_penerima = etNamaPenerima.text.toString()
+                val no_pengaduan = selctedNoPelaporan
+
+                val tanggal = etTanggal.text.toString()
+
+                if (validateInput(nama_penerima, no_pengaduan, tanggal)) {
+                    Log.d(
+                        "ActivityPenyerahan",
+                        "Input data valid"
+                    )
+                    viewModel.getUser().observe(this@ActivityPenyerahan) {
+                        val fileProfilePicture: File =
+                            Constant.reduceFileImage(fotoKerusakan as File)
+
+                        val requestBody: RequestBody = MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("no_pengaduan", no_pengaduan)
+                            .addFormDataPart("nama_penerima", nama_penerima)
+                            .addFormDataPart("tgl_diserahkan", tanggal)
+                            .addFormDataPart(
+                                "foto",
+                                fileProfilePicture.name,
+                                RequestBody.create(
+                                    "image/*".toMediaTypeOrNull(),
+                                    fileProfilePicture
+                                )
+                            ).build()
+                        viewModel.inputPenyerahan(it.getToken, requestBody)
+                            .observe(this@ActivityPenyerahan) { item ->
+                                when (item) {
+                                    is Resource.Loading -> {
+                                        Log.d("ActivityPenyerahan", "Loading...")
+                                        runOnUiThread {
+                                            Toast.makeText(
+                                                this@ActivityPenyerahan,
+                                                "Laporan Anda berhasil terkirim",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                        Log.d("ActivityPenyerahan", "Laporan berhasil dikirimkan")
+                                        Intent(
+                                            this@ActivityPenyerahan,
+                                            ActivityBerhasilAddUser::class.java
+                                        ).apply {
+                                            startActivity(this)
+                                        }
+                                    }
+
+                                    is Resource.Success -> {
+                                        if (item.data.status == 200) {
+                                            Log.d(
+                                                "ActivityPenyerahan",
+                                                "Response: Success (status = 200)"
+                                            )
+                                            runOnUiThread {
+                                                Toast.makeText(
+                                                    this@ActivityPenyerahan,
+                                                    "Laporan Anda berhasil terkirim",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                            Log.d(
+                                                "ActivityPenyerahan",
+                                                "Laporan berhasil dikirimkan"
+                                            )
+                                            Intent(
+                                                this@ActivityPenyerahan,
+                                                ActivityBerhasilAddUser::class.java
+                                            ).apply {
+                                                startActivity(this)
+                                            }
+                                        }
+
+                                    }
+
+                                    is Resource.Error -> {
+                                        Log.e(
+                                            "ActivityPenyerahan",
+                                            "Response: Error - ${item.error}"
+                                        )
+                                    }
+                                }
+                            }
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun getUserData() {
         viewModel.getUser().observe(this) {
@@ -156,13 +257,14 @@ class ActivityPenyerahan : AppCompatActivity() {
 
     private fun getUserInput() {
 
+
         binding.apply {
 
             val nama_penerima = etNamaPenerima.text.toString()
-            val no_pengaduan = etNoPengaduan.text.toString()
+            val no_pengaduan = selctedNoPelaporan
             val tanggal = etTanggal.text.toString()
 
-            if (validateInput(nama_penerima, no_pengaduan, tanggal, fotoKerusakan)) {
+            if (validateInput(nama_penerima, tanggal, fotoKerusakan.toString())) {
                 val fileProfilePicture: File = Constant.reduceFileImage(fotoKerusakan as File)
 
                 val requestBody: RequestBody = MultipartBody.Builder()
@@ -194,31 +296,15 @@ class ActivityPenyerahan : AppCompatActivity() {
             binding.apply {
                 when (result) {
                     is Resource.Loading -> {
-
+                        showLoadingInput(true)
                     }
 
                     is Resource.Success -> {
-
-
-
-                        val intent =
-                            Intent(this@ActivityPenyerahan, ActivityPemberitahuan::class.java)
-                        intent.putExtra(
-                            ActivityPemberitahuan.ID_LAPORAN_PEMBERITAHUAN,
-                            result.data.id
-                        )
-                        intent.putExtra("tanggalLaporan", etTanggal.text.toString())
-                        startActivity(intent)
-                        Log.d(
-                            "LaporanTeknisiActivity::::::",
-                            "Intent ke ActivityPemberitahuan berhasil dilakukan"
-                        )
-
-
+                        showLoadingInput(false)
                     }
 
                     is Resource.Error<*> -> {
-
+                        showLoadingInput(false)
                         Toast.makeText(
                             this@ActivityPenyerahan, result.error,
                             Toast.LENGTH_SHORT
@@ -230,26 +316,39 @@ class ActivityPenyerahan : AppCompatActivity() {
 
     }
 
+    private fun showLoadingInput(condition: Boolean) {
+        binding.apply {
+            progressBar.isVisible = condition
+            btnKirim.isEnabled = !condition
+        }
+    }
+
     private fun validateInput(
         namaPenerima: String,
         noPengaduan: String,
-        tanggal: String,
-        fotoKerusakan: File?
+        tanggal: String
     ):
             Boolean {
+
         binding.apply {
             if (namaPenerima.isEmpty()) {
                 return ilNamaPenerima.setInputError(getString(R.string.must_not_empty))
             }
-            if (noPengaduan.isEmpty()) {
-                return ilNoPengaduan.setInputError(getString(R.string.must_not_empty))
+            if (noPengaduan == null) {
+                Toast.makeText(
+                    this@ActivityPenyerahan,
+                    getString(R.string.pick_no_laporan),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
             }
+
             if (tanggal.isEmpty()) {
                 return ilTanggal.setInputError(getString(R.string.must_not_empty))
             }
             if (fotoKerusakan == null) {
                 Toast.makeText(
-                    this@ActivityPenyerahan ,
+                    this@ActivityPenyerahan,
                     getString(R.string.pick_photo_first),
                     Toast.LENGTH_SHORT
                 ).show()
@@ -341,6 +440,20 @@ class ActivityPenyerahan : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is TextInputEditText || v is AutoCompleteTextView) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
 }

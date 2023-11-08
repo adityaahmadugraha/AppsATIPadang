@@ -36,6 +36,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".admin.ui.ActivityPemberitahuanAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ui.sarana_admin.DialogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".teknik.ui_teknisi.detailpenyerahan.ActivityDetailPenyerahan"
+            android:exported="false" />
+        <activity
             android:name=".teknik.ui_teknisi.penyerahan.ActivityPenyerahan"
             android:exported="false" />
         <activity
@@ -45,13 +54,13 @@
             android:name=".admin.ui.pengaduan_admin.PengaduanActivity"
             android:exported="false" />
         <activity
-            android:name=".user.ui.lupa_password.ActivityLupaPassword"
-            android:exported="false" />
-        <activity
             android:name=".supervisor.LaporanKeseluruhanActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.add_user.ActivityBerhasilAddUser"
+            android:name=".admin.ui.pelaporan.ActivityBerhasilAddUser"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ui.pelaporan.ActivityPelaporanAdmin"
             android:exported="false" />
 
         <service
@@ -62,12 +71,6 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".admin.ui.add_user.AddUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".teknik.ui_teknisi.rekap_laporan.RekapActivityTeknisi"
-            android:exported="false" />
         <activity
             android:name=".teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi"
             android:exported="false"

@@ -2,7 +2,6 @@ package com.aditya.appsatipadang.teknik.ui_teknisi.penyerahan
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.RequestBody
@@ -15,12 +14,27 @@ class PenyerahanViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getUser() = repository.getUser().asLiveData()
-    fun getLaporanId(
-        token: String,
-        id: String
-    ) = repository.getLaporanId(token, id).asLiveData ()
 
-    fun inputPenyerahan(token: String,
-                        requestBody: RequestBody) = repository.inputPenyerahan(token, requestBody).asLiveData()
+
+
+
+    fun getListPenyerahan(token: String) = repository.getListPenyerahan(token).asLiveData()
+
+
+    fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
+
+
+
+    fun deletePenyerahan(token: String, id : String) = repository.deletePenyerahan(token,id).asLiveData()
+
+
+
+    fun getNoPelaporan(token: String) = repository.getNoPelaporan(token).asLiveData()
+
+
+    fun getLaporanStatus(token : String, status : String) = repository.getLaporanStatus(token, status).asLiveData()
+
+
+    fun inputPenyerahan(token: String, requestBody: RequestBody) = repository.inputPenyerahan(token, requestBody).asLiveData()
 
 }

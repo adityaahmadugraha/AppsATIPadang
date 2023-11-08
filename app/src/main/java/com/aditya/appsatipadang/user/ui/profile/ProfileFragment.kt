@@ -3,8 +3,12 @@ package com.aditya.appsatipadang.user.ui.profile
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +17,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.BuildConfig.IMAGE_URL
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.Resource
@@ -30,9 +32,6 @@ import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -136,9 +135,7 @@ class ProfileFragment : Fragment() {
         } else {
             requestPermissions(arrayOf(permission), hashCode())
         }
-
     }
-
 
     private fun startGallery() {
         val intent = Intent()
@@ -158,7 +155,7 @@ class ProfileFragment : Fragment() {
                 profilePicture = Constant.uriToFile(
                     uri, requireContext()
                 )
-                //menambahkan ini disini agar tidak refresh agar foto barubah
+                //menambahkan ini disini, agar tidak refresh agar foto barubah
                 uploadFotoProfil()
             }
         }
@@ -262,18 +259,37 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showAlertLogout() {
+
+
+        val customView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_logout, null)
+
+        val yesString = getString(R.string.yes)
+        val noString = getString(R.string.no)
+
+        val yesSpannable = SpannableString(yesString)
+        val noSpannable = SpannableString(noString)
+
+        val typeface = ResourcesCompat.getFont(requireContext(), R.font.poppinssembiold) // Ganti dengan font yang Anda inginkan
+        typeface?.let {
+            yesSpannable.setSpan(StyleSpan(Typeface.BOLD), 0, yesSpannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            yesSpannable.setSpan(CustomTypefaceSpan(""), 0, yesSpannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            noSpannable.setSpan(StyleSpan(Typeface.BOLD), 0, noSpannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            noSpannable.setSpan(CustomTypefaceSpan(""), 0, noSpannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+
         MaterialAlertDialogBuilder(requireContext())
-            .setMessage(getString(R.string.logoutMessage))
-            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+            .setView(customView)
+            .setPositiveButton(yesSpannable) { dialog, _ ->
                 viewModel.deleteUser()
                 checkUserLogin()
             }
-            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+            .setNegativeButton(noSpannable) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
-
     }
+
 
     private fun checkUserLogin() {
         viewModel.getUser().observe(viewLifecycleOwner) { user ->

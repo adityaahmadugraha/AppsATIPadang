@@ -10,7 +10,15 @@ import javax.inject.Inject
 class PengaduanAdminViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
+
     fun getUser() = repository.getUser().asLiveData()
 
     fun getLaporanStatus(token : String, status : String) = repository.getLaporanStatus(token, status).asLiveData()
+
+    fun getHistoryDihapus(token : String) = repository.getHistoryDihapus(token).asLiveData()
+
+
+
+
+
 }

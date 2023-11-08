@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.HomeActivity
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
@@ -30,11 +31,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
+
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
     private var fcmToken = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -48,21 +52,23 @@ class LoginActivity : AppCompatActivity() {
                 Log.i("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
-
             fcmToken = task.result
         })
 
         //        end token fcm
         checkUserLogin()
 
+
         binding.btnLogin.setOnClickListener {
             loginUser()
         }
+
+
         binding.txtLupaPassword.setOnClickListener {
             showInputDialog(
                 context = this,
-                title = "Masukan Email Akun",
-                message = "Masukan alamat email akun yang akan di reset password..",
+                title = "Masukkan Email Akun",
+                message = "Masukkan alamat email akun yang akan direset password..",
             ) { userInput ->
                 val requestBody: RequestBody = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -76,13 +82,13 @@ class LoginActivity : AppCompatActivity() {
                             if (it.data.status == 200) {
                                 Toast.makeText(
                                     this@LoginActivity,
-                                    "Silahkan Cek Alamat Email",
+                                    "Silahkan cek alamat email",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else {
                                 Toast.makeText(
                                     this@LoginActivity,
-                                    "Email Yang Di Masukan Tidak Valid!",
+                                    "Email yang dimasukkan tidak valid!",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
@@ -95,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun showInputDialog(
+    private fun showInputDialog(
         context: Context,
         title: String,
         message: String,
@@ -130,7 +136,6 @@ class LoginActivity : AppCompatActivity() {
 
                     is Resource.Success -> {
                         setInputLoading(false)
-
                         if (result.data.status == 200) {
                             val userData = result.data.user
                             viewModel.saveUserLocal(
@@ -148,6 +153,7 @@ class LoginActivity : AppCompatActivity() {
                                     userData?.fcmtoken.toString(),
                                 )
                             )
+
                             checkUserLogin()
                         } else {
                             Toast.makeText(
@@ -184,17 +190,17 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
                     Log.d("LOGINADMIN:::::", userData.token)
-                    Intent(this@LoginActivity, HomeActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(this)
-                    }
+                    gotoSupervisor()
                 } else if (userData.roles == "Pelapor") {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("LOGIN:::::", userData.token)
-                    Intent(this@LoginActivity, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(this)
+                    if (userData.confirmLogin?.isEmpty() == true) {
+                        showConfirmDialog(userData)
+                    } else {
+                        Intent(this@LoginActivity, MainActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(this)
+                        }
                     }
                 } else if (userData.roles == "Teknisi") {
                     Toast.makeText(this@LoginActivity, "Anda Berhasil Login", Toast.LENGTH_SHORT)
@@ -217,6 +223,57 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun gotoSupervisor() {
+        Intent(this@LoginActivity, HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(this)
+        }
+    }
+
+    private fun showConfirmDialog(userData: UserLocal) {
+        val dialogView = layoutInflater.inflate(R.layout.custom_alertdialog, null)
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setTitle("Konfirmasi Login")
+            .setPositiveButton("Lanjutkan") { dialog, _ ->
+                dialog.dismiss()
+                if (userData.roles == "Pelapor") {
+                    viewModel.saveUserLocal(
+                        UserLocal(
+                            userData.id,
+                            userData.name,
+                            userData.username,
+                            userData.email,
+                            userData.no_telp,
+                            userData.password,
+                            userData.roles,
+                            userData.alamat,
+                            userData.foto,
+                            userData.token,
+                            userData.fcmtoken,
+                            "ya"
+
+                        )
+                    )
+                    moveToMainActivity()
+                }
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        alertDialog.show()
+    }
+
+    private fun moveToMainActivity() {
+        Intent(this@LoginActivity, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(this)
+        }
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {
             val v = currentFocus
@@ -232,5 +289,4 @@ class LoginActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
-
 }

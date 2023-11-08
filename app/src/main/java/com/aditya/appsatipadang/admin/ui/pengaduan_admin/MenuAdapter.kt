@@ -6,9 +6,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.DikerjakanFragment
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.DiterimaFragment
+import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.FragmentDihapus
 import com.aditya.appsatipadang.admin.ui.pengaduan_admin.fragment.SelesaiFragment
 
-private const val NUM_TABS = 3
+private const val NUM_TABS = 4
+
 class MenuAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
@@ -20,7 +22,8 @@ class MenuAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
         when (position) {
             0 -> return DiterimaFragment()
             1 -> return DikerjakanFragment()
+            2 -> return SelesaiFragment()
         }
-        return SelesaiFragment()
+        return FragmentDihapus()
     }
 }

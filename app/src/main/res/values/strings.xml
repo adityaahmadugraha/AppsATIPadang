@@ -5,7 +5,7 @@
     <string name="title_history">History</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
-    <string name="validasi_login">“Pemeliharaan sarana dan prasarana merupakan kewajiban seluruh civitas akademika Politeknik ATI Padang. Dengan ini pelopor menyatakan telah melakukan usaha perbaikan semaksimal mungkin dan belum berhasil sehingga membutuhkan tindak lanjut.”</string>
+    <string name="validasi_login">Pemeliharaan sarana dan prasarana merupakan kewajiban seluruh civitas akademika Politeknik ATI Padang. Dengan ini pelopor menyatakan telah melakukan usaha perbaikan semaksimal mungkin dan belum berhasil sehingga membutuhkan tindak lanjut</string>
     <string name="name">Aditya ahmad nugraha</string>
     <string name="nama">Nama</string>
     <string name="jenis">Jenis</string>
@@ -34,6 +34,7 @@
     <string name="laporan_sarana_title">Laporan Sarana</string>
     <string name="laporan_penyerahan">Laporan Penyerahan</string>
     <string name="title_pengaduan">Pengaduan</string>
+    <string name="title_penyerahan">Detail Penyerahan</string>
     <string name="senin_25_september_2023">Tanggal/Bulan/Tahun</string>
     <string name="ddhh">00:00</string>
     <string name="merk">Merk :</string>
@@ -65,7 +66,7 @@
     <string name="masukan_password">masukan password</string>
     <string name="useraname">username</string>
     <string name="masuk_ke_akun_anda">Masuk Ke Akun Anda</string>
-    <string name="title_aplikasi">Maintenance And Repair Piliteknik</string>
+    <string name="title_aplikasi">Maintenance And Repair Politeknik</string>
     <string name="format_tgl">21 Setember 2023</string>
     <string name="kirim">Kirim</string>
     <string name="must_not_empty">Form Tidak Boleh Kosong</string>
@@ -73,6 +74,7 @@
     <string name="saveimage">Simpan Foto Profil?</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <string name="batal">Batal</string>
     <string name="hello_user">%1$s</string>
     <string name="laporan_anda_sudah_selesai_dikerjakan">Laporan anda sudah selesai dikerjakan</string>
     <string name="sedang_di_kerjakan_oleh_eleanor">Sedang di kerjakan oleh eleanor</string>
@@ -88,6 +90,7 @@
     <string name="fillUpInput">Input tidak boleh kosong</string>
     <string name="choosePhotoFirst">Pilih foto terlebih dahulu</string>
     <string name="pick_photo_first">Pilih foto dulu</string>
+    <string name="pick_no_laporan">Pilih Nomor Laporan Terlebih Dahulu</string>
     <string name="title_activity_nontofikasi_laporan_teknisi">ActivityNontofikasiLaporanTeknisi
     </string>
     <!-- Strings used for fragments for navigation -->
@@ -156,6 +159,8 @@
 
     <string name="email_not_valid">Format email tidak valid</string>
     <string name="lupa_password">Lupa Password?</string>
+    <string name="laporan_pengaduan_telah">Laporan Pengaduan Telah</string>
+    <string name="berhasil_diteruskan_ke_teknisi">Berhasil Diteruskan Ke Teknisi</string>
 
 
 </resources>

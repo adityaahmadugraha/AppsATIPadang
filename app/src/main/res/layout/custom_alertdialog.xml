@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <CheckBox
-        android:id="@+id/cbDialog"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Saya menyetujui syarat dan ketentuan"
-        android:checked="false"
-        android:textColor="@android:color/white" />
+        android:fontFamily="@font/poppinssembiold"
+        android:justificationMode="inter_word"
+        android:text="@string/validasi_login" />
 
 </LinearLayout>
+

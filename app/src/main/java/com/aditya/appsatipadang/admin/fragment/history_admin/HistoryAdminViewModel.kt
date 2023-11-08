@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.aditya.appsatipadang.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,5 +16,6 @@ class HistoryAdminViewModel @Inject constructor(
     fun getListLaporanBulanan(token: String) = repository.getLaporanBulananTeknisi(token).asLiveData()
     fun getListLaporan(token: String) = repository.getListLaporan(token).asLiveData()
     fun getDataUser(token: String) = repository.getDataUser(token).asLiveData()
-    fun deleteLaporan(token: String, id : String) = repository.deleteLaporan(token,id).asLiveData()
+    fun deleteLaporan(token: String, id : String, requestBody: RequestBody) = repository.deleteLaporan(token,id,requestBody).asLiveData()
+
 }

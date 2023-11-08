@@ -1,13 +1,17 @@
 package com.aditya.appsatipadang.network
 
 import com.aditya.appsatipadang.data.remote.request.AddUserResponse
+import com.aditya.appsatipadang.data.remote.request.DetailPenyerahanResponse
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
+import com.aditya.appsatipadang.data.remote.request.ResponsePenyerahan
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import com.aditya.appsatipadang.data.remote.response.AuthResponse
 import com.aditya.appsatipadang.data.remote.response.DataUserResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanIdResponse
 import com.aditya.appsatipadang.data.remote.response.LaporanResponse
+import com.aditya.appsatipadang.data.remote.response.NoPelaporanTeknisi
+import com.aditya.appsatipadang.data.remote.response.PenyerahanResponse
 import com.aditya.appsatipadang.data.remote.response.ProfileUserResponse
 import com.aditya.appsatipadang.data.remote.response.TeknisiReponse
 import com.aditya.appsatipadang.data.remote.response.TeknisiUserResponse
@@ -56,11 +60,16 @@ interface ApiService {
     ): LaporanResponse
 
 
-
-
     //delete laporan oleh admin
-    @GET("hapus-laporan/{id}")
-   suspend fun deletelaporan(
+    @POST("hapus-laporan/{id}")
+    suspend fun deletelaporan(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body body: RequestBody
+    ): LaporanResponse
+
+    @GET("hapus-penyerahan/{id}")
+    suspend fun deletePenyerahan(
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): LaporanResponse
@@ -69,6 +78,13 @@ interface ApiService {
     suspend fun getListLaporan(
         @Header("Authorization") token: String,
     ): LaporanResponse
+
+
+    //menampilkan laporan penyerahan
+    @GET("get-penyerahan")
+    suspend fun getListPenyerahan(
+        @Header("Authorization") token: String,
+    ): ResponsePenyerahan
 
     @GET("laporan")
     suspend fun getListPengerjaan(
@@ -84,6 +100,11 @@ interface ApiService {
     suspend fun getListLaporanBulanan(
         @Header("Authorization") token: String,
     ): LaporanResponse
+
+    @GET("gethistory")
+    suspend fun getHistoryDihapus(
+        @Header("Authorization") token: String,
+    ): NoPelaporanTeknisi
 
     //input sarana
     @POST("laporan")
@@ -111,8 +132,7 @@ interface ApiService {
     suspend fun inputPenyerahan(
         @Header("Authorization") token: String,
         @Body body: RequestBody
-    ): LaporanResponse
-
+    ): PenyerahanResponse
 
 
     @GET("laporan-id/{id}")
@@ -120,6 +140,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): LaporanIdResponse
+
+    @GET("detail-penyerahan/{id}")
+    suspend fun getPenyerahan(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): DetailPenyerahanResponse
 
 
     @POST("kirimlaporan")
@@ -134,6 +160,11 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): TeknisiReponse
 
+    @GET("getkodepengaduanteknisi")
+    suspend fun getkodepengaduanteknisi(
+        @Header("Authorization") token: String,
+    ): NoPelaporanTeknisi
+
 
     @POST("addUser")
     suspend fun addUser(
@@ -145,6 +176,7 @@ interface ApiService {
     suspend fun gantiPassword(
         @Body body: RequestBody
     ): LaporanResponse
+
 
 
 

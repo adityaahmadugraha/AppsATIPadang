@@ -5,7 +5,6 @@ import com.aditya.appsatipadang.data.local.UserLocal
 import com.aditya.appsatipadang.data.local.UserPreference
 import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
 import com.aditya.appsatipadang.data.remote.request.LoginRequest
-import com.aditya.appsatipadang.data.remote.request.PenyerahanTeknisiRequest
 import com.aditya.appsatipadang.data.remote.response.AddUserRequest
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -22,7 +21,15 @@ class DataRepository @Inject constructor(
 
     suspend fun deleteUser() = localData.deleteUser()
 
+
+
+
     fun getListLaporan(token: String) = remoteData.getListLaporan(token)
+    fun getListPenyerahan(token: String) = remoteData.getListPenyerahan(token)
+
+
+
+
     fun getLaporanStatus(token: String, status: String) = remoteData.getLaporanStatus(token, status)
 
     fun getListPengerjaan(token: String) = remoteData.getListPengerjaan(token)
@@ -31,7 +38,11 @@ class DataRepository @Inject constructor(
 
     fun getListLaporanBulanan(token: String) = remoteData.getListLaporanBulanan(token)
 
+    fun getHistoryDihapus(token: String) = remoteData.getHistoryDihapus(token)
+
     fun getTeknisiList(token: String) = remoteData.getTeknisiList(token)
+
+    fun getNoPelaporan(token: String) = remoteData.getNoPelaporan(token)
 
     fun insertLaporanTeknisi(
         token: String,
@@ -47,7 +58,11 @@ class DataRepository @Inject constructor(
         requestBody: RequestBody
     ) = remoteData.insertLaporan(token, requestBody)
 
-    fun deleteLaporan(token: String, id: String) = remoteData.deleteLaporan(token, id)
+
+
+    fun deleteLaporan(token: String, id: String, requestBody : RequestBody) = remoteData.deleteLaporan(token, id, requestBody)
+
+    fun deletePenyerahan(token: String, id: String) = remoteData.deletePenyerahan(token, id)
 
     fun insertFoto(
         token: String,
@@ -58,6 +73,9 @@ class DataRepository @Inject constructor(
         token: String,
         id: String
     ) = remoteData.getLaporanId(token, id)
+
+
+    fun getPenyerahanId(token: String, id: String) = remoteData.getPenyerahanId(token, id)
 
     fun getDataLaporan(token: String, id: String) = remoteData.getLaporanId(token, id)
 

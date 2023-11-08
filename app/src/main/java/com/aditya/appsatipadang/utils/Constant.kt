@@ -28,6 +28,8 @@ import java.util.UUID
 
 object Constant {
 
+    const val PREF_LOGIN_CONFIRMED = "login_confirmed"
+    const val IDPENYERAHAN = "id_penyerahan"
     const val IDLAPORAN = "id_laporan"
     const val TANGGAL_DARI = "tgl_dari"
     const val TANGGAL_SAMPAI = "tgl_sampai"
@@ -49,6 +51,7 @@ object Constant {
     val TAG_FOTO = stringPreferencesKey("foto")
     val TAG_TOKEN = stringPreferencesKey("token")
     val TAG_FCMTOKEN = stringPreferencesKey("fcmtoken")
+    val TAG_CONFIRMLOGIN = stringPreferencesKey("confirmlogin")
 
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
