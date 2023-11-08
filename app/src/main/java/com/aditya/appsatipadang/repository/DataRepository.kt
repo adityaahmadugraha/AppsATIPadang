@@ -59,10 +59,10 @@ class DataRepository @Inject constructor(
     ) = remoteData.insertLaporan(token, requestBody)
 
 
+
     fun deleteLaporan(token: String, id: String, requestBody : RequestBody) = remoteData.deleteLaporan(token, id, requestBody)
 
     fun deletePenyerahan(token: String, id: String) = remoteData.deletePenyerahan(token, id)
-
 
     fun insertFoto(
         token: String,

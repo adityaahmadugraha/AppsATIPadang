@@ -68,7 +68,6 @@ interface ApiService {
         @Body body: RequestBody
     ): LaporanResponse
 
-
     @GET("hapus-penyerahan/{id}")
     suspend fun deletePenyerahan(
         @Header("Authorization") token: String,

@@ -31,14 +31,6 @@ class AdapterHomeLaporan(
         holder.bind(item)
     }
 
-
-//    fun submitListReversed(list: List<ItemLaporaneResponse>?) {
-//        val reversedList = list?.toMutableList()
-//        reversedList?.add(0, getItem(0))
-//        val limitedList = reversedList?.take(maxItemCount)
-//        submitList(limitedList)
-//    }
-
     inner class ViewHolder(private val binding: ListHistoryLaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ResourceAsColor")
@@ -89,6 +81,7 @@ class AdapterHomeLaporan(
                 itemView.setOnClickListener {
                     onItemClick(data)
                 }
+
                 itemView.setOnLongClickListener {
                     onLongClick(data)
                     return@setOnLongClickListener true

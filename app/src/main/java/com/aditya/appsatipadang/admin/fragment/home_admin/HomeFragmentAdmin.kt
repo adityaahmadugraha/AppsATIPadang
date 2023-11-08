@@ -59,7 +59,6 @@ class HomeFragmentAdmin : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.apply {
             cardLaporan.setOnClickListener {
                 val intent = Intent(activity, LaporanKeseluruhanActivity::class.java)
@@ -149,6 +148,7 @@ class HomeFragmentAdmin : Fragment() {
             onLongClick = { item ->
                 idLaporan = item.id.toString()
 
+
                 val customView =
                     LayoutInflater.from(requireContext()).inflate(R.layout.custom_delate, null)
 
@@ -198,7 +198,7 @@ class HomeFragmentAdmin : Fragment() {
                     .show()
 
             }
-        )
+        }
     }
 
 

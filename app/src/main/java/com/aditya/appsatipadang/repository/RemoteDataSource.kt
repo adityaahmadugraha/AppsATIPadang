@@ -72,13 +72,6 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: "Data Tidak Ditemukan"))
     }.flowOn(Dispatchers.IO)
 
-
-
-
-
-
-
-
     fun getLaporanStatus(token: String, status : String) = flow {
         emit(Resource.Loading())
         val response = apiService.getLaporanStatus(token, status)
@@ -86,12 +79,6 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
-
-
-
-
-
-
 
 
     fun deletePenyerahan(token: String, id: String) = flow<Resource<LaporanResponse>> {
@@ -182,7 +169,6 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-
     fun insertLaporanTeknisi(
         token: String,
         kirimTeknisiRequest: KirimTeknisiRequest
@@ -196,7 +182,6 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
-
 
     fun getLaporanId(
         token: String,
@@ -241,7 +226,6 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-
     fun inputPenyerahan(
         token: String,
         requestBody: RequestBody
@@ -270,7 +254,6 @@ class RemoteDataSource @Inject constructor(
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
 
-
     fun getTeknisiList(token: String) = flow {
         emit(Resource.Loading())
         val response = apiService.getTeknisiNama(token)
@@ -295,6 +278,7 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         emit(Resource.Error(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
     fun gantiPassword(
         requestBody: RequestBody
     ) = flow<Resource<LaporanResponse>> {
