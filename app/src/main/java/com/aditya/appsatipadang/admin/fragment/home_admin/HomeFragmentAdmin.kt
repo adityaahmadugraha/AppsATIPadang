@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,6 @@ import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Compan
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHomeAdminBinding
 import com.aditya.appsatipadang.supervisor.LaporanKeseluruhanActivity
-import com.aditya.appsatipadang.user.laporan.sarana.SaranaActivity
 import com.aditya.appsatipadang.user.ui.profile.CustomTypefaceSpan
 import com.aditya.appsatipadang.utils.Constant.getToken
 import com.bumptech.glide.Glide

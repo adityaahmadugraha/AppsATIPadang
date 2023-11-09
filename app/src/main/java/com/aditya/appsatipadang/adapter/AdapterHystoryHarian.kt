@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aditya.appsatipadang.BuildConfig
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.data.remote.response.ItemLaporaneResponse
+import com.aditya.appsatipadang.databinding.ListHistoryLaporanBinding
 import com.aditya.appsatipadang.databinding.ListPelaporanBinding
 import com.aditya.appsatipadang.utils.Constant
 import com.bumptech.glide.Glide
@@ -20,7 +21,7 @@ class AdapterHystoryHarian(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ListPelaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListHistoryLaporanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -28,14 +29,15 @@ class AdapterHystoryHarian(
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(private val binding: ListPelaporanBinding) :
+    inner class ViewHolder(private val binding: ListHistoryLaporanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemLaporaneResponse) {
             binding.apply {
+                tvNameUser.text = data.namePelapor
                 tvTitleLaporan.text = data.type
                 tvTglLaporanSarana.text = Constant.convertDateFormat(data.tanggal.toString())
                 tvLokasi.text = data.lokasi
-                tvMerk.text = data.jenis
+                tvJenis.text = data.jenis
                 Glide.with(itemView.context)
                     .load(BuildConfig.IMAGE_URL + data.foto)
                     .into(imgPelaporan)

@@ -1,20 +1,20 @@
 package com.aditya.appsatipadang.teknik.ui_teknisi.history
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
-import com.aditya.appsatipadang.adapter.AdapterLaporanTeknisi
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHistoryBinding
-import com.aditya.appsatipadang.databinding.FragmentTHomeBinding
-import com.aditya.appsatipadang.teknik.ui_teknisi.Thome.THomeViewModel
+import com.aditya.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity
+import com.aditya.appsatipadang.utils.Constant
 import com.aditya.appsatipadang.utils.Constant.getToken
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,6 +62,7 @@ class THistoryFragment : Fragment() {
                         setupRecyclerView()
                     }
                     is Resource.Error -> {}
+                    else -> {}
                 }
             }
         }
@@ -82,6 +83,8 @@ class THistoryFragment : Fragment() {
                     is Resource.Error -> {
                         binding.progressBar.isVisible = false
                     }
+
+                    else -> {}
                 }
             }
         }
@@ -89,11 +92,15 @@ class THistoryFragment : Fragment() {
 
     private fun setupList() {
         mAdapterHarian = AdapterHystoryHarian {
-
+            val intent = Intent(requireContext(), LaporanTeknisiActivity::class.java)
+            intent.putExtra(Constant.IDLAPORAN, it.id.toString())
+            startActivity(intent)
         }
 
         mAdapterBulanan = HistoryAdapterBulanan {
-
+            val intent = Intent(requireContext(), LaporanTeknisiActivity::class.java)
+            intent.putExtra(Constant.IDLAPORAN, it.id.toString())
+            startActivity(intent)
         }
     }
 

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -17,6 +16,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -25,8 +25,6 @@ import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.admin.ui.pelaporan.ActivityBerhasilAddUser
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.data.local.UserLocal
-import com.aditya.appsatipadang.data.remote.request.KirimTeknisiRequest
-import com.aditya.appsatipadang.data.remote.response.LaporanItem
 import com.aditya.appsatipadang.databinding.ActivityPenyerahanBinding
 import com.aditya.appsatipadang.teknik.ActivityTeknik
 import com.aditya.appsatipadang.utils.Constant

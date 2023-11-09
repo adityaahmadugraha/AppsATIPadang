@@ -1,5 +1,6 @@
 package com.aditya.appsatipadang.admin.fragment.history_admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aditya.appsatipadang.R
 import com.aditya.appsatipadang.adapter.AdapterHystoryHarian
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin
+import com.aditya.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin.Companion.TAG_ID_PENGADUAN
 import com.aditya.appsatipadang.data.Resource
 import com.aditya.appsatipadang.databinding.FragmentHistoryAdminBinding
 import com.aditya.appsatipadang.teknik.ui_teknisi.history.HistoryAdapterBulanan
@@ -51,15 +54,21 @@ class HistoryFragmentAdmin : Fragment() {
         setupButtonBackClicked()
         getDataUser()
         setupAdapter()
+
     }
+
 
     private fun setupAdapter() {
         mAdapterHarian = AdapterHystoryHarian {
-
+            val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
+            intent.putExtra(TAG_ID_PENGADUAN, it.id.toString())
+            startActivity(intent)
         }
 
         mAdapterBulanan = HistoryAdapterBulanan {
-
+            val intent = Intent(requireActivity(), SaranaActivityAdmin::class.java)
+            intent.putExtra(TAG_ID_PENGADUAN, it.id.toString())
+            startActivity(intent)
         }
     }
 
@@ -72,46 +81,51 @@ class HistoryFragmentAdmin : Fragment() {
     private fun getDataUser() {
         // harian
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            viewModel.getListLaporanHarian(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        val data = result.data
-                        mAdapterHarian.submitList(data.laporan)
-                        setupRecyclerViewHarian()
-                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
-                        mAdapterHarian.submitList(sortedData)
+            viewModel.getListLaporanHarian(userLocal.getToken)
+                .observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Resource.Loading -> {}
+                        is Resource.Success -> {
+                            val data = result.data
+                            mAdapterHarian.submitList(data.laporan)
+                            setupRecyclerViewHarian()
+                            val sortedData = result.data.laporan?.sortedByDescending { it.id }
+                            mAdapterHarian.submitList(sortedData)
 
-                        mAdapterHarian = mAdapterHarian
+                            mAdapterHarian = mAdapterHarian
+                        }
+
+                        is Resource.Error -> {}
                     }
-                    is Resource.Error -> {}
                 }
-            }
         }
 
         // bulanan
         viewModel.getUser().observe(viewLifecycleOwner) { userLocal ->
-            viewModel.getListLaporanBulanan(userLocal.getToken).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
-                    is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-                        lySwip.isRefreshing = false
-                        val data = result.data
-                        mAdapterBulanan.submitList(data.laporan)
-                        setupRecyclerViewBulanan()
-                        val sortedData = result.data.laporan?.sortedByDescending { it.id }
-                        mAdapterBulanan.submitList(sortedData)
+            viewModel.getListLaporanBulanan(userLocal.getToken)
+                .observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            binding.progressBar.isVisible = true
+                        }
 
-                        mAdapterBulanan = mAdapterBulanan
-                    }
-                    is Resource.Error -> {
-                        binding.progressBar.isVisible = false
+                        is Resource.Success -> {
+                            binding.progressBar.isVisible = false
+                            lySwip.isRefreshing = false
+                            val data = result.data
+                            mAdapterBulanan.submitList(data.laporan)
+                            setupRecyclerViewBulanan()
+                            val sortedData = result.data.laporan?.sortedByDescending { it.id }
+                            mAdapterBulanan.submitList(sortedData)
+
+                            mAdapterBulanan = mAdapterBulanan
+                        }
+
+                        is Resource.Error -> {
+                            binding.progressBar.isVisible = false
+                        }
                     }
                 }
-            }
         }
     }
 
@@ -130,8 +144,6 @@ class HistoryFragmentAdmin : Fragment() {
             setHasFixedSize(true)
         }
     }
-
-
 
 
     override fun onDestroyView() {

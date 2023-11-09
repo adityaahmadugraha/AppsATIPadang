@@ -53,7 +53,7 @@
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginTop="16dp"
-                    android:src="@color/pdf"
+                    android:src="@drawable/icon_pp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_profil"
@@ -80,6 +80,7 @@
                     android:fontFamily="@font/poppinssembiold"
                     android:textColor="@color/blue"
                     android:textSize="22sp"
+                    android:text="Mr.Suhairie"
                     app:layout_constraintEnd_toEndOf="@+id/img_profil"
                     app:layout_constraintStart_toStartOf="@+id/img_profil"
                     app:layout_constraintTop_toBottomOf="@+id/img_profil" />
@@ -92,6 +93,7 @@
                     android:fontFamily="@font/poppinssembiold"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:text="Supervisor"
                     app:layout_constraintEnd_toEndOf="@+id/tv_name_profil"
                     app:layout_constraintStart_toStartOf="@+id/tv_name_profil"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name_profil" />
@@ -147,6 +149,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppinssembiold"
                                 android:textColor="@color/black"
+                                android:text="atipadang@gmail.com"
                                 android:textSize="14sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -181,6 +184,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppinssembiold"
                                 android:textColor="@color/black"
+                                android:text="081212121212"
                                 android:textSize="14sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -216,6 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppinssembiold"
                                 android:textColor="@color/black"
+                                android:text="Jl. Ujung Gurun No.77 A-B 25114 Padang Sumatera"
                                 android:textSize="14sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -247,7 +252,7 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_logout"
                     app:layout_constraintEnd_toEndOf="@+id/btn_logout"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/btn_logout"
                     app:layout_constraintTop_toTopOf="@+id/btn_logout"
                     tools:visibility="visible" />
 
