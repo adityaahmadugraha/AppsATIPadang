@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.FirstFragment"
+        android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.SecondFragment"
+        android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

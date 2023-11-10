@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.aditya.appsatipadang">
+    package="com.mediatama.appsatipadang">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -36,35 +36,35 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".admin.ui.ActivityPemberitahuanAdmin"
+            android:name="com.mediatama.appsatipadang.admin.ui.ActivityPemberitahuanAdmin"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.sarana_admin.DialogActivity"
+            android:name="com.mediatama.appsatipadang.admin.ui.sarana_admin.DialogActivity"
             android:exported="false" />
         <activity
-            android:name=".teknik.ui_teknisi.detailpenyerahan.ActivityDetailPenyerahan"
+            android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.detailpenyerahan.ActivityDetailPenyerahan"
             android:exported="false" />
         <activity
-            android:name=".teknik.ui_teknisi.penyerahan.ActivityPenyerahan"
+            android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.penyerahan.ActivityPenyerahan"
             android:exported="false" />
         <activity
-            android:name=".admin.cetaklaporan.CetakLaporanActivity"
+            android:name="com.mediatama.appsatipadang.admin.cetaklaporan.CetakLaporanActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.pengaduan_admin.PengaduanActivity"
+            android:name="com.mediatama.appsatipadang.admin.ui.pengaduan_admin.PengaduanActivity"
             android:exported="false" />
         <activity
-            android:name=".supervisor.LaporanKeseluruhanActivity"
+            android:name="com.mediatama.appsatipadang.supervisor.LaporanKeseluruhanActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.pelaporan.ActivityBerhasilAddUser"
+            android:name="com.mediatama.appsatipadang.admin.ui.pelaporan.ActivityBerhasilAddUser"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.pelaporan.ActivityPelaporanAdmin"
+            android:name="com.mediatama.appsatipadang.admin.ui.pelaporan.ActivityPelaporanAdmin"
             android:exported="false" />
 
         <service
-            android:name=".FirebaseMessagingService"
+            android:name="com.mediatama.appsatipadang.FirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -72,51 +72,51 @@
         </service>
 
         <activity
-            android:name=".teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi"
+            android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.nontifikasi_laporan.ActivityNontofikasiLaporanTeknisi"
             android:exported="false"
             android:label="@string/title_activity_nontofikasi_laporan_teknisi"
             android:theme="@style/Theme.AppsATIPadang" />
         <activity
-            android:name=".teknik.ui_teknisi.laporan.LaporanTeknisiActivity"
+            android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.laporan.LaporanTeknisiActivity"
             android:exported="false" />
         <activity
-            android:name=".supervisor.ActivitySupervisor"
+            android:name="com.mediatama.appsatipadang.supervisor.ActivitySupervisor"
             android:exported="false" />
         <activity
-            android:name=".teknik.ActivityTeknik"
+            android:name="com.mediatama.appsatipadang.teknik.ActivityTeknik"
             android:exported="false" />
         <activity
-            android:name=".admin.ui.sarana_admin.SaranaActivityAdmin"
+            android:name="com.mediatama.appsatipadang.admin.ui.sarana_admin.SaranaActivityAdmin"
             android:exported="false" />
         <activity
-            android:name=".admin.HomeActivity"
+            android:name="com.mediatama.appsatipadang.admin.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".user.ui.detailstatuslaporan.DetailStatusLaporanActivity"
+            android:name="com.mediatama.appsatipadang.user.ui.detailstatuslaporan.DetailStatusLaporanActivity"
             android:exported="false" />
         <activity
-            android:name=".user.ui.pemberitahuan.ActivityPemberitahuan"
+            android:name="com.mediatama.appsatipadang.user.ui.pemberitahuan.ActivityPemberitahuan"
             android:exported="false" />
         <activity
-            android:name=".user.ui.login.LoginActivity"
+            android:name="com.mediatama.appsatipadang.user.ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".user.laporan.prasarana.ActivityPrasarana"
+            android:name="com.mediatama.appsatipadang.user.laporan.prasarana.ActivityPrasarana"
             android:exported="false" />
         <activity
-            android:name=".user.laporan.kamtibmas.ActivityKamtibmas"
+            android:name="com.mediatama.appsatipadang.user.laporan.kamtibmas.ActivityKamtibmas"
             android:exported="false" />
         <activity
-            android:name=".user.laporan.sarana.SaranaActivity"
+            android:name="com.mediatama.appsatipadang.user.laporan.sarana.SaranaActivity"
             android:exported="false" />
         <activity
-            android:name=".user.laporan.status.ActivityStatus"
+            android:name="com.mediatama.appsatipadang.user.laporan.status.ActivityStatus"
             android:exported="false" />
         <activity
-            android:name=".user.MainActivity"
+            android:name="com.mediatama.appsatipadang.user.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".user.ui.splash.SplashActivity"
+            android:name="com.mediatama.appsatipadang.user.ui.splash.SplashActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -129,7 +129,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.aditya.appsatipadang"
+            android:authorities="com.mediatama.appsatipadang"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

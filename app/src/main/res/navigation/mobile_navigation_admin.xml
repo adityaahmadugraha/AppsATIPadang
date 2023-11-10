@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home_admin"
-        android:name="com.aditya.appsatipadang.admin.fragment.home_admin.HomeFragmentAdmin"
+        android:name="com.mediatama.appsatipadang.admin.fragment.home_admin.HomeFragmentAdmin"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home_admin" />
 
     <fragment
         android:id="@+id/navigation_history_admin"
-        android:name="com.aditya.appsatipadang.admin.fragment.history_admin.HistoryFragmentAdmin"
+        android:name="com.mediatama.appsatipadang.admin.fragment.history_admin.HistoryFragmentAdmin"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_history_admin" >
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.aditya.appsatipadang.user.ui.profile.ProfileFragment"
+        android:name="com.mediatama.appsatipadang.user.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
 
@@ -39,7 +39,7 @@
     </fragment>
     <activity
         android:id="@+id/loginActivity"
-        android:name="com.aditya.appsatipadang.user.ui.login.LoginActivity"
+        android:name="com.mediatama.appsatipadang.user.ui.login.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
 </navigation>

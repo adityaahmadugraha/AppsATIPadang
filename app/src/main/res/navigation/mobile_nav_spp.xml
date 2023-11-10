@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home_spp"
-        android:name="com.aditya.appsatipadang.supervisor.ui_supervisor.SppHomeFragment"
+        android:name="com.mediatama.appsatipadang.supervisor.ui_supervisor.SppHomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_spp_home" />
 
     <fragment
         android:id="@+id/navigation_history_spp"
-        android:name="com.aditya.appsatipadang.supervisor.ui_supervisor.SppHistoryFragment"
+        android:name="com.mediatama.appsatipadang.supervisor.ui_supervisor.SppHistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_spp_history">
 
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.aditya.appsatipadang.user.ui.profile.ProfileFragment"
+        android:name="com.mediatama.appsatipadang.user.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
 

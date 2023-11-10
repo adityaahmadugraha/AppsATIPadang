@@ -8,13 +8,13 @@
 
     <fragment
         android:id="@+id/navigation_home_teknik"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.Thome.THomeFragment"
+        android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.Thome.THomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_t_home" />
 
     <fragment
         android:id="@+id/navigation_history_teknik"
-        android:name="com.aditya.appsatipadang.teknik.ui_teknisi.history.THistoryFragment"
+        android:name="com.mediatama.appsatipadang.teknik.ui_teknisi.history.THistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_t_history">
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.aditya.appsatipadang.user.ui.profile.ProfileFragment"
+        android:name="com.mediatama.appsatipadang.user.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
 

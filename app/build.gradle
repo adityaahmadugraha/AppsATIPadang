@@ -20,15 +20,19 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", '"https://maintenance.poltekatipdg.ac.id/api/"')
-        buildConfigField("String", "IMAGE_URL", '"https://maintenance.poltekatipdg.ac.id/"')
+//        buildConfigField("String", "BASE_URL", '"https://maintenance.poltekatipdg.ac.id/api/"')
+//        buildConfigField("String", "IMAGE_URL", '"https://maintenance.poltekatipdg.ac.id/"')
+        buildConfigField("String", "BASE_URL", '"https://atipadang.diatakasir.com/api/"')
+        buildConfigField("String", "IMAGE_URL", '"https://atipadang.diatakasir.com/"')
+
 
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {
