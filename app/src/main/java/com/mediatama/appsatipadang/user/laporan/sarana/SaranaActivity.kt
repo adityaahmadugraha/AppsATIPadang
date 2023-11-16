@@ -62,6 +62,7 @@ class SaranaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySaranaBinding
     private val viewModel: SaranaViewModel by viewModels()
+
     private var user: UserLocal? = null
 
     private var fotoKerusakan: File? = null
@@ -111,11 +112,6 @@ class SaranaActivity : AppCompatActivity() {
             }
 
             getUserData()
-//            imgBack.setOnClickListener {
-//                val intent = Intent(this@SaranaActivity, MainActivity::class.java)
-//                startActivity(intent)
-//            }
-
 
             imgBack.setOnClickListener {
                 viewModel.getUser().observe(this@SaranaActivity){

@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AppsATIPadang"
 include ':app'
+
